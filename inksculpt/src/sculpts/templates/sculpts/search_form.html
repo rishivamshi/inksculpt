@@ -1,0 +1,9 @@
+<form method="GET" action='{% url "sculpt:list" %}'>
+
+	<input type="text" name="q" placeholder="Search" value="{{ request.GET.q }}" />
+	<input type="submit" value="Search">
+</form>
+
+
+<!-- it takes the search term here, and uses the get_queryset function from views.py list view class to search for the terms in the sculpts. and then passes this through the listview.html to either show if the term is present or not.
+ -->

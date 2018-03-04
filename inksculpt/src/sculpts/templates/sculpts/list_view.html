@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>list view</title>
+</head>
+<body>
+
+{% include "sculpts/search_form.html" %}<br>
+
+
+{% for object in object_list %} 
+
+{% if object.content %}
+	<pre>{{ object.content }}</pre><br>
+{% endif %}
+{{ object.user }} <br>
+{{ object.timestamp }}<br>
+{{ object.timestamp|timesince }} ago<br>
+{% if object.image %}
+<img src="{{ object.image.url }}" height="200px"  /><br>
+{% endif %}
+{% empty %}
+{% if request.GET.q %} <!-- for searches.  -->
+<p>No Sculpts or Users found. </p>
+{% else %}
+<p>No Sculpts Yet. </p>
+{% endif %}
+	
+
+
+{% endfor %}
+
+
+
+</body>
+</html>
+
+

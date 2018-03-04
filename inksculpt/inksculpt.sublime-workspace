@@ -1,0 +1,1146 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"qu",
+				"query"
+			],
+			[
+				"for",
+				"formfield"
+			],
+			[
+				"sc",
+				"sculpt"
+			],
+			[
+				"rev",
+				"reverse"
+			],
+			[
+				"in",
+				"input\tTag"
+			],
+			[
+				"Sc",
+				"SculptUpdateView"
+			],
+			[
+				"log",
+				"LoginRequiredMixin"
+			],
+			[
+				"ge",
+				"generic"
+			],
+			[
+				"User",
+				"UserOwnerMixin"
+			],
+			[
+				"q",
+				"queryset"
+			],
+			[
+				"Scu",
+				"SculptUpdateView"
+			],
+			[
+				"Upda",
+				"UpdateView"
+			],
+			[
+				"get_",
+				"get_object_or_404"
+			],
+			[
+				"Scul",
+				"SculptModelAdmin"
+			],
+			[
+				"ob",
+				"objects"
+			],
+			[
+				"get",
+				"get"
+			],
+			[
+				"ret",
+				"return"
+			],
+			[
+				"o",
+				"objects"
+			],
+			[
+				"str",
+				"strip"
+			],
+			[
+				"n",
+				"null"
+			],
+			[
+				"obj",
+				"obj"
+			],
+			[
+				"obje",
+				"object"
+			],
+			[
+				"M",
+				"MEDIA_ROOT"
+			],
+			[
+				"doc",
+				"document_root"
+			],
+			[
+				"S",
+				"STATIC_ROOT"
+			],
+			[
+				"span",
+				"spanChars"
+			],
+			[
+				"re",
+				"return"
+			],
+			[
+				"u",
+				"user__username"
+			],
+			[
+				"pagi",
+				"pagination_class"
+			],
+			[
+				"en",
+				"environ"
+			],
+			[
+				"UserRe",
+				"UserRegisterView"
+			],
+			[
+				"form",
+				"form"
+			],
+			[
+				"pass",
+				"password2"
+			],
+			[
+				"user",
+				"user"
+			],
+			[
+				"USer",
+				"UserProfile"
+			],
+			[
+				"follo",
+				"following"
+			],
+			[
+				"has",
+				"hashtag_obj"
+			],
+			[
+				"Poema",
+				"PoemaModelSerializer"
+			],
+			[
+				"que",
+				"queryset"
+			],
+			[
+				"rg",
+				"rgba()"
+			],
+			[
+				"poema",
+				"poema_id"
+			],
+			[
+				"repl",
+				"reply"
+			],
+			[
+				"te",
+				"text"
+			],
+			[
+				"pa",
+				"parent_id"
+			],
+			[
+				"val",
+				"value"
+			],
+			[
+				"ty",
+				"type"
+			],
+			[
+				"th",
+				"this"
+			],
+			[
+				"is",
+				"isReply"
+			],
+			[
+				"rep",
+				"repoema"
+			],
+			[
+				"repoe",
+				"repoema"
+			],
+			[
+				"lik",
+				"liked"
+			],
+			[
+				"conte",
+				"context"
+			],
+			[
+				"like",
+				"likes"
+			],
+			[
+				"lo",
+				"log"
+			],
+			[
+				"a",
+				"ajax"
+			],
+			[
+				"data",
+				"data-id"
+			],
+			[
+				"req",
+				"requested_user"
+			],
+			[
+				"reque",
+				"requested_user"
+			],
+			[
+				"poe",
+				"poemaContainer"
+			],
+			[
+				"po",
+				"poema-container"
+			],
+			[
+				"load",
+				"loadPoemaContainer"
+			],
+			[
+				"repoema",
+				"repoemaBtn"
+			],
+			[
+				"rem",
+				"removeClass"
+			],
+			[
+				"con",
+				"console"
+			],
+			[
+				"fetc",
+				"fetchOneId"
+			],
+			[
+				"conten",
+				"content"
+			],
+			[
+				"tex",
+				"text"
+			],
+			[
+				"pare",
+				"parent"
+			],
+			[
+				"Rep",
+				"Reply"
+			],
+			[
+				"poem",
+				"poemaFormattedHTML"
+			],
+			[
+				"Poem",
+				"PoemaListAPIView"
+			],
+			[
+				"is_",
+				"is_authenticated"
+			],
+			[
+				"user__",
+				"user__username__icontains"
+			],
+			[
+				"se",
+				"self"
+			],
+			[
+				"requ",
+				"requested_user"
+			],
+			[
+				"ha",
+				"hashtag_list"
+			],
+			[
+				"m",
+				"m"
+			],
+			[
+				"new",
+				"newText"
+			],
+			[
+				"cur",
+				"currentHtml"
+			],
+			[
+				"da",
+				"data"
+			],
+			[
+				"v",
+				"var"
+			],
+			[
+				"tim",
+				"timezone"
+			],
+			[
+				"time",
+				"timestamp"
+			],
+			[
+				"sp",
+				"span"
+			],
+			[
+				"date",
+				"date_display"
+			],
+			[
+				"p",
+				"pk"
+			],
+			[
+				"get_ob",
+				"get_object_or_404"
+			],
+			[
+				"par",
+				"parent"
+			],
+			[
+				"paren",
+				"parent_obj"
+			],
+			[
+				"na",
+				"name"
+			],
+			[
+				"g",
+				"g"
+			],
+			[
+				"Po",
+				"Poema"
+			],
+			[
+				"follow",
+				"followed_by"
+			],
+			[
+				"tog",
+				"toggle_user"
+			],
+			[
+				"userna",
+				"username__iexact"
+			],
+			[
+				"get_o",
+				"get_object_or_404"
+			],
+			[
+				"fo",
+				"following"
+			],
+			[
+				"ex",
+				"exclude"
+			],
+			[
+				"ne",
+				"next"
+			],
+			[
+				"fet",
+				"fetchPoemas"
+			],
+			[
+				"pre",
+				"preventDefault"
+			],
+			[
+				"sea",
+				"searchQuery"
+			],
+			[
+				"done",
+				"doneSearchTyping"
+			],
+			[
+				"typ",
+				"typingTimer"
+			],
+			[
+				"sear",
+				"searchInput"
+			],
+			[
+				"col",
+				"color"
+			],
+			[
+				"add",
+				"addClass"
+			],
+			[
+				"poemaC",
+				"poemaCharsLeft"
+			],
+			[
+				"va",
+				"value"
+			],
+			[
+				"Poe",
+				"PoemaModelSerializer"
+			],
+			[
+				"ser",
+				"serializer_class"
+			],
+			[
+				"this",
+				"this_"
+			],
+			[
+				"thi",
+				"this_"
+			],
+			[
+				"co",
+				"console"
+			],
+			[
+				"im",
+				"img"
+			],
+			[
+				"me",
+				"media-body"
+			],
+			[
+				"c",
+				"class"
+			],
+			[
+				"fun",
+				"function"
+			],
+			[
+				"Mode",
+				"PoemaModelSerializer"
+			],
+			[
+				"ass",
+				"assertEqual"
+			],
+			[
+				"rever",
+				"reverse_lazy"
+			],
+			[
+				"act",
+				"action_url"
+			],
+			[
+				"back",
+				"background-color"
+			],
+			[
+				"Dele",
+				"DeleteView"
+			],
+			[
+				"Up",
+				"UpdateView"
+			],
+			[
+				"Cre",
+				"CreateView"
+			],
+			[
+				"validat",
+				"validate_content"
+			],
+			[
+				"PoemaMode",
+				"PoemaModelAdmin"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "src/sculpts/views.py",
+			"settings":
+			{
+				"buffer_size": 6332,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/sculpts/templates/sculpts/search_form.html",
+			"settings":
+			{
+				"buffer_size": 421,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "src/sculpts/templates/sculpts/list_view.html",
+			"settings":
+			{
+				"buffer_size": 587,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "src/sculpts/models.py",
+			"settings":
+			{
+				"buffer_size": 1958,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/inksculpt/urls.py",
+			"settings":
+			{
+				"buffer_size": 1216,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/sculpts/templates/sculpts/delete_confirm.html",
+			"settings":
+			{
+				"buffer_size": 153,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "src/sculpts/urls.py",
+			"settings":
+			{
+				"buffer_size": 1401,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "src/sculpts/mixins.py",
+			"settings":
+			{
+				"buffer_size": 1197,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "src/sculpts/templates/sculpts/form.html",
+			"settings":
+			{
+				"buffer_size": 165,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "src/sculpts/templates/sculpts/update_view.html",
+			"settings":
+			{
+				"buffer_size": 98,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/D/Work/github_projects/inksculpt/inksculpt",
+		"/D/Work/github_projects/inksculpt/inksculpt/src",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/templates",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/templates/sculpts"
+	],
+	"file_history":
+	[
+		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/templates/sculpts/create_view.html",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/urls.py",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/forms.py",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/admin.py",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/templates/sculpts/form.html",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/inksculpt/urls.py",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/views.py",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/validators.py",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/models.py",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/templates/sculpts/detail_view.html",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/templates/sculpts/list_view.html",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/templates/sculpts/update_view.html",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/templates/sculpts/delete_confirm.html",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/inksculpt/settings/local.py",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/inksculpt/views.py",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/templates/home.html",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/inksculpt/settings/__init__.py",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/static-storage/static/css/custom.css",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/inksculpt/settings/production.py",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/inksculpt/settings/base.py",
+		"/D/Work/github_projects/kalamgraphy/kg/src/kg/kg/settings/local.py",
+		"/D/Work/github_projects/kalamgraphy/kg/src/kg/poemas/forms.py",
+		"/D/Work/github_projects/kalamgraphy/kg/src/kg/poemas/templates/poemas/form.html",
+		"/D/Work/github_projects/kalamgraphy/kg/src/kg/templates/base.html",
+		"/D/Work/github_projects/kalamgraphy/kg/src/kg/poemas/models.py",
+		"/D/Work/github_projects/kalamgraphy/kg/src/kg/kg/urls.py",
+		"/D/Work/github_projects/kalamgraphy/kg/src/kg/poemas/api/views.py",
+		"/D/Work/github_projects/kalamgraphy/kg/src/kg/accounts/tests.py",
+		"/D/Work/github_projects/kalamgraphy/kg/src/kg/accounts/templates/registration/login.html",
+		"/D/Work/github_projects/kalamgraphy/kg/src/kg/accounts/api/urls.py",
+		"/D/Work/github_projects/kalamgraphy/kg/src/kg/accounts/api/serializers.py",
+		"/D/Work/github_projects/kalamgraphy/kg/src/kg/accounts/templates/accounts/user_detail.html",
+		"/D/Work/github_projects/kalamgraphy/kg/src/kg/kg/views.py",
+		"/D/Work/github_projects/kalamgraphy/kg/src/kg/kg/settings/production.py",
+		"/D/Work/github_projects/kalamgraphy/kg/src/kg/kg/settings/base.py",
+		"/D/Work/github_projects/kalamgraphy/kg/src/kg/poemas/views.py",
+		"/D/Work/github_projects/kalamgraphy/kg/src/kg/templates/navbar.html",
+		"/D/Work/github_projects/kalamgraphy/kg/src/kg/accounts/forms.py",
+		"/D/Work/github_projects/kalamgraphy/kg/src/kg/accounts/templates/accounts/user_register_form.html",
+		"/D/Work/github_projects/kalamgraphy/kg/src/kg/accounts/views.py",
+		"/D/Work/github_projects/kalamgraphy/kg/src/kg/accounts/urls.py",
+		"/D/Work/github_projects/kalamgraphy/kg/src/kg/accounts/templatetags/__init__.py",
+		"/D/Work/github_projects/kalamgraphy/kg/src/kg/accounts/templatetags/recommended.py",
+		"/D/Work/github_projects/kalamgraphy/kg/src/kg/accounts/templates/accounts/snippets/recommend.html",
+		"/D/Work/github_projects/kalamgraphy/kg/src/kg/poemas/templates/poemas/list_view.html",
+		"/D/Work/github_projects/kalamgraphy/kg/src/kg/accounts/templates/accounts/login.html",
+		"/D/Work/github_projects/kalamgraphy/kg/src/kg/poemas/api/urls.py",
+		"/D/Work/github_projects/kalamgraphy/kg/src/kg/templates/search.html",
+		"/D/Work/github_projects/kalamgraphy/kg/src/kg/accounts/models.py",
+		"/D/Work/github_projects/kalamgraphy/kg/src/kg/hashtags/api/views.py",
+		"/D/Work/github_projects/kalamgraphy/kg/src/kg/hashtags/templates/hashtags/tag_view.html",
+		"/D/Work/github_projects/kalamgraphy/kg/src/kg/hashtags/api/__init__.py",
+		"/D/Work/github_projects/kalamgraphy/kg/src/kg/poemas/templates/poemas/search_form.html",
+		"/D/Work/github_projects/kalamgraphy/kg/src/kg/poemas/api/serializers.py",
+		"/D/Work/github_projects/kalamgraphy/kg/src/kg/poemas/templates/poemas/detail_view.html",
+		"/D/Work/github_projects/kalamgraphy/kg/src/kg/templates/reply-modal.html",
+		"/D/Work/github_projects/kalamgraphy/kg/src/kg/accounts/api/url.py",
+		"/D/Work/github_projects/kalamgraphy/kg/src/kg/templates/home.html",
+		"/D/Work/github_projects/kalamgraphy/kg/src/kg/poemas/templates/poemas/update_view.html",
+		"/D/Work/github_projects/kalamgraphy/kg/src/kg/poemas/api/pagination.py",
+		"/D/Work/github_projects/kalamgraphy/kg/src/kg/poemas/urls.py",
+		"/D/Work/github_projects/kalamgraphy/kg/src/kg/hashtags/signals.py",
+		"/D/Work/github_projects/kalamgraphy/kg/src/kg/hashtags/models.py",
+		"/D/Work/github_projects/kalamgraphy/kg/src/kg/hashtags/views.py",
+		"/D/Work/github_projects/kalamgraphy/kg/src/kg/hashtags/admin.py",
+		"/D/Work/github_projects/kalamgraphy/kg/src/kg/accounts/admin.py",
+		"/D/Work/github_projects/kalamgraphy/kg/src/kg/poemas/validators.py",
+		"/D/Work/github_projects/kalamgraphy/kg/src/kg/accounts/api/__init__.py",
+		"/D/Work/github_projects/kalamgraphy/kg/src/kg/poemas/api/__init__.py",
+		"/D/Work/github_projects/kalamgraphy/kg/src/kg/poemas/templates/poemas/create_view.html",
+		"/D/Work/github_projects/kalamgraphy/kg/src/kg/poemas/tests.py",
+		"/D/Work/github_projects/kalamgraphy/kg/src/kg/poemas/templates/poemas/delete_confirm.html",
+		"/D/Work/github_projects/kalamgraphy/kg/src/kg/poemas/mixins.py",
+		"/D/Work/github_projects/kalamgraphy/kg/src/kg/poemas/admin.py",
+		"/D/Work/github_projects/kalamgraphy/kg/lib/python3.5/site-packages/django/contrib/messages/storage/base.py",
+		"/D/Work/github_projects/kalamgraphy/kg/src/kg/static-storage/static/css/custom.css",
+		"/D/Work/github_projects/kalamgraphy/kg/src/kg/kg/settings/__init__.py",
+		"/D/Work/github_projects/kalamgraphy/kg/src/kg/kg/settings/__init.py__"
+	],
+	"find":
+	{
+		"height": 29.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			".\n",
+			"poemaaa",
+			"loadPo",
+			"data",
+			"media-b",
+			"StandardResultsPagination",
+			"RedirectView"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 2,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "src/sculpts/views.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6332,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								6327,
+								6327
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1152.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "src/sculpts/templates/sculpts/search_form.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 421,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								421,
+								421
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "src/sculpts/templates/sculpts/list_view.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 587,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								275,
+								275
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "src/sculpts/models.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1958,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1032,
+								1032
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "src/inksculpt/urls.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1216,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1007,
+								1007
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 216.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "src/sculpts/templates/sculpts/delete_confirm.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 153,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								28,
+								28
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "src/sculpts/urls.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1401,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								284,
+								284
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "src/sculpts/mixins.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1197,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1022,
+								1022
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 288.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "src/sculpts/templates/sculpts/form.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 165,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								165,
+								165
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "src/sculpts/templates/sculpts/update_view.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 98,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								98,
+								98
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 28.0
+	},
+	"input":
+	{
+		"height": 81.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "inksculpt.sublime-project",
+	"replace":
+	{
+		"height": 53.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 250.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
