@@ -78,7 +78,7 @@ class SculptListView(ListView): #7
 
 	def get_queryset(self, *args, **kwargs): #18
 		qs = Sculpt.objects.all()
-		print(self.request.GET) 
+		#print(self.request.GET) #prints the querydict 
 		query = self.request.GET.get("q", None)
 		if query is not None:
 			qs = qs.filter (
