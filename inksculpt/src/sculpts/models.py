@@ -13,7 +13,7 @@ class NonStrippingTextField(TextField):
 
 
 def upload_location(object, filename): #5
-	return "%s/%s/%s" %(object.user,object.id, filename)
+	return "%s/%s" %(object.user, filename)
 
 # for validation
 
@@ -70,7 +70,7 @@ COMMENTS - All reasons
 2. to associate with the user model we bring actual path to the user model. 
 3. 24.
 4. ImageField Documentation. It has two attributes, height_field and width_field, which can be used to know about the res of the image. 
-5. it creates a more dynamic upload location. it saves inside the user/id/image. 
+5. it creates a more dynamic upload location. it saves inside the user/image. 
 
 
 '''
