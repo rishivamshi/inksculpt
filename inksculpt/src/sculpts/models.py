@@ -12,6 +12,9 @@ class NonStrippingTextField(TextField):
 		return super(NonStrippingTextField,self).formfield(**kwargs)
 
 
+def upload_location(object, filename): #5
+	return "%s/%s/%s" %(object.user,object.id, filename)
+
 # for validation
 
 from .validators import validate_content
@@ -26,7 +29,16 @@ from .validators import validate_content
 class Sculpt(models.Model):
 	user = models.ForeignKey( settings.AUTH_USER_MODEL ) # Comments - 1 and attribute is cooments 2. 
 	content = NonStrippingTextField(validators = [validate_content]) # writing stuff and see how to take care of blank spaces - strip = false
-	image = models.FileField(null = True, blank = True) # images stuff
+	
+	image = models.ImageField(
+				upload_to = upload_location,
+				null = True,
+				blank = True,
+				width_field = "width_field",
+				height_field = "height_field") # images stuff
+		
+	height_field = models.IntegerField(default = 0) #4
+	width_field = models.IntegerField(default = 0)
 	updated = models.DateTimeField(auto_now = True) # if the content is updated
 	timestamp = models.DateTimeField( auto_now_add = True ) # autonowadd means it will automatically create it fo us, when we create content. 
 
@@ -57,8 +69,8 @@ COMMENTS - All reasons
 1. foreign key connects different models together. creates a relationship between two models. We have to use foreignkey to associate sculpts with users. 
 2. to associate with the user model we bring actual path to the user model. 
 3. 24.
-
-
+4. ImageField Documentation. It has two attributes, height_field and width_field, which can be used to know about the res of the image. 
+5. it creates a more dynamic upload location. it saves inside the user/id/image. 
 
 
 '''
