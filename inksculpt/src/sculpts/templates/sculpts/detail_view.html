@@ -1,5 +1,12 @@
+{% extends "base.html" %}
+{% block title %}{{ block.super }} | Detail{% endblock title %}
+{% block content %}
+
+
 {{ object.content }}<br>
 {{ object.user }} <br>
 {{ object.timestamp }}<br>
 {{ object.timestamp|timesince }}<br>
 {{ object.image }}
+
+{% endblock content %}

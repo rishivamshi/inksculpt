@@ -1,9 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>list view</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% block title %}{{ block.super }} | Feed{% endblock title %}
+
+{% block content %}
 
 {% include "sculpts/search_form.html" %}<br>
 
@@ -31,8 +29,7 @@
 {% endfor %}
 
 
+{% endblock content %}
 
-</body>
-</html>
 
 

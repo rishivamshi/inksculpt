@@ -1,3 +1,6 @@
+{% extends "base.html" %}
+{% block title %}{{ block.super }} | Sculpt{% endblock title %}
+{% block content %}
 
 {% include "sculpts/form.html" with form=form btn_title='Sculpt' %}
 
@@ -10,3 +13,5 @@
 
 	<input type="submit" value="Sculpt" >
 </form> -->
+
+{% endblock content %}
