@@ -3,20 +3,31 @@
 
 {% block content %}
 
-{% include "sculpts/search_form.html" %}<br>
 
 
+<div class="row">
+	<div class="col-sm-9">
+		{% include "sculpts/search_form.html" %}<br>
 {% for object in object_list %} 
 
-{% if object.content %}
-	<pre>{{ object.content }}</pre><br>
-{% endif %}
-{{ object.user }} <br>
-{{ object.timestamp }}<br>
-{{ object.timestamp|timesince }} ago<br>
-{% if object.image %}
-<img src="{{ object.image.url }}" height="200px"  /><br>
-{% endif %}
+<div class="media">
+
+	<!-- {% if object.image %}
+  <img class="mr-3" src="..." alt="DP">
+  {% endif %} -->
+  <div class="media-body">
+    <h5 class="mt-0">{{ object.user }}</h5>
+   			<pre>{{ object.content }}</pre>
+   			{% if object.image %}
+				<img src="{{ object.image.url }}" height="200px"  /><br>
+			{% endif %}
+   			{{ object.timestamp }} | {{ object.timestamp|timesince }} ago | <a href='{{ object.get_absolute_url }}'>View</a>
+
+  </div>
+</div>
+<hr>
+
+
 {% empty %}
 {% if request.GET.q %} <!-- for searches.  -->
 <p>No Sculpts or Users found. </p>
@@ -27,8 +38,8 @@
 
 
 {% endfor %}
-
-
+</div>
+</div>
 {% endblock content %}
 
 
