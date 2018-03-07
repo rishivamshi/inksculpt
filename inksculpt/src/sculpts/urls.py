@@ -3,6 +3,9 @@
 
 from django.conf.urls import url
 # from .views import sculpt_detail_view, sculpt_list_view # comments 1
+
+from django.views.generic.base import RedirectView #9
+
 from .views import (
 	SculptCreateView,
 	SculptDetailView,
@@ -15,8 +18,8 @@ urlpatterns = [
 
     # url(r'^$', sculpt_list_view, name = 'list'), # 2
     # url(r'^1/$', sculpt_detail_view, name = 'detail'), # 3
-
-    url(r'^$', SculptListView.as_view(), name = 'list'), # 5  # /sculpt/
+    url(r'^$', RedirectView.as_view(url = "/")), #10
+    url(r'^search/$', SculptListView.as_view(), name = 'list'), # 5  # /sculpt/ #8
     url(r'^create/$', SculptCreateView.as_view(), name = 'create'), # 7  # /sculpt/create
     url(r'^(?P<pk>\d+)/$', SculptDetailView.as_view(), name = 'detail'), # 6  # /sculpt/1
     url(r'^(?P<pk>\d+)/update/$', SculptUpdateView.as_view(), name = 'update'), # 6  # /sculpt/1/update
@@ -38,7 +41,9 @@ Comments -
 5. .asview() turns that into an view function and its for list view
 6. its for detailview.
 7. url for createview. 
-
+8. changed home to listview, and /sculpt to search view. so, /sculpt gives a page not found, which i will redirect it to home page.
+9. importing redirectview to redirect /sculpt to home page.
+10. this will redirect /sculpt to / which is home page.
 (?P<pk>\d+) is a regular expression only for numbers.
 
 '''

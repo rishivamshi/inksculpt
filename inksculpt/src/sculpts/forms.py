@@ -6,6 +6,12 @@ from django import forms
 from .models import Sculpt
 
 class SculptModelForm(forms.ModelForm):
+	content = forms.CharField(label='', widget=forms.Textarea(
+						attrs={'placeholder':"Your Message",
+						 "class": "form-control"}))
+
+	image = forms.ImageField(label = '',  widget=forms.FileInput(
+						attrs={"class": "form-control"}))
 	class Meta:
 		model = Sculpt
 		fields = [

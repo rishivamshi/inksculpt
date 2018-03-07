@@ -91,7 +91,8 @@ class SculptListView(ListView): #7
 	# to get context of the data.
 	def get_context_data(self, *args, **kwargs):
 		context = super(SculptListView, self).get_context_data(*args, **kwargs)
-
+		context['create_form'] = SculptModelForm() #21
+		context['create_url'] = reverse_lazy("sculpt:create")
 		#context["another_list"] = Sculpt.objects.all()
 		
 		return context
@@ -165,5 +166,7 @@ Comments
 18. this function generates a query dictionary.if we print(self.qs.GET) it prints a querydict. if the url is updats to 12.../sculpt/?q=some search, it prints this q in the qwerydict which allows to search.
 19. This import allows us to search for more fields. its a complex lookup. https://docs.djangoproject.com/en/1.10/topics/db/queries/
 20. this entire functions just makes list view more robust as it allows for searching sculpts. from search_view.html, search term is extracted and then that term is passed in this function to search if the terms is in the database and then if present, it users list_view.html to show them.
+21. This two lines allows to sculpt from the homepage itself. as these two are linked with list_view.html with form=create_form action_url=create_url.
+
 
 '''
