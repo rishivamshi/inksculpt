@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'crispy_forms',
     'sculpts',
 ]
 
@@ -133,3 +134,5 @@ STATIC_ROOT  = os.path.join(os.path.dirname(BASE_DIR), "static-serve") #CDN
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT  = os.path.join(os.path.dirname(BASE_DIR), "media-serve")
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

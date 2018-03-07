@@ -1,0 +1,53 @@
+[33mcommit 3524ca94ae75c85e694a2103ff34ee4a53fe3209[m
+Author:  <rishivamshi0079@gmail.com>
+Date:   Wed Mar 7 15:35:42 2018 +0530
+
+    sculpt from homepage. changed home to listview and /sculpt to redirect to home
+
+[33mcommit fb408d902c12228cd48118ca3b54c83948737fa9[m
+Author:  <rishivamshi0079@gmail.com>
+Date:   Tue Mar 6 16:27:30 2018 +0530
+
+    made small changes to ui to understand containers and columns. edited layout of detail_view
+
+[33mcommit d105c8beaeed7e9d6b08af0d58ff3300c845b259[m
+Author:  <rishivamshi0079@gmail.com>
+Date:   Tue Mar 6 15:50:06 2018 +0530
+
+    Navbar bootstrap
+
+[33mcommit 9e1d76475ac70e3c74cf1ba48efc4e25de92d7c4[m
+Author:  <rishivamshi0079@gmail.com>
+Date:   Tue Mar 6 14:58:16 2018 +0530
+
+    Added media object for list view. made small layout changes
+
+[33mcommit d091551c8346a63e55bfa399045991926920453d[m
+Author:  <rishivamshi0079@gmail.com>
+Date:   Tue Mar 6 14:14:59 2018 +0530
+
+    Created base.html and inherited it into all html files
+
+[33mcommit 91fbd73dcea4bf23b23d106711e12331ab9a4404[m
+Author:  <rishivamshi0079@gmail.com>
+Date:   Mon Mar 5 17:10:42 2018 +0530
+
+    error fixed with image url as id is created after the image is uploaded, so the url is changed to user/image
+
+[33mcommit 601867b6c5fe6087d283567c6b9a4362eeb0814a[m
+Author:  <rishivamshi0079@gmail.com>
+Date:   Mon Mar 5 17:04:16 2018 +0530
+
+    Changed FileField to ImageField and then the upload to /user/id/image, along with ht and wd fields
+
+[33mcommit 339f5f59bba4c2515b22dd2a120da4b271fa4be9[m
+Author:  <rishivamshi0079@gmail.com>
+Date:   Sun Mar 4 22:11:53 2018 +0530
+
+    pAdvance searching using Q Searches implemented for users and content
+
+[33mcommit 133696c563b8d0bccffc89c2316e8812db1bf6a8[m
+Author:  <rishivamshi0079@gmail.com>
+Date:   Sun Mar 4 22:08:28 2018 +0530
+
+    previous commits crashed. first commit reset
