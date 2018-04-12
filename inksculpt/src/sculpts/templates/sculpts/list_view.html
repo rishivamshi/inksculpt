@@ -1,7 +1,92 @@
 {% extends "base.html" %}
 {% block title %}{{ block.super }} | Feed{% endblock title %}
 
+{% block script %}
+
+
+
+
+
+	
+  
+    
+   		
+   		
+
+ 
+
+
+
+<script type="text/javascript">
+	
+	$(document).ready(function(){
+
+		console.log('working');
+
+		$.ajax({
+
+			url: "/api/sculpt/",
+			method: "GET",
+			success: function(data){
+				// console.log(data)
+				$.each(data, function(key, value){
+					// console.log(key)
+					// console.log(value.user)
+					// console.log(value.content)
+					var sculptKey = key;
+					var sculptContent = value.content;
+
+					var sculptImage = value.image;
+					var sculptUser = value.user;
+					console.log(sculptImage);
+
+					if (sculptImage == null) {
+						$('#sculpt-container').append(
+
+							"<div class=\"media\"><div class=\"media-body\"><h5 class=\"mt-0\">" + sculptUser.username +  "</h5><pre>"+ sculptContent + "</pre><br><br> via " + sculptUser.username + " | " + "<a href = '#'>View</a>"+ " </div></div><hr>"
+
+
+						)
+					}
+					else {
+$('#sculpt-container').append(
+
+							"<div class=\"media\"><div class=\"media-body\"><h5 class=\"mt-0\">" + sculptUser.username +  "</h5><pre>"+ sculptContent + "</pre><img src=\"" + sculptImage + "\" height=\"200px\"  /><br><br> via " + sculptUser.username + " | " + "<a href = '#'>View</a>"+ " </div></div><hr>"
+
+
+						)
+
+
+					}
+					
+				})
+			},
+			error: function(data){
+				console.log("error")
+				console.log(data)
+			}
+
+
+		})
+
+
+
+
+
+	}); 
+
+
+
+
+</script>
+
+
+
+{% endblock script %}
+
 {% block content %}
+
+
 
 	
 
@@ -21,7 +106,22 @@
 		<hr>
 	{% endif %}
 	
+
+
+<div id="sculpt-container">
+
+
+	</div>
+
+
 {% for object in object_list %} 
+
+
+
+
+
+
+
 <div class="media">
 
 	<!-- {% if object.image %}
