@@ -7,9 +7,12 @@ from django.conf.urls import url
 from django.views.generic.base import RedirectView 
 
 from .views import (
+	SculptListAPIView, #1
 	
  		)
 urlpatterns = [
+
+	url(r'^$', SculptListAPIView.as_view(), name = 'list'), #/api/sculpt/
    
 ]
 
@@ -21,6 +24,7 @@ urlpatterns = [
 '''
 Comments - 
 
+#1 - importing the view from views.py
 
 
 '''
