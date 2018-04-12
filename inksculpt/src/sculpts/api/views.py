@@ -1,6 +1,6 @@
 from rest_framework import generics 
 
-from sculpts.models import Sculpt #2
+from sculpts.models  import Sculpt #2
 from .serializers import SculptModelSerializer #1
 
 class SculptListAPIView(generics.ListAPIView):
