@@ -1,162 +1,68 @@
-{% extends "base.html" %}
-{% block title %}{{ block.super }} | Feed{% endblock title %}
-
-{% block script %}
-
-
-
-
-
-	
-  
-    
-   		
-   		
-
- 
-
-
-
+{% extends "base.html" %} {% block title %}{{ block.super }} | Feed{% endblock title %} {% block script %}
 <script type="text/javascript">
-	
-	$(document).ready(function(){
+    function getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)")
+            , results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+    $(document).ready(function () {
+        console.log('working');
+        var query = getParameterByName('q')
+            // console.log(query)
+        var sculptlist = [];
 
-		console.log('working');
-
-		$.ajax({
-
-			url: "/api/sculpt/",
-			method: "GET",
-			success: function(data){
-				// console.log(data)
-				$.each(data, function(key, value){
-					// console.log(key)
-					// console.log(value.user)
-					// console.log(value.content)
-					var sculptKey = key;
-					var sculptContent = value.content;
-
-					var sculptImage = value.image;
-					var sculptUser = value.user;
-					console.log(sculptImage);
-
-					if (sculptImage == null) {
-						$('#sculpt-container').append(
-
-							"<div class=\"media\"><div class=\"media-body\"><h5 class=\"mt-0\">" + sculptUser.username +  "</h5><pre>"+ sculptContent + "</pre><br><br> via " + sculptUser.username + " | " + "<a href = '#'>View</a>"+ " </div></div><hr>"
-
-
-						)
-					}
-					else {
-$('#sculpt-container').append(
-
-							"<div class=\"media\"><div class=\"media-body\"><h5 class=\"mt-0\">" + sculptUser.username +  "</h5><pre>"+ sculptContent + "</pre><img src=\"" + sculptImage + "\" height=\"200px\"  /><br><br> via " + sculptUser.username + " | " + "<a href = '#'>View</a>"+ " </div></div><hr>"
-
-
-						)
-
-
-					}
-					
-				})
-			},
-			error: function(data){
-				console.log("error")
-				console.log(data)
-			}
-
-
-		})
-
-
-
-
-
-	}); 
-
-
-
-
-</script>
-
-
-
-{% endblock script %}
-
-{% block content %}
-
-
-
-	
-
-
-
+        function parseSculpts() {
+            if (sculptlist == 0) {
+                $('#sculpt-container').text("No sculpts currently found")
+            }
+            else {
+                // sculpts exist - parse and display them
+                $.each(sculptlist, function (key, value) {
+                    // console.log(key)
+                    // console.log(value.user)
+                    // console.log(value.content)
+                    var sculptKey = key;
+                    var sculptContent = value.content;
+                    var sculptImage = value.image;
+                    var sculptUser = value.user;
+                    console.log(sculptImage);
+                    if (sculptImage == null) {
+                        $('#sculpt-container').append("<div class=\"media\"><div class=\"media-body\"><h5 class=\"mt-0\">" + sculptUser.username + "</h5><pre>" + sculptContent + "</pre><br><br> via " + sculptUser.username + " | " + "<a href = '#'>View</a>" + " </div></div><hr>")
+                    }
+                    else {
+                        $('#sculpt-container').append("<div class=\"media\"><div class=\"media-body\"><h5 class=\"mt-0\">" + sculptUser.username + "</h5><pre>" + sculptContent + "</pre><img src=\"" + sculptImage + "\" height=\"200px\"  /><br><br> via " + sculptUser.username + " | " + "<a href = '#'>View</a>" + " </div></div><hr>")
+                    }
+                })
+            }
+        }
+        $.ajax({
+            url: "/api/sculpt/"
+            , data: {
+                "q": query
+            }
+            , method: "GET"
+            , success: function (data) {
+                // console.log(data)
+                sculptlist = data
+                parseSculpts()
+            }
+            , error: function (data) {
+                console.log("error")
+                console.log(data)
+            }
+        })
+    });
+</script> {% endblock script %} {% block content %}
 <div class="row">
-	<div class="col-sm-3 col-xs-12" style="background-color: teal;">
-		<h1>{{ request.user }}</h1>
-	</div>
-<div class="col-sm-9"> 
-
-
-	{% if not request.GET.q %}
-		<div class="">
-			{% include "sculpts/form.html" with form=create_form action_url=create_url btn_title='Sculpt' %}
-		</div>
-		<hr>
-	{% endif %}
-	
-
-
-<div id="sculpt-container">
-
-
-	</div>
-
-
-{% for object in object_list %} 
-
-
-
-
-
-
-
-<div class="media">
-
-	<!-- {% if object.image %}
-  <img class="mr-3" src="..." alt="DP">
-  {% endif %} -->
-  <div class="media-body">
-    <h5 class="mt-0">{{ object.user }}</h5>
-   			<pre>{{ object.content }}</pre>
-   			{% if object.image %}
-				<img src="{{ object.image.url }}" height="200px"  /><br>
-			{% endif %}
-   			{{ object.timestamp }} | {{ object.timestamp|timesince }} ago | <a href='{{ object.get_absolute_url }}'>View</a>
-
-  </div>
-</div>
-<hr>
-{% empty %}
-{% if request.GET.q %} <!-- for searches.  -->
-<p>No Sculpts or Users found. </p>
-{% else %}
-<p>No Sculpts Yet. </p>
-{% endif %}
-{% endfor %}
-</div>
-
-
-
-
-	
-
-
-
-</div>
-
-{% endblock content %}
-
-
-
+    <div class="col-sm-3 col-xs-12" style="background-color: teal;">
+        <h1>{{ request.user }}</h1> </div>
+    <div class="col-sm-9"> {% if not request.GET.q %}
+        <div class=""> {% include "sculpts/form.html" with form=create_form action_url=create_url btn_title='Sculpt' %} </div>
+        <hr> {% endif %}
+        <div id="sculpt-container"> </div>
+    </div>
+</div> {% endblock content %}
