@@ -20,6 +20,7 @@
                 $('#sculpt-container').text("No sculpts currently found")
             }
             else {
+                $('#sculpt-container').empty()
                 // sculpts exist - parse and display them
                 $.each(sculptlist, function (key, value) {
                     // console.log(key)
@@ -62,42 +63,31 @@
 
         fetchSculpts();
         
-
         $("#sculpt-form").submit(function(event){
         	event.preventDefault()
-        	var this_ = $(this)
-        	
-        	// console.log(event)
-        	 console.log(this_.serialize())
-        	var formData = this_.serialize()
 
-        	$.ajax({
-	            url: "/api/sculpt/create/",
-	            data: formData,
-	            method: "POST",
-	            processData: false,
-      
-	            success: function (data) {
-	                console.log(data)
-	                fetchSculpts();
-	                // sculptlist = data
-	                // parseSculpts()
-	            }
-	            , error: function (data) {
-	                console.log("error")
-	                console.log(data)
-	                console.log(data.statusText)
-	                console.log(data.status)
-	            }
+            var formData = new FormData(
+                document.getElementById("sculpt-form")
+            );
+            
+            $.ajax({
+                url: "/api/sculpt/create/",
+                type: "POST",
+                data: formData,
+                processData: false,  // tell jQuery not to process the data
+                contentType: false,   // tell jQuery not to set contentType
+                success: function (data) {
+                    fetchSculpts();
+                }, error: function (data) {
+                    console.log("error")
+                    console.log(data)
+                }})
+
+            // formData.append('image', $('#id_image').prop('files')[0]);
+            // formData.append('text', $('#id_content').val());
+
+            console.log(formData)
         })
-
-
-        	
-
-        })
-
-
-
     });
 </script> {% endblock script %} {% block content %}
 <div class="row">
