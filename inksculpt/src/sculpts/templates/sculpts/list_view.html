@@ -10,7 +10,7 @@
         return decodeURIComponent(results[2].replace(/\+/g, " "));
     }
     $(document).ready(function () {
-        console.log('working');
+        // console.log('working');
         var query = getParameterByName('q')
             // console.log(query)
         var sculptlist = [];
@@ -29,7 +29,7 @@
                     var sculptContent = value.content;
                     var sculptImage = value.image;
                     var sculptUser = value.user;
-                    console.log(sculptImage);
+                    // console.log(sculptImage);
                     if (sculptImage == null) {
                         $('#sculpt-container').append("<div class=\"media\"><div class=\"media-body\"><h5 class=\"mt-0\">" + sculptUser.username + "</h5><pre>" + sculptContent + "</pre><br><br> via " + sculptUser.username + " | " + "<a href = '#'>View</a>" + " </div></div><hr>")
                     }
@@ -39,29 +39,72 @@
                 })
             }
         }
-        $.ajax({
-            url: "/api/sculpt/"
-            , data: {
-                "q": query
-            }
-            , method: "GET"
-            , success: function (data) {
-                // console.log(data)
-                sculptlist = data
-                parseSculpts()
-            }
-            , error: function (data) {
-                console.log("error")
-                console.log(data)
-            }
+
+        function fetchSculpts() {
+        	console.log("fetching...")
+        	$.ajax({
+	            url: "/api/sculpt/"
+	            , data: {
+	                "q": query
+	            }
+	            , method: "GET"
+	            , success: function (data) {
+	                // console.log(data)
+	                sculptlist = data
+	                parseSculpts()
+	            }
+	            , error: function (data) {
+	                console.log("error")
+	                console.log(data)
+	            }
         })
+        }
+
+        fetchSculpts();
+        
+
+        $("#sculpt-form").submit(function(event){
+        	event.preventDefault()
+        	var this_ = $(this)
+        	
+        	// console.log(event)
+        	 console.log(this_.serialize())
+        	var formData = this_.serialize()
+
+        	$.ajax({
+	            url: "/api/sculpt/create/",
+	            data: formData,
+	            method: "POST",
+	            processData: false,
+      
+	            success: function (data) {
+	                console.log(data)
+	                fetchSculpts();
+	                // sculptlist = data
+	                // parseSculpts()
+	            }
+	            , error: function (data) {
+	                console.log("error")
+	                console.log(data)
+	                console.log(data.statusText)
+	                console.log(data.status)
+	            }
+        })
+
+
+        	
+
+        })
+
+
+
     });
 </script> {% endblock script %} {% block content %}
 <div class="row">
     <div class="col-sm-3 col-xs-12" style="background-color: teal;">
         <h1>{{ request.user }}</h1> </div>
     <div class="col-sm-9"> {% if not request.GET.q %}
-        <div class=""> {% include "sculpts/form.html" with form=create_form action_url=create_url btn_title='Sculpt' %} </div>
+        <div class=""> {% include "sculpts/form.html" with form=create_form action_url=create_url btn_title='Sculpt' form_id='sculpt-form' %} </div>
         <hr> {% endif %}
         <div id="sculpt-container"> </div>
     </div>

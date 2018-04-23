@@ -33,7 +33,7 @@ class SculptModelForm(forms.ModelForm):
 	# 	self.helper = FormHelper()
 	# 	self.helper.form_method = 'POST'
 	# 	self.helper.layout = Layout(
-	# 			PrependedText('content', 'Write Anything'),
+	# 			PrependedText('content', 'Write Anything', css_class='testinghere'),
 				
 	# 			PrependedAppendedText('image', 'Upload','Browse'),
 	# 			FormActions(Submit('Sculptss', 'Sculptss', css_clss = 'btn btn-primary'))
