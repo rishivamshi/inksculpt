@@ -15,77 +15,110 @@
             // console.log(query)
         var sculptlist = [];
 
+        function attachSculpt(sculptValue, prepend) {
+            // console.log(key)
+            // console.log(value.user)
+            // console.log(value.content)
+            var dateDisplay = sculptValue.date_display;
+            var sculptContent = sculptValue.content;
+            var sculptImage = sculptValue.image;
+            var sculptUser = sculptValue.user;
+            // console.log(sculptImage);
+            if (prepend == true) {
+                if (sculptImage == null) {
+                    $('#sculpt-container').prepend("<div class=\"media\"><div class=\"media-body\"><h5 class=\"mt-0\">" + sculptUser.username + "</h5><pre>" + sculptContent + "</pre><br><br> via " + sculptUser.username + "|" + dateDisplay + " | " + "<a href = '#'>View</a>" + " </div></div><hr>")
+                }
+                else {
+                    $('#sculpt-container').prepend("<div class=\"media\"><div class=\"media-body\"><h5 class=\"mt-0\">" + sculptUser.username + "</h5><pre>" + sculptContent + "</pre><img src=\"" + sculptImage + "\" height=\"200px\"  /><br><br> via " + sculptUser.username + " | " + dateDisplay + " | " + "<a href = '#'>View</a>" + " </div></div><hr>")
+                }
+            }
+            else {
+                if (sculptImage == null) {
+                    $('#sculpt-container').append("<div class=\"media\"><div class=\"media-body\"><h5 class=\"mt-0\">" + sculptUser.username + "</h5><pre>" + sculptContent + "</pre><br><br> via " + sculptUser.username + "|" + dateDisplay + " | " + "<a href = '#'>View</a>" + " </div></div><hr>")
+                }
+                else {
+                    $('#sculpt-container').append("<div class=\"media\"><div class=\"media-body\"><h5 class=\"mt-0\">" + sculptUser.username + "</h5><pre>" + sculptContent + "</pre><img src=\"" + sculptImage + "\" height=\"200px\"  /><br><br> via " + sculptUser.username + " | " + dateDisplay + " | " + "<a href = '#'>View</a>" + " </div></div><hr>")
+                }
+            }
+        }
+
         function parseSculpts() {
             if (sculptlist == 0) {
                 $('#sculpt-container').text("No sculpts currently found")
             }
             else {
-                $('#sculpt-container').empty()
+                // $('#sculpt-container').empty()
                 // sculpts exist - parse and display them
                 $.each(sculptlist, function (key, value) {
-                    // console.log(key)
-                    // console.log(value.user)
-                    // console.log(value.content)
                     var sculptKey = key;
-                    var sculptContent = value.content;
-                    var sculptImage = value.image;
-                    var sculptUser = value.user;
-                    // console.log(sculptImage);
-                    if (sculptImage == null) {
-                        $('#sculpt-container').append("<div class=\"media\"><div class=\"media-body\"><h5 class=\"mt-0\">" + sculptUser.username + "</h5><pre>" + sculptContent + "</pre><br><br> via " + sculptUser.username + " | " + "<a href = '#'>View</a>" + " </div></div><hr>")
-                    }
-                    else {
-                        $('#sculpt-container').append("<div class=\"media\"><div class=\"media-body\"><h5 class=\"mt-0\">" + sculptUser.username + "</h5><pre>" + sculptContent + "</pre><img src=\"" + sculptImage + "\" height=\"200px\"  /><br><br> via " + sculptUser.username + " | " + "<a href = '#'>View</a>" + " </div></div><hr>")
-                    }
+                    attachSculpt(value)
                 })
             }
         }
 
         function fetchSculpts() {
-        	console.log("fetching...")
-        	$.ajax({
-	            url: "/api/sculpt/"
-	            , data: {
-	                "q": query
-	            }
-	            , method: "GET"
-	            , success: function (data) {
-	                // console.log(data)
-	                sculptlist = data
-	                parseSculpts()
-	            }
-	            , error: function (data) {
-	                console.log("error")
-	                console.log(data)
-	            }
-        })
-        }
-
-        fetchSculpts();
-        
-        $("#sculpt-form").submit(function(event){
-        	event.preventDefault()
-
-            var formData = new FormData(
-                document.getElementById("sculpt-form")
-            );
-            
+            console.log("fetching...")
             $.ajax({
-                url: "/api/sculpt/create/",
-                type: "POST",
-                data: formData,
-                processData: false,  // tell jQuery not to process the data
-                contentType: false,   // tell jQuery not to set contentType
-                success: function (data) {
-                    fetchSculpts();
-                }, error: function (data) {
+                url: "/api/sculpt/"
+                , data: {
+                    "q": query
+                }
+                , method: "GET"
+                , success: function (data) {
+                    // console.log(data)
+                    sculptlist = data
+                    parseSculpts()
+                }
+                , error: function (data) {
                     console.log("error")
                     console.log(data)
-                }})
+                }
+            })
+        }
+        fetchSculpts();
 
-            // formData.append('image', $('#id_image').prop('files')[0]);
-            // formData.append('text', $('#id_content').val());
+        var charsStart = 0;
+        var charsCurrent = 0;
 
+        $("#sculpt-form").append("<span id='sculptCharsLeft'>" + charsStart +  "</span>")
+
+        $("#sculpt-form textarea").keyup(function(event){
+
+        	//console.log(event.key, event.timeStamp)
+        	var sculptValue = $(this).val()
+        	charsCurrent = charsStart + sculptValue.length
+        	$("#sculptCharsLeft").text(charsCurrent)
+        })
+
+
+
+        $("#sculpt-form").submit(function (event) {
+            event.preventDefault()
+            var this_ = $(this)
+            var formData = new FormData(document.getElementById("sculpt-form"));
+            // console.log(formData)
+            $.ajax({
+                    url: "/api/sculpt/create/"
+                    , data: formData
+                    , type: "POST"
+                    , processData: false, // tell jQuery not to process the data
+                    contentType: false, // tell jQuery not to set contentType
+                    success: function (data) {
+                        // console.log(data)
+                        this_.find("input[type=text], textarea").val("")
+                        this_.find("input[type=file]").val(null)
+                        attachSculpt(data, true)
+                            // fetchSculpts();
+                            // sculptList = data
+                            // parseSculpts()
+                    }
+                    , error: function (data) {
+                        console.log("error")
+                        console.log(data)
+                    }
+                })
+                // formData.append('image', $('#id_image').prop('files')[0]);
+                // formData.append('text', $('#id_content').val());
             console.log(formData)
         })
     });

@@ -541,7 +541,7 @@
 			"file": "src/sculpts/templates/sculpts/list_view.html",
 			"settings":
 			{
-				"buffer_size": 4066,
+				"buffer_size": 4196,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -824,15 +824,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4066,
+						"buffer_size": 4196,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3114,
-								3114
+								2994,
+								2994
 							]
 						],
 						"settings":
@@ -841,7 +841,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 846.0,
+						"translation.y": 918.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,

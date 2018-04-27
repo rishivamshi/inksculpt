@@ -1,7 +1,7 @@
 from rest_framework   import generics 
 from django.db.models import Q #19
 
-from rest_framework import permissions
+from rest_framework import permissions #22
 
 from sculpts.models   import Sculpt #2
 from .serializers     import SculptModelSerializer #1
@@ -10,7 +10,7 @@ from .serializers     import SculptModelSerializer #1
 
 class SculptCreateAPIView(generics.CreateAPIView):
 	serializer_class = SculptModelSerializer
-	permission_classes = [permissions.IsAuthenticated]
+	permission_classes = [permissions.IsAuthenticated] #23
 	def perform_create(self, serializer):
 		serializer.save(user = self.request.user)
 
@@ -20,7 +20,7 @@ class SculptListAPIView(generics.ListAPIView):
 
 	def get_queryset(self, *args, **kwargs): #18
 		qs = Sculpt.objects.all().order_by("-timestamp") #21
-		print(self.request.GET) #prints the querydict 
+		# print(self.request.GET) #prints the querydict 
 		query = self.request.GET.get("q", None)
 		if query is not None:
 			qs = qs.filter (
@@ -45,6 +45,8 @@ Comments -
 
 #21 - it can be replaced with -pk = primary key as it increases by 1.
 
+
+#23 - checks if the create url is user authenticated or not. basically, you cannot post stuff if user is not signed up.
 
 a js function in list_view.html or base.html is used to get the q or the search query. it's done in this way because we are using an api to search for the data also. function name is getParameterByName() and link - https://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript/901144#901144
 '''

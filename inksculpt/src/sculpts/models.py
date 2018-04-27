@@ -22,6 +22,7 @@ from .validators import validate_content
 
 
 
+
 # Create your models here.
 
 
@@ -49,6 +50,10 @@ class Sculpt(models.Model):
 
 	def get_absolute_url(self):
 		return reverse("sculpt:detail", kwargs={"pk":self.pk}) # if theirs no success_url in the views class, it will go this url
+
+	# the following class allows to print the sculpts in reverse order(timestamp). migrations to run this thing. but I am not doing it here, as i am doing it in the api/views.py.
+	# class Meta:
+	# 	ordering = ['-timestamp', 'content']
 
 	# validation can be done in the models itself. 
 	# this will be called , whenever you even want to save the model itself.
