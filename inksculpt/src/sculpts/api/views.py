@@ -4,6 +4,8 @@ from django.db.models import Q #19
 from rest_framework import permissions #22
 
 from sculpts.models   import Sculpt #2
+
+from .pagination 	import StandardResultsPagination #24
 from .serializers     import SculptModelSerializer #1
 
 
@@ -17,6 +19,7 @@ class SculptCreateAPIView(generics.CreateAPIView):
 
 class SculptListAPIView(generics.ListAPIView):
 	serializer_class = SculptModelSerializer
+	pagination_class = StandardResultsPagination
 
 	def get_queryset(self, *args, **kwargs): #18
 		qs = Sculpt.objects.all().order_by("-timestamp") #21
@@ -47,6 +50,8 @@ Comments -
 
 
 #23 - checks if the create url is user authenticated or not. basically, you cannot post stuff if user is not signed up.
+#24 - importing the pagination class from pagination.py
+
 
 a js function in list_view.html or base.html is used to get the q or the search query. it's done in this way because we are using an api to search for the data also. function name is getParameterByName() and link - https://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript/901144#901144
 '''
