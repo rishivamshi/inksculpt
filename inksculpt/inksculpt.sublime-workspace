@@ -684,7 +684,7 @@
 	],
 	"find":
 	{
-		"height": 32.0
+		"height": 41.0
 	},
 	"find_in_files":
 	{
@@ -815,7 +815,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 32.0
+		"height": 41.0
 	},
 	"input":
 	{
@@ -852,7 +852,7 @@
 	"project": "inksculpt.sublime-project",
 	"replace":
 	{
-		"height": 59.0
+		"height": 77.0
 	},
 	"save_all_on_build": true,
 	"select_file":
