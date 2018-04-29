@@ -2,6 +2,9 @@ from django.db import models
 
 from django.conf import settings
 
+from django.urls import reverse_lazy
+
+
 # Create your models here.
 
 class UserProfileManager(models.Manager): #4
@@ -16,6 +19,24 @@ class UserProfileManager(models.Manager): #4
 			pass
 		return qs
 
+	def toggle_follow(self, user, to_toggle_user):
+		user_profile, created = UserProfile.objects.get_or_create(user=user) # creates a tuple (user_obj, true) 
+		if to_toggle_user in user_profile.following.all(): #11
+			user_profile.following.remove(to_toggle_user)
+			added = False
+		else:
+			user_profile.following.add(to_toggle_user)
+			added = True
+		return added
+
+	def is_following(self, user, followed_by_user):
+		user_profile, created = UserProfile.objects.get_or_create(user = user)
+
+		if created:
+			return False
+		if followed_by_user in user.profile.following.all():
+			return True
+		return False
 
 
 class UserProfile(models.Model):
@@ -32,6 +53,12 @@ class UserProfile(models.Model):
 		users = self.following.all() # User.objects.all().exclude(username = self.user.username)
 		return users.exclude(username = self.user.username)
 
+	def get_follow_url(self):
+		return reverse_lazy("profiles:follow", kwargs= {"username": self.user.username})
+
+	def get_absolute_url(self):
+		return reverse_lazy("profiles:detail", kwargs= {"username": self.user.username})
+
 '''
 Comments - 
 
@@ -42,5 +69,7 @@ Comments -
 #5 - it creates a model manager. 
 #6 - prints all the available methods inside of self.
 #7 - removes the user from the qs so that it will not show the user following himself because of reverse relationship.
-#8 - this to remove me from the followers 
+#8 - this to remove me from the followers
+
+#11 - if user is already following, then unfollow, if not then follow.
 '''
