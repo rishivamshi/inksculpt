@@ -26,6 +26,7 @@ from .views import home
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', SculptListView.as_view(), name = 'home'),
+    url(r'^profiles/', include('accounts.urls', namespace = 'profiles')), # url for accounts app.
     url(r'^sculpt/', include('sculpts.urls', namespace = 'sculpt')), # url for sculpts app. 
     url(r'^api/sculpt/', include('sculpts.api.urls', namespace = 'sculpt-api')), #url for api
 ]

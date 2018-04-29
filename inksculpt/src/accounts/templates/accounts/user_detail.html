@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}{{ block.super }} | Detail{% endblock title %}
+{% block content %}
+
+<div class="row">
+	<div class="col-sm-3 col-xs-12" style="background-color: red;">
+		<h1>{{ object.username }}</h1>
+</div>
+<div class="col-sm-9 col-xs-12"  >
+	<h1>Sculpts</h1>
+
+	{% for sculpt in object.sculpt_set.all %}
+
+		{{ sculpt }} <br/>
+	{% endfor %}
+
+	<!-- <pre>{{ object.content }}</pre><br>
+	{% if object.image %}
+				<img src="{{ object.image.url }}" height="200px"  /><br>
+			{% endif %}
+	 
+
+{{ object.timestamp }} | {{ object.timestamp|timesince }}<br> -->
+
+</div>
+
+
+
+
+
+
+
+{% endblock content %}
