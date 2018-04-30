@@ -4,6 +4,8 @@ from django.conf import settings
 
 from django.urls import reverse_lazy
 
+from django.db.models.signals import post_save #12
+
 
 # Create your models here.
 
@@ -59,6 +61,31 @@ class UserProfile(models.Model):
 	def get_absolute_url(self):
 		return reverse_lazy("profiles:detail", kwargs= {"username": self.user.username})
 
+
+
+
+''' 
+explaining the following signal code 
+
+rishi = User.objects.first()
+User.objects.get_or_create() #(user_obj, true/false)
+cfe.save()
+
+'''
+
+def post_save_user_receiver(sender, instance, created, *args, **kwargs): #13
+	# print(instance)
+	if created:
+		new_profile  = UserProfile.objects.get_or_create(user=instance)
+
+		# using celery + redis , we can do some deferred task.
+
+
+
+post_save.connect(post_save_user_receiver, sender = settings.AUTH_USER_MODEL)
+
+
+
 '''
 Comments - 
 
@@ -72,4 +99,9 @@ Comments -
 #8 - this to remove me from the followers
 
 #11 - if user is already following, then unfollow, if not then follow.
+
+#12 - this helps create user profile once the user signsup, so that other users can follow him. it uses post_save signal, that when pressed will create user profile.
+
+#13 - post save signal for the user. docs.djangoproject.com/en/1.10/ref/signals/#post-save
+
 '''
