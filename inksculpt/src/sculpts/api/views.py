@@ -22,7 +22,9 @@ class SculptListAPIView(generics.ListAPIView):
 	pagination_class = StandardResultsPagination
 
 	def get_queryset(self, *args, **kwargs): #18
-		qs = Sculpt.objects.all().order_by("-timestamp") #21
+		im_following = self.request.user.profile.get_following()
+
+		qs = Sculpt.objects.filter(user__in = im_following).order_by("-timestamp") #21
 		# print(self.request.GET) #prints the querydict 
 		query = self.request.GET.get("q", None)
 		if query is not None:

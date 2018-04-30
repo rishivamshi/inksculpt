@@ -77,6 +77,7 @@ def post_save_user_receiver(sender, instance, created, *args, **kwargs): #13
 	# print(instance)
 	if created:
 		new_profile  = UserProfile.objects.get_or_create(user=instance)
+		
 
 		# using celery + redis , we can do some deferred task.
 
