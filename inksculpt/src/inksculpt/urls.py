@@ -21,12 +21,14 @@ from django.conf.urls.static import static
 
 from sculpts.views import SculptListView #1
 
+from hashtags.views import HashTagView
 from .views import home
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', SculptListView.as_view(), name = 'home'),
 
+    url(r'^tags/(?P<hashtag>.*)/$', HashTagView.as_view(), name = 'hashtag'), # url for hashtags app. 
     url(r'^sculpt/', include('sculpts.urls', namespace = 'sculpt')), # url for sculpts app. 
     url(r'^api/sculpt/', include('sculpts.api.urls', namespace = 'sculpt-api')), #url for api
 
