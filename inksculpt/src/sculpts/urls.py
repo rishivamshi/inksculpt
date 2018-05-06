@@ -7,6 +7,7 @@ from django.conf.urls import url
 from django.views.generic.base import RedirectView #9
 
 from .views import (
+    ResculptView,
 	SculptCreateView,
 	SculptDetailView,
 	SculptListView, # 4
@@ -22,6 +23,7 @@ urlpatterns = [
     url(r'^search/$', SculptListView.as_view(), name = 'list'), # 5  # /sculpt/ #8
     url(r'^create/$', SculptCreateView.as_view(), name = 'create'), # 7  # /sculpt/create
     url(r'^(?P<pk>\d+)/$', SculptDetailView.as_view(), name = 'detail'), # 6  # /sculpt/1
+    url(r'^(?P<pk>\d+)/resculpt/$', ResculptView.as_view(), name = 'detail'), # 6  # /sculpt/1
     url(r'^(?P<pk>\d+)/update/$', SculptUpdateView.as_view(), name = 'update'), # 6  # /sculpt/1/update
     url(r'^(?P<pk>\d+)/delete/$', SculptDeleteView.as_view(), name = 'delete'), # 6  # /sculpt/1/delete
 ]

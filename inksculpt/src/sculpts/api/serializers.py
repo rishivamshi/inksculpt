@@ -6,21 +6,67 @@ from accounts.api.serializers import UserDisplaySerializer #4
 
 from sculpts.models import Sculpt #2
 
+
+
+
+
+class ParentSculptModelSerializer(serializers.ModelSerializer): 
+	user = UserDisplaySerializer(read_only=True) 
+	date_display = serializers.SerializerMethodField() 
+	timesince = serializers.SerializerMethodField()
+	
+
+	class Meta:
+		model = Sculpt
+		fields = [
+			'id',
+			'user',
+			'content',
+			'image',
+			'timestamp',
+			'date_display', 
+			'timesince', 
+
+
+		]
+
+	
+
+	def get_date_display(self, obj):
+		return obj.timestamp.strftime("%b %d, %Y | at %I: %M %p") 
+
+	def get_timesince(self, obj):
+		return timesince(obj.timestamp) + " ago" 
+
+
+
+
+
+
+
+
+
 class SculptModelSerializer(serializers.ModelSerializer): #3
 	user = UserDisplaySerializer(read_only=True) #5
 	date_display = serializers.SerializerMethodField() #8
 	timesince = serializers.SerializerMethodField()
+	parent = ParentSculptModelSerializer( read_only = True )
+
 	class Meta:
 		model = Sculpt
 		fields = [
+			'id',
 			'user',
 			'content',
 			'image',
 			'timestamp',
 			'date_display', #6
-			'timesince' #7
+			'timesince', #7
+			'parent'
 
 		]
+
+	
 
 	def get_date_display(self, obj):
 		return obj.timestamp.strftime("%b %d, %Y | at %I: %M %p") #9

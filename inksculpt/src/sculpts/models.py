@@ -5,6 +5,8 @@ from django.db import models
 
 
 from django.db.models import TextField 
+from django.utils import timezone
+
 
 class NonStrippingTextField(TextField):
 	def formfield(self, **kwargs):
@@ -24,10 +26,37 @@ from .validators import validate_content
 
 
 # Create your models here.
+class SculptManager(models.Manager):
+	def resculpt(self, user, parent_obj):
 
+		if parent_obj.parent:
+			og_parent = parent_obj.parent
+		else:
+			og_parent = parent_obj
+
+		qs = self.get_queryset().filter(
+			user = user,
+			parent = og_parent).filter(
+				timestamp__year = timezone.now().year,
+				timestamp__month = timezone.now().month,
+				timestamp__day = timezone.now().day,
+				)
+		if qs.exists():
+			return None 
+
+
+		obj = self.model(
+			parent = og_parent,
+			user = user, 
+			content = parent_obj.content,
+			image = parent_obj.image,
+			)
+		obj.save()
+		return obj
 
 
 class Sculpt(models.Model):
+	parent = models.ForeignKey("self", blank = True, null = True)
 	user = models.ForeignKey( settings.AUTH_USER_MODEL ) # Comments - 1 and attribute is cooments 2. 
 	content = NonStrippingTextField(validators = [validate_content]) # writing stuff and see how to take care of blank spaces - strip = false
 	
@@ -43,6 +72,7 @@ class Sculpt(models.Model):
 	updated = models.DateTimeField(auto_now = True) # if the content is updated
 	timestamp = models.DateTimeField( auto_now_add = True ) # autonowadd means it will automatically create it fo us, when we create content. 
 
+	objects = SculptManager()
 
 	# this function is to change the name from sculptobject to actual written sculpt in admin page.
 	def __str__(self):

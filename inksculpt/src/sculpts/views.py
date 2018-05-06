@@ -1,6 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin #14
 from django.db.models import Q #19
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse #17
 from django.views.generic import DetailView, ListView #5
 from django.views.generic import CreateView #10
@@ -11,9 +11,18 @@ from .mixins import FormUserNeededMixin # importing from mixins.py to validate i
 from .mixins import UserOwnerMixin # see mixins.py
 from .models import Sculpt #1
 
-
+from django.views import View
+from django.http import HttpResponseRedirect
 
 # Create your views here.
+
+class ResculptView(View):
+	def get(self, request, pk, *args, **kwargs):
+		sculpt = get_object_or_404(Sculpt, pk=pk)
+		if request.user.is_authenticated():
+			new_sculpt = Sculpt.objects.resculpt(request.user, sculpt)
+			return HttpResponseRedirect("/")
+		return HttpResponseRedirect(sculpt.get_absolute_url())
 
 # create 
 # Create view is similar to the admin form. 

@@ -9,12 +9,14 @@ from django.views.generic.base import RedirectView
 from .views import (
 	SculptCreateAPIView, #2
 	SculptListAPIView, #1
+	ResculptAPIView,
 	
  		)
 urlpatterns = [
 
 	url(r'^$', SculptListAPIView.as_view(), name = 'list'), #/api/sculpt/
   	url(r'^create/$', SculptCreateAPIView.as_view(), name='create'),
+  	url(r'^(?P<pk>\d+)/resculpt/$', ResculptAPIView.as_view(), name='resculpt' )
 ]
 
 
