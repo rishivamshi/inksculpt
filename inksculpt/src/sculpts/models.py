@@ -1,3 +1,6 @@
+import re
+from django.db.models.signals import post_save
+
 from django.conf import settings # comments -2 
 from django.urls import reverse #3
 from django.core.exceptions import ValidationError # for validation
@@ -94,9 +97,22 @@ class Sculpt(models.Model):
 	# 	return super(Sculpt, self).clean(*args, **kwargs)
 
 
+def sculpt_save_receiver(sender, instance, created, *args, **kwargs):
+
+	if created and not instance.parent:
+		#notify a user.
+		user_regex = r'@(?P<username>[\w.@+-]+)'
+		usernames = re.findall(user_regex, instance.content)
+		# send notification to user here.
+
+		hash_regex = r'#(?P<hashtag>[\w\d-]+)'
+		hashtags = re.findall(hash_regex, instance.content)
+		#send hashtag signal to user here
+		print(usernames)
+		print(hashtags)
 
 
-
+post_save.connect(sculpt_save_receiver, sender = Sculpt)
 '''
 COMMENTS - All reasons 
 
