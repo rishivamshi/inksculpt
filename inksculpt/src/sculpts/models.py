@@ -10,6 +10,8 @@ from django.db import models
 from django.db.models import TextField 
 from django.utils import timezone
 
+from hashtags.signals import parsed_hashtags
+
 
 class NonStrippingTextField(TextField):
 	def formfield(self, **kwargs):
@@ -107,10 +109,9 @@ def sculpt_save_receiver(sender, instance, created, *args, **kwargs):
 
 		hash_regex = r'#(?P<hashtag>[\w\d-]+)'
 		hashtags = re.findall(hash_regex, instance.content)
+		parsed_hashtags.send(sender = instance.__class__, hashtag_list = hashtags)
 		#send hashtag signal to user here
-		print(usernames)
-		print(hashtags)
-
+		
 
 post_save.connect(sculpt_save_receiver, sender = Sculpt)
 '''
