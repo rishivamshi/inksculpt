@@ -30,7 +30,9 @@ urlpatterns = [
 
     url(r'^tags/(?P<hashtag>.*)/$', HashTagView.as_view(), name = 'hashtag'), # url for hashtags app. 
     url(r'^sculpt/', include('sculpts.urls', namespace = 'sculpt')), # url for sculpts app. 
+
     url(r'^api/sculpt/', include('sculpts.api.urls', namespace = 'sculpt-api')), #url for api
+    url(r'^api/', include('accounts.api.urls', namespace = 'profiles-api')), #url for api
 
     url(r'^', include('accounts.urls', namespace = 'profiles')), # url for usernames from accounts app.
 ]
