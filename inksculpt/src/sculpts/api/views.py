@@ -13,6 +13,22 @@ from rest_framework.views import APIView
 from rest_framework.response import Response 
 
 
+class LikeToggleAPIView(APIView):
+	permission_classes = [permissions.IsAuthenticated]
+
+	def get(self, request,pk, format = None):
+		sculpt_qs = Sculpt.objects.filter(pk = pk)
+		message = "Not allowed"
+		
+		if request.user.is_authenticated():
+			is_liked = Sculpt.objects.like_toggle(request.user, sculpt_qs.first())
+			return Response({'liked': is_liked })
+		
+		return Response({"message": message }, status = 400)
+
+
+
+
 class ResculptAPIView(APIView):
 	permission_classes = [permissions.IsAuthenticated]
 
@@ -40,6 +56,12 @@ class SculptCreateAPIView(generics.CreateAPIView):
 class SculptListAPIView(generics.ListAPIView):
 	serializer_class = SculptModelSerializer
 	pagination_class = StandardResultsPagination
+
+
+	def get_serializer_context(self, *args, **kwargs):
+		context = super(SculptListAPIView, self ).get_serializer_context(*args, **kwargs)
+		context['request'] = self.request
+		return context
 
 	def get_queryset(self, *args, **kwargs): #18
 

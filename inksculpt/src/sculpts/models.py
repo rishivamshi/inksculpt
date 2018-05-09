@@ -59,12 +59,25 @@ class SculptManager(models.Manager):
 		obj.save()
 		return obj
 
+	def like_toggle(self, user, sculpt_obj):
+		if user in sculpt_obj.liked.all():
+			is_liked = False 
+			sculpt_obj.liked.remove(user)
+
+		else:
+			is_liked =  True
+			sculpt_obj.liked.add(user)
+
+		return is_liked
+
+
+
 
 class Sculpt(models.Model):
 	parent = models.ForeignKey("self", blank = True, null = True)
 	user = models.ForeignKey( settings.AUTH_USER_MODEL ) # Comments - 1 and attribute is cooments 2. 
 	content = NonStrippingTextField(validators = [validate_content]) # writing stuff and see how to take care of blank spaces - strip = false
-	
+	liked = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, related_name = 'liked')
 	image = models.ImageField(
 				upload_to = upload_location,
 				null = True,

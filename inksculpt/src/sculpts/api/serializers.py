@@ -51,6 +51,8 @@ class SculptModelSerializer(serializers.ModelSerializer): #3
 	date_display = serializers.SerializerMethodField() #8
 	timesince = serializers.SerializerMethodField()
 	parent = ParentSculptModelSerializer( read_only = True )
+	likes = serializers.SerializerMethodField()
+	did_like = serializers.SerializerMethodField()
 
 	class Meta:
 		model = Sculpt
@@ -62,11 +64,22 @@ class SculptModelSerializer(serializers.ModelSerializer): #3
 			'timestamp',
 			'date_display', #6
 			'timesince', #7
-			'parent'
+			'parent',
+			'likes',
+			'did_like',
 
 		]
 
-	
+	def get_did_like(self, obj):
+		request = self.context.get("request")
+		user = request.user
+		if user.is_authenticated():
+			if user in obj.liked.all():
+				return True
+		return False
+
+	def get_likes(self, obj):
+		return obj.liked.all().count()
 
 	def get_date_display(self, obj):
 		return obj.timestamp.strftime("%b %d, %Y | at %I: %M %p") #9
