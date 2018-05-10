@@ -20,11 +20,13 @@
     
     <div class="container">
       {% include "navbar.html" %}
+
+
       {% block content %}
       {% endblock content %}
     </div>
 
-   
+   {% include "reply-modal.html" %}
 
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -77,6 +79,32 @@
             })
 
         })
+
+        $(document.body).on("click", ".sculpt-reply", function(e) {
+            e.preventDefault()
+            var this_ = $(this)
+            var parentId = this_.attr("data-id")
+            var username = this_.attr("data-user")
+
+            $("#replyModal").modal ({})
+            $("#replyModal textarea").after("<input type='hidden' value='" + parentId +"' name='parent_id' />")
+            $("#replyModal textarea").after("<input type='hidden' value='" + true +"' name='reply' />")
+            $("#replyModal textarea").val("@" + username + " ")
+            $("#replyModal").on("shown.bs.modal", function(){
+                $('textarea').focus()
+            })
+
+
+
+
+        })
+
+
+
+
+
+
+
 
 
 
@@ -137,41 +165,68 @@
               verb = 'Unlike'
             }
 
+            var isReply = sculptValue.reply;
+
             // console.log(sculptImage);
 
-            if (resculpt && sculptValue.parent) {
+            if (resculpt && sculptValue.parent && !isReply) {
 
                 var mainSculpt = sculptValue.parent
 
                 if (prepend == true) {
                     if (sculptImage == null) {
-                        sculptContainer.prepend("<div class=\"media\"><div class=\"media-body\"><h5 class=\"mt-0\">" + "Resculpt via <a href = '" + sculptUser.url + "'>" + sculptUser.username + "</a> on " + dateDisplay + " </h5><pre class='sculptcontentclass'>" + mainSculpt.content + "</pre><br><br> via " + mainSculpt.user.username + "|" + mainSculpt.date_display + " | " + "<a href = '/sculpt/" + mainSculpt.id + "'>View</a> | " + "<a class = 'resculptBtn' href = '/sculpt/" + sculptValue.id + "/resculpt/'>Resculpt</a>" + "  | <a href='#' class='sculpt-like' data-id="+ sculptValue.id + ">"+ verb +" ("+ sculptValue.likes +") </a></div></div><hr>")
+                        sculptContainer.prepend("<div class=\"media\"><div class=\"media-body\"><h5 class=\"mt-0\">" + "Resculpt via <a href = '" + sculptUser.url + "'>" + sculptUser.username + "</a> on " + dateDisplay + " </h5><pre class='sculptcontentclass'>" + mainSculpt.content + "</pre><br><br> via " + mainSculpt.user.username + "|" + mainSculpt.date_display + " | " + "<a href = '/sculpt/" + mainSculpt.id + "'>View</a> | " + "<a class = 'resculptBtn' href = '/sculpt/" + sculptValue.id + "/resculpt/'>Resculpt</a>" + "  | <a href='#' class='sculpt-like' data-id='"+ sculptValue.id + "'>"+ verb +" ("+ sculptValue.likes +") </a>" +  " | <a href='#' class='sculpt-reply' data-user ='"+ sculptUser.username +"' data-id='"+ sculptValue.id + "'>Reply </a> " + "</div></div><hr>")
                     } else {
-                        sculptContainer.prepend("<div class=\"media\"><div class=\"media-body\"><h5 class=\"mt-0\">" + "Resculpt via <a href = '" + sculptUser.url + "'>" + sculptUser.username + "</a> on " + dateDisplay + " </h5><pre class='sculptcontentclass'>" + mainSculpt.content + "</pre><img src=\"" + mainSculpt.image + "\" height=\"200px\"  /><br><br> via " + mainSculpt.user.username + " | " + mainSculpt.date_display + " | " + "<a href = '/sculpt/" + mainSculpt.id + "'>View</a> | " + "<a class = 'resculptBtn' href = '/sculpt/" + sculptValue.id + "/resculpt/'>Resculpt</a>" + "  | <a href='#' class='sculpt-like' data-id="+ sculptValue.id + ">"+ verb +" ("+ sculptValue.likes +")</a></div></div><hr>")
+                        sculptContainer.prepend("<div class=\"media\"><div class=\"media-body\"><h5 class=\"mt-0\">" + "Resculpt via <a href = '" + sculptUser.url + "'>" + sculptUser.username + "</a> on " + dateDisplay + " </h5><pre class='sculptcontentclass'>" + mainSculpt.content + "</pre><img src=\"" + mainSculpt.image + "\" height=\"200px\"  /><br><br> via " + mainSculpt.user.username + " | " + mainSculpt.date_display + " | " + "<a href = '/sculpt/" + mainSculpt.id + "'>View</a> | " + "<a class = 'resculptBtn' href = '/sculpt/" + sculptValue.id + "/resculpt/'>Resculpt</a>" + "  | <a href='#' class='sculpt-like' data-id='"+ sculptValue.id + "'>"+ verb +" ("+ sculptValue.likes +")</a>" +  " | <a href='#' class='sculpt-reply' data-user ='"+ sculptUser.username +"' data-id='"+ sculptValue.id + "'>Reply </a> " + "</div></div><hr>")
                     }
                 } else {
                     if (sculptImage == null) {
-                        sculptContainer.append("<div class=\"media\"><div class=\"media-body\"><h5 class=\"mt-0\">" + "Resculpt via <a href = '" + sculptUser.url + "'>" + sculptUser.username + "</a> on " + dateDisplay + " </h5><pre class='sculptcontentclass'>" + mainSculpt.content + "</pre><br><br> via " + mainSculpt.user.username + "|" + mainSculpt.date_display + " | " + "<a href = '/sculpt/" + mainSculpt.id + "'>View</a> | " + "<a class = 'resculptBtn' href = '/sculpt/" + sculptValue.id + "/resculpt/'>Resculpt</a>" + "  | <a href='#' class='sculpt-like' data-id="+ sculptValue.id + ">"+ verb +" ("+ sculptValue.likes +")</a></div></div><hr>")
+                        sculptContainer.append("<div class=\"media\"><div class=\"media-body\"><h5 class=\"mt-0\">" + "Resculpt via <a href = '" + sculptUser.url + "'>" + sculptUser.username + "</a> on " + dateDisplay + " </h5><pre class='sculptcontentclass'>" + mainSculpt.content + "</pre><br><br> via " + mainSculpt.user.username + "|" + mainSculpt.date_display + " | " + "<a href = '/sculpt/" + mainSculpt.id + "'>View</a> | " + "<a class = 'resculptBtn' href = '/sculpt/" + sculptValue.id + "/resculpt/'>Resculpt</a>" + "  | <a href='#' class='sculpt-like' data-id='"+ sculptValue.id + "'>"+ verb +" ("+ sculptValue.likes +")</a>" +  " | <a href='#' class='sculpt-reply'data-user ='"+ sculptUser.username +"' data-id='"+ sculptValue.id + "'>Reply </a> " + "</div></div><hr>")
                     } else {
-                        sculptContainer.append("<div class=\"media\"><div class=\"media-body\"><h5 class=\"mt-0\">" + "Resculpt via <a href = '" + sculptUser.url + "'>" + sculptUser.username + "</a> on " + dateDisplay + "</h5><pre class='sculptcontentclass'>" + mainSculpt.content + "</pre><img src=\"" + mainSculpt.image + "\" height=\"200px\"  /><br><br> via " + mainSculpt.user.username + " | " + mainSculpt.date_display + " | " + "<a href = '/sculpt/" + mainSculpt.id + "'>View</a> | " + "<a class = 'resculptBtn' href = '/sculpt/" + sculptValue.id + "/resculpt/'>Resculpt</a>" + "  | <a href='#' class='sculpt-like' data-id="+ sculptValue.id + ">"+ verb +" ("+ sculptValue.likes +")</a></div></div><hr>")
+                        sculptContainer.append("<div class=\"media\"><div class=\"media-body\"><h5 class=\"mt-0\">" + "Resculpt via <a href = '" + sculptUser.url + "'>" + sculptUser.username + "</a> on " + dateDisplay + "</h5><pre class='sculptcontentclass'>" + mainSculpt.content + "</pre><img src=\"" + mainSculpt.image + "\" height=\"200px\"  /><br><br> via " + mainSculpt.user.username + " | " + mainSculpt.date_display + " | " + "<a href = '/sculpt/" + mainSculpt.id + "'>View</a> | " + "<a class = 'resculptBtn' href = '/sculpt/" + sculptValue.id + "/resculpt/'>Resculpt</a>" + "  | <a href='#' class='sculpt-like' data-id='"+ sculptValue.id + "'>"+ verb +" ("+ sculptValue.likes +")</a>" +  " | <a href='#' class='sculpt-reply' data-user ='"+ sculptUser.username +"'data-id='"+ sculptValue.id + "'>Reply </a> " + "</div></div><hr>")
                     }
                 }
 
 
 
-            } else {
+            }
+
+
+            else if (isReply && sculptValue.parent) {
+
+                var mainSculpt = sculptValue.parent
 
                 if (prepend == true) {
                     if (sculptImage == null) {
-                        sculptContainer.prepend("<div class=\"media\"><div class=\"media-body\"><h5 class=\"mt-0\">" + "<a href = '" + sculptUser.url + "'>" + sculptUser.username + "</a></h5><pre class='sculptcontentclass'>" + sculptContent + "</pre><br><br> via " + sculptUser.username + "|" + dateDisplay + " | " + "<a href = '/sculpt/" + sculptValue.id + "'>View</a> | " + "<a class = 'resculptBtn' href = '/sculpt/" + sculptValue.id + "/resculpt/'>Resculpt</a>" + "  | <a href='#' class='sculpt-like' data-id="+ sculptValue.id + ">"+ verb +" ("+ sculptValue.likes +")</a></div></div><hr>")
+                        sculptContainer.prepend("<div class=\"media\"><div class=\"media-body\"><h5 class=\"mt-0\">" + "Reply via <a href = '" + sculptUser.url + "'>" + sculptUser.username + "</a></h5><pre class='sculptcontentclass'>" + mainSculpt.content + "</pre><br><br> via " + mainSculpt.user.username + "|" + mainSculpt.date_display + " | " + "<a href = '/sculpt/" + mainSculpt.id + "'>View</a> | " + "<a class = 'resculptBtn' href = '/sculpt/" + sculptValue.id + "/resculpt/'>Resculpt</a>" + "  | <a href='#' class='sculpt-like' data-id='"+ sculptValue.id + "'>"+ verb +" ("+ sculptValue.likes +") </a> " +  " | <a href='#' class='sculpt-reply'data-user ='"+ sculptUser.username +"' data-id='"+ sculptValue.id + "'>Reply </a> " + "</div></div><hr>")
                     } else {
-                        sculptContainer.prepend("<div class=\"media\"><div class=\"media-body\"><h5 class=\"mt-0\">" + "<a href = '" + sculptUser.url + "'>" + sculptUser.username + "</a></h5><pre class='sculptcontentclass'>" + sculptContent + "</pre><img src=\"" + sculptImage + "\" height=\"200px\"  /><br><br> via " + sculptUser.username + " | " + dateDisplay + " | " + "<a href = '/sculpt/" + sculptValue.id + "'>View</a> | " + "<a class = 'resculptBtn' href = '/sculpt/" + sculptValue.id + "/resculpt/'>Resculpt</a>" + " | <a href='#' class='sculpt-like' data-id="+ sculptValue.id + ">"+ verb +" ("+ sculptValue.likes +")</a></div></div><hr>")
+                        sculptContainer.prepend("<div class=\"media\"><div class=\"media-body\"><h5 class=\"mt-0\">" + "Reply via <a href = '" + sculptUser.url + "'>" + sculptUser.username + "</a> </h5><pre class='sculptcontentclass'>" + mainSculpt.content + "</pre><img src=\"" + mainSculpt.image + "\" height=\"200px\"  /><br><br> via " + mainSculpt.user.username + " | " + mainSculpt.date_display + " | " + "<a href = '/sculpt/" + mainSculpt.id + "'>View</a> | " + "<a class = 'resculptBtn' href = '/sculpt/" + sculptValue.id + "/resculpt/'>Resculpt</a>" + "  | <a href='#' class='sculpt-like' data-id='"+ sculptValue.id + "'>"+ verb +" ("+ sculptValue.likes +")</a>" +  " | <a href='#' class='sculpt-reply'data-user ='"+ sculptUser.username +"' data-id='"+ sculptValue.id + "'>Reply </a> " + "</div></div><hr>")
                     }
                 } else {
                     if (sculptImage == null) {
-                        sculptContainer.append("<div class=\"media\"><div class=\"media-body\"><h5 class=\"mt-0\">" + "<a href = '" + sculptUser.url + "'>" + sculptUser.username + "</a></h5><pre class='sculptcontentclass'>" + sculptContent + "</pre><br><br> via " + sculptUser.username + "|" + dateDisplay + " | " + "<a href = '/sculpt/" + sculptValue.id + "'>View</a> | " + "<a class = 'resculptBtn' href = '/sculpt/" + sculptValue.id + "/resculpt/'>Resculpt</a>" + " | <a href='#' class='sculpt-like' data-id="+ sculptValue.id + ">"+ verb +" ("+ sculptValue.likes +")</a></div></div><hr>")
+                        sculptContainer.append("<div class=\"media\"><div class=\"media-body\"><h5 class=\"mt-0\">" + "Reply via <a href = '" + sculptUser.url + "'>" + sculptUser.username + "</a> </h5><pre class='sculptcontentclass'>" + mainSculpt.content + "</pre><br><br> via " + mainSculpt.user.username + "|" + mainSculpt.date_display + " | " + "<a href = '/sculpt/" + mainSculpt.id + "'>View</a> | " + "<a class = 'resculptBtn' href = '/sculpt/" + sculptValue.id + "/resculpt/'>Resculpt</a>" + "  | <a href='#' class='sculpt-like' data-id='"+ sculptValue.id + "'>"+ verb +" ("+ sculptValue.likes +")</a>" +  " | <a href='#' class='sculpt-reply'data-user ='"+ sculptUser.username +"' data-id='"+ sculptValue.id + "'>Reply </a> " + "</div></div><hr>")
                     } else {
-                        sculptContainer.append("<div class=\"media\"><div class=\"media-body\"><h5 class=\"mt-0\">" + "<a href = '" + sculptUser.url + "'>" + sculptUser.username + "</a></h5><pre class='sculptcontentclass'>" + sculptContent + "</pre><img src=\"" + sculptImage + "\" height=\"200px\"  /><br><br> via " + sculptUser.username + " | " + dateDisplay + " | " + "<a href = '/sculpt/" + sculptValue.id + "'>View</a> | " + "<a class = 'resculptBtn' href = '/sculpt/" + sculptValue.id + "/resculpt/'>Resculpt</a>" + " | <a href='#' class='sculpt-like' data-id="+ sculptValue.id + ">"+ verb +" ("+ sculptValue.likes +")</a></div></div><hr>")
+                        sculptContainer.append("<div class=\"media\"><div class=\"media-body\"><h5 class=\"mt-0\">" + "Reply via <a href = '" + sculptUser.url + "'>" + sculptUser.username + "</a> </h5><pre class='sculptcontentclass'>" + mainSculpt.content + "</pre><img src=\"" + mainSculpt.image + "\" height=\"200px\"  /><br><br> via " + mainSculpt.user.username + " | " + mainSculpt.date_display + " | " + "<a href = '/sculpt/" + mainSculpt.id + "'>View</a> | " + "<a class = 'resculptBtn' href = '/sculpt/" + sculptValue.id + "/resculpt/'>Resculpt</a>" + "  | <a href='#' class='sculpt-like' data-id='"+ sculptValue.id + "'>"+ verb +" ("+ sculptValue.likes +")</a>" +  " | <a href='#' class='sculpt-reply'data-user ='"+ sculptUser.username +"' data-id='"+ sculptValue.id + "'>Reply </a> " + "</div></div><hr>")
+                    }
+                }
+
+            
+
+            }
+
+             else {
+
+                if (prepend == true) {
+                    if (sculptImage == null) {
+                        sculptContainer.prepend("<div class=\"media\"><div class=\"media-body\"><h5 class=\"mt-0\">" + "<a href = '" + sculptUser.url + "'>" + sculptUser.username + "</a></h5><pre class='sculptcontentclass'>" + sculptContent + "</pre><br><br> via " + sculptUser.username + "|" + dateDisplay + " | " + "<a href = '/sculpt/" + sculptValue.id + "'>View</a> | " + "<a class = 'resculptBtn' href = '/sculpt/" + sculptValue.id + "/resculpt/'>Resculpt</a>" + "  | <a href='#' class='sculpt-like' data-id='"+ sculptValue.id + "'>"+ verb +" ("+ sculptValue.likes +")</a>" +  " | <a href='#' class='sculpt-reply'data-user ='"+ sculptUser.username +"' data-id='"+ sculptValue.id + "'>Reply </a> " + "</div></div><hr>")
+                    } else {
+                        sculptContainer.prepend("<div class=\"media\"><div class=\"media-body\"><h5 class=\"mt-0\">" + "<a href = '" + sculptUser.url + "'>" + sculptUser.username + "</a></h5><pre class='sculptcontentclass'>" + sculptContent + "</pre><img src=\"" + sculptImage + "\" height=\"200px\"  /><br><br> via " + sculptUser.username + " | " + dateDisplay + " | " + "<a href = '/sculpt/" + sculptValue.id + "'>View</a> | " + "<a class = 'resculptBtn' href = '/sculpt/" + sculptValue.id + "/resculpt/'>Resculpt</a>" + " | <a href='#' class='sculpt-like' data-id='"+ sculptValue.id + "'>"+ verb +" ("+ sculptValue.likes +")</a>" +  " | <a href='#' class='sculpt-reply' data-user ='"+ sculptUser.username +"'data-id='"+ sculptValue.id + "'>Reply </a> " + "</div></div><hr>")
+                    }
+                } else {
+                    if (sculptImage == null) {
+                        sculptContainer.append("<div class=\"media\"><div class=\"media-body\"><h5 class=\"mt-0\">" + "<a href = '" + sculptUser.url + "'>" + sculptUser.username + "</a></h5><pre class='sculptcontentclass'>" + sculptContent + "</pre><br><br> via " + sculptUser.username + "|" + dateDisplay + " | " + "<a href = '/sculpt/" + sculptValue.id + "'>View</a> | " + "<a class = 'resculptBtn' href = '/sculpt/" + sculptValue.id + "/resculpt/'>Resculpt</a>" + " | <a href='#' class='sculpt-like' data-id='"+ sculptValue.id + "'>"+ verb +" ("+ sculptValue.likes +")</a>" +  " | <a href='#' class='sculpt-reply' data-user ='"+ sculptUser.username +"'data-id='"+ sculptValue.id + "'>Reply </a> " + "</div></div><hr>")
+                    } else {
+                        sculptContainer.append("<div class=\"media\"><div class=\"media-body\"><h5 class=\"mt-0\">" + "<a href = '" + sculptUser.url + "'>" + sculptUser.username + "</a></h5><pre class='sculptcontentclass'>" + sculptContent + "</pre><img src=\"" + sculptImage + "\" height=\"200px\"  /><br><br> via " + sculptUser.username + " | " + dateDisplay + " | " + "<a href = '/sculpt/" + sculptValue.id + "'>View</a> | " + "<a class = 'resculptBtn' href = '/sculpt/" + sculptValue.id + "/resculpt/'>Resculpt</a>" + " | <a href='#' class='sculpt-like' data-id='"+ sculptValue.id + "'>"+ verb +" ("+ sculptValue.likes +")</a>" +  " | <a href='#' class='sculpt-reply'data-user ='"+ sculptUser.username +"' data-id='"+ sculptValue.id + "'>Reply </a> " + "</div></div><hr>")
                     }
                 }
             }
@@ -252,29 +307,37 @@
         var charsStart = 0;
         var charsCurrent = 0;
 
-        $("#sculpt-form").append("<span id='sculptCharsLeft'>" + charsStart + "</span>")
+        $(".sculpt-form").append("<span class='sculptCharsLeft'>" + charsStart + "</span>")
 
-        $("#sculpt-form textarea").keyup(function(event) {
+        $(".sculpt-form textarea").keyup(function(event) {
 
             //console.log(event.key, event.timeStamp)
             var sculptValue = $(this).val()
             charsCurrent = charsStart + sculptValue.length
-            $("#sculptCharsLeft").text(charsCurrent)
+            var spanChars = $(this).parent().parent().parent().find("span.sculptCharsLeft")
+            spanChars.text(charsCurrent)
+
         })
 
 
 
-        $("#sculpt-form").submit(function(event) {
+        $(".sculpt-form").submit(function(event) {
             event.preventDefault()
             var this_ = $(this)
-            var formData = new FormData(document.getElementById("sculpt-form"));
-            // console.log(formData)
+            
+            var formData = new FormData(document.querySelector(".sculpt-form"));
+
+            // var csrf_token = $('[name="csrfmiddlewaretoken"]').attr('value');
+            
+            //console.log(formData)
             $.ajax({
                 url: "/api/sculpt/create/",
                 data: formData,
+                // headers:{"X-CSRFToken": csrf_token},
                 type: "POST",
                 processData: false, // tell jQuery not to process the data
                 contentType: false, // tell jQuery not to set contentType
+                
                 success: function(data) {
                     // console.log(data)
                     this_.find("input[type=text], textarea").val("")
@@ -286,6 +349,7 @@
                     // parseSculpts()
                 },
                 error: function(data) {
+                    
                     console.log("error")
                     console.log(data)
                 }
@@ -294,6 +358,52 @@
             // formData.append('text', $('#id_content').val());
             console.log(formData)
         })
+
+
+        $(".sculpt-modal-form").submit(function(event) {
+            event.preventDefault()
+            var this_ = $(this)
+            
+            var formData = new FormData(document.querySelector(".sculpt-modal-form"));
+
+            // var csrf_token = $('[name="csrfmiddlewaretoken"]').attr('value');
+            
+            //console.log(formData)
+            $.ajax({
+                url: "/api/sculpt/create/",
+                data: formData,
+                // headers:{"X-CSRFToken": csrf_token},
+                type: "POST",
+                processData: false, // tell jQuery not to process the data
+                contentType: false, // tell jQuery not to set contentType
+                
+                success: function(data) {
+                    // console.log(data)
+                    this_.find("input[type=text], textarea").val("")
+                    this_.find("input[type=file]").val(null)
+                    attachSculpt(data, true)
+                    updateHashLinks()
+                    $("#replyModal").modal("hide")
+                    // fetchSculpts();
+                    // sculptList = data
+                    // parseSculpts()
+                },
+                error: function(data) {
+                    
+                    console.log("error")
+                    console.log(data)
+                }
+            })
+            // formData.append('image', $('#id_image').prop('files')[0]);
+            // formData.append('text', $('#id_content').val());
+            console.log(formData)
+        })
+
+       
+
+
+
+
 }
 
 

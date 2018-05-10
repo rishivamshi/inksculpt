@@ -23,7 +23,7 @@
         <h1>{{ request.user }}</h1>
     </div>
     <div class="col-sm-9"> {% if not request.GET.q %}
-        <div class=""> {% include "sculpts/form.html" with form=create_form action_url=create_url btn_title='Sculpt' form_id='sculpt-form' %} </div>
+        <div class=""> {% include "sculpts/form.html" with form=create_form action_url=create_url btn_title='Sculpt' form_class='sculpt-form' %} </div>
         <hr> {% endif %}
         <div id="sculpt-container" data-url='/api/sculpt/'> </div>
         <a href="#" id='loadmore'>Load More Sculpts</a>
