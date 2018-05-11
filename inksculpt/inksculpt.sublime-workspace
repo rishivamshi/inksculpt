@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"scu",
+				"sculpts"
+			],
+			[
+				"temp",
+				"template_name"
+			],
+			[
 				"paren",
 				"parent_id"
 			],
@@ -234,10 +242,6 @@
 			[
 				"th",
 				"this_"
-			],
-			[
-				"scu",
-				"sculptImage"
 			],
 			[
 				"fo",
@@ -510,65 +514,16 @@
 			[
 				"p",
 				"pk"
-			],
-			[
-				"get_ob",
-				"get_object_or_404"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "src/templates/base.html",
+			"file": "src/templates/newsfeed.html",
 			"settings":
 			{
-				"buffer_size": 20925,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "src/templates/reply-modal.html",
-			"settings":
-			{
-				"buffer_size": 956,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "src/sculpts/templates/sculpts/form.html",
-			"settings":
-			{
-				"buffer_size": 317,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "src/sculpts/templates/sculpts/list_view.html",
-			"settings":
-			{
-				"buffer_size": 1206,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "src/sculpts/models.py",
-			"settings":
-			{
-				"buffer_size": 4403,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/sculpts/api/serializers.py",
-			"settings":
-			{
-				"buffer_size": 3012,
+				"buffer_size": 32617,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -608,8 +563,8 @@
 	[
 		"/D/Work/github_projects/inksculpt/inksculpt",
 		"/D/Work/github_projects/inksculpt/inksculpt/src",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/inksculpt",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts",
-		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/api",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/templates",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/templates/sculpts",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/templates"
@@ -617,22 +572,25 @@
 	"file_history":
 	[
 		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/api/serializers.py",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/views.py",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/models.py",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/templates/sculpts/list_view.html",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/templates/sculpts/form.html",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/templates/reply-modal.html",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/urls.py",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/templates/base.html",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/templates/newsfeed.html",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/api/urls.py",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/api/views.py",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/api/urls.py",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/inksculpt/urls.py",
-		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/models.py",
-		"/D/Work/github_projects/inksculpt/inksculpt/src/templates/base.html",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/templates/accounts/user_detail.html",
-		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/templates/sculpts/list_view.html",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/hashtags/models.py",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/hashtags/signals.py",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/admin.py",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/hashtags/admin.py",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/hashtags/templates/hashtags/tag_view.html",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/hashtags/views.py",
-		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/urls.py",
-		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/views.py",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/inksculpt/settings/base.py",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/inksculpt/settings/local.py",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/inksculpt/settings/production.py",
@@ -642,7 +600,6 @@
 		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/models.py",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/api/serializers.py",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/api/pagination.py",
-		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/templates/sculpts/form.html",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/forms.py",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/api/__init__.py",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/api/__init__.py",
@@ -722,7 +679,7 @@
 	],
 	"find":
 	{
-		"height": 40.0
+		"height": 23.0
 	},
 	"find_in_files":
 	{
@@ -767,49 +724,19 @@
 			[
 				{
 					"buffer": 0,
-					"file": "src/templates/base.html",
-					"semi_transient": false,
+					"file": "src/templates/newsfeed.html",
+					"semi_transient": true,
 					"settings":
 					{
-						"buffer_size": 20925,
+						"buffer_size": 32617,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2738,
-								2738
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 901.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "src/templates/reply-modal.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 956,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								956,
-								956
+								32617,
+								32617
 							]
 						],
 						"settings":
@@ -819,126 +746,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 52.0,
+						"translation.y": 7020.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "src/sculpts/templates/sculpts/form.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 317,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								231,
-								231
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "src/sculpts/templates/sculpts/list_view.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1206,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								993,
-								993
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "src/sculpts/models.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4403,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1989,
-								1989
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 832.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "src/sculpts/api/serializers.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3012,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1767,
-								1767
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 572.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
+					"stack_index": 0,
 					"type": "text"
 				}
 			]

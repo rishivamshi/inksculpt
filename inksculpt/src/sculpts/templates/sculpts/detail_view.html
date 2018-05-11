@@ -1,5 +1,26 @@
 {% extends "base.html" %}
 {% block title %}{{ block.super }} | Detail{% endblock title %}
+
+
+{% block script %}
+	
+	<script type="text/javascript">
+			
+			$(document).ready(function() {
+				loadSculptContainer("sculpt-container", {{ object.id }})
+			});
+
+
+
+	</script>
+
+
+
+ {% endblock script %}
+
+
+
+
 {% block content %}
 
 <div class="row">
@@ -7,13 +28,7 @@
 		<h1>{{ object.user }}</h1>
 </div>
 <div class="col-sm-9 col-xs-12"  >
-	<pre>{{ object.content }}</pre><br>
-	{% if object.image %}
-				<img src="{{ object.image.url }}" height="200px"  /><br>
-			{% endif %}
-	 
-
-{{ object.timestamp }} | {{ object.timestamp|timesince }}<br>
+	<div id="sculpt-container"></div>
 
 </div>
 

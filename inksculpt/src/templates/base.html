@@ -5,8 +5,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
-   
-
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/ionicons.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.min.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i" rel="stylesheet">
     <title>{% block title %} Inksculpt {% endblock title %}</title>
   </head>
 
@@ -35,9 +37,25 @@
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
   crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+     <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+     <script type="text/javascript" src="{% static 'js/jquery.sticky-kit.min.js' %}"></script>
+     <script type="text/javascript" src="{% static 'js/jquery.scrollbar.min.js' %}"></script>
+     <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
+
 
     <script type="text/javascript">
-      function loadSculptContainer(sculptContainerID) {
+
+        function getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+
+      function loadSculptContainer(sculptContainerID, fetchOneId) {
     // console.log('working');
         var query = getParameterByName('q')
         // console.log(query)
@@ -166,6 +184,11 @@
             }
 
             var isReply = sculptValue.reply;
+            var replyId = sculptValue.id
+            if (sculptValue.parent) {
+                replyId = sculptValue.parent.id
+            }
+
 
             // console.log(sculptImage);
 
@@ -175,15 +198,18 @@
 
                 if (prepend == true) {
                     if (sculptImage == null) {
-                        sculptContainer.prepend("<div class=\"media\"><div class=\"media-body\"><h5 class=\"mt-0\">" + "Resculpt via <a href = '" + sculptUser.url + "'>" + sculptUser.username + "</a> on " + dateDisplay + " </h5><pre class='sculptcontentclass'>" + mainSculpt.content + "</pre><br><br> via " + mainSculpt.user.username + "|" + mainSculpt.date_display + " | " + "<a href = '/sculpt/" + mainSculpt.id + "'>View</a> | " + "<a class = 'resculptBtn' href = '/sculpt/" + sculptValue.id + "/resculpt/'>Resculpt</a>" + "  | <a href='#' class='sculpt-like' data-id='"+ sculptValue.id + "'>"+ verb +" ("+ sculptValue.likes +") </a>" +  " | <a href='#' class='sculpt-reply' data-user ='"+ sculptUser.username +"' data-id='"+ sculptValue.id + "'>Reply </a> " + "</div></div><hr>")
+                        sculptContainer.prepend("<div class=\"media\"><div class=\"media-body\"><h5 class=\"mt-0\">" + "Resculpt via <a href = '" + sculptUser.url + "'>" + sculptUser.username + "</a> on " + dateDisplay + " </h5><pre class='sculptcontentclass'>" + mainSculpt.content + "</pre><br><br> via " + mainSculpt.user.username + "|" + mainSculpt.date_display + " | " + "<a href = '/sculpt/" + mainSculpt.id + "'>View</a> | " + "<a class = 'resculptBtn' href = '/sculpt/" + sculptValue.id + "/resculpt/'>Resculpt</a>" + "  | <a href='#' class='sculpt-like' data-id='"+ sculptValue.id + "'>"+ verb +" ("+ sculptValue.likes +") </a>" +  " | <a href='#' class='sculpt-reply' data-user ='"+ sculptUser.username +"' data-id='"+ replyId + "'>Reply </a> " + "</div></div><hr>")
                     } else {
-                        sculptContainer.prepend("<div class=\"media\"><div class=\"media-body\"><h5 class=\"mt-0\">" + "Resculpt via <a href = '" + sculptUser.url + "'>" + sculptUser.username + "</a> on " + dateDisplay + " </h5><pre class='sculptcontentclass'>" + mainSculpt.content + "</pre><img src=\"" + mainSculpt.image + "\" height=\"200px\"  /><br><br> via " + mainSculpt.user.username + " | " + mainSculpt.date_display + " | " + "<a href = '/sculpt/" + mainSculpt.id + "'>View</a> | " + "<a class = 'resculptBtn' href = '/sculpt/" + sculptValue.id + "/resculpt/'>Resculpt</a>" + "  | <a href='#' class='sculpt-like' data-id='"+ sculptValue.id + "'>"+ verb +" ("+ sculptValue.likes +")</a>" +  " | <a href='#' class='sculpt-reply' data-user ='"+ sculptUser.username +"' data-id='"+ sculptValue.id + "'>Reply </a> " + "</div></div><hr>")
+                        sculptContainer.prepend("<div class=\"media\"><div class=\"media-body\"><h5 class=\"mt-0\">" + "Resculpt via <a href = '" + sculptUser.url + "'>" + sculptUser.username + "</a> on " + dateDisplay + " </h5><pre class='sculptcontentclass'>" + mainSculpt.content + "</pre><img src=\"" + mainSculpt.image + "\" height=\"200px\"  /><br><br> via " + mainSculpt.user.username + " | " + mainSculpt.date_display + " | " + "<a href = '/sculpt/" + mainSculpt.id + "'>View</a> | " + "<a class = 'resculptBtn' href = '/sculpt/" + sculptValue.id + "/resculpt/'>Resculpt</a>" + "  | <a href='#' class='sculpt-like' data-id='"+ sculptValue.id + "'>"+ verb +" ("+ sculptValue.likes +")</a>" +  " | <a href='#' class='sculpt-reply' data-user ='"+ sculptUser.username +"' data-id='"+ replyId + "'>Reply </a> " + "</div></div><hr>")
                     }
                 } else {
                     if (sculptImage == null) {
-                        sculptContainer.append("<div class=\"media\"><div class=\"media-body\"><h5 class=\"mt-0\">" + "Resculpt via <a href = '" + sculptUser.url + "'>" + sculptUser.username + "</a> on " + dateDisplay + " </h5><pre class='sculptcontentclass'>" + mainSculpt.content + "</pre><br><br> via " + mainSculpt.user.username + "|" + mainSculpt.date_display + " | " + "<a href = '/sculpt/" + mainSculpt.id + "'>View</a> | " + "<a class = 'resculptBtn' href = '/sculpt/" + sculptValue.id + "/resculpt/'>Resculpt</a>" + "  | <a href='#' class='sculpt-like' data-id='"+ sculptValue.id + "'>"+ verb +" ("+ sculptValue.likes +")</a>" +  " | <a href='#' class='sculpt-reply'data-user ='"+ sculptUser.username +"' data-id='"+ sculptValue.id + "'>Reply </a> " + "</div></div><hr>")
+                            sculptContainer.append("<div class='post-content'><div class='post-container'><img src='http://placehold.it/300x300' alt='user' class='profile-photo-md pull-left' /><div class='post-detail'><div class='user-info'><h5><a href='"+  sculptUser.url +"' class='profile-link'>"+ sculptUser.username + "</a> </h5><p class='text-muted'>Reposted <a href = '/sculpt/"+ mainSculpt.id + "'>"+ mainSculpt.user.username + "</a>\'s post on " + dateDisplay + "</p></div><div class='reaction'> <a href='#' class='btn text-green sculpt-like' data-id='"+ sculptValue.id +"'><i class='icon ion-thumbsup'></i>"+ verb +"(" + sculptValue.likes +")</a></div><div class='line-divider'></div><div class='post-text'><pre class='sculptcontentclass'>"+ mainSculpt.content +" </pre></div><div class='row'><a class = 'resculptBtn' href = '/sculpt/" + sculptValue.id + "/resculpt/'><div class='col-sm-6' style='background-color: red'><span style='color: white' >Repost</span></a></div><a href='#' class='sculpt-reply'data-user ='"+ sculptUser.username +"' data-id='"+ replyId + "'><div class='col-sm-6' style='background-color: green'><span style='color: white' >Reply</span></a></div><div class='line-divider'></div><div class='line-divider'></div></div></div></div>")
                     } else {
-                        sculptContainer.append("<div class=\"media\"><div class=\"media-body\"><h5 class=\"mt-0\">" + "Resculpt via <a href = '" + sculptUser.url + "'>" + sculptUser.username + "</a> on " + dateDisplay + "</h5><pre class='sculptcontentclass'>" + mainSculpt.content + "</pre><img src=\"" + mainSculpt.image + "\" height=\"200px\"  /><br><br> via " + mainSculpt.user.username + " | " + mainSculpt.date_display + " | " + "<a href = '/sculpt/" + mainSculpt.id + "'>View</a> | " + "<a class = 'resculptBtn' href = '/sculpt/" + sculptValue.id + "/resculpt/'>Resculpt</a>" + "  | <a href='#' class='sculpt-like' data-id='"+ sculptValue.id + "'>"+ verb +" ("+ sculptValue.likes +")</a>" +  " | <a href='#' class='sculpt-reply' data-user ='"+ sculptUser.username +"'data-id='"+ sculptValue.id + "'>Reply </a> " + "</div></div><hr>")
+                        
+
+                            sculptContainer.append("<div class='post-content'><img src='" + mainSculpt.image + "' alt='post-image' class='img-responsive post-image' /><div class='post-container'><img src='http://placehold.it/300x300' alt='user' class='profile-photo-md pull-left' /><div class='post-detail'><div class='user-info'><h5><a href='"+  sculptUser.url +"' class='profile-link'>"+ sculptUser.username + "</a> </h5><p class='text-muted'>Reposted <a href = '/sculpt/"+ mainSculpt.id + "'>"+ mainSculpt.user.username + "</a>\'s post on " + dateDisplay + "</p></div><div class='reaction'> <a href='#' class='btn text-green sculpt-like' data-id='"+ sculptValue.id +"'><i class='icon ion-thumbsup'></i>"+ verb +"(" + sculptValue.likes +")</a></div><div class='line-divider'></div><div class='post-text'><pre class='sculptcontentclass'>"+ mainSculpt.content +" </pre></div><div class='row'><a class = 'resculptBtn' href = '/sculpt/" + sculptValue.id + "/resculpt/'><div class='col-sm-6' style='background-color: red'><span style='color: white' >Repost</span></a></div><a href='#' class='sculpt-reply'data-user ='"+ sculptUser.username +"' data-id='"+ replyId + "'><div class='col-sm-6' style='background-color: green'><span style='color: white' >Reply</span></a></div><div class='line-divider'></div><div class='line-divider'></div></div></div></div>")
+
                     }
                 }
 
@@ -197,20 +223,24 @@
                 var mainSculpt = sculptValue.parent
 
                 if (prepend == true) {
-                    if (sculptImage == null) {
-                        sculptContainer.prepend("<div class=\"media\"><div class=\"media-body\"><h5 class=\"mt-0\">" + "Reply via <a href = '" + sculptUser.url + "'>" + sculptUser.username + "</a></h5><pre class='sculptcontentclass'>" + mainSculpt.content + "</pre><br><br> via " + mainSculpt.user.username + "|" + mainSculpt.date_display + " | " + "<a href = '/sculpt/" + mainSculpt.id + "'>View</a> | " + "<a class = 'resculptBtn' href = '/sculpt/" + sculptValue.id + "/resculpt/'>Resculpt</a>" + "  | <a href='#' class='sculpt-like' data-id='"+ sculptValue.id + "'>"+ verb +" ("+ sculptValue.likes +") </a> " +  " | <a href='#' class='sculpt-reply'data-user ='"+ sculptUser.username +"' data-id='"+ sculptValue.id + "'>Reply </a> " + "</div></div><hr>")
+                    if (mainSculpt.image == null) {
+                        sculptContainer.prepend("<div class=\"media\"><div class=\"media-body\"><h5 class=\"mt-0\">" + "Reply via <a href = '" + sculptUser.url + "'>" + sculptUser.username + "</a></h5><pre class='sculptcontentclass'>" + sculptValue.content + "</pre><br><br> via " + mainSculpt.user.username + "|" + mainSculpt.date_display + " | " + "<a href = '/sculpt/" + mainSculpt.id + "'>View</a> | " + "<a class = 'resculptBtn' href = '/sculpt/" + sculptValue.id + "/resculpt/'>Resculpt</a>" + "  | <a href='#' class='sculpt-like' data-id='"+ sculptValue.id + "'>"+ verb +" ("+ sculptValue.likes +") </a> " +  " | <a href='#' class='sculpt-reply'data-user ='"+ sculptUser.username +"' data-id='"+ replyId + "'>Reply </a> " + "</div></div><hr>")
                     } else {
-                        sculptContainer.prepend("<div class=\"media\"><div class=\"media-body\"><h5 class=\"mt-0\">" + "Reply via <a href = '" + sculptUser.url + "'>" + sculptUser.username + "</a> </h5><pre class='sculptcontentclass'>" + mainSculpt.content + "</pre><img src=\"" + mainSculpt.image + "\" height=\"200px\"  /><br><br> via " + mainSculpt.user.username + " | " + mainSculpt.date_display + " | " + "<a href = '/sculpt/" + mainSculpt.id + "'>View</a> | " + "<a class = 'resculptBtn' href = '/sculpt/" + sculptValue.id + "/resculpt/'>Resculpt</a>" + "  | <a href='#' class='sculpt-like' data-id='"+ sculptValue.id + "'>"+ verb +" ("+ sculptValue.likes +")</a>" +  " | <a href='#' class='sculpt-reply'data-user ='"+ sculptUser.username +"' data-id='"+ sculptValue.id + "'>Reply </a> " + "</div></div><hr>")
+                        sculptContainer.prepend("<div class=\"media\"><div class=\"media-body\"><h5 class=\"mt-0\">" + "Reply via <a href = '" + sculptUser.url + "'>" + sculptUser.username + "</a> </h5><pre class='sculptcontentclass'>" + sculptValue.content + "</pre><img src=\"" + mainSculpt.image + "\" height=\"200px\"  /><br><br> via " + mainSculpt.user.username + " | " + mainSculpt.date_display + " | " + "<a href = '/sculpt/" + mainSculpt.id + "'>View</a> | " + "<a class = 'resculptBtn' href = '/sculpt/" + sculptValue.id + "/resculpt/'>Resculpt</a>" + "  | <a href='#' class='sculpt-like' data-id='"+ sculptValue.id + "'>"+ verb +" ("+ sculptValue.likes +")</a>" +  " | <a href='#' class='sculpt-reply'data-user ='"+ sculptUser.username +"' data-id='"+ replyId + "'>Reply </a> " + "</div></div><hr>")
                     }
                 } else {
-                    if (sculptImage == null) {
-                        sculptContainer.append("<div class=\"media\"><div class=\"media-body\"><h5 class=\"mt-0\">" + "Reply via <a href = '" + sculptUser.url + "'>" + sculptUser.username + "</a> </h5><pre class='sculptcontentclass'>" + mainSculpt.content + "</pre><br><br> via " + mainSculpt.user.username + "|" + mainSculpt.date_display + " | " + "<a href = '/sculpt/" + mainSculpt.id + "'>View</a> | " + "<a class = 'resculptBtn' href = '/sculpt/" + sculptValue.id + "/resculpt/'>Resculpt</a>" + "  | <a href='#' class='sculpt-like' data-id='"+ sculptValue.id + "'>"+ verb +" ("+ sculptValue.likes +")</a>" +  " | <a href='#' class='sculpt-reply'data-user ='"+ sculptUser.username +"' data-id='"+ sculptValue.id + "'>Reply </a> " + "</div></div><hr>")
+                    if (mainSculpt.image == null) {
+
+                        
+
+                        sculptContainer.append("<div class='post-content'><div class='post-container'><img src='http://placehold.it/300x300' alt='user' class='profile-photo-md pull-left' /><div class='post-detail'><div class='user-info'><h5><a href='"+  mainSculpt.user.url +"' class='profile-link'>"+ mainSculpt.user.username + "</a> </h5><p class='text-muted'>Published a photo on " + mainSculpt.date_display + "</p></div><div class='reaction'> <a href='#' class='btn text-green sculpt-like' data-id='"+ sculptValue.id +"'><i class='icon ion-thumbsup'></i>"+ verb +"(" + sculptValue.likes +")</a></div><div class='line-divider'></div><div class='post-text'><pre class='sculptcontentclass'>"+ mainSculpt.content +" </pre></div><div class='row'><a class = 'resculptBtn' href = '/sculpt/" + sculptValue.id + "/resculpt/'><div class='col-sm-6' style='background-color: red'><span style='color: white' >Repost</span></a></div><a href='#' class='sculpt-reply'data-user ='"+ sculptUser.username +"' data-id='"+ replyId + "'><div class='col-sm-6' style='background-color: green'><span style='color: white' >Reply</span></a></div><div class='line-divider'></div><div class='line-divider'></div><div class='line-divider'></div><div class='post-comment'><img src='http://placehold.it/300x300' alt='' class='profile-photo-sm' /><p><a href='"+ sculptUser.url +"' class='profile-link'>"+ sculptUser.username +"</a> "+ sculptValue.content +"</p></div></div></div></div>")
+
+
+
                     } else {
-                        sculptContainer.append("<div class=\"media\"><div class=\"media-body\"><h5 class=\"mt-0\">" + "Reply via <a href = '" + sculptUser.url + "'>" + sculptUser.username + "</a> </h5><pre class='sculptcontentclass'>" + mainSculpt.content + "</pre><img src=\"" + mainSculpt.image + "\" height=\"200px\"  /><br><br> via " + mainSculpt.user.username + " | " + mainSculpt.date_display + " | " + "<a href = '/sculpt/" + mainSculpt.id + "'>View</a> | " + "<a class = 'resculptBtn' href = '/sculpt/" + sculptValue.id + "/resculpt/'>Resculpt</a>" + "  | <a href='#' class='sculpt-like' data-id='"+ sculptValue.id + "'>"+ verb +" ("+ sculptValue.likes +")</a>" +  " | <a href='#' class='sculpt-reply'data-user ='"+ sculptUser.username +"' data-id='"+ sculptValue.id + "'>Reply </a> " + "</div></div><hr>")
+                        sculptContainer.append("<div class='post-content'><img src='" + mainSculpt.image + "' alt='post-image' class='img-responsive post-image' /><div class='post-container'><img src='http://placehold.it/300x300' alt='user' class='profile-photo-md pull-left' /><div class='post-detail'><div class='user-info'><h5><a href='"+  mainSculpt.user.url +"' class='profile-link'>"+ mainSculpt.user.username + "</a> </h5><p class='text-muted'>Published a photo on " + mainSculpt.date_display + "</p></div><div class='reaction'> <a href='#' class='btn text-green sculpt-like' data-id='"+ sculptValue.id +"'><i class='icon ion-thumbsup'></i>"+ verb +"(" + sculptValue.likes +")</a></div><div class='line-divider'></div><div class='post-text'><pre class='sculptcontentclass'>"+ mainSculpt.content +" </pre></div><div class='row'><a class = 'resculptBtn' href = '/sculpt/" + sculptValue.id + "/resculpt/'><div class='col-sm-6' style='background-color: red'><span style='color: white' >Repost</span></a></div><a href='#' class='sculpt-reply'data-user ='"+ sculptUser.username +"' data-id='"+ replyId + "'><div class='col-sm-6' style='background-color: green'><span style='color: white' >Reply</span></a></div><div class='line-divider'></div><div class='line-divider'></div><div class='line-divider'></div><div class='post-comment'><img src='http://placehold.it/300x300' alt='' class='profile-photo-sm' /><p><a href='"+ sculptUser.url +"' class='profile-link'>"+ sculptUser.username +"</a> "+ sculptValue.content +"</p></div></div></div></div>")
                     }
                 }
-
-            
 
             }
 
@@ -218,15 +248,20 @@
 
                 if (prepend == true) {
                     if (sculptImage == null) {
-                        sculptContainer.prepend("<div class=\"media\"><div class=\"media-body\"><h5 class=\"mt-0\">" + "<a href = '" + sculptUser.url + "'>" + sculptUser.username + "</a></h5><pre class='sculptcontentclass'>" + sculptContent + "</pre><br><br> via " + sculptUser.username + "|" + dateDisplay + " | " + "<a href = '/sculpt/" + sculptValue.id + "'>View</a> | " + "<a class = 'resculptBtn' href = '/sculpt/" + sculptValue.id + "/resculpt/'>Resculpt</a>" + "  | <a href='#' class='sculpt-like' data-id='"+ sculptValue.id + "'>"+ verb +" ("+ sculptValue.likes +")</a>" +  " | <a href='#' class='sculpt-reply'data-user ='"+ sculptUser.username +"' data-id='"+ sculptValue.id + "'>Reply </a> " + "</div></div><hr>")
+                        sculptContainer.prepend("<div class='post-content'><div class='post-container'><img src='http://placehold.it/300x300' alt='user' class='profile-photo-md pull-left' /><div class='post-detail'><div class='user-info'><h5><a href='"+  sculptUser.url +"' class='profile-link'>"+ sculptUser.username + "</a> </h5><p class='text-muted'>Published a photo on " + dateDisplay + "</p></div><div class='reaction'> <a href='#' class='btn text-green sculpt-like' data-id='"+ sculptValue.id +"'><i class='icon ion-thumbsup'></i>"+ verb +"(" + sculptValue.likes +")</a></div><div class='line-divider'></div><div class='post-text'><pre class='sculptcontentclass'>"+ sculptContent +" </pre></div><div class='row'><a class = 'resculptBtn' href = '/sculpt/" + sculptValue.id + "/resculpt/'><div class='col-sm-6' style='background-color: red'><span style='color: white' >Repost</span></a></div><a href='#' class='sculpt-reply'data-user ='"+ sculptUser.username +"' data-id='"+ replyId + "'><div class='col-sm-6' style='background-color: green'><span style='color: white' >Reply</span></a></div><div class='line-divider'></div><div class='line-divider'></div></div></div></div>")
                     } else {
-                        sculptContainer.prepend("<div class=\"media\"><div class=\"media-body\"><h5 class=\"mt-0\">" + "<a href = '" + sculptUser.url + "'>" + sculptUser.username + "</a></h5><pre class='sculptcontentclass'>" + sculptContent + "</pre><img src=\"" + sculptImage + "\" height=\"200px\"  /><br><br> via " + sculptUser.username + " | " + dateDisplay + " | " + "<a href = '/sculpt/" + sculptValue.id + "'>View</a> | " + "<a class = 'resculptBtn' href = '/sculpt/" + sculptValue.id + "/resculpt/'>Resculpt</a>" + " | <a href='#' class='sculpt-like' data-id='"+ sculptValue.id + "'>"+ verb +" ("+ sculptValue.likes +")</a>" +  " | <a href='#' class='sculpt-reply' data-user ='"+ sculptUser.username +"'data-id='"+ sculptValue.id + "'>Reply </a> " + "</div></div><hr>")
+                        sculptContainer.prepend("<div class='post-content'><img src='" + sculptImage + "' alt='post-image' class='img-responsive post-image' /><div class='post-container'><img src='http://placehold.it/300x300' alt='user' class='profile-photo-md pull-left' /><div class='post-detail'><div class='user-info'><h5><a href='"+  sculptUser.url +"' class='profile-link'>"+ sculptUser.username + "</a> </h5><p class='text-muted'>Published a photo on " + dateDisplay + "</p></div><div class='reaction'> <a href='#' class='btn text-green sculpt-like' data-id='"+ sculptValue.id +"'><i class='icon ion-thumbsup'></i>"+ verb +"(" + sculptValue.likes +")</a></div><div class='line-divider'></div><div class='post-text'><pre class='sculptcontentclass'>"+ sculptContent +" </pre></div><div class='row'><a class = 'resculptBtn' href = '/sculpt/" + sculptValue.id + "/resculpt/'><div class='col-sm-6' style='background-color: red'><span style='color: white' >Repost</span></a></div><a href='#' class='sculpt-reply'data-user ='"+ sculptUser.username +"' data-id='"+ replyId + "'><div class='col-sm-6' style='background-color: green'><span style='color: white' >Reply</span></a></div><div class='line-divider'></div><div class='line-divider'></div></div></div></div>")
                     }
                 } else {
                     if (sculptImage == null) {
-                        sculptContainer.append("<div class=\"media\"><div class=\"media-body\"><h5 class=\"mt-0\">" + "<a href = '" + sculptUser.url + "'>" + sculptUser.username + "</a></h5><pre class='sculptcontentclass'>" + sculptContent + "</pre><br><br> via " + sculptUser.username + "|" + dateDisplay + " | " + "<a href = '/sculpt/" + sculptValue.id + "'>View</a> | " + "<a class = 'resculptBtn' href = '/sculpt/" + sculptValue.id + "/resculpt/'>Resculpt</a>" + " | <a href='#' class='sculpt-like' data-id='"+ sculptValue.id + "'>"+ verb +" ("+ sculptValue.likes +")</a>" +  " | <a href='#' class='sculpt-reply' data-user ='"+ sculptUser.username +"'data-id='"+ sculptValue.id + "'>Reply </a> " + "</div></div><hr>")
+
+                        sculptContainer.append("<div class='post-content'><div class='post-container'><img src='http://placehold.it/300x300' alt='user' class='profile-photo-md pull-left' /><div class='post-detail'><div class='user-info'><h5><a href='"+  sculptUser.url +"' class='profile-link'>"+ sculptUser.username + "</a> </h5><p class='text-muted'>Published a photo on " + dateDisplay + "</p></div><div class='reaction'> <a href='#' class='btn text-green sculpt-like' data-id='"+ sculptValue.id +"'><i class='icon ion-thumbsup'></i>"+ verb +"(" + sculptValue.likes +")</a></div><div class='line-divider'></div><div class='post-text'><pre class='sculptcontentclass'>"+ sculptContent +" </pre></div><div class='row'><a class = 'resculptBtn' href = '/sculpt/" + sculptValue.id + "/resculpt/'><div class='col-sm-6' style='background-color: red'><span style='color: white' >Repost</span></a></div><a href='#' class='sculpt-reply'data-user ='"+ sculptUser.username +"' data-id='"+ replyId + "'><div class='col-sm-6' style='background-color: green'><span style='color: white' >Reply</span></a></div><div class='line-divider'></div><div class='line-divider'></div></div></div></div>")
+
+
                     } else {
-                        sculptContainer.append("<div class=\"media\"><div class=\"media-body\"><h5 class=\"mt-0\">" + "<a href = '" + sculptUser.url + "'>" + sculptUser.username + "</a></h5><pre class='sculptcontentclass'>" + sculptContent + "</pre><img src=\"" + sculptImage + "\" height=\"200px\"  /><br><br> via " + sculptUser.username + " | " + dateDisplay + " | " + "<a href = '/sculpt/" + sculptValue.id + "'>View</a> | " + "<a class = 'resculptBtn' href = '/sculpt/" + sculptValue.id + "/resculpt/'>Resculpt</a>" + " | <a href='#' class='sculpt-like' data-id='"+ sculptValue.id + "'>"+ verb +" ("+ sculptValue.likes +")</a>" +  " | <a href='#' class='sculpt-reply'data-user ='"+ sculptUser.username +"' data-id='"+ sculptValue.id + "'>Reply </a> " + "</div></div><hr>")
+                        
+                        sculptContainer.append("<div class='post-content'><img src='" + sculptImage + "' alt='post-image' class='img-responsive post-image' /><div class='post-container'><img src='http://placehold.it/300x300' alt='user' class='profile-photo-md pull-left' /><div class='post-detail'><div class='user-info'><h5><a href='"+  sculptUser.url +"' class='profile-link'>"+ sculptUser.username + "</a> </h5><p class='text-muted'>Published a photo on " + dateDisplay + "</p></div><div class='reaction'> <a href='#' class='btn text-green sculpt-like' data-id='"+ sculptValue.id +"'><i class='icon ion-thumbsup'></i>"+ verb +"(" + sculptValue.likes +")</a></div><div class='line-divider'></div><div class='post-text'><pre class='sculptcontentclass'>"+ sculptContent +" </pre></div><div class='row'><a class = 'resculptBtn' href = '/sculpt/" + sculptValue.id + "/resculpt/'><div class='col-sm-6' style='background-color: red'><span style='color: white' >Repost</span></a></div><a href='#' class='sculpt-reply'data-user ='"+ sculptUser.username +"' data-id='"+ replyId + "'><div class='col-sm-6' style='background-color: green'><span style='color: white' >Reply</span></a></div><div class='line-divider'></div><div class='line-divider'></div></div></div></div>")
+
                     }
                 }
             }
@@ -292,7 +327,44 @@
                 }
             })
         }
-        fetchSculpts();
+
+        function fetchSingle(fetchOneId) {
+            
+            var fetchDetailUrl = '/api/sculpt/' + fetchOneId + '/';
+
+
+            $.ajax({
+                url: fetchDetailUrl,
+                
+                method: "GET",
+                success: function(data) {
+                    //console.log(data)
+                    sculptlist = data.results
+
+                    // if (data.next) {
+                    //     nextSculptUrl = data.next
+                    // } else {
+                    //     $('#loadmore').css('display', 'none')
+                    // }
+                    parseSculpts()
+                    updateHashLinks()
+                },
+                error: function(data) {
+                    console.log("error")
+                    console.log(data)
+                }
+            })
+        }
+
+
+
+        if (fetchOneId) {
+            fetchSingle(fetchOneId);
+        } else {
+            fetchSculpts();
+        }
+
+
 
         $('#loadmore').click(function(event) {
             event.preventDefault()
@@ -414,7 +486,7 @@
 
     {% block script %}{% endblock script %}
 
-    <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+   
    
   </body>
 </html>

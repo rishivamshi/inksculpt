@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}{{ block.super }} | Sculpt{% endblock title %}
+{% block content %}
+
+{% include "sculpts/form.html" with form=form btn_title='Sculpt' %}
+
+
+<!-- bottom was the case first, but as the same has to be applied for update_view.html, i am creating a form.html file and include that over here. -->
+
+<!-- <form class="form" method="POST" enctype="multipart/form-data" action="">
+	{% csrf_token %}
+	{{ form.as_p }}
+
+	<input type="submit" value="Sculpt" >
+</form> -->
+
+{% endblock content %}

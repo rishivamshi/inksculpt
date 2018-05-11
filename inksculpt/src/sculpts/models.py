@@ -104,6 +104,18 @@ class Sculpt(models.Model):
 	class Meta:
 		ordering = ['-timestamp']
 
+	def get_parent(self):
+		the_parent = self
+		if self.parent:
+			the_parent = self.parent
+		return the_parent
+
+	def get_children(self):
+		parent = self.get_parent()
+		qs = Sculpt.objects.filter(parent=parent)
+		qs_parent = Sculpt.objects.filter(pk = parent.pk)
+		return (qs | qs_parent)
+
 	# validation can be done in the models itself. 
 	# this will be called , whenever you even want to save the model itself.
 	# def clean(self, *args, **kwargs ):
