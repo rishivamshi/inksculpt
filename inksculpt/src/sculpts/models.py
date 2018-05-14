@@ -45,6 +45,7 @@ class SculptManager(models.Manager):
 				timestamp__year = timezone.now().year,
 				timestamp__month = timezone.now().month,
 				timestamp__day = timezone.now().day,
+				reply = False,
 				)
 		if qs.exists():
 			return None 
@@ -114,7 +115,7 @@ class Sculpt(models.Model):
 		parent = self.get_parent()
 		qs = Sculpt.objects.filter(parent=parent)
 		qs_parent = Sculpt.objects.filter(pk = parent.pk)
-		return (qs | qs_parent)
+		return (qs | qs_parent) 
 
 	# validation can be done in the models itself. 
 	# this will be called , whenever you even want to save the model itself.

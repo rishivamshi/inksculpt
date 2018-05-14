@@ -61,6 +61,7 @@ class SculptDetailAPIView(generics.ListAPIView):
 	
 	def get_queryset(self, *args, **kwargs):
 		sculpt_id = self.kwargs.get("pk")
+		# print(sculpt_id)
 		qs = Sculpt.objects.filter(pk = sculpt_id)
 		if qs.exists() and qs.count() == 1:
 			parent_obj = qs.first()
@@ -73,7 +74,8 @@ class SculptDetailAPIView(generics.ListAPIView):
 class SculptListAPIView(generics.ListAPIView):
 	serializer_class = SculptModelSerializer
 	pagination_class = StandardResultsPagination
-
+	permission_classes = [permissions.AllowAny]
+	queryset = Sculpt.objects.all()
 
 	def get_serializer_context(self, *args, **kwargs):
 		context = super(SculptListAPIView, self ).get_serializer_context(*args, **kwargs)
@@ -81,7 +83,6 @@ class SculptListAPIView(generics.ListAPIView):
 		return context
 
 	def get_queryset(self, *args, **kwargs): #18
-
 		requested_user = self.kwargs.get("username")
 		if requested_user:
 

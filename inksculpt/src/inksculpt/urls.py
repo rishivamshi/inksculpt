@@ -20,8 +20,9 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from sculpts.views import SculptListView #1
-
+from hashtags.api.views import TagSculptAPIView
 from hashtags.views import HashTagView
+
 from .views import home
 
 urlpatterns = [
@@ -30,6 +31,8 @@ urlpatterns = [
 
     url(r'^tags/(?P<hashtag>.*)/$', HashTagView.as_view(), name = 'hashtag'), # url for hashtags app. 
     url(r'^sculpt/', include('sculpts.urls', namespace = 'sculpt')), # url for sculpts app. 
+
+    url(r'^api/tags/(?P<hashtag>.*)/$', TagSculptAPIView.as_view(), name='tag-sculpt-api'),
 
     url(r'^api/sculpt/', include('sculpts.api.urls', namespace = 'sculpt-api')), #url for api
     url(r'^api/', include('accounts.api.urls', namespace = 'profiles-api')), #url for api
