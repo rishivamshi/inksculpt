@@ -1,4 +1,7 @@
 {% extends "base.html" %}
+
+{% load recommended %}
+
 {% block title %}{{ block.super }} | Detail{% endblock title %}
 
 {% block script %}
@@ -58,6 +61,14 @@
 		<h4>Not Followed by Any Users </h4>
 
 	{% endfor %}
+
+
+	<hr>
+	<h1>Recommended Users</h1>
+	{% recommended request.user %}
+	
+
+
 		
 </div>
 <div class="col-sm-9 col-xs-12"  >
