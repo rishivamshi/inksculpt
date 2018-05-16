@@ -19,6 +19,8 @@ from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 
+
+from accounts.views import UserRegisterView
 from sculpts.views import SculptListView #1
 from hashtags.api.views import TagSculptAPIView
 from hashtags.views import HashTagView
@@ -37,6 +39,10 @@ urlpatterns = [
     url(r'^api/sculpt/', include('sculpts.api.urls', namespace = 'sculpt-api')), #url for api
     url(r'^api/', include('accounts.api.urls', namespace = 'profiles-api')), #url for api
 
+
+    url(r'^register/$', UserRegisterView.as_view(), name='register'),
+
+    url(r'^', include('django.contrib.auth.urls')),
     url(r'^', include('accounts.urls', namespace = 'profiles')), # url for usernames from accounts app.
 ]
 

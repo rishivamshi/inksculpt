@@ -81,7 +81,7 @@ class SculptDetailView(DetailView): #6
 	#   obj = get_object_or_404(Sculpt, pk = pk)
 	# 	return Sculpt.objects.get(id =pk )
 
-class SculptListView(ListView): #7
+class SculptListView(LoginRequiredMixin, ListView): #7
 	template_name = "sculpts/list_view.html"
 	#queryset = Sculpt.objects.all() 
 

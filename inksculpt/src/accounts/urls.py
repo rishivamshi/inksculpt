@@ -1,7 +1,7 @@
 
 # we have to wrap this list of urls to the main one i.e to the urls of inksculpt. insculpt/urls.py
 
-from django.conf.urls import url
+from django.conf.urls import url, include
 # from .views import sculpt_detail_view, sculpt_list_view # comments 1
 
 from django.views.generic.base import RedirectView #9
@@ -11,6 +11,8 @@ from .views import (
 	UserFollowView #10
  		)
 urlpatterns = [
+	
+
     
     url(r'^(?P<username>[\w.@+-]+)/$', UserDetailView.as_view(), name = 'detail'), # 6  # /sculpt/1
     url(r'^(?P<username>[\w.@+-]+)/follow/$', UserFollowView.as_view(), name = 'follow'), # 6  # /sculpt/1
