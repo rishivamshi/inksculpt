@@ -107,6 +107,11 @@ class SculptListView(LoginRequiredMixin, ListView): #7
 		return context
 
 
+class SculptFeaturedListView(LoginRequiredMixin, ListView): #7
+	template_name = "sculpts/featured.html"
+	queryset = Sculpt.objects.all() 
+
+
 
 
 

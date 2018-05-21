@@ -71,6 +71,26 @@ class SculptDetailAPIView(generics.ListAPIView):
 		return qs.order_by("-parent_id_null", '-timestamp')
 
 
+class SculptFeaturedAPIView(generics.ListAPIView):
+	queryset = Sculpt.objects.all()
+	serializer_class = SculptModelSerializer
+	pagination_class = StandardResultsPagination
+	permission_classes = [permissions.AllowAny] 
+	
+	def get_queryset(self, *args, **kwargs):
+		# sculpt_id = self.kwargs.get("pk")
+		# print(sculpt_id)
+		qs = Sculpt.objects.filter(featured = True)
+		# if qs.exists() and qs.count() == 1:
+		# 	parent_obj = qs.first()
+		# 	qs1 = parent_obj.get_children()
+		# 	qs = (qs | qs1).distinct().extra(select = {"parent_id_null": 'parent_id IS NULL'})
+
+		return qs
+
+
+
+
 class SculptListAPIView(generics.ListAPIView):
 	serializer_class = SculptModelSerializer
 	pagination_class = StandardResultsPagination

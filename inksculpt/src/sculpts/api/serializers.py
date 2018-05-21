@@ -84,6 +84,7 @@ class SculptModelSerializer(serializers.ModelSerializer): #3
 			'likes',
 			'did_like',
 			'reply',
+			'featured',
 
 		]
 		#read_only_fields = ['reply']

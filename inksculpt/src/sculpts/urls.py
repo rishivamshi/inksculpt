@@ -12,7 +12,8 @@ from .views import (
 	SculptDetailView,
 	SculptListView, # 4
 	SculptUpdateView,
-    SculptDeleteView
+    SculptDeleteView,
+    SculptFeaturedListView
  		)
 urlpatterns = [
     # url(r'^admin/', admin.site.urls),
@@ -22,6 +23,7 @@ urlpatterns = [
     url(r'^$', RedirectView.as_view(url = "/")), #10
     url(r'^search/$', SculptListView.as_view(), name = 'list'), # 5  # /sculpt/ #8
     url(r'^create/$', SculptCreateView.as_view(), name = 'create'), # 7  # /sculpt/create
+    url(r'^featured/$', SculptFeaturedListView.as_view(), name = 'featured'),
     url(r'^(?P<pk>\d+)/$', SculptDetailView.as_view(), name = 'detail'), # 6  # /sculpt/1
     url(r'^(?P<pk>\d+)/resculpt/$', ResculptView.as_view(), name = 'detail'), # 6  # /sculpt/1
     url(r'^(?P<pk>\d+)/update/$', SculptUpdateView.as_view(), name = 'update'), # 6  # /sculpt/1/update

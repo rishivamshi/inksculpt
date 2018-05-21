@@ -80,6 +80,7 @@ class Sculpt(models.Model):
 	content = NonStrippingTextField(validators = [validate_content]) # writing stuff and see how to take care of blank spaces - strip = false
 	liked = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, related_name = 'liked')
 	reply = models.BooleanField(verbose_name = 'Is a reply?', default = False)
+	featured = models.BooleanField(verbose_name='Featured aah? haha', default = False)
 	image = models.ImageField(
 				upload_to = upload_location,
 				null = True,
