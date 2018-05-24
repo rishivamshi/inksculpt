@@ -27,6 +27,10 @@ from hashtags.views import HashTagView
 
 from .views import home
 
+
+
+
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', SculptListView.as_view(), name = 'home'),
@@ -39,6 +43,7 @@ urlpatterns = [
     url(r'^api/sculpt/', include('sculpts.api.urls', namespace = 'sculpt-api')), #url for api
     url(r'^api/', include('accounts.api.urls', namespace = 'profiles-api')), #url for api
 
+   
 
     url(r'^register/$', UserRegisterView.as_view(), name='register'),
 

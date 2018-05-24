@@ -54,7 +54,6 @@ class UserProfile(models.Model):
 	user 		= models.OneToOneField(settings.AUTH_USER_MODEL , related_name='profile') #1
 	following 	= models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True ,related_name='followed_by') #2
 
-
 	objects  = UserProfileManager() # UserProfile.objects.all() #5
 
 	def __sts__(self):

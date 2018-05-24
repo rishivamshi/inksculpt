@@ -1,12 +1,152 @@
-{% extends "base.html" %}
+{% load static %}
+
 
 {% load recommended %}
 
-{% block title %}{{ block.super }} | Detail{% endblock title %}
 
-{% block script %}
-<script type="text/javascript">
-    function getParameterByName(name, url) {
+<html lang="en">
+  <head>
+  
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/ionicons.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.min.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i" rel="stylesheet">
+    <title>{% block title %} Inksculpt {% endblock title %}</title>
+  </head>
+
+{% include "reply-modal.html" %}
+<body>
+    	
+    {% include "navbar.html" %}
+
+    <div class="container">
+
+      <!-- Timeline
+      ================================================= -->
+      <div class="timeline">
+        <div class="timeline-cover">
+
+          <!--Timeline Menu for Large Screens-->
+          <div class="timeline-nav-bar hidden-sm hidden-xs">
+            <div class="row">
+              <div class="col-md-3">
+                <div class="profile-info">
+                  <img src="http://placehold.it/300x300" alt="" class="img-responsive profile-photo" />
+                  <h3>{{ object.username }}</h3>
+                  <p class="text-muted">Creative Director</p>
+                </div>
+              </div>
+              <div class="col-md-9">
+                <ul class="list-inline profile-menu">
+                  <li><a href="timeline.html" class="active">Timeline</a></li>
+                  <li><a href="timeline-about.html">About</a></li>
+                  <li><a href="timeline-album.html">Album</a></li>
+                  <li><a href="timeline-friends.html">Friends</a></li>
+                </ul>
+                <ul class="follow-me list-inline">
+                  <li>{{ object.followed_by.all.count }} Followers</li>
+                  <li><button class="btn-primary">{% if following %}Unfollow{% else %}Follow{% endif %}</button></li>
+                </ul>
+              </div>
+            </div>
+          </div><!--Timeline Menu for Large Screens End-->
+
+          <!--Timeline Menu for Small Screens-->
+          <div class="navbar-mobile hidden-lg hidden-md">
+            <div class="profile-info">
+              <img src="http://placehold.it/300x300" alt="" class="img-responsive profile-photo" />
+              <h4>{{ object.username }}</h4>
+              <p class="text-muted">Creative Director</p>
+            </div>
+            <div class="mobile-menu">
+              <ul class="list-inline">
+                <li><a href="timline.html" class="active">Timeline</a></li>
+                <li><a href="timeline-about.html">About</a></li>
+                <li><a href="timeline-album.html">Album</a></li>
+                <li><a href="timeline-friends.html">Friends</a></li>
+              </ul>
+              <button class="btn-primary">{% if following %}Unfollow{% else %}Follow{% endif %}</button>
+            </div>
+          </div><!--Timeline Menu for Small Screens End-->
+
+        </div>
+
+
+
+        
+        <div id="page-contents">
+          <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-7">
+
+              <!-- Post Create Box
+              ================================================= -->
+              <div class="create-post">
+                <div class="row">
+                  
+                  
+                </div>
+              </div><!-- Post Create Box End-->
+
+              <div id="sculpt-container" data-url='/api/{{ object.username }}/sculpt/'> </div>
+        <a href="#" id='loadmore'>Load More Sculpts</a>
+
+
+
+            </div>
+
+
+            <div class="col-md-2 static">
+              <div id="sticky-sidebar">
+                <h4 class="grey">Recommended Users</h4>
+                <div class="feed-item">
+                  <div class="live-activity">
+                    <p>{% recommended request.user %}</p>
+                    
+                  </div>
+                </div>
+                
+                
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+
+
+
+
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+     <script type="text/javascript" src="{% static 'js/js/bootstrap.min.js' %}"></script>
+     <script type="text/javascript" src="{% static 'js/jquery.sticky-kit.min.js' %}"></script>
+     <script type="text/javascript" src="{% static 'js/jquery.scrollbar.min.js' %}"></script>
+     <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
+
+
+    <script type="text/javascript">
+
+        function getParameterByName(name, url) {
         if (!url) url = window.location.href;
         name = name.replace(/[\[\]]/g, "\\$&");
         var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
@@ -16,87 +156,419 @@
         return decodeURIComponent(results[2].replace(/\+/g, " "));
     }
 
+      function loadSculptContainer(sculptContainerID, fetchOneId) {
+    // console.log('working');
+        var query = getParameterByName('q')
+        // console.log(query)
+        var sculptlist = [];
+        var nextSculptUrl;
+        
+        var sculptContainer;
+        if (sculptContainerID) {
+          sculptContainer = $("#" + sculptContainerID)
+        } else {
+          sculptContainer = $("#sculpt-container")
+        }
+
+        var initialURL = sculptContainer.attr("data-url") || "/api/sculpt/";
+        // console.log(initialURL)
+
+
+        $(document.body).on("click", ".sculpt-like", function(e) {
+            e.preventDefault()
+            var this_ = $(this)
+            var sculptId = this_.attr("data-id")
+            var likedUrl = '/api/sculpt/' + sculptId + "/like/"
+            //this_.text("Liked")
+
+            $.ajax({
+              method: "GET",
+              url: likedUrl,
+              success: function(data){
+                if (data.liked) {
+                  this_.text("Liked")
+                } else {
+                  this_.text("Unliked")
+                }
+              },
+              error: function(data) {
+                console.log("error")
+                console.log(data)
+              }
+            })
+
+        })
+
+        $(document.body).on("click", ".sculpt-reply", function(e) {
+            e.preventDefault()
+            var this_ = $(this)
+            var parentId = this_.attr("data-id")
+            var username = this_.attr("data-user")
+
+            $("#replyModal").modal ({})
+            $("#replyModal textarea").after("<input type='hidden' value='" + parentId +"' name='parent_id' />")
+            $("#replyModal textarea").after("<input type='hidden' value='" + true +"' name='reply' />")
+            $("#replyModal textarea").val("@" + username + " ")
+            $("#replyModal").on("shown.bs.modal", function(){
+                $('textarea').focus()
+            })
 
 
 
 
+        })
+
+
+
+
+
+
+
+
+
+
+        $(document.body).on("click", ".resculptBtn", function(e) {
+            e.preventDefault()
+            var url = "/api" + $(this).attr("href")
+            $.ajax({
+                method: "GET",
+                url: url,
+                success: function(data) {
+                    console.log(data)
+                    // if username is in the API path... let's ignore
+                    if (initialURL == "/api/sculpt/") {
+                      attachSculpt(data, true, true)
+                    updateHashLinks()
+                    }
+                    
+
+                },
+                error: function(data) {
+                    console.log("error")
+                    console.log(data)
+                }
+            })
+
+        })
+
+
+        function updateHashLinks() {
+            $(".sculptcontentclass").each(function(data) {
+                var hashtagRegex = /(^|\s)#([\w\d-]+)/g
+                var usernameRegex = /(^|\s)@([\w\d-]+)/g
+
+                var currentHtml = $(this).html()
+                var newText;
+                newText = currentHtml.replace(hashtagRegex, "$1<a href='/tags/$2/'>#$2</a>")
+
+                newText = newText.replace(usernameRegex, "$1<a href='/$2/'>@$2</a>")
+                $(this).html(newText)
+            })
+        }
+
+
+
+        function attachSculpt(sculptValue, prepend, resculpt) {
+            // console.log(key)
+            // console.log(value.user)
+            // console.log(value.content)
+            var dateDisplay = sculptValue.date_display;
+            var sculptContent = sculptValue.content;
+            var sculptImage = sculptValue.image;
+            var sculptUser = sculptValue.user;
+            var timeSince = sculptValue.timesince;
+            var verb = 'Like'
+            if (sculptValue.did_like) {
+              verb = 'Unlike'
+            }
+            var isReply = sculptValue.reply;
+
+            var replyId = sculptValue.id
+            if (sculptValue.parent) {
+                replyId = sculptValue.parent.id
+            }
+
+            // console.log(sculptImage);
+            if (resculpt && sculptValue.parent && !isReply) {
+                var mainSculpt = sculptValue.parent
+                
+                    if (sculptImage == null) {
+
+                        sculptContainer.append("<div class='post-content'><div class='post-date hidden-xs hidden-sm'><h5>"+ sculptUser.username +"</h5><p class='text-grey' style='font-size: 9'>"+ dateDisplay +"</p></div><div class='post-container'><img src='http://placehold.it/300x300' alt='user' class='profile-photo-md pull-left' /><div class='post-detail'><div class='user-info'><h5><a href='"+ sculptUser.url +"' class='profile-link'>" + sculptUser.username  + "</a> <span class='following'>following</span></h5><p class='text-muted'>Reposted <a href='"+ mainSculpt.user.url +"'>"+ mainSculpt.user.username + "</a>'s post about <span title='" + dateDisplay + "' style=' color:#00897B;'> "+ timeSince +"</span></p></div><div class='reaction'><a href = '#' class='btn text-green sculpt-like' data-id='" + sculptValue.id +"'><i class='icon ion-thumbsup'></i>" + verb + " ("+ sculptValue.likes +")</a></div><div class='line-divider'></div><div class='post-text'><pre class='sculptcontentclass'>" + sculptContent +"</pre></div><div class='row' style='margin-bottom: 10px'><a role='button'  class='col-lg-3 col-md-3 col-sm-3 btn' style='background-color: #00897B; color: whitesmoke' href = '/sculpt/" + sculptValue.id + "' >View</a><div class='col-lg-1 col-md-1 col-sm-1'></div><a role='button' class='sculpt-reply col-lg-3 col-md-3 col-sm-3 btn' style='background-color: #00897B; color: whitesmoke' data-user ='"+ sculptUser.username +"' data-id='"+ replyId + "' >Comment</a><div class='col-lg-1 col-md-1 col-sm-1'></div><a role='button' class=' resculptBtn col-lg-3 col-md-3 col-sm-3 btn' style='background-color: #00897B; color: whitesmoke' href = '/sculpt/" + sculptValue.id + "/resculpt/' >Repost</a><div class='col-lg-1 col-md-1 col-sm-1'></div></div></div></div></div>")
+                    
+
+                    } else {
+
+
+                        sculptContainer.append("<div class='post-content'><div class='post-date hidden-xs hidden-sm'><h5>"+ sculptUser.username +"</h5><p class='text-grey' style='font-size: 9'>"+ dateDisplay +"</p></div><img src='" + mainSculpt.image + "' alt='post-image' class='img-responsive post-image' /><div class='post-container'><img src='http://placehold.it/300x300' alt='user' class='profile-photo-md pull-left' /><div class='post-detail'><div class='user-info'><h5><a href='"+ sculptUser.url +"' class='profile-link'>" + sculptUser.username  + "</a> <span class='following'>following</span></h5><p class='text-muted'>Reposted <a href='"+ mainSculpt.user.url +"'>"+ mainSculpt.user.username + "</a>'s post about <span title='" + dateDisplay + "' style=' color:#00897B;'> "+ timeSince +"</span></p></div><div class='reaction'><a href = '#' class='btn text-green sculpt-like' data-id='" + sculptValue.id +"'><i class='icon ion-thumbsup'></i>" + verb + " ("+ sculptValue.likes +")</a></div><div class='line-divider'></div><div class='post-text'><pre class='sculptcontentclass'>" + sculptContent +"</pre></div><div class='row' style='margin-bottom: 10px'><a role='button'  class='col-lg-3 col-md-3 col-sm-3 btn' style='background-color: #00897B; color: whitesmoke' href = '/sculpt/" + sculptValue.id + "' >View</a><div class='col-lg-1 col-md-1 col-sm-1'></div><a role='button' class='sculpt-reply col-lg-3 col-md-3 col-sm-3 btn' style='background-color: #00897B; color: whitesmoke' data-user ='"+ sculptUser.username +"' data-id='"+ replyId + "' >Comment</a><div class='col-lg-1 col-md-1 col-sm-1'></div><a role='button' class=' resculptBtn col-lg-3 col-md-3 col-sm-3 btn' style='background-color: #00897B; color: whitesmoke' href = '/sculpt/" + sculptValue.id + "/resculpt/' >Repost</a><div class='col-lg-1 col-md-1 col-sm-1'></div></div></div></div></div>")
+                    
+
+
+                    }
+                }
+            
+
+            else if (isReply && sculptValue.parent) {
+
+                var mainSculpt = sculptValue.parent
+                
+                    
+                        
+                        
+
+                        sculptContainer.append("<div class='post-content'><div class='post-date hidden-xs hidden-sm'><h5>"+ sculptUser.username +"</h5><p class='text-grey' style='font-size: 9'>"+ dateDisplay +"</p></div><div class='post-container'><img src='http://placehold.it/300x300' alt='user' class='profile-photo-md pull-left' /><div class='post-detail'><div class='user-info'><h5><a href='"+ sculptUser.url +"' class='profile-link'>" + sculptUser.username  + "</a> <span class='following'>following</span></h5><p class='text-muted'>Commented on <a href='"+ mainSculpt.user.url +"'>"+ mainSculpt.user.username + "</a>'s post about <span title='" + dateDisplay + "' style=' color:#00897B;'> "+ timeSince +"</span></p></div><div class='reaction'><a href = '#' class='btn text-green sculpt-like' data-id='" + sculptValue.id +"'><i class='icon ion-thumbsup'></i>" + verb + " ("+ sculptValue.likes +")</a></div><div class='line-divider'></div><div class='post-text'><pre class='sculptcontentclass'>" + sculptContent +"</pre></div><div class='row' style='margin-bottom: 10px'><a role='button'  class='col-lg-3 col-md-3 col-sm-3 btn' style='background-color: #00897B; color: whitesmoke' href = '/sculpt/" + sculptValue.id + "' >View</a><div class='col-lg-1 col-md-1 col-sm-1'></div><a role='button' class='sculpt-reply col-lg-3 col-md-3 col-sm-3 btn' style='background-color: #00897B; color: whitesmoke' data-user ='"+ sculptUser.username +"' data-id='"+ replyId + "' >Comment</a><div class='col-lg-1 col-md-1 col-sm-1'></div><a role='button' class=' resculptBtn col-lg-3 col-md-3 col-sm-3 btn' style='background-color: #00897B; color: whitesmoke' href = '/sculpt/" + sculptValue.id + "/resculpt/' >Repost</a><div class='col-lg-1 col-md-1 col-sm-1'></div></div></div></div></div>")
+
+
+                    
+                    
+               
+            
+            }
+
+             else {
+                
+                    if (sculptImage == null) {
+
+
+                       sculptContainer.append("<div class='post-content'><div class='post-date hidden-xs hidden-sm'><h5>"+ sculptUser.username +"</h5><p class='text-grey' style='font-size: 9'>"+ dateDisplay +"</p></div><div class='post-container'><img src='http://placehold.it/300x300' alt='user' class='profile-photo-md pull-left' /><div class='post-detail'><div class='user-info'><h5><a href='"+ sculptUser.url +"' class='profile-link'>" + sculptUser.username  + "</a> <span class='following'>following</span></h5><p class='text-muted'>Published a photo about <span title='" + dateDisplay + "' style=' color:#00897B;'> "+ timeSince +"</span></p></div><div class='reaction'><a href = '#' class='btn text-green sculpt-like' data-id='" + sculptValue.id +"'><i class='icon ion-thumbsup'></i>" + verb + " ("+ sculptValue.likes +")</a></div><div class='line-divider'></div><div class='post-text'><pre class='sculptcontentclass'>" + sculptContent +"</pre></div><div class='row' style='margin-bottom: 10px'><a role='button'  class='col-lg-3 col-md-3 col-sm-3 btn' style='background-color: #00897B; color: whitesmoke' href = '/sculpt/" + sculptValue.id + "' >View</a><div class='col-lg-1 col-md-1 col-sm-1'></div><a role='button' class='sculpt-reply col-lg-3 col-md-3 col-sm-3 btn' style='background-color: #00897B; color: whitesmoke' data-user ='"+ sculptUser.username +"' data-id='"+ replyId + "' >Comment</a><div class='col-lg-1 col-md-1 col-sm-1'></div><a role='button' class=' resculptBtn col-lg-3 col-md-3 col-sm-3 btn' style='background-color: #00897B; color: whitesmoke' href = '/sculpt/" + sculptValue.id + "/resculpt/' >Repost</a><div class='col-lg-1 col-md-1 col-sm-1'></div></div></div></div></div>")
+
+
+
+
+
+                    
+
+                    } else {
+                        
+                        
+                        
+
+                        sculptContainer.append("<div class='post-content'><div class='post-date hidden-xs hidden-sm'><h5>"+ sculptUser.username +"</h5><p class='text-grey' style='font-size: 9'  >"+ dateDisplay +"</p></div><img src='" + sculptImage + "' alt='post-image' class='img-responsive post-image' /><div class='post-container'><img src='http://placehold.it/300x300' alt='user' class='profile-photo-md pull-left' /><div class='post-detail'><div class='user-info'><h5><a href='"+ sculptUser.url +"' class='profile-link'>" + sculptUser.username  + "</a> <span class='following'>following</span></h5><p class='text-muted'>Published a photo about <span title='" + dateDisplay + "' style=' color:#00897B;'> "+ timeSince +"</span></p></div><div class='reaction'><a href = '#' class='btn text-green sculpt-like' data-id='" + sculptValue.id +"'><i class='icon ion-thumbsup'></i>" + verb + " ("+ sculptValue.likes +")</a></div><div class='line-divider'></div><div class='post-text'><pre class='sculptcontentclass'>" + sculptContent +"</pre></div><div class='row' style='margin-bottom: 10px'><a role='button'  class='col-lg-3 col-md-3 col-sm-3 btn' style='background-color: #00897B; color: whitesmoke' href = '/sculpt/" + sculptValue.id + "' >View</a><div class='col-lg-1 col-md-1 col-sm-1'></div><a role='button' class='sculpt-reply col-lg-3 col-md-3 col-sm-3 btn' style='background-color: #00897B; color: whitesmoke' data-user ='"+ sculptUser.username +"' data-id='"+ replyId + "' >Comment</a><div class='col-lg-1 col-md-1 col-sm-1'></div><a role='button' class=' resculptBtn col-lg-3 col-md-3 col-sm-3 btn' style='background-color: #00897B; color: whitesmoke' href = '/sculpt/" + sculptValue.id + "/resculpt/' >Repost</a><div class='col-lg-1 col-md-1 col-sm-1'></div></div></div></div></div>")
+
+
+
+
+
+
+                    }
+
+                
+            }
+        }
+
+
+
+
+        function parseSculpts() {
+            if (sculptlist == 0) {
+                sculptContainer.text("No sculpts currently found")
+            } else {
+                // $('#sculpt-container').empty()
+                // sculpts exist - parse and display them
+                $.each(sculptlist, function(key, value) {
+                    var sculptKey = key;
+
+                    if (value.parent) {
+                        attachSculpt(value, false, true)
+                    } else {
+                        attachSculpt(value)
+                    }
+
+
+                })
+            }
+        }
+
+        function fetchSculpts(url) {
+            console.log("fetching...")
+            var fetchurl;
+
+            if (!url) {
+                fetchurl = initialURL
+            } else {
+                fetchurl = url
+            }
+
+
+
+            $.ajax({
+                url: fetchurl,
+                data: {
+                    "q": query
+                },
+                method: "GET",
+                success: function(data) {
+                    // console.log(data)
+                    sculptlist = data.results
+
+                    if (data.next) {
+                        nextSculptUrl = data.next
+                    } else {
+                        $('#loadmore').css('display', 'none')
+                    }
+                    parseSculpts()
+                    updateHashLinks()
+                },
+                error: function(data) {
+                    console.log("error")
+                    console.log(data)
+                }
+            })
+        }
+
+        function fetchSingle(fetchOneId) {
+            
+            var fetchDetailUrl = '/api/sculpt/' + fetchOneId + '/';
+
+
+            $.ajax({
+                url: fetchDetailUrl,
+                
+                method: "GET",
+                success: function(data) {
+                    //console.log(data)
+                    sculptlist = data.results
+
+                    // if (data.next) {
+                    //     nextSculptUrl = data.next
+                    // } else {
+                    //     $('#loadmore').css('display', 'none')
+                    // }
+                    parseSculpts()
+                    updateHashLinks()
+                },
+                error: function(data) {
+                    console.log("error")
+                    console.log(data)
+                }
+            })
+        }
+
+
+
+        if (fetchOneId) {
+            fetchSingle(fetchOneId);
+        } else {
+            fetchSculpts();
+        }
+
+
+
+        $('#loadmore').click(function(event) {
+            event.preventDefault()
+
+            if (nextSculptUrl) {
+                fetchSculpts(nextSculptUrl)
+            }
+            // load more items
+
+        })
+
+        
+
+
+
+        $(".sculpt-form").submit(function(event) {
+            event.preventDefault()
+            var this_ = $(this)
+            
+            var formData = new FormData(document.querySelector(".sculpt-form"));
+
+            // var csrf_token = $('[name="csrfmiddlewaretoken"]').attr('value');
+            
+            //console.log(formData)
+            $.ajax({
+                url: "/api/sculpt/create/",
+                data: formData,
+                // headers:{"X-CSRFToken": csrf_token},
+                type: "POST",
+                processData: false, // tell jQuery not to process the data
+                contentType: false, // tell jQuery not to set contentType
+                
+                success: function(data) {
+                    // console.log(data)
+                    this_.find("input[type=text], textarea").val("")
+                    this_.find("input[type=file]").val(null)
+                    attachSculpt(data, true)
+                    updateHashLinks()
+                    // fetchSculpts();
+                    // sculptList = data
+                    // parseSculpts()
+                },
+                error: function(data) {
+                    
+                    console.log("error")
+                    console.log(data)
+                }
+            })
+            // formData.append('image', $('#id_image').prop('files')[0]);
+            // formData.append('text', $('#id_content').val());
+            console.log(formData)
+        })
+
+
+        $(".sculpt-modal-form").submit(function(event) {
+            event.preventDefault()
+            var this_ = $(this)
+            
+            var formData = new FormData(document.querySelector(".sculpt-modal-form"));
+
+            // var csrf_token = $('[name="csrfmiddlewaretoken"]').attr('value');
+            
+            //console.log(formData)
+            $.ajax({
+                url: "/api/sculpt/create/",
+                data: formData,
+                // headers:{"X-CSRFToken": csrf_token},
+                type: "POST",
+                processData: false, // tell jQuery not to process the data
+                contentType: false, // tell jQuery not to set contentType
+                
+                success: function(data) {
+                    // console.log(data)
+                    this_.find("input[type=text], textarea").val("")
+                    this_.find("input[type=file]").val(null)
+                    attachSculpt(data, true)
+                    updateHashLinks()
+                    $("#replyModal").modal("hide")
+                    // fetchSculpts();
+                    // sculptList = data
+                    // parseSculpts()
+                },
+                error: function(data) {
+                    
+                    console.log("error")
+                    console.log(data)
+                }
+            })
+            // formData.append('image', $('#id_image').prop('files')[0]);
+            // formData.append('text', $('#id_content').val());
+            console.log(formData)
+        })
+
+       
+
+
+
+
+}
+
+
+
+    </script>
+
+
+
+
+
+<script type="text/javascript">
+    
     $(document).ready(function() {
         loadSculptContainer("sculpt-container")
     });
-</script> {% endblock script %} 
+</script>  
 
 
-{% block content %}
-
-<div class="row">
-	<div class="col-sm-3 col-xs-12" >
-		<h1>{{ object.username }}</h1>
-		<hr>
-		<p>followers: {{ object.followed_by.all.count }} </p>
-		<p><a class="btn btn-link" href="{{ object.profile.get_follow_url }}">
-			{% if following %}Unfollow{% else %}Follow{% endif %}
-
-		</a></p>
-
-<h1>Following <small>{{ object.profile.get_following.count }}</small></h1>
-
-	{% for user in object.profile.get_following %}
-
-		<a href='/{{ user.username }}'>{{ user.username }}</a> <br/>
-
-		{% empty %}
-		<h4>Not Following Any Users </h4>
-
-	{% endfor %}
-
-
-	<hr>
-	<h1>Followed By</h1>
-
-	{% for profile in object.followed_by.all %}
-
-		<a href='/{{ profile.user.username }}'>{{ profile.user.username }}</a> <br/>
-
-		{% empty %}
-		<h4>Not Followed by Any Users </h4>
-
-	{% endfor %}
-
-
-	<hr>
-	<h1>Recommended Users</h1>
-	{% recommended request.user %}
-	
-
-
-		
-</div>
-<div class="col-sm-9 col-xs-12"  >
-	<h1>Sculpts</h1>
-
-	<div id="sculpt-container" data-url='/api/{{ object.username }}/sculpt/'> </div>
-        <a href="#" id='loadmore'>Load More Sculpts</a>
-
-
-
-
-	<hr>
-	
-
-	<!-- <pre>{{ object.content }}</pre><br>
-	{% if object.image %}
-				<img src="{{ object.image.url }}" height="200px"  /><br>
-			{% endif %}
-	 
-
-{{ object.timestamp }} | {{ object.timestamp|timesince }}<br> -->
-
-</div>
-
-
-
-
-
-
-
-{% endblock content %}
+  
+  </body>
+</html>

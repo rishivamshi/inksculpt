@@ -1,4 +1,4 @@
-from django.contrib.auth.mixins import LoginRequiredMixin #14
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin #14
 from django.db.models import Q #19
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse #17
@@ -63,10 +63,13 @@ class SculptUpdateView(LoginRequiredMixin, UserOwnerMixin, UpdateView):
 
 
 #delete
-class SculptDeleteView(LoginRequiredMixin,UserOwnerMixin, DeleteView):
+class SculptDeleteView(LoginRequiredMixin, DeleteView):
 	model = Sculpt
 	template_name = 'sculpts/delete_confirm.html' # delete view template
 	success_url = reverse_lazy("sculpt:list") #/sculpt/list
+	def get_queryset(self):
+		qs = super(SculptDeleteView, self).get_queryset()
+		return qs.filter(user = self.request.user)
 
 
 #retrieve
