@@ -5,7 +5,55 @@
 		[
 			[
 				"scu",
-				"sculptImage"
+				"sculptContainer"
+			],
+			[
+				"pre",
+				"prepend"
+			],
+			[
+				"res",
+				"resculpt"
+			],
+			[
+				"pag",
+				"pagination"
+			],
+			[
+				"pare",
+				"parent_id_null"
+			],
+			[
+				"par",
+				"parent_obj"
+			],
+			[
+				"paret",
+				"parent_id_null"
+			],
+			[
+				"parent_id",
+				"parent_id_null"
+			],
+			[
+				"ex",
+				"extra"
+			],
+			[
+				"Sc",
+				"Sculpt"
+			],
+			[
+				"get",
+				"get_children"
+			],
+			[
+				"co",
+				"count"
+			],
+			[
+				"repl",
+				"replySculptAdder"
 			],
 			[
 				"sc",
@@ -32,16 +80,8 @@
 				"username"
 			],
 			[
-				"pre",
-				"pre"
-			],
-			[
 				"timeS",
 				"timeSince"
-			],
-			[
-				"get",
-				"get"
 			],
 			[
 				"cle",
@@ -96,10 +136,6 @@
 				"permission_classes"
 			],
 			[
-				"repl",
-				"reply-container"
-			],
-			[
 				"date",
 				"date_display"
 			],
@@ -110,14 +146,6 @@
 			[
 				"parent",
 				"parent"
-			],
-			[
-				"pare",
-				"parent"
-			],
-			[
-				"res",
-				"results"
 			],
 			[
 				"qs",
@@ -198,10 +226,6 @@
 			[
 				"resculpt",
 				"resculptBtn"
-			],
-			[
-				"co",
-				"console"
 			],
 			[
 				"fun",
@@ -338,10 +362,6 @@
 			[
 				"in",
 				"input\tTag"
-			],
-			[
-				"Sc",
-				"SculptUpdateView"
 			],
 			[
 				"log",
@@ -494,26 +514,6 @@
 			[
 				"load",
 				"loadPoemaContainer"
-			],
-			[
-				"repoema",
-				"repoemaBtn"
-			],
-			[
-				"fetc",
-				"fetchOneId"
-			],
-			[
-				"conten",
-				"content"
-			],
-			[
-				"tex",
-				"text"
-			],
-			[
-				"Rep",
-				"Reply"
 			]
 		]
 	},
@@ -529,10 +529,28 @@
 			}
 		},
 		{
+			"file": "src/sculpts/templates/sculpts/featured.html",
+			"settings":
+			{
+				"buffer_size": 23861,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
 			"file": "src/sculpts/api/views.py",
 			"settings":
 			{
-				"buffer_size": 5280,
+				"buffer_size": 5548,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "src/sculpts/api/pagination.py",
+			"settings":
+			{
+				"buffer_size": 641,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -544,15 +562,6 @@
 				"buffer_size": 7165,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/sculpts/templates/sculpts/featured.html",
-			"settings":
-			{
-				"buffer_size": 33617,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
 			}
 		},
 		{
@@ -603,7 +612,8 @@
 		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/api",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/templates",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/templates/sculpts",
-		"/D/Work/github_projects/inksculpt/inksculpt/src/static-storage"
+		"/D/Work/github_projects/inksculpt/inksculpt/src/static-storage",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/templates"
 	],
 	"file_history":
 	[
@@ -724,7 +734,7 @@
 	],
 	"find":
 	{
-		"height": 40.0
+		"height": 41.0
 	},
 	"find_in_files":
 	{
@@ -738,6 +748,11 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"replySculptContainer",
+			"sculptReplyContainer",
+			"sculptContainer",
+			"prepend",
+			"resculpt",
 			"sculpt-container",
 			"hover",
 			"page-content",
@@ -773,7 +788,7 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -799,27 +814,57 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 624.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "src/sculpts/api/views.py",
+					"file": "src/sculpts/templates/sculpts/featured.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 5280,
+						"buffer_size": 23861,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2168,
-								2189
+								7851,
+								7809
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 3085.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "src/sculpts/api/views.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5548,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2953,
+								2953
 							]
 						],
 						"settings":
@@ -828,14 +873,42 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 728.0,
+						"translation.y": 572.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "src/sculpts/api/pagination.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 641,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								198,
+								231
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 4,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
+					"buffer": 4,
 					"file": "src/sculpts/views.py",
 					"semi_transient": false,
 					"settings":
@@ -864,37 +937,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "src/sculpts/templates/sculpts/featured.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 33617,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2860,
-								2776
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 654.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
+					"buffer": 5,
 					"file": "src/sculpts/urls.py",
 					"semi_transient": false,
 					"settings":
@@ -920,7 +963,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 5,
 					"type": "text"
 				}
 			]
@@ -928,7 +971,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 22.0
+		"height": 29.0
 	},
 	"input":
 	{
@@ -965,7 +1008,7 @@
 	"project": "inksculpt.sublime-project",
 	"replace":
 	{
-		"height": 72.0
+		"height": 54.0
 	},
 	"save_all_on_build": true,
 	"select_file":

@@ -6,11 +6,15 @@ from rest_framework import permissions #22
 from sculpts.models   import Sculpt #2
 
 from .pagination 	import StandardResultsPagination #24
+from .pagination import StandardResultsFeaturedPagination 
 from .serializers     import SculptModelSerializer #1
 
 
 from rest_framework.views import APIView 
 from rest_framework.response import Response 
+
+
+from itertools import chain
 
 
 class LikeToggleAPIView(APIView):
@@ -63,9 +67,12 @@ class SculptDetailAPIView(generics.ListAPIView):
 		sculpt_id = self.kwargs.get("pk")
 		# print(sculpt_id)
 		qs = Sculpt.objects.filter(pk = sculpt_id)
+		#print(qs)
 		if qs.exists() and qs.count() == 1:
 			parent_obj = qs.first()
+			# print(parent_obj)
 			qs1 = parent_obj.get_children()
+			
 			qs = (qs | qs1).distinct().extra(select = {"parent_id_null": 'parent_id IS NULL'})
 
 		return qs.order_by("-parent_id_null", '-timestamp')
@@ -74,19 +81,27 @@ class SculptDetailAPIView(generics.ListAPIView):
 class SculptFeaturedAPIView(generics.ListAPIView):
 	queryset = Sculpt.objects.all()
 	serializer_class = SculptModelSerializer
-	pagination_class = StandardResultsPagination
+	pagination_class = StandardResultsFeaturedPagination
 	permission_classes = [permissions.AllowAny] 
 	
 	def get_queryset(self, *args, **kwargs):
-		# sculpt_id = self.kwargs.get("pk")
+		sculpt_id = self.kwargs.get("pk")
 		# print(sculpt_id)
-		qs = Sculpt.objects.filter(featured = True)
-		# if qs.exists() and qs.count() == 1:
-		# 	parent_obj = qs.first()
-		# 	qs1 = parent_obj.get_children()
-		# 	qs = (qs | qs1).distinct().extra(select = {"parent_id_null": 'parent_id IS NULL'})
+		qs = Sculpt.objects.filter(featured = True) 
+		
+		if qs.exists():
+			qs2 = Sculpt.objects.none()
+			for i in range(qs.count()):
 
-		return qs
+				parent_obj = qs[i]
+				
+				qs1 = parent_obj.get_children()
+				qs3 = Sculpt.objects.filter(pk = parent_obj.id)
+				qs3 = (qs3 | qs1).distinct().extra(select = {"parent_id_null": 'parent_id IS NULL'})
+				qs2 = list(chain(qs2, qs3))
+			
+
+		return qs2
 
 
 

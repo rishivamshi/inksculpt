@@ -7,7 +7,10 @@ class StandardResultsPagination(pagination.PageNumberPagination): #2
 	max_page_size = 1000
 
 
-
+class StandardResultsFeaturedPagination(pagination.PageNumberPagination): #2
+	page_size = 60 #3
+	page_size_query_param = 'page_size'
+	max_page_size = 1000
 
 
 
