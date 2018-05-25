@@ -1,4 +1,4 @@
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin #14
+from django.contrib.auth.mixins import LoginRequiredMixin #14
 from django.db.models import Q #19
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse #17
@@ -113,6 +113,13 @@ class SculptListView(LoginRequiredMixin, ListView): #7
 class SculptFeaturedListView(LoginRequiredMixin, ListView): #7
 	template_name = "sculpts/featured.html"
 	queryset = Sculpt.objects.all() 
+
+
+
+
+
+
+
 
 
 

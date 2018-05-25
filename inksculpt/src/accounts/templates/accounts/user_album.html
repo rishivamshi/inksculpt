@@ -14,6 +14,14 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/ionicons.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.min.css' %}">
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i" rel="stylesheet">
+    <style>
+        .oneeee{
+            border-style: solid;
+            border-width: 5px
+        }
+    
+    
+    </style>
     <title>{% block title %} Inksculpt {% endblock title %}</title>
   </head>
 
@@ -41,9 +49,9 @@
               </div>
               <div class="col-md-9">
                 <ul class="list-inline profile-menu">
-                  <li><a href="http://127.0.0.1:8000/rishivamshi/" class="active">Timeline</a></li>
+                  <li><a href="http://127.0.0.1:8000/rishivamshi/" >Timeline</a></li>
                   <li><a href="timeline-about.html">About</a></li>
-                  <li><a href="http://127.0.0.1:8000/rishivamshi/album/">Album</a></li>
+                  <li><a href="http://127.0.0.1:8000/rishivamshi/album/" class="active">Album</a></li>
                   <li><a href="timeline-friends.html">Friends</a></li>
                 </ul>
                 <ul class="follow-me list-inline">
@@ -63,9 +71,9 @@
             </div>
             <div class="mobile-menu">
               <ul class="list-inline">
-                <li><a href="http://127.0.0.1:8000/rishivamshi/" class="active">Timeline</a></li>
+                <li><a href="http://127.0.0.1:8000/rishivamshi/" >Timeline</a></li>
                 <li><a href="timeline-about.html">About</a></li>
-                <li><a href="http://127.0.0.1:8000/rishivamshi/album/">Album</a></li>
+                <li><a href="http://127.0.0.1:8000/rishivamshi/album/" class="active">Album</a></li>
                 <li><a href="timeline-friends.html">Friends</a></li>
               </ul>
               <button class="btn-primary">{% if following %}Unfollow{% else %}Follow{% endif %}</button>
@@ -82,17 +90,17 @@
             <div class="col-md-3"></div>
             <div class="col-md-7">
 
-              <!-- Post Create Box
-              ================================================= -->
-              <div class="create-post">
-                <div class="row">
-                  
-                  
-                </div>
-              </div><!-- Post Create Box End-->
+             
 
-              <div id="sculpt-container" data-url='/api/{{ object.username }}/sculpt/'> </div>
-        <a href="#" id='loadmore'>Load More Sculpts</a>
+
+
+            	<ul class="album-photos">
+              
+              		<div id="sculpt-container" data-url='/api/{{ object.username }}/sculpt/album/'> </div>
+        			<a href="#" id='loadmore'>Load More Sculpts</a>
+				
+				</ul>
+
 
 
 
@@ -292,65 +300,34 @@
             if (resculpt && sculptValue.parent && !isReply) {
                 var mainSculpt = sculptValue.parent
                 
-                    if (sculptImage == null) {
-
-                        sculptContainer.append("<div class='post-content'><div class='post-date hidden-xs hidden-sm'><h5>"+ sculptUser.username +"</h5><p class='text-grey' style='font-size: 9'>"+ dateDisplay +"</p></div><div class='post-container'><img src='http://placehold.it/300x300' alt='user' class='profile-photo-md pull-left' /><div class='post-detail'><div class='user-info'><h5><a href='"+ sculptUser.url +"' class='profile-link'>" + sculptUser.username  + "</a> <span class='following'>following</span></h5><p class='text-muted'>Reposted <a href='"+ mainSculpt.user.url +"'>"+ mainSculpt.user.username + "</a>'s post about <span title='" + dateDisplay + "' style=' color:#00897B;'> "+ timeSince +"</span></p></div><div class='reaction'><a href = '#' class='btn text-green sculpt-like' data-id='" + sculptValue.id +"'><i class='icon ion-thumbsup'></i>" + verb + " ("+ sculptValue.likes +")</a></div><div class='line-divider'></div><div class='post-text'><pre class='sculptcontentclass'>" + sculptContent +"</pre></div><div class='row' style='margin-bottom: 10px'><a role='button'  class='col-lg-3 col-md-3 col-sm-3 btn' style='background-color: #00897B; color: whitesmoke' href = '/sculpt/" + sculptValue.id + "' >View</a><div class='col-lg-1 col-md-1 col-sm-1'></div><a role='button' class='sculpt-reply col-lg-3 col-md-3 col-sm-3 btn' style='background-color: #00897B; color: whitesmoke' data-user ='"+ sculptUser.username +"' data-id='"+ replyId + "' >Comment</a><div class='col-lg-1 col-md-1 col-sm-1'></div><a role='button' class=' resculptBtn col-lg-3 col-md-3 col-sm-3 btn' style='background-color: #00897B; color: whitesmoke' href = '/sculpt/" + sculptValue.id + "/resculpt/' >Repost</a><div class='col-lg-1 col-md-1 col-sm-1'></div></div></div></div></div>")
-                    
-
-                    } else {
-
-
-                        sculptContainer.append("<div class='post-content'><div class='post-date hidden-xs hidden-sm'><h5>"+ sculptUser.username +"</h5><p class='text-grey' style='font-size: 9'>"+ dateDisplay +"</p></div><img src='" + mainSculpt.image + "' alt='post-image' class='img-responsive post-image' /><div class='post-container'><img src='http://placehold.it/300x300' alt='user' class='profile-photo-md pull-left' /><div class='post-detail'><div class='user-info'><h5><a href='"+ sculptUser.url +"' class='profile-link'>" + sculptUser.username  + "</a> <span class='following'>following</span></h5><p class='text-muted'>Reposted <a href='"+ mainSculpt.user.url +"'>"+ mainSculpt.user.username + "</a>'s post about <span title='" + dateDisplay + "' style=' color:#00897B;'> "+ timeSince +"</span></p></div><div class='reaction'><a href = '#' class='btn text-green sculpt-like' data-id='" + sculptValue.id +"'><i class='icon ion-thumbsup'></i>" + verb + " ("+ sculptValue.likes +")</a></div><div class='line-divider'></div><div class='post-text'><pre class='sculptcontentclass'>" + sculptContent +"</pre></div><div class='row' style='margin-bottom: 10px'><a role='button'  class='col-lg-3 col-md-3 col-sm-3 btn' style='background-color: #00897B; color: whitesmoke' href = '/sculpt/" + sculptValue.id + "' >View</a><div class='col-lg-1 col-md-1 col-sm-1'></div><a role='button' class='sculpt-reply col-lg-3 col-md-3 col-sm-3 btn' style='background-color: #00897B; color: whitesmoke' data-user ='"+ sculptUser.username +"' data-id='"+ replyId + "' >Comment</a><div class='col-lg-1 col-md-1 col-sm-1'></div><a role='button' class=' resculptBtn col-lg-3 col-md-3 col-sm-3 btn' style='background-color: #00897B; color: whitesmoke' href = '/sculpt/" + sculptValue.id + "/resculpt/' >Repost</a><div class='col-lg-1 col-md-1 col-sm-1'></div></div></div></div></div>")
                     
 
 
-                    }
+                        
+                    
+                        sculptContainer.append("<li ><div class='img-wrapper' data-toggle='modal' data-target='.photo-"+ sculptValue.id +"'><img src='"+ mainSculpt.image +"' alt='photo' /></div><div class='modal fade photo-"+ sculptValue.id +"' tabindex='-1' role='dialog' aria-hidden='true'><div class='modal-dialog modal-lg'><div class='modal-content'><img src='"+ mainSculpt.image +"' alt='photo' /></div></div></div></li>")
+
+                    
                 }
             
 
-            else if (isReply && sculptValue.parent) {
-
-                var mainSculpt = sculptValue.parent
-                
-                    
-                        
-                        
-
-                        sculptContainer.append("<div class='post-content'><div class='post-date hidden-xs hidden-sm'><h5>"+ sculptUser.username +"</h5><p class='text-grey' style='font-size: 9'>"+ dateDisplay +"</p></div><div class='post-container'><img src='http://placehold.it/300x300' alt='user' class='profile-photo-md pull-left' /><div class='post-detail'><div class='user-info'><h5><a href='"+ sculptUser.url +"' class='profile-link'>" + sculptUser.username  + "</a> <span class='following'>following</span></h5><p class='text-muted'>Commented on <a href='"+ mainSculpt.user.url +"'>"+ mainSculpt.user.username + "</a>'s post about <span title='" + dateDisplay + "' style=' color:#00897B;'> "+ timeSince +"</span></p></div><div class='reaction'><a href = '#' class='btn text-green sculpt-like' data-id='" + sculptValue.id +"'><i class='icon ion-thumbsup'></i>" + verb + " ("+ sculptValue.likes +")</a></div><div class='line-divider'></div><div class='post-text'><pre class='sculptcontentclass'>" + sculptContent +"</pre></div><div class='row' style='margin-bottom: 10px'><a role='button'  class='col-lg-3 col-md-3 col-sm-3 btn' style='background-color: #00897B; color: whitesmoke' href = '/sculpt/" + sculptValue.id + "' >View</a><div class='col-lg-1 col-md-1 col-sm-1'></div><a role='button' class='sculpt-reply col-lg-3 col-md-3 col-sm-3 btn' style='background-color: #00897B; color: whitesmoke' data-user ='"+ sculptUser.username +"' data-id='"+ replyId + "' >Comment</a><div class='col-lg-1 col-md-1 col-sm-1'></div><a role='button' class=' resculptBtn col-lg-3 col-md-3 col-sm-3 btn' style='background-color: #00897B; color: whitesmoke' href = '/sculpt/" + sculptValue.id + "/resculpt/' >Repost</a><div class='col-lg-1 col-md-1 col-sm-1'></div></div></div></div></div>")
-
-
-                    
-                    
-               
             
-            }
 
              else {
                 
-                    if (sculptImage == null) {
+                    
+                        
+                        
+                        
 
+                        
 
-                       sculptContainer.append("<div class='post-content'><div class='post-date hidden-xs hidden-sm'><h5>"+ sculptUser.username +"</h5><p class='text-grey' style='font-size: 9'>"+ dateDisplay +"</p></div><div class='post-container'><img src='http://placehold.it/300x300' alt='user' class='profile-photo-md pull-left' /><div class='post-detail'><div class='user-info'><h5><a href='"+ sculptUser.url +"' class='profile-link'>" + sculptUser.username  + "</a> <span class='following'>following</span></h5><p class='text-muted'>Published a photo about <span title='" + dateDisplay + "' style=' color:#00897B;'> "+ timeSince +"</span></p></div><div class='reaction'><a href = '#' class='btn text-green sculpt-like' data-id='" + sculptValue.id +"'><i class='icon ion-thumbsup'></i>" + verb + " ("+ sculptValue.likes +")</a></div><div class='line-divider'></div><div class='post-text'><pre class='sculptcontentclass'>" + sculptContent +"</pre></div><div class='row' style='margin-bottom: 10px'><a role='button'  class='col-lg-3 col-md-3 col-sm-3 btn' style='background-color: #00897B; color: whitesmoke' href = '/sculpt/" + sculptValue.id + "' >View</a><div class='col-lg-1 col-md-1 col-sm-1'></div><a role='button' class='sculpt-reply col-lg-3 col-md-3 col-sm-3 btn' style='background-color: #00897B; color: whitesmoke' data-user ='"+ sculptUser.username +"' data-id='"+ replyId + "' >Comment</a><div class='col-lg-1 col-md-1 col-sm-1'></div><a role='button' class=' resculptBtn col-lg-3 col-md-3 col-sm-3 btn' style='background-color: #00897B; color: whitesmoke' href = '/sculpt/" + sculptValue.id + "/resculpt/' >Repost</a><div class='col-lg-1 col-md-1 col-sm-1'></div></div></div></div></div>")
-
+                        sculptContainer.append("<li ><div class='img-wrapper' data-toggle='modal' data-target='.photo-"+ sculptValue.id +"'><img src='"+ sculptImage +"' alt='photo' /></div><div class='modal fade photo-"+ sculptValue.id +"' tabindex='-1' role='dialog' aria-hidden='true'><div class='modal-dialog modal-lg'><div class='modal-content'><img src='"+ sculptImage +"' alt='photo' /></div></div></div></li>")
 
 
 
 
                     
-
-                    } else {
-                        
-                        
-                        
-
-                        sculptContainer.append("<div class='post-content'><div class='post-date hidden-xs hidden-sm'><h5>"+ sculptUser.username +"</h5><p class='text-grey' style='font-size: 9'  >"+ dateDisplay +"</p></div><img src='" + sculptImage + "' alt='post-image' class='img-responsive post-image' /><div class='post-container'><img src='http://placehold.it/300x300' alt='user' class='profile-photo-md pull-left' /><div class='post-detail'><div class='user-info'><h5><a href='"+ sculptUser.url +"' class='profile-link'>" + sculptUser.username  + "</a> <span class='following'>following</span></h5><p class='text-muted'>Published a photo about <span title='" + dateDisplay + "' style=' color:#00897B;'> "+ timeSince +"</span></p></div><div class='reaction'><a href = '#' class='btn text-green sculpt-like' data-id='" + sculptValue.id +"'><i class='icon ion-thumbsup'></i>" + verb + " ("+ sculptValue.likes +")</a></div><div class='line-divider'></div><div class='post-text'><pre class='sculptcontentclass'>" + sculptContent +"</pre></div><div class='row' style='margin-bottom: 10px'><a role='button'  class='col-lg-3 col-md-3 col-sm-3 btn' style='background-color: #00897B; color: whitesmoke' href = '/sculpt/" + sculptValue.id + "' >View</a><div class='col-lg-1 col-md-1 col-sm-1'></div><a role='button' class='sculpt-reply col-lg-3 col-md-3 col-sm-3 btn' style='background-color: #00897B; color: whitesmoke' data-user ='"+ sculptUser.username +"' data-id='"+ replyId + "' >Comment</a><div class='col-lg-1 col-md-1 col-sm-1'></div><a role='button' class=' resculptBtn col-lg-3 col-md-3 col-sm-3 btn' style='background-color: #00897B; color: whitesmoke' href = '/sculpt/" + sculptValue.id + "/resculpt/' >Repost</a><div class='col-lg-1 col-md-1 col-sm-1'></div></div></div></div></div>")
-
-
-
-
-
-
-                    }
 
                 
             }

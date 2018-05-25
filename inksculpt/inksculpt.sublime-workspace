@@ -4,6 +4,18 @@
 		"selected_items":
 		[
 			[
+				"c",
+				"class"
+			],
+			[
+				"sculptI",
+				"sculptId"
+			],
+			[
+				"USer",
+				"User"
+			],
+			[
 				"Scu",
 				"SculptDetailView"
 			],
@@ -340,10 +352,6 @@
 				"serializers"
 			],
 			[
-				"c",
-				"content"
-			],
-			[
 				"serial",
 				"serializers"
 			],
@@ -448,10 +456,6 @@
 				"UserRegisterView"
 			],
 			[
-				"USer",
-				"UserProfile"
-			],
-			[
 				"follo",
 				"following"
 			],
@@ -510,10 +514,6 @@
 			[
 				"lo",
 				"log"
-			],
-			[
-				"a",
-				"ajax"
 			]
 		]
 	},
@@ -554,23 +554,32 @@
 	[
 		"/D/Work/github_projects/inksculpt/inksculpt",
 		"/D/Work/github_projects/inksculpt/inksculpt/src",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/templates",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/templates/accounts",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/inksculpt",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/api",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/templates",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/templates/sculpts",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/templates"
 	],
 	"file_history":
 	[
-		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/templates/sculpts/search_form.html",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/api/views.py",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/templates/accounts/user_album.html",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/templates/accounts/user_detail.html",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/urls.py",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/views.py",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/api/urls.py",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/views.py",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/templates/sculpts/search_form.html",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/templates/sculpts/detail_view.html",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/templates/navbar.html",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/templates/base.html",
-		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/views.py",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/templates/sculpts/delete_confirm.html",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/mixins.py",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/models.py",
-		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/views.py",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/forms.py",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/inksculpt/urls.py",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/inksculpt/settings/base.py",
@@ -581,13 +590,11 @@
 		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/api/serializers.py",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/urls.py",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/api/pagination.py",
-		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/api/views.py",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/templates/sculpts/featured.html",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/api/urls.py",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/templates/sculpts/list_view.html",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/templates/registration/login.html",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/templates/accounts/user_register_form.html",
-		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/urls.py",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/templates/accounts/snippets/recommend.html",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/templatetags/recommended.py",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/hashtags/api/views.py",
@@ -598,7 +605,6 @@
 		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/templates/sculpts/form.html",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/templates/reply-modal.html",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/templates/newsfeed.html",
-		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/api/urls.py",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/hashtags/models.py",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/hashtags/signals.py",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/admin.py",
@@ -680,7 +686,7 @@
 	],
 	"find":
 	{
-		"height": 23.0
+		"height": 40.0
 	},
 	"find_in_files":
 	{
@@ -694,6 +700,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"reverse",
 			"replySculptContainer",
 			"sculptReplyContainer",
 			"sculptContainer",

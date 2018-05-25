@@ -5,12 +5,13 @@ from django.shortcuts import render
 from django.shortcuts import get_object_or_404 #4
 from django.shortcuts import redirect #6
 from django.views import View #5
-from django.views.generic import DetailView #1
+from django.views.generic import DetailView, ListView #1
 
 from django.views.generic.edit import FormView
 from .forms import UserRegisterForm
 from .models import UserProfile #9
 
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 
@@ -39,7 +40,6 @@ class UserRegisterView(FormView):
 class UserDetailView(DetailView):	#2
 	template_name = 'accounts/user_detail.html'
 	queryset = User.objects.all()
-
 	def get_object(self):
 		return get_object_or_404(User, username__iexact = self.kwargs.get("username"))
 
@@ -61,6 +61,24 @@ class UserFollowView(View): #7
 		return redirect("profiles:detail", username = username)
 
 
+
+
+class UserAlbumListView(DetailView): #7
+	template_name = 'accounts/user_album.html'
+	queryset = User.objects.all()
+	def get_object(self):
+		return get_object_or_404(User, username__iexact = self.kwargs.get("username"))
+
+
+	def get_context_data(self, *args, **kwargs):
+		context = super(UserAlbumListView, self).get_context_data(*args, **kwargs)
+		following = UserProfile.objects.is_following(self.request.user, self.get_object())
+		context['following'] = following
+		context['recommended'] = UserProfile.objects.recommended(self.request.user)
+
+		return context
+
+	
 
 '''
 Comments - 

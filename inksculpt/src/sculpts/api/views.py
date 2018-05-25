@@ -105,6 +105,25 @@ class SculptFeaturedAPIView(generics.ListAPIView):
 
 
 
+class SculptUserAlbumAPIView(generics.ListAPIView):
+	queryset = Sculpt.objects.all()
+	serializer_class = SculptModelSerializer
+	pagination_class = StandardResultsFeaturedPagination
+	permission_classes = [permissions.AllowAny] 
+	
+	def get_queryset(self, *args, **kwargs):
+		sculpt_id = self.kwargs.get("pk")
+		# print(sculpt_id)
+		qs = Sculpt.objects.exclude(image = '') 
+		
+		
+			
+
+		return qs
+
+
+
+
 
 class SculptListAPIView(generics.ListAPIView):
 	serializer_class = SculptModelSerializer
@@ -143,6 +162,9 @@ class SculptListAPIView(generics.ListAPIView):
 				)
 
 		return qs #20
+
+
+
 
 
 '''
