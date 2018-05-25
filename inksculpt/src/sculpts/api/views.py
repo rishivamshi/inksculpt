@@ -106,15 +106,18 @@ class SculptFeaturedAPIView(generics.ListAPIView):
 
 
 class SculptUserAlbumAPIView(generics.ListAPIView):
-	queryset = Sculpt.objects.all()
+	# queryset = Sculpt.objects.all()
 	serializer_class = SculptModelSerializer
 	pagination_class = StandardResultsFeaturedPagination
 	permission_classes = [permissions.AllowAny] 
 	
-	def get_queryset(self, *args, **kwargs):
-		sculpt_id = self.kwargs.get("pk")
-		# print(sculpt_id)
-		qs = Sculpt.objects.exclude(image = '') 
+	def get_queryset(self, *args, **kwargs): #18
+		requested_user = self.kwargs.get("username")
+		if requested_user:
+
+
+			qs = Sculpt.objects.filter(user__username = requested_user).order_by("-timestamp").exclude(image='')
+	 
 		
 		
 			

@@ -41,9 +41,9 @@
               </div>
               <div class="col-md-9">
                 <ul class="list-inline profile-menu">
-                  <li><a href="http://127.0.0.1:8000/rishivamshi/" class="active">Timeline</a></li>
+                  <li><a href="http://127.0.0.1:8000/{{ object.username }}/" class="active">Timeline</a></li>
                   <li><a href="timeline-about.html">About</a></li>
-                  <li><a href="http://127.0.0.1:8000/rishivamshi/album/">Album</a></li>
+                  <li><a href="http://127.0.0.1:8000/{{ object.username }}/album/">Album</a></li>
                   <li><a href="timeline-friends.html">Friends</a></li>
                 </ul>
                 <ul class="follow-me list-inline">
@@ -63,9 +63,9 @@
             </div>
             <div class="mobile-menu">
               <ul class="list-inline">
-                <li><a href="http://127.0.0.1:8000/rishivamshi/" class="active">Timeline</a></li>
+                <li><a href="http://127.0.0.1:8000/{{ object.username }}/" class="active">Timeline</a></li>
                 <li><a href="timeline-about.html">About</a></li>
-                <li><a href="http://127.0.0.1:8000/rishivamshi/album/">Album</a></li>
+                <li><a href="http://127.0.0.1:8000/{{ object.username }}/album/">Album</a></li>
                 <li><a href="timeline-friends.html">Friends</a></li>
               </ul>
               <button class="btn-primary">{% if following %}Unfollow{% else %}Follow{% endif %}</button>
