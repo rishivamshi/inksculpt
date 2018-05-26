@@ -7,8 +7,13 @@ User = get_user_model()
 class UserRegisterForm(forms.Form):
 	username = forms.CharField()
 	email = forms.EmailField()
+	first_name = forms.CharField(max_length = 30)
+	last_name = forms.CharField(max_length = 30)
 	password = forms.CharField(widget = forms.PasswordInput)
 	password2 = forms.CharField(label ='Confirm Password',  widget = forms.PasswordInput)
+
+	
+			
 
 	def clean_password2(self):
 		password = self.cleaned_data.get('password')
