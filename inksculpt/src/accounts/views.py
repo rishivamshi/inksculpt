@@ -20,7 +20,7 @@ User = get_user_model()
 # Create your views here.
 
 class UserRegisterView(FormView):
-	template_name = 'accounts/user_register_form.html'
+	template_name = 'registration/user_register_form.html'
 	form_class = UserRegisterForm
 	success_url = '/login'
 

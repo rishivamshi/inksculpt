@@ -105,6 +105,24 @@ class SculptFeaturedAPIView(generics.ListAPIView):
 
 
 
+class SculptFeaturedHomepageAPIView(generics.ListAPIView):
+	queryset = Sculpt.objects.all()
+	serializer_class = SculptModelSerializer
+	pagination_class = StandardResultsFeaturedPagination
+	permission_classes = [permissions.AllowAny] 
+	
+	def get_queryset(self, *args, **kwargs):
+		
+		qs = Sculpt.objects.filter(featured = True) 
+		
+		
+		
+
+		return qs[:3]
+
+
+
+
 class SculptUserAlbumAPIView(generics.ListAPIView):
 	# queryset = Sculpt.objects.all()
 	serializer_class = SculptModelSerializer
