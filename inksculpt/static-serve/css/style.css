@@ -43,15 +43,64 @@
     - Scroll Down Arrow
     - Preloader
 ==================================================*/
+ .dropbtn {
+    
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {background-color: #ddd}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: black;
+}
+        
+
+
+
+
+
+
+
+
+
+
 .slider-size {
   height: 350px; 
 }
 
 .carousel-fixed-height {
-  border-radius: 20px;
+  border-radius: 7px;
     width: 100%;
   
-  margin-bottom: 20px;
+  margin-bottom: 40px;
   overflow: hidden;
   position: relative;
     box-shadow: 0px 10px 12px rgba(0, 0, 0, 0.4);
@@ -60,6 +109,48 @@
 .carousel-fixed-height:hover {
     box-shadow: 0px 0px 4px rgba(0, 0, 0, .5);
 }
+
+.newcontent{
+  background: linear-gradient(to bottom, rgba(39,170,225,.8), rgba(28,117,188,.8)),  no-repeat;
+  background-size: cover;
+  width: 100%;
+  min-height: 70px;
+  border-radius: 7px;
+  padding: 3.5px;
+  
+  margin-bottom: 30px;
+    box-shadow: 0px 10px 12px rgba(0, 0, 0, 0.2);
+}
+
+.newcontent:hover {
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, .5);
+}
+
+
+.newcontent h3 {
+    color: white;
+    text-align: center;
+}
+
+
+
+.suggestedusers{
+  background: linear-gradient(to bottom, rgba(39,170,225,.8), rgba(28,117,188,.8)),  no-repeat;
+  background-size: cover;
+  width: 100%;
+  min-height: 40px;
+  border-radius: 7px;
+  padding: 3.5px;
+  
+  margin-bottom: 20px;
+    
+}
+
+.suggestedusers h5 {
+    color: white;
+    text-align: center;
+}
+
 
 
 html, body {
@@ -1087,7 +1178,7 @@ ul.nav-news-feed li div::after{
   left: 0;
 }
 
-ul.nav-news-feed li a{color: #6d6e71;}
+ul.nav-news-feed li a{color: white;}
 
 ul.nav-news-feed li i{
   font-size: 18px;
@@ -1095,17 +1186,17 @@ ul.nav-news-feed li i{
   float: left;
 }
 
-ul.nav-news-feed i.ion-ios-paper{color: #8dc63f;}
+ul.nav-news-feed i.ion-ios-paper{color: white;}
 
-ul.nav-news-feed i.ion-ios-people{color: #662d91;}
+ul.nav-news-feed i.ion-ios-people{color: white;}
 
-ul.nav-news-feed i.ion-ios-people-outline{color: #ee2a7b;}
+ul.nav-news-feed i.ion-ios-people-outline{color: white;}
 
-ul.nav-news-feed i.ion-chatboxes{color: #f7941e;}
+ul.nav-news-feed i.ion-chatboxes{color: white;}
 
-ul.nav-news-feed i.ion-images{color: #1c75bc;}
+ul.nav-news-feed i.ion-images{color: white;}
 
-ul.nav-news-feed i.ion-ios-videocam{color: #9e1f63;}
+ul.nav-news-feed i.ion-ios-videocam{color: white;}
 
 /*Chat Block CSS*/
 
@@ -1177,7 +1268,7 @@ ul.online-users li span.online-dot{
 .follow-user div::after{
   content: "";
   background: none;
-  border-top: 1px solid #f1f2f2;
+  
   position: absolute;
   width: 100%;
   left: 0;
@@ -1238,7 +1329,7 @@ ul.online-users li span.online-dot{
 
 .post-content{
   background: #fff;
-  border-radius: 20px;
+  border-radius: 7px;
   width: 100%;
   
   margin-bottom: 20px;

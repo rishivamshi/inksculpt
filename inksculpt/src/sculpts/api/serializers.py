@@ -13,6 +13,7 @@ from sculpts.models import Sculpt #2
 class ParentSculptModelSerializer(serializers.ModelSerializer): 
 	user = UserDisplaySerializer(read_only=True) 
 	date_display = serializers.SerializerMethodField() 
+	
 	timesince = serializers.SerializerMethodField()
 	likes = serializers.SerializerMethodField()
 	did_like = serializers.SerializerMethodField()
@@ -46,6 +47,7 @@ class ParentSculptModelSerializer(serializers.ModelSerializer):
 		return obj.liked.all().count()
 	
 
+
 	def get_date_display(self, obj):
 		return obj.timestamp.strftime("%b %d, %Y | at %I: %M %p") 
 
@@ -63,6 +65,7 @@ class ParentSculptModelSerializer(serializers.ModelSerializer):
 class SculptModelSerializer(serializers.ModelSerializer): #3
 	parent_id = serializers.CharField(write_only = True, required = False)
 	user = UserDisplaySerializer(read_only=True) #5
+	current_user = serializers.SerializerMethodField('_user')
 	date_display = serializers.SerializerMethodField() #8
 	timesince = serializers.SerializerMethodField()
 	parent = ParentSculptModelSerializer( read_only = True )
@@ -74,7 +77,9 @@ class SculptModelSerializer(serializers.ModelSerializer): #3
 		fields = [
 		'parent_id',
 			'id',
+
 			'user',
+			'current_user',
 			'content',
 			'image',
 			'timestamp',
@@ -102,6 +107,16 @@ class SculptModelSerializer(serializers.ModelSerializer): #3
 
 	def get_likes(self, obj):
 		return obj.liked.all().count()
+
+	def _user(self,obj):
+		user = ''
+		try:
+			user = self.context['request'].user.username
+		except:
+			pass
+		return user
+	
+
 
 	def get_date_display(self, obj):
 		return obj.timestamp.strftime("%b %d, %Y | at %I: %M %p") #9
