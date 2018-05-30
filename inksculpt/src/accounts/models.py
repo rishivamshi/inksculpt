@@ -5,6 +5,11 @@ from django.conf import settings
 from django.urls import reverse_lazy
 
 from django.db.models.signals import post_save #12
+from django.core.validators import RegexValidator
+from django.core.validators import MinLengthValidator
+
+def upload_location(object, filename): #5
+	return "%s/%s/%s" %(object.user,"displaypicture", filename)
 
 
 # Create your models here.
@@ -54,12 +59,59 @@ class UserProfile(models.Model):
 	user 		= models.OneToOneField(settings.AUTH_USER_MODEL , related_name='profile') #1
 	following 	= models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True ,related_name='followed_by') #2
 
-	
+	profile_image = models.ImageField(
+				upload_to = upload_location,
+				null = True,
+				blank = True,
+				width_field = "width_profilefield",
+				height_field = "height_profilefield") # images stuff
+		
+	height_profilefield = models.IntegerField(default = 0) 
+	width_profilefield = models.IntegerField(default = 0)
+
+
+	cover_image = models.ImageField(
+				upload_to = upload_location,
+				null = True,
+				blank = True,
+				width_field = "width_coverfield",
+				height_field = "height_coverfield") # images stuff
+		
+	height_coverfield = models.IntegerField(default = 0) 
+	width_coverfield = models.IntegerField(default = 0)
+
+
+
+
+	dob = models.DateField(null = True, blank = True)
+
+	GENDER_CHOICES = (
+		('M', 'Male'),
+		('F', 'Female'),
+		('U', 'Unspecified'),
+		)
+
+	gender = models.CharField(max_length = 1, choices = GENDER_CHOICES, null = True)
+	city	= models.CharField(max_length = 140, null = True, blank = True)
+	country = models.CharField(max_length = 140, null = True, blank = True)
+	status = models.CharField(max_length = 140, null = True, blank = True)
+	phone_number = models.CharField( max_length=10, validators=[RegexValidator(r'^\d{1,10}$'),MinLengthValidator(10)], null = True, blank = True)
+
+
+
+
 
 	objects  = UserProfileManager() # UserProfile.objects.all() #5
 
+	def __str__(self):	
+		return str(self.user)
+
+
 	def __sts__(self):
 		return str(self.following.all().count()) #3
+
+	def get_profileurl(self):
+		return profile_image
 
 	def get_following(self): #8
 		users = self.following.all() # User.objects.all().exclude(username = self.user.username)

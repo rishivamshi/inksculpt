@@ -34,8 +34,16 @@
             <div class="row">
               <div class="col-md-3">
                 <div class="profile-info">
-                  <img src="http://placehold.it/300x300" alt="" class="img-responsive profile-photo" />
+
+                  {% if object.profile.profile_image %} 
+                    <img src="http://127.0.0.1:8000/media/{{ object.profile.profile_image }}" alt="" class="img-responsive profile-photo" />
+                    {% else %} 
+                    <img src="http://placehold.it/300x300" alt="" class="img-responsive profile-photo" />
+                    {% endif %}
+                  
+                  
                   <h3>{{ object.username }}</h3>
+                
                   
                   <p class="text-muted">Creative Director</p>
                 </div>
