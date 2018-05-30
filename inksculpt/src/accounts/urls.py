@@ -9,12 +9,18 @@ from django.views.generic.base import RedirectView #9
 from .views import (
 	UserDetailView, #4
 	UserFollowView, #10
-	UserAlbumListView
+	UserAlbumListView,
+	UserFollowersListView,
+	UserFollowingListView,
+	
  		)
 urlpatterns = [
 	
 
     url(r'^(?P<username>[\w.@+-]+)/album/$', UserAlbumListView.as_view(), name = 'album'),
+    url(r'^(?P<username>[\w.@+-]+)/followers/$', UserFollowersListView.as_view(), name = 'followers'),
+    url(r'^(?P<username>[\w.@+-]+)/following/$', UserFollowingListView.as_view(), name = 'following'),
+
 
     url(r'^(?P<username>[\w.@+-]+)/$', UserDetailView.as_view(), name = 'detail'), # 6  # /sculpt/1
     url(r'^(?P<username>[\w.@+-]+)/follow/$', UserFollowView.as_view(), name = 'follow'), # 6  # /sculpt/1

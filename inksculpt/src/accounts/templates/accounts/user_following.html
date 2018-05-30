@@ -1,0 +1,199 @@
+{% load static %}
+
+
+{% load recommended %}
+
+
+<html lang="en">
+  <head>
+  
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/ionicons.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.min.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i" rel="stylesheet">
+    <title>{% block title %} Inksculpt {% endblock title %}</title>
+  </head>
+
+{% include "reply-modal.html" %}
+<body>
+    	
+    {% include "navbar.html" %}
+
+    <div class="container">
+
+      <!-- Timeline
+      ================================================= -->
+      <div class="timeline">
+        <div class="timeline-cover">
+
+          <!--Timeline Menu for Large Screens-->
+          <div class="timeline-nav-bar hidden-sm hidden-xs">
+            <div class="row">
+              <div class="col-md-3">
+                <div class="profile-info">
+                  <img src="http://placehold.it/300x300" alt="" class="img-responsive profile-photo" />
+                  <h3>{{ object.username }}</h3>
+                  
+                  <p class="text-muted">Creative Director</p>
+                </div>
+              </div>
+              <div class="col-md-9">
+                <ul class="list-inline profile-menu">
+                  <li><a href="http://127.0.0.1:8000/{{ object.username }}/" >Timeline</a></li>
+                  <li><a href="timeline-about.html">About</a></li>
+                  <li><a href="http://127.0.0.1:8000/{{ object.username }}/album/">Album</a></li>
+                  <li><a href="http://127.0.0.1:8000/{{ object.username }}/following/" class="active">Following ({{ object.profile.get_following.count }})</a></li>
+                  <li><a href="http://127.0.0.1:8000/{{ object.username }}/followers/">Followers ({{ object.followed_by.all.count }})</a></li>
+                </ul>
+                <ul class="follow-me list-inline">
+                  
+
+
+                  {% if request.user.get_username != object.username %}
+                  <li><a class="btn-primary" href="{{ object.profile.get_follow_url }}">{% if following %}Unfollow{% else %}Follow{% endif %}</a></li>
+        
+               {% endif %}
+
+                </ul>
+              </div>
+            </div>
+          </div><!--Timeline Menu for Large Screens End-->
+
+          <!--Timeline Menu for Small Screens-->
+          <div class="navbar-mobile hidden-lg hidden-md">
+            <div class="profile-info">
+              <img src="http://placehold.it/300x300" alt="" class="img-responsive profile-photo" />
+              <h4>{{ object.username }}</h4>
+              <p class="text-muted">Creative Director</p>
+            </div>
+            <div class="mobile-menu">
+              <ul class="list-inline">
+                <li><a href="http://127.0.0.1:8000/{{ object.username }}/" >Timeline</a></li>
+                <li><a href="timeline-about.html">About</a></li>
+                <li><a href="http://127.0.0.1:8000/{{ object.username }}/album/">Album</a></li>
+                <li><a href="http://127.0.0.1:8000/{{ object.username }}/following/" class="active">Following ({{ object.profile.get_following.count }})</a></li>
+                <li><a href="http://127.0.0.1:8000/{{ object.username }}/followers/">Followers ({{ object.followed_by.all.count }})</a></li>
+              </ul>
+
+              {% if request.user.get_username != object.username %}
+                  <a class="btn-primary" href="{{ object.profile.get_follow_url }}">{% if following %}Unfollow{% else %}Follow{% endif %}</a>
+        
+               {% endif %}
+
+              
+            </div>
+          </div><!--Timeline Menu for Small Screens End-->
+
+        </div>
+
+
+
+        
+        <div id="page-contents">
+          <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-7">
+            	<div class="friend-list">
+            		<div class="row">
+
+            			{% for user in object.profile.get_following %}
+
+            				<div class="col-md-6 col-sm-6">
+                    <div class="friend-card">
+                      <img src="http://placehold.it/1030x360" alt="profile-cover" class="img-responsive cover" />
+                      <div class="card-info">
+                        <img src="http://placehold.it/300x300" alt="user" class="profile-photo-lg" />
+                        <div class="friend-info">
+                          <a href="#" class="pull-right text-green">My Friend</a>
+                          <h5><a href='/{{ user.username }}' class="profile-link">{{ user.username }}</a></h5>
+                          <p>Student at Harvard</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+		
+
+		{% empty %}
+
+		<h4>Not Following Any Users </h4>
+
+	{% endfor %}
+
+            			
+
+
+
+
+            		</div>
+            	</div>
+              
+
+              
+
+
+
+            </div>
+
+
+            <div class="col-md-2 static">
+              <div id="sticky-sidebar">
+                <h4 class="grey">Recommended Users</h4>
+                <div class="feed-item">
+                  <div class="live-activity">
+                    <p>{% recommended request.user %}</p>
+                    
+                  </div>
+                </div>
+                
+                
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+
+
+
+
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+     <script type="text/javascript" src="{% static 'js/js/bootstrap.min.js' %}"></script>
+     <script type="text/javascript" src="{% static 'js/jquery.sticky-kit.min.js' %}"></script>
+     <script type="text/javascript" src="{% static 'js/jquery.scrollbar.min.js' %}"></script>
+     <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
+
+
+  
+
+
+
+
+
+ 
+
+
+  
+  </body>
+</html>

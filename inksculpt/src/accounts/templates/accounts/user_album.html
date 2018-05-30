@@ -52,11 +52,18 @@
                   <li><a href="http://127.0.0.1:8000/{{ object.username }}/" >Timeline</a></li>
                   <li><a href="timeline-about.html">About</a></li>
                   <li><a href="http://127.0.0.1:8000/{{ object.username }}/album/" class="active">Album</a></li>
-                  <li><a href="timeline-friends.html">Friends</a></li>
+                  <li><a href="http://127.0.0.1:8000/{{ object.username }}/following/">Following ({{ object.profile.get_following.count }})</a></li>
+                  <li><a href="http://127.0.0.1:8000/{{ object.username }}/followers/">Followers ({{ object.followed_by.all.count }})</a></li>
                 </ul>
                 <ul class="follow-me list-inline">
-                  <li>{{ object.followed_by.all.count }} Followers</li>
-                  <li><button class="btn-primary">{% if following %}Unfollow{% else %}Follow{% endif %}</button></li>
+                  
+
+
+                  {% if request.user.get_username != object.username %}
+                  <li><a class="btn btn-primary" href="{{ object.profile.get_follow_url }}">{% if following %}Unfollow{% else %}Follow{% endif %}</a></li>
+        
+               {% endif %}
+
                 </ul>
               </div>
             </div>
@@ -74,9 +81,16 @@
                 <li><a href="http://127.0.0.1:8000/{{ object.username }}/" >Timeline</a></li>
                 <li><a href="timeline-about.html">About</a></li>
                 <li><a href="http://127.0.0.1:8000/{{ object.username }}/album/" class="active">Album</a></li>
-                <li><a href="timeline-friends.html">Friends</a></li>
+                <li><a href="http://127.0.0.1:8000/{{ object.username }}/following/">Following ({{ object.profile.get_following.count }})</a></li>
+                <li><a href="http://127.0.0.1:8000/{{ object.username }}/followers/">Followers ({{ object.followed_by.all.count }})</a></li>
               </ul>
-              <button class="btn-primary">{% if following %}Unfollow{% else %}Follow{% endif %}</button>
+
+              {% if request.user.get_username != object.username %}
+                  <a class="btn-primary" href="{{ object.profile.get_follow_url }}">{% if following %}Unfollow{% else %}Follow{% endif %}</a>
+        
+               {% endif %}
+
+              
             </div>
           </div><!--Timeline Menu for Small Screens End-->
 
