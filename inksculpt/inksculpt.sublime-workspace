@@ -4,6 +4,26 @@
 		"selected_items":
 		[
 			[
+				"con",
+				"context"
+			],
+			[
+				"user",
+				"user"
+			],
+			[
+				"text-a",
+				"text-align\tproperty"
+			],
+			[
+				"st",
+				"style\tTag"
+			],
+			[
+				"backg",
+				"background-color\tproperty"
+			],
+			[
 				"las",
 				"last_name"
 			],
@@ -38,10 +58,6 @@
 			[
 				"Scu",
 				"SculptDetailView"
-			],
-			[
-				"user",
-				"username"
 			],
 			[
 				"use",
@@ -178,10 +194,6 @@
 			[
 				"date",
 				"date_display"
-			],
-			[
-				"con",
-				"content"
 			],
 			[
 				"parent",
@@ -502,23 +514,19 @@
 			[
 				"is",
 				"isReply"
-			],
-			[
-				"repoe",
-				"repoema"
-			],
-			[
-				"lik",
-				"liked"
-			],
-			[
-				"conte",
-				"context"
 			]
 		]
 	},
 	"buffers":
 	[
+		{
+			"file": "src/hashtags/templates/hashtags/tag_view.html",
+			"settings":
+			{
+				"buffer_size": 587,
+				"line_ending": "Windows"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -554,17 +562,18 @@
 	[
 		"/D/Work/github_projects/inksculpt/inksculpt",
 		"/D/Work/github_projects/inksculpt/inksculpt/src",
-		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts",
-		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/api",
-		"/D/Work/github_projects/inksculpt/inksculpt/src/templates"
+		"/D/Work/github_projects/inksculpt/inksculpt/src/hashtags",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/hashtags/templates",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/hashtags/templates/hashtags"
 	],
 	"file_history":
 	[
+		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/api/serializers.py",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/templates/sculpts/form.html",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/templates/sculpts/list_view.html",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/api/views.py",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/api/urls.py",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/templates/navbar.html",
-		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/templates/sculpts/form.html",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/templates/create_modal.html",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/views.py",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/templates/registration/login.html",
@@ -588,7 +597,6 @@
 		"/D/Work/github_projects/inksculpt/inksculpt/src/inksculpt/settings/production.py",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/models.py",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/signals.py",
-		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/api/serializers.py",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/urls.py",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/api/pagination.py",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/templates/sculpts/featured.html",
@@ -682,7 +690,7 @@
 	],
 	"find":
 	{
-		"height": 40.0
+		"height": 23.0
 	},
 	"find_in_files":
 	{
@@ -696,6 +704,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"loadmore",
 			"sculptFeaturedContainer",
 			"sculpt-container",
 			"loadSculptContainer",
@@ -745,14 +754,45 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "src/hashtags/templates/hashtags/tag_view.html",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 587,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								307,
+								307
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
 			]
 		}
 	],
 	"incremental_find":
 	{
-		"height": 27.0
+		"height": 22.0
 	},
 	"input":
 	{
@@ -789,7 +829,7 @@
 	"project": "inksculpt.sublime-project",
 	"replace":
 	{
-		"height": 50.0
+		"height": 42.0
 	},
 	"save_all_on_build": true,
 	"select_file":
