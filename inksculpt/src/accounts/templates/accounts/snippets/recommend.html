@@ -1,8 +1,25 @@
-{% for profile in recommended %}
+<!-- {% for profile in recommended %}
 
 		<a href='/{{ profile.user.username }}'>{{ profile.user.username }}</a> <br/>
 
 		{% empty %}
 		<h4>Not Followed by Any Users </h4>
 
-	{% endfor %}
+	{% endfor %} -->
+
+
+
+{% for profile in recommended %}
+	<div class="follow-user newcontent">
+                <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm pull-left" />
+                <div>
+                	
+                  <h5><a href="/{{ profile.user.username }}" class="text-white"><p>{{ profile.user.username }}</p></a></h5>
+                  <!-- <a href="#" class="text-white">Add friend</a> -->
+                </div>
+                
+
+              </div>
+{% empty %}
+		<h4>Not Followed by Any Users </h4>
+              {% endfor %}
