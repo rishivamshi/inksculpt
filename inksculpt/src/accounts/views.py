@@ -1,6 +1,7 @@
 from django.contrib.auth import get_user_model #3
 from django.http import HttpResponseRedirect
-
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import CreateView
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404 #4
 from django.shortcuts import redirect #6
@@ -13,9 +14,35 @@ from .models import UserProfile #9
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 
+from .forms import UserProfileModelForm
 
+from sculpts.mixins import FormUserNeededMixin
 
 User = get_user_model()
+
+# class UserProfileCreateView(LoginRequiredMixin,FormUserNeededMixin,  CreateView):
+# 	# if request.method == 'POST':
+        
+#  #        profile_form = UserProfileModelForm(request.POST, instance=request.user.profile)
+#  #        if  profile_form.is_valid():
+            
+#  #            profile_form.save()
+#  #            messages.success(request, _('Your profile was successfully updated!'))
+            
+#  #        else:
+#  #            messages.error(request, _('Please correct the error below.'))
+#  #    else:
+        
+#  #        profile_form = UserProfileModelForm(instance=request.user.profile)
+#  #    return render(request, 'accounts/user_profile_create.html', {
+        
+#  #        'profile_form': UserProfileModelForm
+#  #    })
+# 	# user = User.objects.get(pk = user_id)
+# 	form_class = UserProfileModelForm(instance = User.profile) 
+# 	template_name = 'accounts/user_profile_create.html'
+	
+
 
 # Create your views here.
 

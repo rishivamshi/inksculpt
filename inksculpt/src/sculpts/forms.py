@@ -4,16 +4,14 @@
 from django import forms
 
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit, Layout , Field 
+from crispy_forms.layout import Submit, Layout , Field, HTML, Button, Row, Div
 from crispy_forms.bootstrap import (PrependedText, PrependedAppendedText, FormActions)
 
-
+from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
 from .models import Sculpt
 
 class SculptModelForm(forms.ModelForm):
-	content = forms.CharField(label='', widget=forms.Textarea(
-	 					attrs={
-	 					 "class": "form-control"}))
+	content = forms.CharField(label='', widget=SummernoteInplaceWidget())
 
 	# image = forms.ImageField(label = '',  widget=forms.FileInput(
 	# 					attrs={"class": "form-control"}))
@@ -26,20 +24,25 @@ class SculptModelForm(forms.ModelForm):
 			"image",
 
 		]
+		widgets = {
+			'content': SummernoteInplaceWidget(),
+		}
 		# exclude = ['user'] # to exclude.
 
-	# def __init__(self, *args, **kwargs):
-	# 	super (SculptModelForm, self).__init__(*args, **kwargs)
-	# 	self.helper = FormHelper()
-	# 	self.helper.form_method = 'POST'
-	# 	self.helper.layout = Layout(
-	# 			PrependedText('content', 'Write Anything', css_class='testinghere'),
+	def __init__(self, *args, **kwargs):
+		super (SculptModelForm, self).__init__(*args, **kwargs)
+		self.helper = FormHelper()
+		self.helper.form_method = 'POST'
+		
+		self.helper.layout = Layout(
 				
-	# 			PrependedAppendedText('image', 'Upload','Browse'),
-	# 			FormActions(Submit('Sculptss', 'Sculptss', css_clss = 'btn btn-primary'))
+				Field('content', css_class='onetwothree'),
+				
+				PrependedAppendedText('image', 'Upload','Browse'),
+				FormActions(Submit('Sculptss', 'Sculptss', css_clss = 'btn btn-primary'))
 
 
-	# 		)
+			)
 
 	# all from official documentation 	
 	# def clean_content(self, *args, **kwargs):

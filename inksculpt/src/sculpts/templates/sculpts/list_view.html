@@ -140,13 +140,30 @@
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
   crossorigin="anonymous"></script> -->
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script> -->
-    <script type="text/javascript" src="{% static 'js/js/jquery-3.1.1.min.js' %}"></script
+    <!-- <script type="text/javascript" src="{% static 'js/js/jquery-3.1.1.min.js' %}"></script> -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
     <script type="text/javascript" src="{% static 'js/js/popper.min.js' %}"></script>
      <script type="text/javascript" src="{% static 'js/js/bootstrap.min.js' %}"></script>
      <script type="text/javascript" src="{% static 'js/jquery.sticky-kit.min.js' %}"></script>
      <script type="text/javascript" src="{% static 'js/jquery.scrollbar.min.js' %}"></script>
      <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
 
+
+
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#id_content-textarea').summernote({
+            placeholder: 'Write write and write...',
+            tabsize: 4,
+            height: 100,
+            minHeight: null,             
+            maxHeight: null,
+            focus: true,
+        });
+    });
+  </script>
 
     <script type="text/javascript">
 
@@ -185,7 +202,7 @@
             var likedUrl = '/api/sculpt/' + sculptId + "/like/"
             //this_.text("Liked")
 
-            $.ajax({
+            jQuery.ajax({
               method: "GET",
               url: likedUrl,
               success: function(data){
@@ -234,7 +251,7 @@
         $(document.body).on("click", ".resculptBtn", function(e) {
             e.preventDefault()
             var url = "/api" + $(this).attr("href")
-            $.ajax({
+            jQuery.ajax({
                 method: "GET",
                 url: url,
                 success: function(data) {
@@ -450,7 +467,7 @@ var counter = 0;
 
 
 
-            $.ajax({
+            jQuery.ajax({
                 url: fetchurl,
                 data: {
                     "q": query
@@ -480,7 +497,7 @@ var counter = 0;
             var fetchDetailUrl = '/api/sculpt/' + fetchOneId + '/';
 
 
-            $.ajax({
+            jQuery.ajax({
                 url: fetchDetailUrl,
                 
                 method: "GET",
@@ -545,11 +562,11 @@ var counter = 0;
             var this_ = $(this)
             
             var formData = new FormData(document.querySelector(".sculpt-form"));
-
+            console.log(formData)
             // var csrf_token = $('[name="csrfmiddlewaretoken"]').attr('value');
             
             //console.log(formData)
-            $.ajax({
+            jQuery.ajax({
                 url: "/api/sculpt/create/",
                 data: formData,
                 // headers:{"X-CSRFToken": csrf_token},
@@ -589,7 +606,7 @@ var counter = 0;
             // var csrf_token = $('[name="csrfmiddlewaretoken"]').attr('value');
             
             //console.log(formData)
-            $.ajax({
+            jQuery.ajax({
                 url: "/api/sculpt/create/",
                 data: formData,
                 // headers:{"X-CSRFToken": csrf_token},
@@ -735,7 +752,7 @@ sculptFeaturedContainer.append("<div class='item active'><div style=\"background
 
 
 
-            $.ajax({
+            jQuery.ajax({
                 url: fetchurl,
                 data: {
                     "q": query

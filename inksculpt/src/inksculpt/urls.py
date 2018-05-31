@@ -43,7 +43,8 @@ urlpatterns = [
     url(r'^api/sculpt/', include('sculpts.api.urls', namespace = 'sculpt-api')), #url for api
     url(r'^api/', include('accounts.api.urls', namespace = 'profiles-api')), #url for api
 
-   
+    
+   url(r'^summernote/', include('django_summernote.urls')),
 
     url(r'^register/$', UserRegisterView.as_view(), name='register'),
 
