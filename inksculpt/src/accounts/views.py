@@ -156,6 +156,26 @@ class UserFollowersListView(DetailView): #7
 		context['recommended'] = UserProfile.objects.recommended(self.request.user)
 
 		return context
+
+
+class UserAboutView(DetailView): #7
+	template_name = 'accounts/user_about.html'
+	queryset = User.objects.all()
+	
+
+	def get_object(self):
+		return get_object_or_404(User, username__iexact = self.kwargs.get("username"))
+
+
+	def get_context_data(self, *args, **kwargs):
+		context = super(UserAboutView, self).get_context_data(*args, **kwargs)
+		following = UserProfile.objects.is_following(self.request.user, self.get_object())
+		context['following'] = following
+		context['recommended'] = UserProfile.objects.recommended(self.request.user)
+
+		return context
+
+	
 	
 
 '''

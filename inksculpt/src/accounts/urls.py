@@ -13,6 +13,7 @@ from .views import (
 	UserFollowersListView,
 	UserFollowingListView,
 	update_profile,
+	UserAboutView,
  		)
 urlpatterns = [
 	
@@ -20,7 +21,7 @@ urlpatterns = [
     url(r'^(?P<username>[\w.@+-]+)/album/$', UserAlbumListView.as_view(), name = 'album'),
     url(r'^(?P<username>[\w.@+-]+)/followers/$', UserFollowersListView.as_view(), name = 'followers'),
     url(r'^(?P<username>[\w.@+-]+)/following/$', UserFollowingListView.as_view(), name = 'following'),
-    
+    url(r'^(?P<username>[\w.@+-]+)/about/$', UserAboutView.as_view(), name = 'about'),
     url(r'^profile/$', update_profile, name = 'profileedit'),
 
 

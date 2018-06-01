@@ -1,0 +1,234 @@
+
+{% load static %}
+
+
+{% load recommended %}
+
+
+<html lang="en">
+  <head>
+  
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/ionicons.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.min.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i" rel="stylesheet">
+    <title>{% block title %} Inksculpt {% endblock title %}</title>
+
+    <style type="text/css">
+    	
+    .timeline-cover{
+  background: url("http://127.0.0.1:8000/media/{{ object.profile.cover_image }}") no-repeat;
+  background-position: center;
+  background-size: cover;
+  min-height: 360px;
+  border-radius: 0 0 4px 4px;
+  position: relative;
+}
+
+    	.profile-info:hover .edit  {
+    			display: block;
+    	}
+
+    	.edit {
+
+	padding-top: 40px;	
+	padding-right: 60px;
+
+	position: absolute;
+	right: 0;
+	top: 0;
+	display: none;
+	
+}
+.edit a {
+	color: #000;
+}
+
+
+    </style>
+
+  </head>
+
+
+<body>
+    	
+    {% include "navbar.html" %}
+
+    <div class="container">
+
+      <!-- Timeline
+      ================================================= -->
+      <div class="timeline">
+        <div class="timeline-cover">
+
+          <!--Timeline Menu for Large Screens-->
+          <div class="timeline-nav-bar hidden-sm hidden-xs">
+            <div class="row">
+              <div class="col-md-3">
+                <div class="profile-info">
+                	<div class="editbutton">
+                  {% if object.profile.profile_image %} 
+
+                    <img src="http://127.0.0.1:8000/media/{{ object.profile.profile_image }}" alt="" class="img-responsive profile-photo" />
+                     <div class="edit"><a href="#" ><i class="fa fa-pencil fa-lg"></i></a></div>
+                    {% else %} 
+                    <img src="http://placehold.it/300x300" alt="" class="img-responsive profile-photo" />
+                    {% endif %}
+                   
+                  </div>
+                  
+                  <h3>{{ object.username }}</h3>
+                
+                  
+                  <p class="text-muted">Creative Director</p>
+
+                  
+                  <!-- <div class="edit"><a href="#"><i class="fa fa-pencil fa-lg"></i></a></div> -->
+
+                </div>
+              </div>
+              <div class="col-md-9">
+                <ul class="list-inline profile-menu">
+                  <li><a href="http://127.0.0.1:8000/{{ object.username }}/" >Timeline</a></li>
+                  <li><a href="timeline-about.html" class="active">About</a></li>
+                  <li><a href="http://127.0.0.1:8000/{{ object.username }}/album/">Album</a></li>
+                  <li><a href="http://127.0.0.1:8000/{{ object.username }}/following/">Following ({{ object.profile.get_following.count }})</a></li>
+                  <li><a href="http://127.0.0.1:8000/{{ object.username }}/followers/">Followers ({{ object.followed_by.all.count }})</a></li>
+                </ul>
+                <ul class="follow-me list-inline">
+                  
+
+
+                  {% if request.user.get_username != object.username %}
+                  <li><a class="btn-primary" href="{{ object.profile.get_follow_url }}">{% if following %}Unfollow{% else %}Follow{% endif %}</a></li>
+        			
+        			{% else %}
+
+        			<li><a class="btn-primary" href="http://127.0.0.1:8000/profile"><i class="fa fa-pencil "></i>&nbsp; Edit</a></li>
+
+               {% endif %}
+
+                </ul>
+              </div>
+            </div>
+          </div><!--Timeline Menu for Large Screens End-->
+
+          <!--Timeline Menu for Small Screens-->
+          <div class="navbar-mobile hidden-lg hidden-md">
+            <div class="profile-info">
+              <img src="http://placehold.it/300x300" alt="" class="img-responsive profile-photo" />
+              <h4>{{ object.username }}</h4>
+              <p class="text-muted">Creative Director</p>
+            </div>
+            <div class="mobile-menu">
+              <ul class="list-inline">
+                <li><a href="http://127.0.0.1:8000/{{ object.username }}/">Timeline</a></li>
+                <li><a href="timeline-about.html" class="active">About</a></li>
+                <li><a href="http://127.0.0.1:8000/{{ object.username }}/album/">Album</a></li>
+                <li><a href="http://127.0.0.1:8000/{{ object.username }}/following/">Following ({{ object.profile.get_following.count }})</a></li>
+                <li><a href="http://127.0.0.1:8000/{{ object.username }}/followers/">Followers ({{ object.followed_by.all.count }})</a></li>
+              </ul>
+
+              {% if request.user.get_username != object.username %}
+                  <a class="btn-primary" href="{{ object.profile.get_follow_url }}">{% if following %}Unfollow{% else %}Follow{% endif %}</a>
+        
+               {% endif %}
+
+              
+            </div>
+          </div><!--Timeline Menu for Small Screens End-->
+
+        </div>
+
+
+
+        
+        <div id="page-contents">
+          <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-7">
+
+              <div class="about-profile">
+                <div class="about-content-block">
+                  <h4 class="grey"><i class="ion-ios-information-outline icon-in-title"></i>Status</h4>
+                  <p>{{ object.profile.status }}</p>
+                </div>
+                
+                <div class="about-content-block">
+                  <h4 class="grey"><i class="ion-ios-email-outline icon-in-title"></i>email</h4>
+                  <p>{{ object.profile.email }}</p>
+                  
+                </div>
+                <div class="about-content-block">
+                  <h4 class="grey"><i class="ion-ios-location-outline icon-in-title"></i>location</h4>
+                  <p>{{ object.profile.city }} , {{ object.profile.country }}</p>
+                </div>
+                
+              </div>
+
+             
+
+
+
+            </div>
+
+
+            <div class="col-md-2 static">
+              <div id="sticky-sidebar">
+                <h4 class="grey">Recommended Users</h4>
+                <div class="feed-item">
+                  <div class="live-activity">
+                    <p>{% recommended request.user %}</p>
+                    
+                  </div>
+                </div>
+                
+                
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+
+
+
+
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+     <script type="text/javascript" src="{% static 'js/js/bootstrap.min.js' %}"></script>
+     <script type="text/javascript" src="{% static 'js/jquery.sticky-kit.min.js' %}"></script>
+     <script type="text/javascript" src="{% static 'js/jquery.scrollbar.min.js' %}"></script>
+     <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
+
+
+    
+
+
+
+
+  
+
+
+  
+  </body>
+</html>
