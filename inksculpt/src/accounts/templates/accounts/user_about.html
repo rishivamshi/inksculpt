@@ -69,7 +69,8 @@
             <div class="row">
               <div class="col-md-3">
                 <div class="profile-info">
-                	<div class="editbutton">
+
+                  <div class="editbutton">
                   {% if object.profile.profile_image %} 
 
                     <img src="http://127.0.0.1:8000/media/{{ object.profile.profile_image }}" alt="" class="img-responsive profile-photo" />
@@ -80,20 +81,17 @@
                    
                   </div>
                   
+                  
                   <h3>{{ object.username }}</h3>
                 
                   
                   <p class="text-muted">Creative Director</p>
-
-                  
-                  <!-- <div class="edit"><a href="#"><i class="fa fa-pencil fa-lg"></i></a></div> -->
-
                 </div>
               </div>
               <div class="col-md-9">
                 <ul class="list-inline profile-menu">
                   <li><a href="http://127.0.0.1:8000/{{ object.username }}/" >Timeline</a></li>
-                  <li><a href="timeline-about.html" class="active">About</a></li>
+                  <li><a href="http://127.0.0.1:8000/{{ object.username }}/about/" class="active">About</a></li>
                   <li><a href="http://127.0.0.1:8000/{{ object.username }}/album/">Album</a></li>
                   <li><a href="http://127.0.0.1:8000/{{ object.username }}/following/">Following ({{ object.profile.get_following.count }})</a></li>
                   <li><a href="http://127.0.0.1:8000/{{ object.username }}/followers/">Followers ({{ object.followed_by.all.count }})</a></li>
@@ -104,10 +102,10 @@
 
                   {% if request.user.get_username != object.username %}
                   <li><a class="btn-primary" href="{{ object.profile.get_follow_url }}">{% if following %}Unfollow{% else %}Follow{% endif %}</a></li>
-        			
-        			{% else %}
+        
+               {% else %}
 
-        			<li><a class="btn-primary" href="http://127.0.0.1:8000/profile"><i class="fa fa-pencil "></i>&nbsp; Edit</a></li>
+              <li><a class="btn-primary" href="http://127.0.0.1:8000/profile"><i class="fa fa-pencil "></i>&nbsp; Edit</a></li>
 
                {% endif %}
 
@@ -119,14 +117,26 @@
           <!--Timeline Menu for Small Screens-->
           <div class="navbar-mobile hidden-lg hidden-md">
             <div class="profile-info">
-              <img src="http://placehold.it/300x300" alt="" class="img-responsive profile-photo" />
+
+              <div class="editbutton">
+                  {% if object.profile.profile_image %} 
+
+                    <img src="http://127.0.0.1:8000/media/{{ object.profile.profile_image }}" alt="" class="img-responsive profile-photo" />
+                     <div class="edit"><a href="#" ><i class="fa fa-pencil fa-lg"></i></a></div>
+                    {% else %} 
+                    <img src="http://placehold.it/300x300" alt="" class="img-responsive profile-photo" />
+                    {% endif %}
+                   
+                  </div>
               <h4>{{ object.username }}</h4>
               <p class="text-muted">Creative Director</p>
+
+              
             </div>
             <div class="mobile-menu">
               <ul class="list-inline">
-                <li><a href="http://127.0.0.1:8000/{{ object.username }}/">Timeline</a></li>
-                <li><a href="timeline-about.html" class="active">About</a></li>
+                <li><a href="http://127.0.0.1:8000/{{ object.username }}/" >Timeline</a></li>
+                <li><a href="http://127.0.0.1:8000/{{ object.username }}/about/" class="active">About</a></li>
                 <li><a href="http://127.0.0.1:8000/{{ object.username }}/album/">Album</a></li>
                 <li><a href="http://127.0.0.1:8000/{{ object.username }}/following/">Following ({{ object.profile.get_following.count }})</a></li>
                 <li><a href="http://127.0.0.1:8000/{{ object.username }}/followers/">Followers ({{ object.followed_by.all.count }})</a></li>
@@ -135,6 +145,10 @@
               {% if request.user.get_username != object.username %}
                   <a class="btn-primary" href="{{ object.profile.get_follow_url }}">{% if following %}Unfollow{% else %}Follow{% endif %}</a>
         
+               {% else %}
+
+              <li><a class="btn-primary" href="http://127.0.0.1:8000/profile"><i class="fa fa-pencil "></i>&nbsp; Edit</a></li>
+
                {% endif %}
 
               

@@ -7,6 +7,7 @@ from django.urls import reverse_lazy
 from django.db.models.signals import post_save #12
 from django.core.validators import RegexValidator
 from django.core.validators import MinLengthValidator
+from django_countries.fields import CountryField
 
 def upload_location(object, filename): #5
 	return "%s/%s/%s" %(object.user,"displaypicture", filename)
@@ -91,9 +92,13 @@ class UserProfile(models.Model):
 		('U', 'Unspecified'),
 		)
 
+
+
+	
+
 	gender = models.CharField(max_length = 1, choices = GENDER_CHOICES, null = True)
 	city	= models.CharField(max_length = 140, null = True, blank = True)
-	country = models.CharField(max_length = 140, null = True, blank = True)
+	country = CountryField(blank = True, null = True)
 	status = models.CharField(max_length = 140, null = True, blank = True)
 	phone_number = models.CharField( max_length=10, validators=[RegexValidator(r'^\d{1,10}$'),MinLengthValidator(10)], null = True, blank = True)
 

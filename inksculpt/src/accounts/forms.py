@@ -53,6 +53,7 @@ class ProfileForm(forms.ModelForm):
 			'dob',
 			'city', 
 			'country',
+			'gender',
 			'status',
 			'phone_number'
 
