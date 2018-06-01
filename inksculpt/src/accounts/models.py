@@ -66,8 +66,8 @@ class UserProfile(models.Model):
 				width_field = "width_profilefield",
 				height_field = "height_profilefield") # images stuff
 		
-	height_profilefield = models.IntegerField(default = 0) 
-	width_profilefield = models.IntegerField(default = 0)
+	height_profilefield = models.IntegerField(default = 0, null = True, blank = True) 
+	width_profilefield = models.IntegerField(default = 0, null = True, blank = True)
 
 
 	cover_image = models.ImageField(
@@ -77,8 +77,8 @@ class UserProfile(models.Model):
 				width_field = "width_coverfield",
 				height_field = "height_coverfield") # images stuff
 		
-	height_coverfield = models.IntegerField(default = 0) 
-	width_coverfield = models.IntegerField(default = 0)
+	height_coverfield = models.IntegerField(default = 0, null = True, blank = True) 
+	width_coverfield = models.IntegerField(default = 0, null = True, blank = True)
 
 
 

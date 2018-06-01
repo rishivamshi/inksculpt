@@ -1,46 +1,59 @@
 from django.contrib.auth import get_user_model #3
 from django.http import HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import CreateView
+from django.views.generic import UpdateView
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404 #4
 from django.shortcuts import redirect #6
 from django.views import View #5
 from django.views.generic import DetailView, ListView #1
-
+from django.urls import reverse_lazy, reverse
 from django.views.generic.edit import FormView
 from .forms import UserRegisterForm
 from .models import UserProfile #9
+from django.shortcuts import render, get_object_or_404, redirect
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from .forms import UserProfileModelForm
 
-from sculpts.mixins import FormUserNeededMixin
+from .forms import UserForm, ProfileForm
+from sculpts.mixins import UserOwnerMixin
 
 User = get_user_model()
 
-# class UserProfileCreateView(LoginRequiredMixin,FormUserNeededMixin,  CreateView):
-# 	# if request.method == 'POST':
-        
-#  #        profile_form = UserProfileModelForm(request.POST, instance=request.user.profile)
-#  #        if  profile_form.is_valid():
-            
-#  #            profile_form.save()
-#  #            messages.success(request, _('Your profile was successfully updated!'))
-            
-#  #        else:
-#  #            messages.error(request, _('Please correct the error below.'))
-#  #    else:
-        
-#  #        profile_form = UserProfileModelForm(instance=request.user.profile)
-#  #    return render(request, 'accounts/user_profile_create.html', {
-        
-#  #        'profile_form': UserProfileModelForm
-#  #    })
-# 	# user = User.objects.get(pk = user_id)
-# 	form_class = UserProfileModelForm(instance = User.profile) 
-# 	template_name = 'accounts/user_profile_create.html'
+
+
+
+def update_profile(request):
+	# instance = get_object_or_404(User, username__iexact = self.kwargs.get('username'))
+
+	if request.method == 'POST':
+		user_form = UserForm(request.POST, instance = request.user)
+		profile_form = ProfileForm(request.POST, instance = request.user.profile)
+		if user_form.is_valid() and profile_form.is_valid():
+			user_form.save()
+			profile_form.save()
+			# messages.success(request, _('Your profile was successfully updated!'))
+			return redirect('/')
+
+		# else:
+			# messages.error(request, _('Please correct the error below.'))
+
+	else:
+		user_form = UserForm(instance = request.user)
+		profile_form = ProfileForm(instance = request.user.profile)
+
+	return render(request, 'accounts/user_profile.html', {
+		'user_form': user_form,
+		'profile_form': profile_form,
+		})
+
+
+
+
+
+
+
 	
 
 

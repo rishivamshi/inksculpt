@@ -37,20 +37,28 @@ class UserRegisterForm(forms.Form):
 			raise forms.ValidationError(" This email is already registered ")
 		return email
 
-class UserProfileModelForm(forms.ModelForm):
-	
-	
+
+class UserForm(forms.ModelForm):
+	class Meta:
+		model = User 
+		fields = ('first_name', 'last_name', 'email')
+
+class ProfileForm(forms.ModelForm):
 	class Meta:
 		model = UserProfile
-		fields = [
-			"user", #1
-			"profile_image",
-			"cover_image",
-			"dob",
-			"gender",
-			"city",
-			"country",
-			"status",
-			"phone_number",
+		fields = (
 
-		]
+			'profile_image', 
+			'cover_image',
+			'dob',
+			'city', 
+			'country',
+			'status',
+			'phone_number'
+
+
+
+
+			)
+
+		

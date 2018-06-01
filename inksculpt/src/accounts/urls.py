@@ -12,8 +12,7 @@ from .views import (
 	UserAlbumListView,
 	UserFollowersListView,
 	UserFollowingListView,
-	# UserProfileCreateView,
-	
+	update_profile,
  		)
 urlpatterns = [
 	
@@ -21,8 +20,8 @@ urlpatterns = [
     url(r'^(?P<username>[\w.@+-]+)/album/$', UserAlbumListView.as_view(), name = 'album'),
     url(r'^(?P<username>[\w.@+-]+)/followers/$', UserFollowersListView.as_view(), name = 'followers'),
     url(r'^(?P<username>[\w.@+-]+)/following/$', UserFollowingListView.as_view(), name = 'following'),
-    # url(r'^(?P<username>[\w.@+-]+)/profilecreate/$', UserProfileCreateView.as_view(), name = 'profilecreate'),
     
+    url(r'^profile/$', update_profile, name = 'profileedit'),
 
 
     url(r'^(?P<username>[\w.@+-]+)/$', UserDetailView.as_view(), name = 'detail'), # 6  # /sculpt/1
