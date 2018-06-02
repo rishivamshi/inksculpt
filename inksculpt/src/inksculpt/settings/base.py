@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+     'imagekit',
     'django_countries',
     'django_summernote',
     'crispy_forms',

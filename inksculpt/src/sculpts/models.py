@@ -12,6 +12,8 @@ from django.utils import timezone
 
 from hashtags.signals import parsed_hashtags
 
+from imagekit.models import ImageSpecField
+from imagekit.processors import ResizeToFill
 
 class NonStrippingTextField(TextField):
 	def formfield(self, **kwargs):
@@ -87,6 +89,17 @@ class Sculpt(models.Model):
 				blank = True,
 				width_field = "width_field",
 				height_field = "height_field") # images stuff
+
+	image_thumbnail = ImageSpecField(
+				source = 'image',
+				
+				format = 'JPEG',
+				options = {'quality': 60})
+
+
+    
+
+
 		
 	height_field = models.IntegerField(default = 0) #4
 	width_field = models.IntegerField(default = 0)
@@ -133,7 +146,15 @@ def sculpt_save_receiver(sender, instance, created, *args, **kwargs):
 		#notify a user.
 		user_regex = r'@(?P<username>[\w.@+-]+)'
 		usernames = re.findall(user_regex, instance.content)
+		# username = usernames[0]
+		# print(sender.user.username)
+		# print(instance.user)
+
+		# print(created)
+		# print(username)
+
 		# send notification to user here.
+		
 
 		hash_regex = r'#(?P<hashtag>[\w\d-]+)'
 		hashtags = re.findall(hash_regex, instance.content)

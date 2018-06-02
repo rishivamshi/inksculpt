@@ -71,6 +71,7 @@ class SculptModelSerializer(serializers.ModelSerializer): #3
 	parent = ParentSculptModelSerializer( read_only = True )
 	likes = serializers.SerializerMethodField()
 	did_like = serializers.SerializerMethodField()
+	thumbnail = serializers.ReadOnlyField(source = 'image_thumbnail.url')
 
 	class Meta:
 		model = Sculpt
@@ -82,6 +83,7 @@ class SculptModelSerializer(serializers.ModelSerializer): #3
 			'current_user',
 			'content',
 			'image',
+			'thumbnail',
 			'timestamp',
 			'date_display', #6
 			'timesince', #7

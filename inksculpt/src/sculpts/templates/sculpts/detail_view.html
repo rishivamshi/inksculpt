@@ -22,6 +22,8 @@
     	
     {% include "navbar.html" %}
 
+    <!-- <img src = "{{ object.image_thumbnail.url }}"> -->
+
     <div class="container">
 
       <!-- Timeline
@@ -222,7 +224,7 @@
             // console.log(value.content)
             var dateDisplay = sculptValue.date_display;
             var sculptContent = sculptValue.content;
-            var sculptImage = sculptValue.image;
+            var sculptImage = sculptValue.thumbnail;
             var sculptUser = sculptValue.user;
             var timeSince = sculptValue.timesince;
             var verb = 'Like'
