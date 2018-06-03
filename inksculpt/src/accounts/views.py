@@ -15,8 +15,11 @@ from django.shortcuts import render, get_object_or_404, redirect
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 
+from django.contrib import messages
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
 
-from .forms import UserForm, ProfileForm
+from .forms import UserForm, ProfileForm, ProfileImageForm
 from sculpts.mixins import UserOwnerMixin
 
 User = get_user_model()
@@ -49,9 +52,46 @@ def update_profile(request):
 		})
 
 
+def update_imageprofile(request):
+	# instance = get_object_or_404(User, username__iexact = self.kwargs.get('username'))
+
+	if request.method == 'POST':
+		
+		profileimage_form = ProfileImageForm(request.POST,request.FILES, instance = request.user.profile)
+		if profileimage_form.is_valid():
+			
+			profileimage_form.save()
+			# messages.success(request, _('Your profile was successfully updated!'))
+			return redirect('/')
+
+		# else:
+			# messages.error(request, _('Please correct the error below.'))
+
+	else:
+		
+		profileimage_form = ProfileImageForm(instance = request.user.profile)
+
+	return render(request, 'accounts/user_profileimage.html', {
+		
+		'profileimage_form': profileimage_form,
+		})
 
 
-
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            
+            return redirect('/')
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'accounts/change_password.html', {
+        'form': form
+    })
 
 
 	

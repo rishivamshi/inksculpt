@@ -55,11 +55,16 @@ class ProfileForm(forms.ModelForm):
 			'country',
 			'gender',
 			'status',
-			'phone_number'
-
-
-
-
+			'phone_number',
 			)
 
-		
+
+class ProfileImageForm(forms.ModelForm):
+	class Meta:
+		model = UserProfile
+		fields = (
+
+			'profile_image', 
+			'cover_image',
+			
+			)	

@@ -14,6 +14,8 @@ from .views import (
 	UserFollowingListView,
 	update_profile,
 	UserAboutView,
+	update_imageprofile,
+	change_password,
  		)
 urlpatterns = [
 	
@@ -23,7 +25,8 @@ urlpatterns = [
     url(r'^(?P<username>[\w.@+-]+)/following/$', UserFollowingListView.as_view(), name = 'following'),
     url(r'^(?P<username>[\w.@+-]+)/about/$', UserAboutView.as_view(), name = 'about'),
     url(r'^profile/$', update_profile, name = 'profileedit'),
-
+    url(r'^profileimage/$', update_imageprofile, name = 'profileimageedit'),
+    url(r'^changepassword/$', change_password, name='change_password'),
 
     url(r'^(?P<username>[\w.@+-]+)/$', UserDetailView.as_view(), name = 'detail'), # 6  # /sculpt/1
     url(r'^(?P<username>[\w.@+-]+)/follow/$', UserFollowView.as_view(), name = 'follow'), # 6  # /sculpt/1

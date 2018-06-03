@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'easy_thumbnails',
+    'image_cropping',
      'imagekit',
     'django_countries',
     'django_summernote',
@@ -148,4 +150,9 @@ STATIC_ROOT  = os.path.join(os.path.dirname(BASE_DIR), "static-serve") #CDN
 MEDIA_URL = "/media/"
 MEDIA_ROOT  = os.path.join(os.path.dirname(BASE_DIR), "media-serve")
 
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
+from easy_thumbnails.conf import Settings as thumbnail_settings
+THUMBNAIL_PROCESSORS = (
+    'image_cropping.thumbnail_processors.crop_corners',
+) + thumbnail_settings.THUMBNAIL_PROCESSORS
