@@ -90,11 +90,11 @@ class Sculpt(models.Model):
 				width_field = "width_field",
 				height_field = "height_field") # images stuff
 
-	image_thumbnail = ImageSpecField(
-				source = 'image',
+	# image_thumbnail = ImageSpecField(
+	# 			source = 'image',
 				
-				format = 'JPEG',
-				options = {'quality': 60})
+	# 			format = 'JPEG',
+	# 			options = {'quality': 60})
 
 
     

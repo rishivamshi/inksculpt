@@ -44,7 +44,7 @@ urlpatterns = [
 
     
     
-   url(r'^summernote/', include('django_summernote.urls')),
+   
 
     url(r'^register/$', UserRegisterView.as_view(), name='register'),
 

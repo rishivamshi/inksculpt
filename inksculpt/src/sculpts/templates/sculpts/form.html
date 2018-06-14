@@ -1,10 +1,10 @@
-{% load crispy_forms_tags %}
+<!-- {% load crispy_forms_tags %} -->
 
 <form  class="form {% if form_class %}{{ form_class }}{% endif %}" method="POST" enctype="multipart/form-data" action="{% if action_url %}{{ action_url }}{% endif %}">
 	{% csrf_token %}
-	{{ content|safe }}
-	{% crispy form %}
+	{{ form.content }}
+	
 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	<!-- <input class="btn btn-primary"  type="submit" value="Post" > -->
+	<input class="btn btn-primary"  type="submit" value="Post" >
 </form>
 

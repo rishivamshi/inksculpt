@@ -11,6 +11,18 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/ionicons.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.min.css' %}">
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i" rel="stylesheet">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <!-- <script type="text/javascript" src="{% static 'js/js/popper.min.js' %}"></script> -->
+     <script type="text/javascript" src="{% static 'js/js/bootstrap.min.js' %}"></script>
+     <script type="text/javascript" src="{% static 'js/jquery.sticky-kit.min.js' %}"></script>
+     <script type="text/javascript" src="{% static 'js/jquery.scrollbar.min.js' %}"></script>
+     <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
+
+
+
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
+
     <title> Feed | Inksculpt </title>
     <style type="text/css">
           
@@ -24,12 +36,24 @@
 
 
 
-  <body>
+  <body >
    
     {% include "create_modal.html" %}
     {% include "reply-modal.html" %}
 
     {% include "navbar.html" %}
+    <!-- <script>
+    $(document).ready(function() {
+        $('#summernote').summernote({
+            placeholder: 'Write write and write...',
+            tabsize: 4,
+            height: 100,
+            minHeight: null,             
+            maxHeight: null,
+            // focus: true,
+        });
+    });
+  </script> -->
     <div class="container">
       
 
@@ -140,30 +164,8 @@
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
   crossorigin="anonymous"></script> -->
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script> -->
-    <script type="text/javascript" src="{% static 'js/js/jquery-3.1.1.min.js' %}"></script>
-   <!--  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> -->
-    <script type="text/javascript" src="{% static 'js/js/popper.min.js' %}"></script>
-     <script type="text/javascript" src="{% static 'js/js/bootstrap.min.js' %}"></script>
-     <script type="text/javascript" src="{% static 'js/jquery.sticky-kit.min.js' %}"></script>
-     <script type="text/javascript" src="{% static 'js/jquery.scrollbar.min.js' %}"></script>
-     <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
-
-
-
-<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
-<script>
-    $(document).ready(function() {
-        $('#id_content-textarea').summernote({
-            placeholder: 'Write write and write...',
-            tabsize: 4,
-            height: 100,
-            minHeight: null,             
-            maxHeight: null,
-            focus: true,
-        });
-    });
-  </script>
+    <!-- <script type="text/javascript" src="{% static 'js/js/jquery-3.1.1.min.js' %}"></script> -->
+    
 
     <script type="text/javascript">
 

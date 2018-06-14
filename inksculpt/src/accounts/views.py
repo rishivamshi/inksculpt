@@ -116,7 +116,11 @@ class UserRegisterView(FormView):
 		new_user.save()
 		return super(UserRegisterView, self).form_valid(form)
 
-
+	def get_context_data(self, **kwargs):
+		data = super (UserRegisterView, self).get_context_data(**kwargs)
+		data['my_reg_form'] = data.get('form')
+		return data
+	
 
 
 
