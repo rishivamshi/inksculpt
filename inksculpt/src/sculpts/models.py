@@ -14,6 +14,7 @@ from hashtags.signals import parsed_hashtags
 
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
+from notify.signals import notify
 
 class NonStrippingTextField(TextField):
 	def formfield(self, **kwargs):
@@ -70,6 +71,8 @@ class SculptManager(models.Manager):
 		else:
 			is_liked =  True
 			sculpt_obj.liked.add(user)
+			print(sculpt_obj)
+			notify.send(user, recipient = sculpt_obj.user , actor = user, verb = 'successful like')
 
 		return is_liked
 
@@ -155,12 +158,22 @@ def sculpt_save_receiver(sender, instance, created, *args, **kwargs):
 
 		# send notification to user here.
 		
-
+		
 		hash_regex = r'#(?P<hashtag>[\w\d-]+)'
 		hashtags = re.findall(hash_regex, instance.content)
 		parsed_hashtags.send(sender = instance.__class__, hashtag_list = hashtags)
+
 		#send hashtag signal to user here
 		
+	else:
+		if (instance.reply):
+			
+			notify.send(instance.user, recipient = instance.parent.user , actor = instance.user, verb = 'successful comment')
+			
+		else:
+			notify.send(instance.user, recipient = instance.parent.user , actor = instance.user, verb = 'successful repost')
+		
+
 
 post_save.connect(sculpt_save_receiver, sender = Sculpt)
 '''

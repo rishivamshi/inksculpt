@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'image_cropping',
      'imagekit',
     'django_countries',
-   
+   'notify',
     'crispy_forms',
     'rest_framework',
     'accounts',

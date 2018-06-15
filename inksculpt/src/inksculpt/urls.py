@@ -43,7 +43,7 @@ urlpatterns = [
     url(r'^api/', include('accounts.api.urls', namespace = 'profiles-api')), #url for api
 
     
-    
+    url(r'^notifications/', include('notify.urls', 'notifications')),
    
 
     url(r'^register/$', UserRegisterView.as_view(), name='register'),
