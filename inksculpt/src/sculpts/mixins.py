@@ -10,7 +10,7 @@ class FormUserNeededMixin(object):
 		# return super(SculptCreateView, self).form_valid(form)
 		# 12
 
-		if self.request.user.is_authenticated():
+		if self.request.user.is_authenticated:
 			form.instance.user = self.request.user
 			return super(FormUserNeededMixin, self).form_valid(form)
 		else:

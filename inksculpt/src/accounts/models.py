@@ -57,7 +57,7 @@ class UserProfileManager(models.Manager): #4
 
 
 class UserProfile(models.Model):
-	user 		= models.OneToOneField(settings.AUTH_USER_MODEL , related_name='profile') #1
+	user 		= models.OneToOneField(settings.AUTH_USER_MODEL , related_name='profile', null = True, on_delete = models.SET_NULL) #1
 	following 	= models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True ,related_name='followed_by') #2
 
 	profile_image = models.ImageField(

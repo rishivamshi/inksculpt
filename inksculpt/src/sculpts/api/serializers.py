@@ -36,7 +36,7 @@ class ParentSculptModelSerializer(serializers.ModelSerializer):
 		request = self.context.get("request")
 		try: 			
 			user = request.user
-			if user.is_authenticated():
+			if user.is_authenticated:
 				if user in obj.liked.all():
 					return True
 		except:
@@ -100,7 +100,7 @@ class SculptModelSerializer(serializers.ModelSerializer): #3
 		request = self.context.get("request")
 		try: 			
 			user = request.user
-			if user.is_authenticated():
+			if user.is_authenticated:
 				if user in obj.liked.all():
 					return True
 		except:

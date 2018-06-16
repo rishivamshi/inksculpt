@@ -2,6 +2,7 @@
 # we have to wrap this list of urls to the main one i.e to the urls of inksculpt. insculpt/urls.py
 
 from django.conf.urls import url, include
+from django.urls import re_path
 # from .views import sculpt_detail_view, sculpt_list_view # comments 1
 
 from django.views.generic.base import RedirectView #9
@@ -20,16 +21,16 @@ from .views import (
 urlpatterns = [
 	
 
-    url(r'^(?P<username>[\w.@+-]+)/album/$', UserAlbumListView.as_view(), name = 'album'),
-    url(r'^(?P<username>[\w.@+-]+)/followers/$', UserFollowersListView.as_view(), name = 'followers'),
-    url(r'^(?P<username>[\w.@+-]+)/following/$', UserFollowingListView.as_view(), name = 'following'),
-    url(r'^(?P<username>[\w.@+-]+)/about/$', UserAboutView.as_view(), name = 'about'),
-    url(r'^profile/$', update_profile, name = 'profileedit'),
-    url(r'^profileimage/$', update_imageprofile, name = 'profileimageedit'),
-    url(r'^changepassword/$', change_password, name='change_password'),
+    re_path(r'^(?P<username>[\w.@+-]+)/album/$', UserAlbumListView.as_view(), name = 'album'),
+    re_path(r'^(?P<username>[\w.@+-]+)/followers/$', UserFollowersListView.as_view(), name = 'followers'),
+    re_path(r'^(?P<username>[\w.@+-]+)/following/$', UserFollowingListView.as_view(), name = 'following'),
+    re_path(r'^(?P<username>[\w.@+-]+)/about/$', UserAboutView.as_view(), name = 'about'),
+    re_path(r'^profile/$', update_profile, name = 'profileedit'),
+    re_path(r'^profileimage/$', update_imageprofile, name = 'profileimageedit'),
+    re_path(r'^changepassword/$', change_password, name='change_password'),
 
-    url(r'^(?P<username>[\w.@+-]+)/$', UserDetailView.as_view(), name = 'detail'), # 6  # /sculpt/1
-    url(r'^(?P<username>[\w.@+-]+)/follow/$', UserFollowView.as_view(), name = 'follow'), # 6  # /sculpt/1
+    re_path(r'^(?P<username>[\w.@+-]+)/$', UserDetailView.as_view(), name = 'detail'), # 6  # /sculpt/1
+    re_path(r'^(?P<username>[\w.@+-]+)/follow/$', UserFollowView.as_view(), name = 'follow'), # 6  # /sculpt/1
    
 ]
 

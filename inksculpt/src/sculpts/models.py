@@ -80,8 +80,8 @@ class SculptManager(models.Manager):
 
 
 class Sculpt(models.Model):
-	parent = models.ForeignKey("self", blank = True, null = True)
-	user = models.ForeignKey( settings.AUTH_USER_MODEL ) # Comments - 1 and attribute is cooments 2. 
+	parent = models.ForeignKey("self", blank = True, null = True, on_delete = models.SET_NULL)
+	user = models.ForeignKey( settings.AUTH_USER_MODEL, null = True , on_delete = models.SET_NULL ) # Comments - 1 and attribute is cooments 2. 
 	content = NonStrippingTextField(validators = [validate_content]) # writing stuff and see how to take care of blank spaces - strip = false
 	liked = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, related_name = 'liked')
 	reply = models.BooleanField(verbose_name = 'Is a reply?', default = False)

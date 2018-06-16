@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'easy_thumbnails',
     'image_cropping',
      'imagekit',
@@ -48,7 +49,12 @@ INSTALLED_APPS = [
     'accounts',
     'hashtags',
     'sculpts',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
 ]
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -63,9 +69,7 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'inksculpt.urls'
 
 
-LOGIN_URL = "/login/"
-LOGIN_REDIRECT_URL = "/"
-LOGOUT_REDIRECT_URL = LOGIN_REDIRECT_URL
+
 
 
 
@@ -117,6 +121,13 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = (
+    # Needed to login by username in Django admin, regardless of `allauth`
+    "django.contrib.auth.backends.ModelBackend",
+    # `allauth` specific authentication methods, such as login by e-mail
+    "allauth.account.auth_backends.AuthenticationBackend"
+)
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
@@ -167,3 +178,36 @@ THUMBNAIL_PROCESSORS = (
 # SECURE_HSTS_SECONDS             = None
 # SECURE_HSTS_INCLUDE_SUBDOMAINS  = False
 # SECURE_FRAME_DENY               = False
+
+
+LOGIN_URL = "/login/"
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = LOGIN_REDIRECT_URL
+
+#Email_configuration
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'inksculpt@gmail.com'
+EMAIL_HOST_PASSWORD = 'INK18marriott!'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+# #allauth_configuration
+# SITE_ID = 1
+ACCOUNT_SIGNUP_FORM_CLASS = 'accounts.forms.SignupForm' #customized_signup_form
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1 #days
+ACCOUNT_EMAIL_CONFIRMATION_COOLDOWN = 600 #seconds
+ACCOUNT_CONFIRM_EMAIL_ON_GET = True
+ACCOUNT_LOGOUT_ON_GET = True
+ACCOUNT_LOGOUT_REDIRECT_URL = LOGIN_REDIRECT_URL
+ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = True
+ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = None # this can be used to firsttime user
+ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 10
+ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 600
+# ACCOUNT_LOGOUT_ON_PASSWORD_CHANGE = True
+ACCOUNT_LOGIN_ON_PASSWORD_RESET = True
+
+# ACCOUNT_USERNAME_BLACKLIST = []
+# ACCOUNT_USERNAME_VALIDATORS #check out configuration page of django all auth for details

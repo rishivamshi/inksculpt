@@ -19,7 +19,7 @@ from django.http import HttpResponseRedirect
 class ResculptView(View):
 	def get(self, request, pk, *args, **kwargs):
 		sculpt = get_object_or_404(Sculpt, pk=pk)
-		if request.user.is_authenticated():
+		if request.user.is_authenticated:
 			new_sculpt = Sculpt.objects.resculpt(request.user, sculpt)
 			return HttpResponseRedirect("/")
 		return HttpResponseRedirect(sculpt.get_absolute_url())
@@ -42,7 +42,7 @@ class SculptCreateView(LoginRequiredMixin, FormUserNeededMixin, CreateView):
 	# 	# return super(SculptCreateView, self).form_valid(form)
 	# 	# 12
 
-	# 	if self.request.user.is_authenticated():
+	# 	if self.request.user.is_authenticated:
 	# 		form.instance.user = self.request.user
 	# 		return super(SculptCreateView, self).form_valid(form)
 	# 	else:

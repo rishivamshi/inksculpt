@@ -2,6 +2,7 @@
 # we have to wrap this list of urls to the main one i.e to the urls of inksculpt. insculpt/urls.py
 
 from django.conf.urls import url
+from django.urls import re_path
 # from .views import sculpt_detail_view, sculpt_list_view # comments 1
 
 from django.views.generic.base import RedirectView #9
@@ -20,14 +21,14 @@ urlpatterns = [
 
     # url(r'^$', sculpt_list_view, name = 'list'), # 2
     # url(r'^1/$', sculpt_detail_view, name = 'detail'), # 3
-    url(r'^$', RedirectView.as_view(url = "/")), #10
-    url(r'^search/$', SculptListView.as_view(), name = 'list'), # 5  # /sculpt/ #8
-    url(r'^create/$', SculptCreateView.as_view(), name = 'create'), # 7  # /sculpt/create
-    url(r'^featured/$', SculptFeaturedListView.as_view(), name = 'featured'),
-    url(r'^(?P<pk>\d+)/$', SculptDetailView.as_view(), name = 'detail'), # 6  # /sculpt/1
-    url(r'^(?P<pk>\d+)/resculpt/$', ResculptView.as_view(), name = 'detail'), # 6  # /sculpt/1
-    url(r'^(?P<pk>\d+)/update/$', SculptUpdateView.as_view(), name = 'update'), # 6  # /sculpt/1/update
-    url(r'^(?P<pk>\d+)/delete/$', SculptDeleteView.as_view(), name = 'delete'), # 6  # /sculpt/1/delete
+    re_path(r'^$', RedirectView.as_view(url = "/")), #10
+    re_path(r'^search/$', SculptListView.as_view(), name = 'list'), # 5  # /sculpt/ #8
+    re_path(r'^create/$', SculptCreateView.as_view(), name = 'create'), # 7  # /sculpt/create
+    re_path(r'^featured/$', SculptFeaturedListView.as_view(), name = 'featured'),
+    re_path(r'^(?P<pk>\d+)/$', SculptDetailView.as_view(), name = 'detail'), # 6  # /sculpt/1
+    re_path(r'^(?P<pk>\d+)/resculpt/$', ResculptView.as_view(), name = 'detail'), # 6  # /sculpt/1
+    re_path(r'^(?P<pk>\d+)/update/$', SculptUpdateView.as_view(), name = 'update'), # 6  # /sculpt/1/update
+    re_path(r'^(?P<pk>\d+)/delete/$', SculptDeleteView.as_view(), name = 'delete'), # 6  # /sculpt/1/delete
 ]
 
 

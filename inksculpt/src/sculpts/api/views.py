@@ -24,7 +24,7 @@ class LikeToggleAPIView(APIView):
 		sculpt_qs = Sculpt.objects.filter(pk = pk)
 		message = "Not allowed"
 		
-		if request.user.is_authenticated():
+		if request.user.is_authenticated:
 			is_liked = Sculpt.objects.like_toggle(request.user, sculpt_qs.first())
 			return Response({'liked': is_liked })
 		

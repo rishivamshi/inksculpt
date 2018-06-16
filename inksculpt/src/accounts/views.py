@@ -144,7 +144,7 @@ class UserFollowView(View): #7
 	def get(self, request, username, *args, **kwargs):
 
 		toggle_user = get_object_or_404(User, username__iexact = username) #to get the user #8
-		if request.user.is_authenticated():
+		if request.user.is_authenticated:
 			is_following = UserProfile.objects.toggle_follow(request.user , toggle_user)
 		return redirect("profiles:detail", username = username)
 

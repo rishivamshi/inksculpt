@@ -14,6 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url, include # to include the urls of apps.
+from django.urls import re_path
 from django.contrib import admin
 
 from django.conf import settings
@@ -31,25 +32,26 @@ from .views import home
 
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'^$', SculptListView.as_view(), name = 'home'),
+    re_path(r'^admin/', admin.site.urls),
+    re_path(r'^$', SculptListView.as_view(), name = 'home'),
 
-    url(r'^tags/(?P<hashtag>.*)/$', HashTagView.as_view(), name = 'hashtag'), # url for hashtags app. 
-    url(r'^sculpt/', include('sculpts.urls', namespace = 'sculpt')), # url for sculpts app. 
+    re_path(r'^tags/(?P<hashtag>.*)/$', HashTagView.as_view(), name = 'hashtag'), # url for hashtags app. 
+    re_path(r'^sculpt/', include(('sculpts.urls', 'sculpt'), namespace = 'sculpt')), # url for sculpts app. 
 
-    url(r'^api/tags/(?P<hashtag>.*)/$', TagSculptAPIView.as_view(), name='tag-sculpt-api'),
+    re_path(r'^api/tags/(?P<hashtag>.*)/$', TagSculptAPIView.as_view(), name='tag-sculpt-api'),
 
-    url(r'^api/sculpt/', include('sculpts.api.urls', namespace = 'sculpt-api')), #url for api
-    url(r'^api/', include('accounts.api.urls', namespace = 'profiles-api')), #url for api
+    re_path(r'^api/sculpt/', include(('sculpts.api.urls', 'sculpt-api'), namespace = 'sculpt-api')), #url for api
+    re_path(r'^api/', include(('accounts.api.urls', 'profiles-api'), namespace = 'profiles-api')), #url for api
 
     
-    url(r'^notifications/', include('notify.urls', 'notifications')),
+    re_path(r'^notifications/', include('notify.urls', 'notifications')),
    
+    
 
-    url(r'^register/$', UserRegisterView.as_view(), name='register'),
+    re_path(r'^register/$', UserRegisterView.as_view(), name='register'),
 
-    url(r'^', include('django.contrib.auth.urls')),
-    url(r'^', include('accounts.urls', namespace = 'profiles')), # url for usernames from accounts app.
+    re_path(r'^', include('allauth.urls')),
+    re_path(r'^', include(('accounts.urls', 'profiles' ), namespace = 'profiles')), # url for usernames from accounts app.
 ]
 
 if settings.DEBUG:
