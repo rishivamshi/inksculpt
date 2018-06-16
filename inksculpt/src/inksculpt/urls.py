@@ -21,7 +21,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 
-from accounts.views import UserRegisterView
+# from accounts.views import UserRegisterView
 from sculpts.views import SculptListView #1
 from hashtags.api.views import TagSculptAPIView
 from hashtags.views import HashTagView
@@ -48,7 +48,7 @@ urlpatterns = [
    
     
 
-    re_path(r'^register/$', UserRegisterView.as_view(), name='register'),
+    # re_path(r'^register/$', UserRegisterView.as_view(), name='register'),
 
     re_path(r'^', include('allauth.urls')),
     re_path(r'^', include(('accounts.urls', 'profiles' ), namespace = 'profiles')), # url for usernames from accounts app.

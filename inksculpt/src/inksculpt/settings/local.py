@@ -32,13 +32,14 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+ 'django.contrib.sites',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.sites',
+   
     'easy_thumbnails',
     'image_cropping',
      'imagekit',
@@ -54,7 +55,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
 ]
 
-SITE_ID = 1
+SITE_ID = 2
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -192,7 +193,7 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 # #allauth_configuration
-# SITE_ID = 1
+
 ACCOUNT_SIGNUP_FORM_CLASS = 'accounts.forms.SignupForm' #customized_signup_form
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'

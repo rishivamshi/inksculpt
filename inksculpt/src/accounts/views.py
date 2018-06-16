@@ -9,7 +9,7 @@ from django.views import View #5
 from django.views.generic import DetailView, ListView #1
 from django.urls import reverse_lazy, reverse
 from django.views.generic.edit import FormView
-from .forms import UserRegisterForm
+# from .forms import UserRegisterForm
 from .models import UserProfile #9
 from django.shortcuts import render, get_object_or_404, redirect
 
@@ -99,27 +99,27 @@ def change_password(request):
 
 # Create your views here.
 
-class UserRegisterView(FormView):
-	template_name = 'registration/user_register_form.html'
-	form_class = UserRegisterForm
-	success_url = '/login'
+# class UserRegisterView(FormView):
+# 	template_name = 'registration/user_register_form.html'
+# 	form_class = UserRegisterForm
+# 	success_url = '/login'
 
-	def form_valid(self, form):
-		username = form.cleaned_data.get("username")
-		email = form.cleaned_data.get("email")
-		password = form.cleaned_data.get("password")
-		first_name = form.cleaned_data.get("first_name")
-		last_name = form.cleaned_data.get("last_name")
-		new_user = User.objects.create(username = username, email = email, first_name = first_name, last_name  = last_name)
-		new_user.set_password(password)
+# 	def form_valid(self, form):
+# 		username = form.cleaned_data.get("username")
+# 		email = form.cleaned_data.get("email")
+# 		password = form.cleaned_data.get("password")
+# 		first_name = form.cleaned_data.get("first_name")
+# 		last_name = form.cleaned_data.get("last_name")
+# 		new_user = User.objects.create(username = username, email = email, first_name = first_name, last_name  = last_name)
+# 		new_user.set_password(password)
 
-		new_user.save()
-		return super(UserRegisterView, self).form_valid(form)
+# 		new_user.save()
+# 		return super(UserRegisterView, self).form_valid(form)
 
-	def get_context_data(self, **kwargs):
-		data = super (UserRegisterView, self).get_context_data(**kwargs)
-		data['my_reg_form'] = data.get('form')
-		return data
+# 	def get_context_data(self, **kwargs):
+# 		data = super (UserRegisterView, self).get_context_data(**kwargs)
+# 		data['my_reg_form'] = data.get('form')
+# 		return data
 	
 
 
