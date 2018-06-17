@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"name",
+				"namespace"
+			],
+			[
+				"re",
+				"re_path"
+			],
+			[
 				"scul",
 				"sculpt_obj"
 			],
@@ -106,10 +114,6 @@
 			[
 				"for",
 				"formData"
-			],
-			[
-				"re",
-				"request"
 			],
 			[
 				"true",
@@ -510,20 +514,25 @@
 			[
 				"M",
 				"MEDIA_ROOT"
-			],
-			[
-				"doc",
-				"document_root"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "src/sculpts/models.py",
+			"file": "lib/python3.5/site-packages/allauth/templates/account/login.html",
 			"settings":
 			{
-				"buffer_size": 5575,
+				"buffer_size": 1409,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "lib/python3.5/site-packages/allauth/templates/account/signup.html",
+			"settings":
+			{
+				"buffer_size": 635,
+				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		}
@@ -561,33 +570,43 @@
 	"expanded_folders":
 	[
 		"/D/Work/github_projects/inksculpt/inksculpt",
-		"/D/Work/github_projects/inksculpt/inksculpt/src"
+		"/D/Work/github_projects/inksculpt/inksculpt/lib",
+		"/D/Work/github_projects/inksculpt/inksculpt/lib/python3.5",
+		"/D/Work/github_projects/inksculpt/inksculpt/lib/python3.5/site-packages",
+		"/D/Work/github_projects/inksculpt/inksculpt/lib/python3.5/site-packages/allauth",
+		"/D/Work/github_projects/inksculpt/inksculpt/lib/python3.5/site-packages/allauth/templates",
+		"/D/Work/github_projects/inksculpt/inksculpt/lib/python3.5/site-packages/allauth/templates/account"
 	],
 	"file_history":
 	[
-		"/D/Work/github_projects/inksculpt/inksculpt/lib/python3.5/site-packages/notify/templates/notifications/all.html",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/templates/navbar.html",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/inksculpt/urls.py",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/forms.py",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/views.py",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/inksculpt/settings/local.py",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/api/serializers.py",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/api/views.py",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/mixins.py",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/views.py",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/models.py",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/models.py",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/urls.py",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/urls.py",
+		"/D/Work/github_projects/inksculpt/inksculpt/lib/python3.5/site-packages/notify/templates/notifications/all.html",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/templates/sculpts/list_view.html",
 		"/D/Work/github_projects/inksculpt/inksculpt/lib/python3.5/site-packages/notify/templates/base.html",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/templates/sculpts/notifications.html",
-		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/views.py",
-		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/urls.py",
-		"/D/Work/github_projects/inksculpt/inksculpt/src/inksculpt/urls.py",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/inksculpt/settings/base.py",
-		"/D/Work/github_projects/inksculpt/inksculpt/src/inksculpt/settings/local.py",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/inksculpt/settings/production.py",
-		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/models.py",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/forms.py",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/templates/sculpts/form.html",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/templates/create_modal.html",
-		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/api/serializers.py",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/admin.py",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/templates/registration/user_register_form.html",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/templates/registration/login.html",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/templates/accounts/user_profileimage.html",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/templates/accounts/user_profile.html",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/templates/accounts/change_password.html",
-		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/forms.py",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/templates/accounts/user_about.html",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/admin.py",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/templates/sculpts/detail_view.html",
@@ -596,18 +615,13 @@
 		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/templates/accounts/user_following.html",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/templates/accounts/user_album.html",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/templates/accounts/form.html",
-		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/views.py",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/templates/accounts/user_profile_create.html",
-		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/mixins.py",
-		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/urls.py",
-		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/api/views.py",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/templates/base.html",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/templates/sculpts/detail_view - Copy.html",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/templates/accounts/user_detail - Copy.html",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/templates/accounts/snippets/recommend.html",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/hashtags/templates/hashtags/tag_view.html",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/api/urls.py",
-		"/D/Work/github_projects/inksculpt/inksculpt/src/templates/navbar.html",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/templates/accounts/user_register_form.html",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/api/urls.py",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/templates/sculpts/search_form.html",
@@ -703,6 +717,7 @@
 		"height": 104.0,
 		"where_history":
 		[
+			"D:\\Work\\github_projects\\inksculpt\\inksculpt\\src"
 		]
 	},
 	"find_state":
@@ -710,6 +725,10 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"register",
+			"UserRegisterForm",
+			"is_authenticated()",
+			"reverse",
 			"parsed_hashtags",
 			"summ",
 			"id_content",
@@ -772,33 +791,62 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "src/sculpts/models.py",
-					"semi_transient": true,
+					"file": "lib/python3.5/site-packages/allauth/templates/account/login.html",
+					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 5575,
+						"buffer_size": 1409,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4864,
-								4864
+								1392,
+								948
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Python/Python.sublime-syntax",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 832.0,
+						"translation.y": 156.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "lib/python3.5/site-packages/allauth/templates/account/signup.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 635,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								619,
+								619
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
