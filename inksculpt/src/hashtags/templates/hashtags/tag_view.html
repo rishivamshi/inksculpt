@@ -1,5 +1,6 @@
 
 {% load static %}
+{% load recommended %}
 <html lang="en">
   <head>
   
@@ -49,6 +50,7 @@
                     <li><i class="icon ion-ios-paper"></i><div><a href="newsfeed.html">My Newsfeed</a></div></li>
                     <li><i class="icon ion-images"></i><div><a href="newsfeed.html">Featured</a></div></li>
                     <li><i class="icon ion-ios-people"></i><div><a href="newsfeed.html">My Profile</a></div></li>
+                    <li><i class="icon ion-ios-bell"></i><div><a href="{% url 'notifications:all'  %}">Notifications</a></div></li>
                     
             </ul>
             
@@ -96,13 +98,10 @@
                 
               <div class="suggestedusers"><h5 >Who to Follow</h5></div>
               <div class="suggestions" >
-                <div class="follow-user newcontent">
-                <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm pull-left" />
-                <div>
-                  <h5><a href="timeline.html" class="text-white">Diana Amber</a></h5>
-                  <a href="#" class="text-white">Add friend</a>
-                </div>
-              </div>
+
+                {% recommended request.user %}
+
+              
               
               
             </div>

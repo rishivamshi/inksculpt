@@ -52,8 +52,8 @@
                 <div class="col-md-3 static">
                     <div class="profile-card">
                         <img src="http://placehold.it/300x300" alt="user" class="profile-photo" />
-                        <h5><a href="timeline.html" class="text-white">{{ request.user }}</a></h5>
-                        <a href="#" class="text-white"><i class="ion ion-android-person-add"></i> 1,299 followers</a>
+                        <h5><a href="{% url 'profiles:detail' request.user.username %}" class="text-white">{{ request.user }}</a></h5>
+                        <a href="{% url 'profiles:followers' request.user.username %}" class="text-white"><i class="ion ion-android-person-add"></i> {{ request.user.followed_by.all.count }} &nbsp; followers</a>
                     </div><!--profile card ends-->
 
                     <div class='post-content'>
@@ -62,9 +62,10 @@
             </div> 
                         <div class='newcontent'>
                 <ul class="nav-news-feed">
-                    <li><i class="icon ion-ios-paper"></i><div><a href="newsfeed.html">My Newsfeed</a></div></li>
-                    <li><i class="icon ion-images"></i><div><a href="newsfeed.html">Featured</a></div></li>
-                    <li><i class="icon ion-ios-people"></i><div><a href="newsfeed.html">My Profile</a></div></li>
+                    <li><i class="icon ion-ios-paper"></i><div><a href="/">My Newsfeed</a></div></li>
+                    <li><i class="icon ion-images"></i><div><a href="{% url 'sculpt:featured' %}">Featured</a></div></li>
+                    <li><i class="icon ion-ios-people"></i><div><a href="{% url 'profiles:detail' request.user.username %}">My Profile</a></div></li>
+                    <li><i class="icon ion-ios-bell"></i><div><a href="{% url 'notifications:all'  %}">Notifications</a></div></li>
                     
             </ul>
             

@@ -10,16 +10,21 @@
 
 
 {% for profile in recommended %}
-	<div class="follow-user newcontent">
+	<div  class="follow-user">
+
+    
                 <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm pull-left" />
                 <div>
-                	
-                  <h5><a href="/{{ profile.user.username }}" class="text-white"><p>{{ profile.user.username }}</p></a></h5>
-                  <!-- <a href="#" class="text-white">Add friend</a> -->
+                  <h5><a href="/{{ profile.user.username }}">{{ profile.user.username }}</a></h5>
+                  <a href="/{{ profile.user.username }}/follow" class="text-green">Follow</a>
                 </div>
+                	
+                 
                 
+                </div>
+                <hr>
 
-              </div>
+              
 {% empty %}
-		<h4>Not Followed by Any Users </h4>
+		<h4>You are following everyone. It's time to write up!</h4>
               {% endfor %}

@@ -17,14 +17,25 @@
     <title>{% block title %} Inksculpt {% endblock title %}</title>
     <style type="text/css">
       
+    {% if user.profile.cover_image %}
     .timeline-cover{
-  background: url("http://127.0.0.1:8000/media/{{ object.profile.cover_image }}") no-repeat;
+  background: url("{{ user.profile.cover_image.url }}") no-repeat;
   background-position: center;
   background-size: cover;
   min-height: 360px;
   border-radius: 0 0 4px 4px;
   position: relative;
-}
+} 
+{% else %}
+.timeline-cover{
+  background: url("http://placehold.it/1030x360") no-repeat;
+  background-position: center;
+  background-size: cover;
+  min-height: 360px;
+  border-radius: 0 0 4px 4px;
+  position: relative;
+} 
+{% endif %}
 
       .profile-info:hover .edit  {
           display: block;
@@ -70,7 +81,7 @@
                   <div class="editbutton">
                   {% if object.profile.profile_image %} 
 
-                    <img src="http://127.0.0.1:8000/media/{{ object.profile.profile_image }}" alt="" class="img-responsive profile-photo" />
+                    <img src="{{ object.profile.profile_image.url }}" alt="" class="img-responsive profile-photo" />
                      <div class="edit"><a href="#" ><i class="fa fa-pencil fa-lg"></i></a></div>
                     {% else %} 
                     <img src="http://placehold.it/300x300" alt="" class="img-responsive profile-photo" />
@@ -87,11 +98,11 @@
               </div>
               <div class="col-md-9">
                 <ul class="list-inline profile-menu">
-                  <li><a href="http://127.0.0.1:8000/{{ object.username }}/" >Timeline</a></li>
-                  <li><a href="http://127.0.0.1:8000/{{ object.username }}/about/" >About</a></li>
-                  <li><a href="http://127.0.0.1:8000/{{ object.username }}/album/">Album</a></li>
-                  <li><a href="http://127.0.0.1:8000/{{ object.username }}/following/" class="active">Following ({{ object.profile.get_following.count }})</a></li>
-                  <li><a href="http://127.0.0.1:8000/{{ object.username }}/followers/">Followers ({{ object.followed_by.all.count }})</a></li>
+                  <li><a href="{% url 'profiles:detail' object.username %}" >Timeline</a></li>
+                  <li><a href="{% url 'profiles:about' object.username %}" >About</a></li>
+                  <li><a href="{% url 'profiles:album' object.username %}">Album</a></li>
+                  <li><a href="{% url 'profiles:following' object.username %}" class="active">Following ({{ object.profile.get_following.count }})</a></li>
+                  <li><a href="{% url 'profiles:followers' object.username %}">Followers ({{ object.followed_by.all.count }})</a></li>
                 </ul>
                 <ul class="follow-me list-inline">
                   
@@ -102,7 +113,7 @@
         
                {% else %}
 
-              <li><a class="btn-primary" href="http://127.0.0.1:8000/profile"><i class="fa fa-pencil "></i>&nbsp; Edit</a></li>
+              <li><a class="btn-primary" href="{% url 'profiles:profileedit'  %}"><i class="fa fa-pencil "></i>&nbsp; Edit</a></li>
 
                {% endif %}
 
@@ -118,7 +129,7 @@
               <div class="editbutton">
                   {% if object.profile.profile_image %} 
 
-                    <img src="http://127.0.0.1:8000/media/{{ object.profile.profile_image }}" alt="" class="img-responsive profile-photo" />
+                    <img src="{{ object.profile.profile_image.url }}" alt="" class="img-responsive profile-photo" />
                      <div class="edit"><a href="#" ><i class="fa fa-pencil fa-lg"></i></a></div>
                     {% else %} 
                     <img src="http://placehold.it/300x300" alt="" class="img-responsive profile-photo" />
@@ -132,11 +143,11 @@
             </div>
             <div class="mobile-menu">
               <ul class="list-inline">
-                <li><a href="http://127.0.0.1:8000/{{ object.username }}/" >Timeline</a></li>
-                <li><a href="http://127.0.0.1:8000/{{ object.username }}/about/" >About</a></li>
-                <li><a href="http://127.0.0.1:8000/{{ object.username }}/album/">Album</a></li>
-                <li><a href="http://127.0.0.1:8000/{{ object.username }}/following/" class="active">Following ({{ object.profile.get_following.count }})</a></li>
-                <li><a href="http://127.0.0.1:8000/{{ object.username }}/followers/">Followers ({{ object.followed_by.all.count }})</a></li>
+                <li><a href="{% url 'profiles:detail' object.username %}" >Timeline</a></li>
+                  <li><a href="{% url 'profiles:about' object.username %}" >About</a></li>
+                  <li><a href="{% url 'profiles:album' object.username %}">Album</a></li>
+                  <li><a href="{% url 'profiles:following' object.username %}" class="active">Following ({{ object.profile.get_following.count }})</a></li>
+                  <li><a href="{% url 'profiles:followers' object.username %}">Followers ({{ object.followed_by.all.count }})</a></li>
               </ul>
 
               {% if request.user.get_username != object.username %}
@@ -144,7 +155,7 @@
         
                {% else %}
 
-              <li><a class="btn-primary" href="http://127.0.0.1:8000/profile"><i class="fa fa-pencil "></i>&nbsp; Edit</a></li>
+              <li><a class="btn-primary" href="{% url 'profiles:profileedit'  %}"><i class="fa fa-pencil "></i>&nbsp; Edit</a></li>
 
                {% endif %}
 
@@ -171,7 +182,7 @@
 
                       {% if user.profile.cover_image %} 
 
-                    <img src="http://127.0.0.1:8000/media/{{ user.profile.cover_image }}" alt="profile-cover" class="img-responsive cover" />
+                    <img src="{{ user.profile.cover_image.url }}" alt="profile-cover" class="img-responsive cover" />
                      
                     {% else %} 
                    <img src="http://placehold.it/1030x360" alt="profile-cover" class="img-responsive cover" />
@@ -182,7 +193,7 @@
 
                         {% if user.profile.profile_image %} 
 
-                    <img src="http://127.0.0.1:8000/media/{{ user.profile.profile_image }}" alt="user" class="profile-photo-lg" />
+                    <img src="{{ user.profile.profile_image.url }}" alt="user" class="profile-photo-lg" />
                      
                     {% else %} 
                     <img src="http://placehold.it/300x300" alt="user" class="profile-photo-lg" />

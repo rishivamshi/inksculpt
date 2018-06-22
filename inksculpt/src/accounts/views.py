@@ -37,7 +37,7 @@ def update_profile(request):
 			user_form.save()
 			profile_form.save()
 			# messages.success(request, _('Your profile was successfully updated!'))
-			return redirect('/')
+			return redirect('/'+request.user.username)
 
 		# else:
 			# messages.error(request, _('Please correct the error below.'))
@@ -62,7 +62,7 @@ def update_imageprofile(request):
 			
 			profileimage_form.save()
 			# messages.success(request, _('Your profile was successfully updated!'))
-			return redirect('/')
+			return redirect('/' + request.user.username)
 
 		# else:
 			# messages.error(request, _('Please correct the error below.'))

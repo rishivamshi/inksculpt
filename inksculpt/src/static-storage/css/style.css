@@ -923,20 +923,20 @@ textarea{
   Landing Page: V2 | Register/Login
   ==================================================*/  
 
-#lp-register{
-  background: linear-gradient(to right, rgba(0,0,0, 0.7) , rgba(0,0,0, 0.7)), url("http://placehold.it/1920x1280") fixed no-repeat;
-  background-size: cover;
-  background-position: center;
-  position: absolute;
-  top: 0;
-  width: 100%;
-  min-height: 100vh;
-}
+
 
 #lp-register .wrapper{
   padding-top: 140px;
   padding-bottom: 140px;
 }
+
+
+
+#lp-login .wrapper{
+  padding-top: 140px;
+  padding-bottom: 140px;
+}
+
 
 .intro-texts{
   color: #fff;
@@ -1119,6 +1119,26 @@ textarea{
 }
 
 
+#lp-login ul.social-icons{
+  text-align: center;
+  margin-top: 40px;
+  z-index: 11;
+}
+  
+#lp-login ul.social-icons li{
+  border: none;
+}  
+  
+#lp-login ul.social-icons li a{
+  color: #fff;
+}
+
+#lp-login ul.social-icons li a:hover{
+  color: #27aae1;
+  transition: all .5s;
+}
+
+
 /*feed-block and ul.online-users css available below*/
 
 /*==================================================
@@ -1189,6 +1209,7 @@ ul.nav-news-feed li i{
 ul.nav-news-feed i.ion-ios-paper{color: white;}
 
 ul.nav-news-feed i.ion-ios-people{color: white;}
+ul.nav-news-feed i.ion-ios-bell{color: white;}
 
 ul.nav-news-feed i.ion-ios-people-outline{color: white;}
 
