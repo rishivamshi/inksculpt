@@ -25,7 +25,9 @@
     <title> Feed | Inksculpt </title>
     <style type="text/css">
           
-
+.upload-image {
+  width: 100%
+}
     </style>
   </head>
 
@@ -157,6 +159,18 @@
     
 
     <script type="text/javascript">
+
+$(document).ready(function() {
+        $("form input").addClass('browse btn btn-primary upload-image ')
+    });
+
+$(document).on('click', '.browse', function(){
+  var file = $(this).parent().parent().parent().find('.file');
+  file.trigger('click');
+});
+$(document).on('change', '.file', function(){
+  $(this).parent().find('.form-control').val($(this).val().replace(/C:\\fakepath\\/i, ''));
+});
 
         function getParameterByName(name, url) {
         if (!url) url = window.location.href;
@@ -534,7 +548,7 @@ var counter = 0;
         var charsStart = 0;
         var charsCurrent = 0;
 
-        $(".sculpt-form").append("<span class='sculptCharsLeft'>" + charsStart + "</span>")
+        $(".sculpt-form").append("&nbsp;&nbsp;<span class='sculptCharsLeft'>" + charsStart + "</span>")
 
         $(".sculpt-form textarea").keyup(function(event) {
 
@@ -558,6 +572,27 @@ var counter = 0;
             
             //console.log(formData)
             jQuery.ajax({
+
+                cache: true,
+dataType: 'json',
+
+xhr: function()
+{
+    $('.progress').css("display",'block');
+    $('#percent').text('0%');
+    var xhr = new window.XMLHttpRequest();
+    //Upload progress
+    xhr.upload.addEventListener("progress", function(e){
+    if (e.lengthComputable) {
+        var percentComplete = e.loaded / e.total;
+        //Do something with upload progress
+        console.log(percentComplete)
+        $('.bar').css ('width', (percentComplete)*100+'%');
+        $('#percent').text(Math.floor((percentComplete)*100)+'%');
+    }
+}, false);
+return xhr;
+},
                 url: "/api/sculpt/create/",
                 data: formData,
                 // headers:{"X-CSRFToken": csrf_token},
