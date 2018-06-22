@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"resi",
+				"resized_image"
+			],
+			[
+				"wi",
+				"widget"
+			],
+			[
 				"name",
 				"namespace"
 			],
@@ -62,10 +70,6 @@
 			[
 				"Dat",
 				"DATE_CHOICES"
-			],
-			[
-				"wi",
-				"width\tproperty"
 			],
 			[
 				"pro",
@@ -510,28 +514,25 @@
 			[
 				"obje",
 				"object"
-			],
-			[
-				"M",
-				"MEDIA_ROOT"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "lib/python3.5/site-packages/allauth/templates/account/login.html",
+			"file": "src/accounts/forms.py",
 			"settings":
 			{
-				"buffer_size": 1409,
-				"line_ending": "Unix"
+				"buffer_size": 1944,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "lib/python3.5/site-packages/allauth/templates/account/signup.html",
+			"file": "src/accounts/views.py",
 			"settings":
 			{
-				"buffer_size": 635,
+				"buffer_size": 7644,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -570,15 +571,30 @@
 	"expanded_folders":
 	[
 		"/D/Work/github_projects/inksculpt/inksculpt",
-		"/D/Work/github_projects/inksculpt/inksculpt/lib",
-		"/D/Work/github_projects/inksculpt/inksculpt/lib/python3.5",
-		"/D/Work/github_projects/inksculpt/inksculpt/lib/python3.5/site-packages",
-		"/D/Work/github_projects/inksculpt/inksculpt/lib/python3.5/site-packages/allauth",
-		"/D/Work/github_projects/inksculpt/inksculpt/lib/python3.5/site-packages/allauth/templates",
-		"/D/Work/github_projects/inksculpt/inksculpt/lib/python3.5/site-packages/allauth/templates/account"
+		"/D/Work/github_projects/inksculpt/inksculpt/src",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/templates",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/templates/accounts"
 	],
 	"file_history":
 	[
+		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/templates/accounts/user_profileimage.html",
+		"/D/Work/github_projects/kalamgraphy/frontend-template/HTML/HTML/index-register.html",
+		"/D/Work/github_projects/inksculpt/inksculpt/lib/python3.5/site-packages/allauth/templates/account/login.html",
+		"/D/Work/github_projects/inksculpt/inksculpt/lib/python3.5/site-packages/allauth/templates/account/verification_sent.html",
+		"/D/Work/github_projects/inksculpt/inksculpt/lib/python3.5/site-packages/allauth/templates/account/verified_email_required.html",
+		"/D/Work/github_projects/inksculpt/inksculpt/lib/python3.5/site-packages/allauth/templates/account/password_reset_from_key_done.html",
+		"/D/Work/github_projects/inksculpt/inksculpt/lib/python3.5/site-packages/allauth/templates/account/password_reset_from_key.html",
+		"/D/Work/github_projects/inksculpt/inksculpt/lib/python3.5/site-packages/allauth/templates/account/password_reset_done.html",
+		"/D/Work/github_projects/inksculpt/inksculpt/lib/python3.5/site-packages/allauth/templates/account/password_reset.html",
+		"/D/Work/github_projects/inksculpt/inksculpt/lib/python3.5/site-packages/allauth/templates/account/password_change.html",
+		"/D/Work/github_projects/inksculpt/inksculpt/lib/python3.5/site-packages/allauth/templates/account/logout.html",
+		"/D/Work/github_projects/inksculpt/inksculpt/lib/python3.5/site-packages/allauth/templates/account/email_confirm.html",
+		"/D/Work/github_projects/inksculpt/inksculpt/lib/python3.5/site-packages/allauth/templates/account/email.html",
+		"/D/Work/github_projects/inksculpt/inksculpt/lib/python3.5/site-packages/allauth/templates/account/account_inactive.html",
+		"/D/Work/github_projects/inksculpt/inksculpt/lib/python3.5/site-packages/allauth/templates/account/signup.html",
+		"/D/Work/github_projects/inksculpt/inksculpt/lib/python3.5/site-packages/allauth/templates/base.html",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/templates/registration/login.html",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/templates/navbar.html",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/inksculpt/urls.py",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/forms.py",
@@ -603,8 +619,6 @@
 		"/D/Work/github_projects/inksculpt/inksculpt/src/templates/create_modal.html",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/admin.py",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/templates/registration/user_register_form.html",
-		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/templates/registration/login.html",
-		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/templates/accounts/user_profileimage.html",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/templates/accounts/user_profile.html",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/templates/accounts/change_password.html",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/templates/accounts/user_about.html",
@@ -691,26 +705,11 @@
 		"/D/Work/github_projects/kalamgraphy/kg/src/kg/templates/reply-modal.html",
 		"/D/Work/github_projects/kalamgraphy/kg/src/kg/accounts/api/url.py",
 		"/D/Work/github_projects/kalamgraphy/kg/src/kg/templates/home.html",
-		"/D/Work/github_projects/kalamgraphy/kg/src/kg/poemas/templates/poemas/update_view.html",
-		"/D/Work/github_projects/kalamgraphy/kg/src/kg/poemas/api/pagination.py",
-		"/D/Work/github_projects/kalamgraphy/kg/src/kg/poemas/urls.py",
-		"/D/Work/github_projects/kalamgraphy/kg/src/kg/hashtags/signals.py",
-		"/D/Work/github_projects/kalamgraphy/kg/src/kg/hashtags/models.py",
-		"/D/Work/github_projects/kalamgraphy/kg/src/kg/hashtags/views.py",
-		"/D/Work/github_projects/kalamgraphy/kg/src/kg/hashtags/admin.py",
-		"/D/Work/github_projects/kalamgraphy/kg/src/kg/accounts/admin.py",
-		"/D/Work/github_projects/kalamgraphy/kg/src/kg/poemas/validators.py",
-		"/D/Work/github_projects/kalamgraphy/kg/src/kg/accounts/api/__init__.py",
-		"/D/Work/github_projects/kalamgraphy/kg/src/kg/poemas/api/__init__.py",
-		"/D/Work/github_projects/kalamgraphy/kg/src/kg/poemas/templates/poemas/create_view.html",
-		"/D/Work/github_projects/kalamgraphy/kg/src/kg/poemas/tests.py",
-		"/D/Work/github_projects/kalamgraphy/kg/src/kg/poemas/templates/poemas/delete_confirm.html",
-		"/D/Work/github_projects/kalamgraphy/kg/src/kg/poemas/mixins.py",
-		"/D/Work/github_projects/kalamgraphy/kg/src/kg/poemas/admin.py"
+		"/D/Work/github_projects/kalamgraphy/kg/src/kg/poemas/templates/poemas/update_view.html"
 	],
 	"find":
 	{
-		"height": 40.0
+		"height": 23.0
 	},
 	"find_in_files":
 	{
@@ -796,29 +795,27 @@
 			[
 				{
 					"buffer": 0,
-					"file": "lib/python3.5/site-packages/allauth/templates/account/login.html",
+					"file": "src/accounts/forms.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1409,
+						"buffer_size": 1944,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1392,
-								948
+								1846,
+								1846
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/HTML/HTML.sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
+							"syntax": "Packages/Python/Python.sublime-syntax"
 						},
 						"translation.x": 0.0,
-						"translation.y": 156.0,
+						"translation.y": 866.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
@@ -826,27 +823,28 @@
 				},
 				{
 					"buffer": 1,
-					"file": "lib/python3.5/site-packages/allauth/templates/account/signup.html",
+					"file": "src/accounts/views.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 635,
+						"buffer_size": 7644,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								619,
-								619
+								2206,
+								2206
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/HTML/HTML.sublime-syntax"
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 624.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -932,7 +930,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 275.0,
+	"side_bar_width": 234.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

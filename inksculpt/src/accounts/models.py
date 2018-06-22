@@ -49,8 +49,8 @@ class UserProfileManager(models.Manager): #4
 
 	def recommended(self, user, limit_to = 10):
 		profile = user.profile 
-		following = profile.get_following()
-		qs = self.get_queryset().exclude(user__in = following).exclude(id = profile.id).order_by("?")[:limit_to]
+		following = profile.get_following()		
+		qs = self.get_queryset().exclude(user__in = following).exclude(id = profile.id).exclude(user__isnull = True).order_by("?")[:limit_to]
 		return qs
 
 
