@@ -28,7 +28,7 @@
 } 
 {% else %}
 .timeline-cover{
-  background: url("http://placehold.it/1030x360") no-repeat;
+  background: url("{% static 'images/cover.jpg' %}") no-repeat;
   background-position: center;
   background-size: cover;
   min-height: 360px;
@@ -84,7 +84,7 @@
                     <img src="{{ object.profile.profile_image.url }}" alt="" class="img-responsive profile-photo" />
                      <div class="edit"><a href="#" ><i class="fa fa-pencil fa-lg"></i></a></div>
                     {% else %} 
-                    <img src="http://placehold.it/300x300" alt="" class="img-responsive profile-photo" />
+                    <img src="{% static 'images/dp.jpg' %}" alt="" class="img-responsive profile-photo" />
                     {% endif %}
                    
                   </div>
@@ -132,7 +132,7 @@
                     <img src="{{ object.profile.profile_image.url }}" alt="" class="img-responsive profile-photo" />
                      <div class="edit"><a href="#" ><i class="fa fa-pencil fa-lg"></i></a></div>
                     {% else %} 
-                    <img src="http://placehold.it/300x300" alt="" class="img-responsive profile-photo" />
+                    <img src="{% static 'images/dp.jpg' %}" alt="" class="img-responsive profile-photo" />
                     {% endif %}
                    
                   </div>
@@ -184,7 +184,7 @@
                     <img src="{{ profile.user.profile.cover_image.url }}" alt="profile-cover" class="img-responsive cover" />
                      
                     {% else %} 
-                   <img src="http://placehold.it/1030x360" alt="profile-cover" class="img-responsive cover" />
+                   <img src="{% static 'images/cover.jpg' %}" alt="profile-cover" class="img-responsive cover" />
                     {% endif %}
 
                       <div class="card-info">
@@ -193,7 +193,7 @@
                     <img src="{{ profile.user.profile.profile_image.url }}" alt="user" class="profile-photo-lg" />
                      
                     {% else %} 
-                    <img src="http://placehold.it/300x300" alt="user" class="profile-photo-lg" />
+                    <img src="{% static 'images/dp.jpg' %}" alt="user" class="profile-photo-lg" />
                     {% endif %}
                         <div class="friend-info">
                           <a href="#" class="pull-right text-green">My Friend</a>

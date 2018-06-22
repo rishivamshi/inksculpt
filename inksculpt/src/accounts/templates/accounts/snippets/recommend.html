@@ -7,13 +7,13 @@
 
 	{% endfor %} -->
 
-
+{% load static %}
 
 {% for profile in recommended %}
 	<div  class="follow-user">
 
     
-                <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm pull-left" />
+                <img src="{% static 'images/dp.jpg' %}" alt="" class="profile-photo-sm pull-left" />
                 <div>
                   <h5><a href="/{{ profile.user.username }}">{{ profile.user.username }}</a></h5>
                   <a href="/{{ profile.user.username }}/follow" class="text-green">Follow</a>

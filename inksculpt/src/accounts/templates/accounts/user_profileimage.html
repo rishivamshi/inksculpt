@@ -32,7 +32,7 @@
 } 
 {% else %}
 .timeline-cover{
-  background: url("http://placehold.it/1030x360") no-repeat;
+  background: url("{% static 'images/cover.jpg' %}") no-repeat;
   background-position: center;
   background-size: cover;
   min-height: 360px;
@@ -91,7 +91,7 @@
                     <img src="{{ user.profile.profile_image.url }}" alt="" class="img-responsive profile-photo" />
                      <div class="edit"><a href="#" ><i class="fa fa-pencil fa-lg"></i></a></div>
                     {% else %} 
-                    <img src="http://placehold.it/300x300" alt="" class="img-responsive profile-photo" />
+                    <img src="{% static 'images/dp.jpg' %}" alt="" class="img-responsive profile-photo" />
                     {% endif %}
                    
                   </div>
@@ -139,7 +139,7 @@
                     <img src="{{ user.profile.profile_image.url }}" alt="" class="img-responsive profile-photo" />
                      <div class="edit"><a href="#" ><i class="fa fa-pencil fa-lg"></i></a></div>
                     {% else %} 
-                    <img src="http://placehold.it/300x300" alt="" class="img-responsive profile-photo" />
+                    <img src="{% static 'images/dp.jpg' %}" alt="" class="img-responsive profile-photo" />
                     {% endif %}
                    
                   </div>
@@ -183,8 +183,8 @@
               <!--Edit Profile Menu-->
               <ul class="edit-menu">
               	<li ><i class="icon ion-ios-information-outline"></i><a href="{% url 'profiles:profileedit'  %}">Basic Information</a></li>
-                <li ><i class="icon ion-ios-camera-outline"></i><a href="{% url 'profiles:profileimageedit'  %}">Update Images</a></li>
-                <li class="active"><i class="icon ion-ios-locked-outline"></i><a href="{% url 'profiles:change_password'  %}">Change Password</a></li>
+                <li class="active"><i class="icon ion-ios-camera-outline"></i><a href="{% url 'profiles:profileimageedit'  %}">Update Images</a></li>
+                <li ><i class="icon ion-ios-locked-outline"></i><a href="{% url 'profiles:change_password'  %}">Change Password</a></li>
                 <li ><i class="icon ion-ios-settings"></i><a href="#">Account Settings</a></li>
               </ul>
             </div>
