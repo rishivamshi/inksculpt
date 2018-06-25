@@ -322,11 +322,14 @@ var counter = 0;
             var PopoverMenu;
             if (sculptValue.current_user == sculptUser.username) {
 
-                PopoverMenu = "<div class='dropdown'><button type='button' class='dropbtn btn btn-lg btn-danger'><i class='icon ion-more'></i></button><div class='dropdown-content'><a href='sculpt/"+ sculptValue.id + "/update'>Edit</a><a href='sculpt/"+ sculptValue.id +"/delete'>Delete</a><a href='#'>Report</a></div></div>"
+                
+
+
+                PopoverMenu = "<div class='btn-group'><button type='button' data-toggle='dropdown' class='btn btn-info dropdown-toggle'>options &nbsp;<span class='caret'></span></button><div role='menu' class='dropdown-menu'><li><a href='sculpt/"+ sculptValue.id + "/update'>edit</a></li><li><a href='sculpt/"+ sculptValue.id +"/delete'>Delete</a></li><li class='divider'></li><li><a href='#'>Report</a></li></div></div>";
 
              } else {
 
-                PopoverMenu = "<div class='dropdown'><button type='button' class='dropbtn btn btn-lg btn-danger'><i class='icon ion-more'></i></button><div class='dropdown-content'><a href='#'>Report</a></div></div>";
+                PopoverMenu = "<div class='btn-group'><button type='button' data-toggle='dropdown' class='btn btn-info dropdown-toggle'>options &nbsp;<span class='caret'></span></button><div role='menu' class='dropdown-menu'><div class='divider'></div><div><a href='#'>Report</a></div></div></div>";
 
              }
             
