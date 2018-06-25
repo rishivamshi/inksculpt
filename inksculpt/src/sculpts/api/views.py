@@ -144,6 +144,30 @@ class SculptUserAlbumAPIView(generics.ListAPIView):
 
 
 
+class SearchSculptAPIView(generics.ListAPIView):
+	serializer_class = SculptModelSerializer
+	pagination_class = StandardResultsPagination
+	permission_classes = [permissions.AllowAny]
+	queryset = Sculpt.objects.all().order_by("-timestamp")
+
+	def get_serializer_context(self, *args, **kwargs):
+		context = super(SearchSculptAPIView, self ).get_serializer_context(*args, **kwargs)
+		context['request'] = self.request
+		return context
+
+	def get_queryset(self, *args, **kwargs): #18
+		
+		qs = self.queryset
+		query = self.request.GET.get("q", None)
+		if query is not None:
+			qs = qs.filter (
+
+				Q(content__icontains = query) | 
+				Q(user__username__icontains = query)
+				
+				)
+
+		return qs #20
 
 
 class SculptListAPIView(generics.ListAPIView):

@@ -26,14 +26,16 @@ from sculpts.views import SculptListView #1
 from hashtags.api.views import TagSculptAPIView
 from hashtags.views import HashTagView
 
-from .views import home
-
+from .views import home, SearchView
+from sculpts.api.views import SearchSculptAPIView
 
 
 
 urlpatterns = [
     re_path(r'^admin/', admin.site.urls),
     re_path(r'^$', SculptListView.as_view(), name = 'home'),
+    re_path(r'^search/$', SearchView.as_view(), name = 'search'),
+    re_path(r'^api/search/$', SearchSculptAPIView.as_view(), name = 'search-api'),
 
     re_path(r'^tags/(?P<hashtag>.*)/$', HashTagView.as_view(), name = 'hashtag'), # url for hashtags app. 
     re_path(r'^sculpt/', include(('sculpts.urls', 'sculpt'), namespace = 'sculpt')), # url for sculpts app. 
