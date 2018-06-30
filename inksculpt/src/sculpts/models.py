@@ -72,7 +72,7 @@ class SculptManager(models.Manager):
 			is_liked =  True
 			sculpt_obj.liked.add(user)
 			
-			notify.send(user, recipient = sculpt_obj.user , actor = user, verb = 'successful like')
+			notify.send(user, recipient = sculpt_obj.user , actor = user, object = sculpt_obj, verb = 'liked your post')
 
 		return is_liked
 
@@ -182,10 +182,10 @@ def sculpt_save_receiver(sender, instance, created, *args, **kwargs):
 	else:
 		if (instance.reply):
 			
-			notify.send(instance.user, recipient = instance.parent.user , actor = instance.user, verb = 'successful comment')
+			notify.send(instance.user, recipient = instance.parent.user , actor = instance.user, verb = 'Commented on your post')
 			
 		else:
-			notify.send(instance.user, recipient = instance.parent.user , actor = instance.user, verb = 'successful repost')
+			notify.send(instance.user, recipient = instance.parent.user , actor = instance.user, verb = 'Reposted your post')
 		
 
 

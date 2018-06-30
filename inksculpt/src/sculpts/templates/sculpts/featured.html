@@ -34,9 +34,12 @@
                         <a href="#" class="text-white"><i class="ion ion-android-person-add"></i> 1,299 followers</a>
                     </div><!--profile card ends-->
                         <ul class="nav-news-feed">
-                            <li><i class="icon ion-ios-paper"></i><div><a href="newsfeed.html">My Newsfeed</a></div></li>
-              
-                        </ul>
+                    <li><i class="icon ion-ios-paper"></i><div><a href="{% url 'sculpt:sculpt-home' %}">My Newsfeed</a></div></li>
+                    <li><i class="icon ion-images"></i><div><a href="{% url 'sculpt:featured' %}">Featured</a></div></li>
+                    <li><i class="icon ion-ios-people"></i><div><a href="{% url 'profiles:detail' request.user.username %}">My Profile</a></div></li>
+                    <li><i class="icon ion-ios-bell"></i><div><a href="{% url 'notifications:all'  %}">Notifications</a></div></li>
+                    
+            </ul>
             
                 </div>
 
@@ -476,6 +479,7 @@
                     attachSculpt(data, true)
                     updateHashLinks()
                     $("#replyModal").modal("hide")
+                    window.location.reload(false); 
                     // fetchSculpts();
                     // sculptList = data
                     // parseSculpts()

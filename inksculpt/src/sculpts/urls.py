@@ -21,7 +21,7 @@ urlpatterns = [
 
     # url(r'^$', sculpt_list_view, name = 'list'), # 2
     # url(r'^1/$', sculpt_detail_view, name = 'detail'), # 3
-    re_path(r'^$', RedirectView.as_view(url = "/")), #10
+    re_path(r'^$', RedirectView.as_view(url = "/"), name = 'sculpt-home'), #10
     re_path(r'^search/$', SculptListView.as_view(), name = 'list'), # 5  # /sculpt/ #8
     re_path(r'^create/$', SculptCreateView.as_view(), name = 'create'), # 7  # /sculpt/create
     re_path(r'^featured/$', SculptFeaturedListView.as_view(), name = 'featured'),

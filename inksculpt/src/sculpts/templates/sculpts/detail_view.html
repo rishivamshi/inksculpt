@@ -1,6 +1,4 @@
 {% load static %}
-
-
 {% load recommended %}
 
 
@@ -14,12 +12,20 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/ionicons.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.min.css' %}">
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i" rel="stylesheet">
-    <title>{% block title %} Inksculpt {% endblock title %}</title>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+     <script type="text/javascript" src="{% static 'js/js/bootstrap.min.js' %}"></script>
+     <script type="text/javascript" src="{% static 'js/jquery.sticky-kit.min.js' %}"></script>
+     <script type="text/javascript" src="{% static 'js/jquery.scrollbar.min.js' %}"></script>
+     <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
+
+
+
+    <title>Detail View | Inksculpt </title>
   </head>
 
-{% include "reply-modal.html" %}
+
 <body>
-    	
+    {% include "reply-modal.html" %}
     {% include "navbar.html" %}
 
     <!-- <img src = "{{ object.image_thumbnail.url }}"> -->
@@ -36,8 +42,8 @@
         
         <div id="page-contents">
           <div class="row">
-            <div class="col-md-3"></div>
-            <div class="col-md-7">
+            
+            <div class="col-md-8">
 
              
 
@@ -49,7 +55,7 @@
             </div>
 
 
-            <div class="col-md-2 static">
+            <div class="col-md-4 static">
               <div id="sticky-sidebar">
                 <h4 class="grey">Recommended Users</h4>
                 <div class="feed-item">
@@ -83,16 +89,8 @@
 
 
 
-<script
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-     <script type="text/javascript" src="{% static 'js/js/bootstrap.min.js' %}"></script>
-     <script type="text/javascript" src="{% static 'js/jquery.sticky-kit.min.js' %}"></script>
-     <script type="text/javascript" src="{% static 'js/jquery.scrollbar.min.js' %}"></script>
-     <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
 
+{% include "search-js.html" %}
 
     <script type="text/javascript">
 
@@ -123,6 +121,30 @@
         var initialURL = sculptContainer.attr("data-url") || "/api/sculpt/";
         // console.log(initialURL)
 
+         $(document.body).on("click", ".sculpt-report", function(e) {
+            e.preventDefault()
+            var this_ = $(this)
+            var sculptId = this_.attr("data-id")
+            var reportUrl = '/api/sculpt/' + sculptId + "/report/"
+            //this_.text("Liked")
+
+            jQuery.ajax({
+              method: "GET",
+              url: reportUrl,
+              success: function(data){
+                if (data.reported) {
+                  this_.text("Reported")
+                } else {
+                  this_.text("UnReported")
+                }
+              },
+              error: function(data) {
+                console.log("error")
+                console.log(data)
+              }
+            })
+
+        })
 
         $(document.body).on("click", ".sculpt-like", function(e) {
             e.preventDefault()
@@ -217,14 +239,14 @@
         }
 
 
-
+var counter = 0;
         function attachSculpt(sculptValue, prepend, resculpt) {
             // console.log(key)
             // console.log(value.user)
             // console.log(value.content)
             var dateDisplay = sculptValue.date_display;
             var sculptContent = sculptValue.content;
-            var sculptImage = sculptValue.thumbnail;
+            var sculptImage = sculptValue.image;
             var sculptUser = sculptValue.user;
             var timeSince = sculptValue.timesince;
             var verb = 'Like'
@@ -236,7 +258,22 @@
             var replyId = sculptValue.id
             if (sculptValue.parent) {
                 replyId = sculptValue.parent.id
+                counter = counter + 1;
             }
+
+            var PopoverMenu;
+            if (sculptValue.current_user == sculptUser.username) {
+
+                
+
+
+                PopoverMenu = "<div class='btn-group'><button type='button' data-toggle='dropdown' class='btn btn-info dropdown-toggle'>options &nbsp;<span class='caret'></span></button><div role='menu' class='dropdown-menu'><li><a href='/update'>edit</a></li><li><a href='delete'>Delete</a></li><li class='divider'></li><li><a href='#' class='sculpt-report' data-id = "+ sculptValue.id +" >Report</a></li></div></div>";
+
+             } else {
+
+                PopoverMenu = "<div class='btn-group'><button type='button' data-toggle='dropdown' class='btn btn-info dropdown-toggle'>options &nbsp;<span class='caret'></span></button><div role='menu' class='dropdown-menu'><div class='divider'></div><div><a href='#' class='sculpt-report'  data-id = "+ sculptValue.id +">Report</a></div></div></div>";
+
+             }
 
             // console.log(sculptImage);
             if (resculpt && sculptValue.parent && !isReply) {
@@ -244,13 +281,13 @@
                 
                     if (sculptImage == null) {
 
-                        sculptContainer.append("<div class='post-content'><div class='post-date hidden-xs hidden-sm'><h5>"+ sculptUser.username +"</h5><p class='text-grey' style='font-size: 9'>"+ dateDisplay +"</p></div><div class='post-container'><img src='{% static 'images/dp.jpg' %}' alt='user' class='profile-photo-md pull-left' /><div class='post-detail'><div class='user-info'><h5><a href='"+ sculptUser.url +"' class='profile-link'>" + sculptUser.username  + "</a> <span class='following'>following</span></h5><p class='text-muted'>Reposted <a href='"+ mainSculpt.user.url +"'>"+ mainSculpt.user.username + "</a>'s post about <span title='" + dateDisplay + "' style=' color:#00897B;'> "+ timeSince +"</span></p></div><div class='reaction'><a href = '#' class='btn text-green sculpt-like' data-id='" + sculptValue.id +"'><i class='icon ion-thumbsup'></i>" + verb + " ("+ sculptValue.likes +")</a></div><div class='line-divider'></div><div class='post-text'><pre class='sculptcontentclass'>" + sculptContent +"</pre></div><div class='row' style='margin-bottom: 10px'><a role='button'  class='col-lg-3 col-md-3 col-sm-3 btn' style='background-color: #00897B; color: whitesmoke' href = '/sculpt/" + sculptValue.id + "' >View</a><div class='col-lg-1 col-md-1 col-sm-1'></div><a role='button' class='sculpt-reply col-lg-3 col-md-3 col-sm-3 btn' style='background-color: #00897B; color: whitesmoke' data-user ='"+ sculptUser.username +"' data-id='"+ replyId + "' >Comment</a><div class='col-lg-1 col-md-1 col-sm-1'></div><a role='button' class=' resculptBtn col-lg-3 col-md-3 col-sm-3 btn' style='background-color: #00897B; color: whitesmoke' href = '/sculpt/" + sculptValue.id + "/resculpt/' >Repost</a><div class='col-lg-1 col-md-1 col-sm-1'></div></div></div></div></div>")
+                        sculptContainer.append("<div class='post-content'><div class='post-date hidden-xs hidden-sm'><h5>"+ sculptUser.username +"</h5><p class='text-grey' style='font-size: 9'>"+ dateDisplay +"</p></div><div class='post-container'><img src='{% static 'images/dp.jpg' %}' alt='user' class='profile-photo-md pull-left' /><div class='post-detail'><div class='user-info'><h5><a href='"+ sculptUser.url +"' class='profile-link'>" + sculptUser.username  + "</a> </h5><p class='text-muted'>Reposted <a href='"+ mainSculpt.user.url +"'>"+ mainSculpt.user.username + "</a>'s post about <span title='" + dateDisplay + "' style=' color:#00897B;'> "+ timeSince +"</span></p></div><div class='reaction'><a href = '#' class='btn text-green sculpt-like' data-id='" + sculptValue.id +"'><i class='icon ion-thumbsup'></i>" + verb + " ("+ sculptValue.likes +")</a>"+ PopoverMenu +"</div><div class='line-divider'></div><div class='post-text'><pre class='sculptcontentclass'>" + sculptContent +"</pre></div>                                                                                                                                                              <div class='row options-buttons' style='margin-bottom: 10px'><a role='button'  class=' btn' style='background-color: #00897B; color: whitesmoke' href = '/sculpt/" + sculptValue.id + "' >("+ counter +")<span class='options-buttons-text'>View</span> </a><a role='button' class='sculpt-reply   btn' style='background-color: #00897B; color: whitesmoke' data-user ='"+ sculptUser.username +"' data-id='"+ replyId + "' ><i class='icon ion-ios-chatbubble-outline'></i>&nbsp;<span class='options-buttons-text'>Comment</span></a><a role='button' class=' resculptBtn  btn' style='background-color: #00897B; color: whitesmoke' href = '/sculpt/" + sculptValue.id + "/resculpt/' ><i class='icon ion-ios-refresh-outline'></i>&nbsp;<span class='options-buttons-text'>Repost</span></a></div></div></div></div>")
                     
 
                     } else {
 
 
-                        sculptContainer.append("<div class='post-content'><div class='post-date hidden-xs hidden-sm'><h5>"+ sculptUser.username +"</h5><p class='text-grey' style='font-size: 9'>"+ dateDisplay +"</p></div><img src='" + mainSculpt.image + "' alt='post-image' class='img-responsive post-image' /><div class='post-container'><img src='{% static 'images/dp.jpg' %}' alt='user' class='profile-photo-md pull-left' /><div class='post-detail'><div class='user-info'><h5><a href='"+ sculptUser.url +"' class='profile-link'>" + sculptUser.username  + "</a> <span class='following'>following</span></h5><p class='text-muted'>Reposted <a href='"+ mainSculpt.user.url +"'>"+ mainSculpt.user.username + "</a>'s post about <span title='" + dateDisplay + "' style=' color:#00897B;'> "+ timeSince +"</span></p></div><div class='reaction'><a href = '#' class='btn text-green sculpt-like' data-id='" + sculptValue.id +"'><i class='icon ion-thumbsup'></i>" + verb + " ("+ sculptValue.likes +")</a></div><div class='line-divider'></div><div class='post-text'><pre class='sculptcontentclass'>" + sculptContent +"</pre></div><div class='row' style='margin-bottom: 10px'><a role='button'  class='col-lg-3 col-md-3 col-sm-3 btn' style='background-color: #00897B; color: whitesmoke' href = '/sculpt/" + sculptValue.id + "' >View</a><div class='col-lg-1 col-md-1 col-sm-1'></div><a role='button' class='sculpt-reply col-lg-3 col-md-3 col-sm-3 btn' style='background-color: #00897B; color: whitesmoke' data-user ='"+ sculptUser.username +"' data-id='"+ replyId + "' >Comment</a><div class='col-lg-1 col-md-1 col-sm-1'></div><a role='button' class=' resculptBtn col-lg-3 col-md-3 col-sm-3 btn' style='background-color: #00897B; color: whitesmoke' href = '/sculpt/" + sculptValue.id + "/resculpt/' >Repost</a><div class='col-lg-1 col-md-1 col-sm-1'></div></div></div></div></div>")
+                        sculptContainer.append("<div class='post-content'><div class='post-date hidden-xs hidden-sm'><h5>"+ sculptUser.username +"</h5><p class='text-grey' style='font-size: 9'>"+ dateDisplay +"</p></div><img src='" + mainSculpt.image + "' alt='post-image' class='img-responsive post-image' /><div class='post-container'><img src='{% static 'images/dp.jpg' %}' alt='user' class='profile-photo-md pull-left' /><div class='post-detail'><div class='user-info'><h5><a href='"+ sculptUser.url +"' class='profile-link'>" + sculptUser.username  + "</a> </h5><p class='text-muted'>Reposted <a href='"+ mainSculpt.user.url +"'>"+ mainSculpt.user.username + "</a>'s post about <span title='" + dateDisplay + "' style=' color:#00897B;'> "+ timeSince +"</span></p></div><div class='reaction'><a href = '#' class='btn text-green sculpt-like' data-id='" + sculptValue.id +"'><i class='icon ion-thumbsup'></i>" + verb + " ("+ sculptValue.likes +")</a>"+ PopoverMenu +"</div><div class='line-divider'></div><div class='post-text'><pre class='sculptcontentclass'>" + sculptContent +"</pre></div>                                                                                                                                                               <div class='row options-buttons' style='margin-bottom: 10px'><a role='button'  class=' btn' style='background-color: #00897B; color: whitesmoke' href = '/sculpt/" + sculptValue.id + "' >("+ counter +")<span class='options-buttons-text'>View</span> </a><a role='button' class='sculpt-reply  btn' style='background-color: #00897B; color: whitesmoke' data-user ='"+ sculptUser.username +"' data-id='"+ replyId + "' ><i class='icon ion-ios-chatbubble-outline'></i>&nbsp;<span class='options-buttons-text'>Comment</span></a><a role='button' class=' resculptBtn btn' style='background-color: #00897B; color: whitesmoke' href = '/sculpt/" + sculptValue.id + "/resculpt/' ><i class='icon ion-ios-refresh-outline'></i>&nbsp;<span class='options-buttons-text'>Repost</span></a></div></div></div></div>")
                     
 
 
@@ -266,7 +303,7 @@
                         
                         
 
-                        sculptContainer.append("<div class='post-content'><div class='post-date hidden-xs hidden-sm'><h5>"+ sculptUser.username +"</h5><p class='text-grey' style='font-size: 9'>"+ dateDisplay +"</p></div><div class='post-container'><img src='{% static 'images/dp.jpg' %}' alt='user' class='profile-photo-md pull-left' /><div class='post-detail'><div class='user-info'><h5><a href='"+ sculptUser.url +"' class='profile-link'>" + sculptUser.username  + "</a> <span class='following'>following</span></h5><p class='text-muted'>Commented on <a href='"+ mainSculpt.user.url +"'>"+ mainSculpt.user.username + "</a>'s post about <span title='" + dateDisplay + "' style=' color:#00897B;'> "+ timeSince +"</span></p></div><div class='reaction'><a href = '#' class='btn text-green sculpt-like' data-id='" + sculptValue.id +"'><i class='icon ion-thumbsup'></i>" + verb + " ("+ sculptValue.likes +")</a></div><div class='line-divider'></div><div class='post-text'><pre class='sculptcontentclass'>" + sculptContent +"</pre></div><div class='row' style='margin-bottom: 10px'><a role='button'  class='col-lg-3 col-md-3 col-sm-3 btn' style='background-color: #00897B; color: whitesmoke' href = '/sculpt/" + sculptValue.id + "' >View</a><div class='col-lg-1 col-md-1 col-sm-1'></div><a role='button' class='sculpt-reply col-lg-3 col-md-3 col-sm-3 btn' style='background-color: #00897B; color: whitesmoke' data-user ='"+ sculptUser.username +"' data-id='"+ replyId + "' >Comment</a><div class='col-lg-1 col-md-1 col-sm-1'></div><a role='button' class=' resculptBtn col-lg-3 col-md-3 col-sm-3 btn' style='background-color: #00897B; color: whitesmoke' href = '/sculpt/" + sculptValue.id + "/resculpt/' >Repost</a><div class='col-lg-1 col-md-1 col-sm-1'></div></div></div></div></div>")
+                        sculptContainer.append("<div class='post-content'><div class='post-date hidden-xs hidden-sm'><h5>"+ sculptUser.username +"</h5><p class='text-grey' style='font-size: 9'>"+ dateDisplay +"</p></div><div class='post-container'><img src='{% static 'images/dp.jpg' %}' alt='user' class='profile-photo-md pull-left' /><div class='post-detail'><div class='user-info'><h5><a href='"+ sculptUser.url +"' class='profile-link'>" + sculptUser.username  + "</a> </h5><p class='text-muted'>Commented on <a href='"+ mainSculpt.user.url +"'>"+ mainSculpt.user.username + "</a>'s post about <span title='" + dateDisplay + "' style=' color:#00897B;'> "+ timeSince +"</span></p></div><div class='reaction'><a href = '#' class='btn text-green sculpt-like' data-id='" + sculptValue.id +"'><i class='icon ion-thumbsup'></i>" + verb + " ("+ sculptValue.likes +")</a>"+ PopoverMenu +"</div><div class='line-divider'></div><div class='post-text'><pre class='sculptcontentclass'>" + sculptContent +"</pre></div>                                                                                                                              <div class='row options-buttons' style='margin-bottom: 10px'><a role='button'  class=' btn' style='background-color: #00897B; color: whitesmoke' href = '/sculpt/" + sculptValue.id + "' >("+ counter +")<span class='options-buttons-text'>View</span> </a><a role='button' class='sculpt-reply  btn' style='background-color: #00897B; color: whitesmoke' data-user ='"+ sculptUser.username +"' data-id='"+ replyId + "' ><i class='icon ion-ios-chatbubble-outline'></i>&nbsp;<span class='options-buttons-text'>Repost</span></a></div></div></div></div>")
 
 
                     
@@ -280,7 +317,9 @@
                     if (sculptImage == null) {
 
 
-                       sculptContainer.append("<div class='post-content'><div class='post-date hidden-xs hidden-sm'><h5>"+ sculptUser.username +"</h5><p class='text-grey' style='font-size: 9'>"+ dateDisplay +"</p></div><div class='post-container'><img src='{% static 'images/dp.jpg' %}' alt='user' class='profile-photo-md pull-left' /><div class='post-detail'><div class='user-info'><h5><a href='"+ sculptUser.url +"' class='profile-link'>" + sculptUser.username  + "</a> <span class='following'>following</span></h5><p class='text-muted'>Published a photo about <span title='" + dateDisplay + "' style=' color:#00897B;'> "+ timeSince +"</span></p></div><div class='reaction'><a href = '#' class='btn text-green sculpt-like' data-id='" + sculptValue.id +"'><i class='icon ion-thumbsup'></i>" + verb + " ("+ sculptValue.likes +")</a></div><div class='line-divider'></div><div class='post-text'><pre class='sculptcontentclass'>" + sculptContent +"</pre></div><div class='row' style='margin-bottom: 10px'><a role='button'  class='col-lg-3 col-md-3 col-sm-3 btn' style='background-color: #00897B; color: whitesmoke' href = '/sculpt/" + sculptValue.id + "' >View</a><div class='col-lg-1 col-md-1 col-sm-1'></div><a role='button' class='sculpt-reply col-lg-3 col-md-3 col-sm-3 btn' style='background-color: #00897B; color: whitesmoke' data-user ='"+ sculptUser.username +"' data-id='"+ replyId + "' >Comment</a><div class='col-lg-1 col-md-1 col-sm-1'></div><a role='button' class=' resculptBtn col-lg-3 col-md-3 col-sm-3 btn' style='background-color: #00897B; color: whitesmoke' href = '/sculpt/" + sculptValue.id + "/resculpt/' >Repost</a><div class='col-lg-1 col-md-1 col-sm-1'></div></div></div></div></div>")
+                       sculptContainer.append("<div class='post-content'><div class='post-date hidden-xs hidden-sm'><h5>"+ sculptUser.username +"</h5><p class='text-grey' style='font-size: 9'>"+ dateDisplay +"</p></div><div class='post-container dffdfsd'><img src='{% static 'images/dp.jpg' %}' alt='user' class='profile-photo-md pull-left' /><div class='post-detail'><div class='user-info'><h5><a href='"+ sculptUser.url +"' class='profile-link'>" + sculptUser.username  + "</a> </h5><p class='text-muted'>Published about <span title='" + dateDisplay + "' style=' color:#00897B;'> "+ timeSince +"</span></p></div><div class='reaction'><a href = '#' class='btn text-green sculpt-like' data-id='" + sculptValue.id +"'><i class='icon ion-thumbsup'></i>" + verb + " ("+ sculptValue.likes +")</a>" + PopoverMenu + "</div><div class='line-divider'></div><div class='post-text'><pre class='sculptcontentclass'>" + sculptContent +"</pre></div><div class='row options-buttons' style='margin-bottom: 10px'><a role='button'  class=' btn' style='background-color: #00897B; color: whitesmoke' href = '/sculpt/" + sculptValue.id + "' >("+ counter +")<span class='options-buttons-text'>View</span>  </a><a role='button' class='sculpt-reply  btn' style='background-color: #00897B; color: whitesmoke' data-user ='"+ sculptUser.username +"' data-id='"+ replyId + "' ><i class='icon ion-ios-chatbubble-outline'></i>&nbsp;<span class='options-buttons-text'>Comment</span></a><a role='button' class=' resculptBtn  btn' style='background-color: #00897B; color: whitesmoke' href = '/sculpt/" + sculptValue.id + "/resculpt/' ><i class='icon ion-ios-refresh-outline'></i>&nbsp;<span class='options-buttons-text'>Repost</span></a></div></div></div></div>")
+
+                       counter = 0;
 
 
 
@@ -293,10 +332,10 @@
                         
                         
 
-                        sculptContainer.append("<div class='post-content'><div class='post-date hidden-xs hidden-sm'><h5>"+ sculptUser.username +"</h5><p class='text-grey' style='font-size: 9'  >"+ dateDisplay +"</p></div><img src='" + sculptImage + "' alt='post-image' class='img-responsive post-image' /><div class='post-container'><img src='{% static 'images/dp.jpg' %}' alt='user' class='profile-photo-md pull-left' /><div class='post-detail'><div class='user-info'><h5><a href='"+ sculptUser.url +"' class='profile-link'>" + sculptUser.username  + "</a> <span class='following'>following</span></h5><p class='text-muted'>Published a photo about <span title='" + dateDisplay + "' style=' color:#00897B;'> "+ timeSince +"</span></p></div><div class='reaction'><a href = '#' class='btn text-green sculpt-like' data-id='" + sculptValue.id +"'><i class='icon ion-thumbsup'></i>" + verb + " ("+ sculptValue.likes +")</a></div><div class='line-divider'></div><div class='post-text'><pre class='sculptcontentclass'>" + sculptContent +"</pre></div><div class='row' style='margin-bottom: 10px'><a role='button'  class='col-lg-3 col-md-3 col-sm-3 btn' style='background-color: #00897B; color: whitesmoke' href = '/sculpt/" + sculptValue.id + "' >View</a><div class='col-lg-1 col-md-1 col-sm-1'></div><a role='button' class='sculpt-reply col-lg-3 col-md-3 col-sm-3 btn' style='background-color: #00897B; color: whitesmoke' data-user ='"+ sculptUser.username +"' data-id='"+ replyId + "' >Comment</a><div class='col-lg-1 col-md-1 col-sm-1'></div><a role='button' class=' resculptBtn col-lg-3 col-md-3 col-sm-3 btn' style='background-color: #00897B; color: whitesmoke' href = '/sculpt/" + sculptValue.id + "/resculpt/' >Repost</a><div class='col-lg-1 col-md-1 col-sm-1'></div></div></div></div></div>")
+                        sculptContainer.append("<div class='post-content'><div class='post-date hidden-xs hidden-sm'><h5>"+ sculptUser.username +"</h5><p class='text-grey' style='font-size: 9'  >"+ dateDisplay +"</p></div><img src='" + sculptImage + "' alt='post-image' class='img-responsive post-image' /><div class='post-container'><img src='{% static 'images/dp.jpg' %}' alt='user' class='profile-photo-md pull-left' /><div class='post-detail'><div class='user-info'><h5><a href='"+ sculptUser.url +"' class='profile-link'>" + sculptUser.username  + "</a></h5><p class='text-muted'>Published a photo about <span title='" + dateDisplay + "' style=' color:#00897B;'> "+ timeSince +"</span></p></div><div class='reaction'><a href = '#' class='btn text-green sculpt-like' data-id='" + sculptValue.id +"'><i class='icon ion-thumbsup'></i>" + verb + " ("+ sculptValue.likes +")</a>" + PopoverMenu +"</div><div class='line-divider'></div><div class='post-text'><pre class='sculptcontentclass'>" + sculptContent +"</pre></div><div class='row options-buttons' style='margin-bottom: 10px'><a role='button'  class=' btn' style='background-color: #00897B; color: whitesmoke' href = '/sculpt/" + sculptValue.id + "' >("+ counter +")<span class='options-buttons-text'>View</span> </a><a role='button' class='sculpt-reply  btn' style='background-color: #00897B; color: whitesmoke' data-user ='"+ sculptUser.username +"' data-id='"+ replyId + "' ><i class='icon ion-ios-chatbubble-outline'></i>&nbsp;<span class='options-buttons-text'>Comment</span></a><a role='button' class=' resculptBtn  btn' style='background-color: #00897B; color: whitesmoke' href = '/sculpt/" + sculptValue.id + "/resculpt/' ><i class='icon ion-ios-refresh-outline'></i>&nbsp;<span class='options-buttons-text'>Repost</span></a>  </div></div></div></div>")
 
 
-
+counter = 0;
 
 
 
