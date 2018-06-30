@@ -29,7 +29,7 @@
 } 
 {% else %}
 .timeline-cover{
-  background: url("{% static 'images/cover.jpg' %}") no-repeat;
+  background: url("{% static 'images/cover.png' %}") no-repeat;
   background-position: center;
   background-size: cover;
   min-height: 360px;
@@ -97,7 +97,7 @@
                   <h3>{{ object.username }}</h3>
                 
                   
-                  <p class="text-muted">Creative Director</p>
+<p class="text-muted">{{ user.first_name }} &nbsp; {{ user.last_name }}</p>
                 </div>
               </div>
               <div class="col-md-9">
@@ -141,7 +141,7 @@
                    
                   </div>
               <h4>{{ object.username }}</h4>
-              <p class="text-muted">Creative Director</p>
+<p class="text-muted">{{ user.first_name }} &nbsp; {{ user.last_name }}</p>
 
 
             </div>
@@ -181,10 +181,14 @@
               ================================================= -->
               <div class="create-post">
                 <div class="row">
-                  <div class="panel panel-default">
-  <div class="panel-heading">Credits: </div>
+                  {% if request.user.get_username == object.username %}
+                    <div class="panel panel-default">
+                    <div class="panel-heading">Credits:  {{ credits }}</div>
+                    </div>
+                  {% endif %}
+                  
  
-</div>
+                
                   
                 </div>
               </div><!-- Post Create Box End-->

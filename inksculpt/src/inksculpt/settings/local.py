@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'accounts',
     'hashtags',
+   
     'sculpts',
     'allauth',
     'allauth.account',

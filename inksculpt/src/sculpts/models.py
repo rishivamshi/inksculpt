@@ -71,10 +71,23 @@ class SculptManager(models.Manager):
 		else:
 			is_liked =  True
 			sculpt_obj.liked.add(user)
-			print(sculpt_obj)
+			
 			notify.send(user, recipient = sculpt_obj.user , actor = user, verb = 'successful like')
 
 		return is_liked
+
+	def report_toggle(self, user, sculpt_obj):
+		if user in sculpt_obj.reported.all():
+			is_reported = False 
+			sculpt_obj.reported.remove(user)
+
+		else:
+			is_reported =  True
+			sculpt_obj.reported.add(user)
+			
+
+		return is_reported
+
 
 
 
@@ -84,6 +97,7 @@ class Sculpt(models.Model):
 	user = models.ForeignKey( settings.AUTH_USER_MODEL, null = True , on_delete = models.SET_NULL ) # Comments - 1 and attribute is cooments 2. 
 	content = NonStrippingTextField(validators = [validate_content]) # writing stuff and see how to take care of blank spaces - strip = false
 	liked = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, related_name = 'liked')
+	reported = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, related_name = 'reported')
 	reply = models.BooleanField(verbose_name = 'Is a reply?', default = False)
 	featured = models.BooleanField(verbose_name='Featured aah? haha', default = False)
 	image = models.ImageField(

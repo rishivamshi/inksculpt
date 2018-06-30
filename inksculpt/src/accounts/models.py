@@ -53,6 +53,38 @@ class UserProfileManager(models.Manager): #4
 		qs = self.get_queryset().exclude(user__in = following).exclude(id = profile.id).exclude(user__isnull = True).order_by("?")[:limit_to]
 		return qs
 
+	def credits(self, user):
+		profile = user.profile
+		following = profile.get_following().count()
+		followedby = user.followed_by.count()
+		dpUploaded = 0
+		cpUploaded = 0
+		dobUpdated = 0
+		genderUpdated = 0
+		cityUpdated = 0
+		countryUpdated = 0
+		statusUpdated = 0
+		if(profile.profile_image):
+			dpUploaded = 10
+		if (profile.cover_image):
+			cpUploaded = 10
+		if (profile.dob):
+			dobUpdated = 5
+		if (profile.gender):
+			genderUpdated = 5
+		if (profile.city):
+			cityUpdated = 5
+		if (profile.country):
+			countryUpdated = 5
+		if (profile.status):
+			statusUpdated = 5
+		credits = following + (followedby) * 2 + dpUploaded + cpUploaded + dobUpdated + genderUpdated + cityUpdated + countryUpdated + statusUpdated
+		return credits
+
+
+
+
+
 
 
 

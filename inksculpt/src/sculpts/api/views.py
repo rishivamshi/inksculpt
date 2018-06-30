@@ -17,6 +17,20 @@ from rest_framework.response import Response
 from itertools import chain
 
 
+class ReportToggleAPIView(APIView):
+	permission_classes = [permissions.IsAuthenticated]
+
+	def get(self, request,pk, format = None):
+		sculpt_qs = Sculpt.objects.filter(pk = pk)
+		message = "Not allowed"
+		
+		if request.user.is_authenticated:
+			is_reported = Sculpt.objects.report_toggle(request.user, sculpt_qs.first())
+			return Response({'reported': is_reported })
+		
+		return Response({"message": message }, status = 400)
+
+
 class LikeToggleAPIView(APIView):
 	permission_classes = [permissions.IsAuthenticated]
 
@@ -29,7 +43,6 @@ class LikeToggleAPIView(APIView):
 			return Response({'liked': is_liked })
 		
 		return Response({"message": message }, status = 400)
-
 
 
 

@@ -14,6 +14,7 @@ from .views import (
 	SculptDetailAPIView,
 	SculptFeaturedAPIView,
 	SculptFeaturedHomepageAPIView,
+	ReportToggleAPIView,
 	
  		)
 urlpatterns = [
@@ -25,7 +26,7 @@ urlpatterns = [
   	url(r'^featured/$', SculptFeaturedAPIView.as_view(), name='featured' ),
   	url(r'^featuredhome/$', SculptFeaturedHomepageAPIView.as_view(), name='featuredhome' ),
   	url(r'^(?P<pk>\d+)/like/$', LikeToggleAPIView.as_view(), name='like-toggle' ),
-
+  	url(r'^(?P<pk>\d+)/report/$', ReportToggleAPIView.as_view(), name='report-toggle' ),
 
 ]
 

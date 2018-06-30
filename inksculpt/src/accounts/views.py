@@ -137,8 +137,13 @@ class UserDetailView(DetailView):	#2
 		following = UserProfile.objects.is_following(self.request.user, self.get_object())
 		context['following'] = following
 		context['recommended'] = UserProfile.objects.recommended(self.request.user)
-
+		context['credits'] = UserProfile.objects.credits(self.request.user)
+		
 		return context
+
+
+
+
 
 class UserFollowView(View): #7
 	def get(self, request, username, *args, **kwargs):
@@ -171,6 +176,7 @@ class UserAlbumListView(DetailView): #7
 class UserFollowingListView(DetailView): #7
 	template_name = 'accounts/user_following.html'
 	queryset = User.objects.all()
+
 
 	def get_object(self):
 		return get_object_or_404(User, username__iexact = self.kwargs.get("username"))

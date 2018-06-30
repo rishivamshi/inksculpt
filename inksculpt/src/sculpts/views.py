@@ -13,6 +13,7 @@ from .models import Sculpt #1
 
 from django.views import View
 from django.http import HttpResponseRedirect
+from accounts.models import UserProfile
 
 # Create your views here.
 
@@ -106,7 +107,7 @@ class SculptListView(LoginRequiredMixin, ListView): #7
 		context['create_form'] = SculptModelForm() #21
 		context['create_url'] = reverse_lazy("sculpt:create")
 		#context["another_list"] = Sculpt.objects.all()
-		
+		context['credits'] = UserProfile.objects.credits(self.request.user)
 		return context
 
 

@@ -55,7 +55,10 @@
                     <div class="profile-card">
                         <img src="{% static 'images/dp.jpg' %}" alt="user" class="profile-photo" />
                         <h5><a href="{% url 'profiles:detail' request.user.username %}" class="text-white">{{ request.user }}</a></h5>
-                        <a href="{% url 'profiles:followers' request.user.username %}" class="text-white"><i class="ion ion-android-person-add"></i> {{ request.user.followed_by.all.count }} &nbsp; followers</a>
+                        <a href="{% url 'profiles:followers' request.user.username %}" class="text-white"><i class="ion ion-android-person-add"></i> &nbsp; {{ request.user.followed_by.all.count }} &nbsp; followers</a>
+                        <br>
+                        <a href="{% url 'profiles:detail' request.user.username %}" class="text-white"><i class="ion ion-egg"></i> &nbsp; {{ credits }} &nbsp; Credits</a>
+
                     </div><!--profile card ends-->
 
                     <div class='post-content'>
@@ -199,6 +202,31 @@ $(document).on('change', '.file', function(){
         var initialURL = sculptContainer.attr("data-url") || "/api/sculpt/";
         // console.log(initialURL)
 
+        $(document.body).on("click", ".sculpt-report", function(e) {
+            e.preventDefault()
+            var this_ = $(this)
+            var sculptId = this_.attr("data-id")
+            var reportUrl = '/api/sculpt/' + sculptId + "/report/"
+            //this_.text("Liked")
+
+            jQuery.ajax({
+              method: "GET",
+              url: reportUrl,
+              success: function(data){
+                if (data.reported) {
+                  this_.text("Reported")
+                } else {
+                  this_.text("UnReported")
+                }
+              },
+              error: function(data) {
+                console.log("error")
+                console.log(data)
+              }
+            })
+
+        })
+
 
         $(document.body).on("click", ".sculpt-like", function(e) {
             e.preventDefault()
@@ -325,11 +353,11 @@ var counter = 0;
                 
 
 
-                PopoverMenu = "<div class='btn-group'><button type='button' data-toggle='dropdown' class='btn btn-info dropdown-toggle'>options &nbsp;<span class='caret'></span></button><div role='menu' class='dropdown-menu'><li><a href='sculpt/"+ sculptValue.id + "/update'>edit</a></li><li><a href='sculpt/"+ sculptValue.id +"/delete'>Delete</a></li><li class='divider'></li><li><a href='#'>Report</a></li></div></div>";
+                PopoverMenu = "<div class='btn-group'><button type='button' data-toggle='dropdown' class='btn btn-info dropdown-toggle'>options &nbsp;<span class='caret'></span></button><div role='menu' class='dropdown-menu'><li><a href='sculpt/"+ sculptValue.id + "/update'>edit</a></li><li><a href='sculpt/"+ sculptValue.id +"/delete'>Delete</a></li><li class='divider'></li><li><a href='#' class='sculpt-report' data-id = "+ sculptValue.id +" >Report</a></li></div></div>";
 
              } else {
 
-                PopoverMenu = "<div class='btn-group'><button type='button' data-toggle='dropdown' class='btn btn-info dropdown-toggle'>options &nbsp;<span class='caret'></span></button><div role='menu' class='dropdown-menu'><div class='divider'></div><div><a href='#'>Report</a></div></div></div>";
+                PopoverMenu = "<div class='btn-group'><button type='button' data-toggle='dropdown' class='btn btn-info dropdown-toggle'>options &nbsp;<span class='caret'></span></button><div role='menu' class='dropdown-menu'><div class='divider'></div><div><a href='#' class='sculpt-report'  data-id = "+ sculptValue.id +">Report</a></div></div></div>";
 
              }
             
