@@ -79,6 +79,8 @@ class UserProfileManager(models.Manager): #4
 		if (profile.status):
 			statusUpdated = 5
 		credits = following + (followedby) * 2 + dpUploaded + cpUploaded + dobUpdated + genderUpdated + cityUpdated + countryUpdated + statusUpdated
+		
+
 		return credits
 
 
@@ -177,7 +179,7 @@ def post_save_user_receiver(sender, instance, created, *args, **kwargs): #13
 	if created:
 		new_profile  = UserProfile.objects.get_or_create(user=instance)
 		try:
-			instance.profile.following.add(sender.objects.get(pk = 2))
+			instance.profile.following.add(sender.objects.get(pk = 1))
 		except:
 			pass
 		

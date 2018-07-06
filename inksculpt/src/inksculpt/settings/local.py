@@ -187,9 +187,9 @@ LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = LOGIN_REDIRECT_URL
 
 #Email_configuration
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'inksculpt@gmail.com'
-EMAIL_HOST_PASSWORD = 'INK18marriott!'
+EMAIL_HOST = 'smtp.mailgun.org'
+EMAIL_HOST_USER = 'postmaster@mg.inksculpt.com'
+EMAIL_HOST_PASSWORD = 'a3c5fb9e0946ff0290767036ee8d0abc-770f03c4-317a25e3'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
