@@ -42,6 +42,7 @@ INSTALLED_APPS = [
   'imagekit',
     'django_countries',
  'notify',
+ 'django_fields',
     'crispy_forms',
     'rest_framework',
     'accounts',

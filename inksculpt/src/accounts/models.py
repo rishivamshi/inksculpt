@@ -9,6 +9,8 @@ from django.core.validators import RegexValidator
 from django.core.validators import MinLengthValidator
 from django_countries.fields import CountryField
 
+from django_fields import DefaultStaticImageField
+
 def upload_location(object, filename): #5
 	return "%s/%s/%s" %(object.user,"displaypicture", filename)
 
@@ -94,10 +96,11 @@ class UserProfile(models.Model):
 	user 		= models.OneToOneField(settings.AUTH_USER_MODEL , related_name='profile', null = True, on_delete = models.SET_NULL) #1
 	following 	= models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True ,related_name='followed_by') #2
 
-	profile_image = models.ImageField(
+	profile_image = DefaultStaticImageField(
 				upload_to = upload_location,
 				null = True,
 				blank = True,
+				default_image_path='images/dp.jpg',
 				width_field = "width_profilefield",
 				height_field = "height_profilefield") # images stuff
 		

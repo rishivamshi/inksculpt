@@ -4,6 +4,50 @@
 		"selected_items":
 		[
 			[
+				"Inksc",
+				"inksculpt"
+			],
+			[
+				"att",
+				"attachSculpt"
+			],
+			[
+				"tim",
+				"timesince"
+			],
+			[
+				"pop",
+				"PopoverMenu"
+			],
+			[
+				"sculptC",
+				"sculptContent"
+			],
+			[
+				"sculpt",
+				"sculptValue"
+			],
+			[
+				"main",
+				"mainSculpt"
+			],
+			[
+				"sculptCon",
+				"sculptContainer"
+			],
+			[
+				"user",
+				"username"
+			],
+			[
+				"sub",
+				"substring"
+			],
+			[
+				"sculptCo",
+				"sculptContent"
+			],
+			[
 				"out",
 				"outlook"
 			],
@@ -150,10 +194,6 @@
 			[
 				"scul",
 				"sculpt_obj"
-			],
-			[
-				"user",
-				"user"
 			],
 			[
 				"sen",
@@ -328,18 +368,6 @@
 				"replySculptAdder"
 			],
 			[
-				"sculptCo",
-				"sculptContent"
-			],
-			[
-				"sculpt",
-				"sculptUser"
-			],
-			[
-				"sculptC",
-				"sculptContainer"
-			],
-			[
 				"timeS",
 				"timeSince"
 			],
@@ -436,10 +464,6 @@
 				"this_"
 			],
 			[
-				"sculptCon",
-				"sculptContainer"
-			],
-			[
 				"sculptConta",
 				"sculptContainer"
 			],
@@ -490,40 +514,35 @@
 			[
 				"hr",
 				"href"
-			],
-			[
-				"medi",
-				"media-body"
-			],
-			[
-				"UserPr",
-				"UserProfile"
-			],
-			[
-				"Us",
-				"UserDetailView"
-			],
-			[
-				"toggle",
-				"toggle_user"
-			],
-			[
-				"mod",
-				"models"
-			],
-			[
-				"ge",
-				"get_object_or_404"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "src/accounts/templates/accounts/user_detail.html",
+			"file": "src/templates/navbar.html",
 			"settings":
 			{
-				"buffer_size": 30368,
+				"buffer_size": 15733,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "src/sculpts/templates/sculpts/search_form.html",
+			"settings":
+			{
+				"buffer_size": 474,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "src/sculpts/templates/sculpts/list_view.html",
+			"settings":
+			{
+				"buffer_size": 66732,
+				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		}
@@ -563,12 +582,16 @@
 		"/D/Work/github_projects/inksculpt/inksculpt",
 		"/D/Work/github_projects/inksculpt/inksculpt/lib",
 		"/D/Work/github_projects/inksculpt/inksculpt/src",
-		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts",
-		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/templates",
-		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/templates/accounts"
+		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/templates",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/templates/sculpts",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/templates"
 	],
 	"file_history":
 	[
+		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/templates/sculpts/form.html",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/templates/sculpts/list_view.html",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/models.py",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/templates/navbar.html",
 		"/D/Work/github_projects/inksculpt/inksculpt/lib/python3.5/site-packages/allauth/templates/account/login.html",
 		"/D/Work/github_projects/inksculpt/inksculpt/lib/python3.5/site-packages/allauth/templates/account/signup.html",
@@ -576,7 +599,6 @@
 		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/urls.py",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/inksculpt/urls.py",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/inksculpt/settings/local.py",
-		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/templates/sculpts/list_view.html",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/templates/search.html",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/templates/sculpts/detail_view.html",
 		"/D/Work/github_projects/inksculpt/inksculpt/lib/python3.5/site-packages/notify/templates/notifications/all.html",
@@ -606,10 +628,8 @@
 		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/templates/sculpts/update_view.html",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/templates/sculpts/featured.html",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/templates/sculpts/delete_confirm.html",
-		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/models.py",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/templates/sculpts/create_view.html",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/templates/create_modal.html",
-		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/templates/sculpts/form.html",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/admin.py",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/static-storage/css/style.css",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/api/urls.py",
@@ -700,7 +720,7 @@
 	],
 	"find":
 	{
-		"height": 23.0
+		"height": 40.8
 	},
 	"find_in_files":
 	{
@@ -717,6 +737,10 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"noti",
+			"sculpt-form",
+			"=\"\"",
+			"sculpt-form",
 			"Home",
 			"{ url",
 			"1030x430",
@@ -840,11 +864,7 @@
 			"id_content-textarea",
 			"image_thumbnail",
 			"image",
-			".url",
-			"object",
-			"oneee",
-			"ajax",
-			"follow"
+			".url"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -871,19 +891,49 @@
 			[
 				{
 					"buffer": 0,
-					"file": "src/accounts/templates/accounts/user_detail.html",
-					"semi_transient": true,
+					"file": "src/templates/navbar.html",
+					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 30368,
+						"buffer_size": 15733,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								1749,
+								1749
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 236.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "src/sculpts/templates/sculpts/search_form.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 474,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1,
+								1
 							]
 						],
 						"settings":
@@ -891,10 +941,40 @@
 							"syntax": "Packages/HTML/HTML.sublime-syntax"
 						},
 						"translation.x": 0.0,
-						"translation.y": 1352.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "src/sculpts/templates/sculpts/list_view.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 66732,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								12526,
+								12526
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 4476.8,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
 					"type": "text"
 				}
 			]
@@ -977,7 +1057,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 283.0,
+	"side_bar_width": 291.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

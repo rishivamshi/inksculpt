@@ -1,10 +1,11 @@
 
 
-
-<form id = 'navbar-search-form' class="navbar-form navbar-right hidden-sm" method="GET" action='{% url "search" %}'>
-              <div class="form-group">
-              	<input type="text" class="form-control" name="q" placeholder="Search " value="{{ request.GET.q }}" />
-                <button  type="submit"><i class="icon ion-android-search"></i></button>
-                
-              </div>
-            </form>
+<form id = 'navbar-search-form' class="search-bar w-search notification-list friend-requests" method="GET" action='{% url "search" %}'>
+      <div class="form-group with-button">
+        <input class="form-control " placeholder="Search here people or content" name="q" type="text" value="{{ request.GET.q }}">
+        <button type="submit">
+                    <i class="fas fa-search olymp-magnifying-glass-icon"></i>
+          
+        </button>
+      </div>
+    </form>

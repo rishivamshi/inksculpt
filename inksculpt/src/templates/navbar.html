@@ -3,95 +3,582 @@
 {% if request.user.is_authenticated %}
 
 
-  <header id="header">
-      <nav class="navbar navbar-default navbar-fixed-top menu">
-        <div class="container">
+<div class="fixed-sidebar">
+  <div class="fixed-sidebar-left sidebar--small" id="sidebar-left">
 
-          <!-- Brand and toggle get grouped for better mobile display -->
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'images/finallogo.png' %}" alt="logo" /></a>
+    <a href="{% url 'home' %}" class="logo">
+      <div class="img-wrap">
+        <img src="{% static 'static/img/logo.png' %}" alt="Inksculpt">
+      </div>
+    </a>
+
+    <div class="mCustomScrollbar" data-mcs-theme="dark">
+      <ul class="left-menu">
+        <li>
+          <a href="#" class="js-sidebar-open">
+                        <i class="fas fa-angle-double-right left-menu-icon" style="font-size: 25px;" data-toggle="tooltip" data-placement="right"   data-original-title="OPEN MENU"></i>
+
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'home' %}">
+                        <i class="fas fa-bars left-menu-icon" style="font-size: 25px;" data-toggle="tooltip" data-placement="right"   data-original-title="NEWSFEED"></i>
+            
+          </a>
+        </li>
+        <li>
+          <a href="#">
+                        <i class="fas fa-star left-menu-icon" style="font-size: 25px;" data-toggle="tooltip" data-placement="right"   data-original-title="FEATURED"></i>
+            
+          </a>
+        </li>
+        <li>
+          <a href="#">
+                        <i class="fas fa-user left-menu-icon"  style="font-size: 25px;" data-toggle="tooltip" data-placement="right"   data-original-title="MY PROFILE"></i>
+            
+          </a>
+        </li>
+                <li>
+          <a href="#">
+                        <i class="fas fa-bell left-menu-icon" style="font-size: 25px;" data-toggle="tooltip" data-placement="right"   data-original-title="NOTIFICATIONS"></i>
+            
+          </a>
+        </li>
+        
+        
+      </ul>
+    </div>
+  </div>
+
+  <div class="fixed-sidebar-left sidebar--large" id="sidebar-left-1">
+    <a href="{% url 'home' %}" class="logo">
+      <div class="img-wrap">
+        <img src="{% static 'static/img/logo.png' %}" alt="Inksculpt">
+      </div>
+      <div class="title-block">
+        <h6 class="logo-title">Inksculpt</h6>
+      </div>
+    </a>
+
+    <div class="mCustomScrollbar" data-mcs-theme="dark">
+      <ul class="left-menu">
+        <li>
+          <a href="#" class="js-sidebar-open">
+                                                
+                        <i class="fas fa-times  left-menu-icon"></i>
+            
+            <span class="left-menu-title">Collapse Menu</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+                        <i class="fas fa-bars  left-menu-icon"  data-toggle="tooltip" data-placement="right"   data-original-title="NEWSFEED"></i>
+            
+            <span class="left-menu-title">Newsfeed</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+                        <i class="fas fa-star  left-menu-icon"  data-toggle="tooltip" data-placement="right"   data-original-title="FEATURED"></i>
+            
+            <span class="left-menu-title">Featured</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+                         <i class="fas fa-user  left-menu-icon"   data-toggle="tooltip" data-placement="right"   data-original-title="MY PROFILE"></i>
+            
+            <span class="left-menu-title">My Profile</span>
+          </a>
+        </li>
+                <li>
+          <a href="#">
+                        <i class="fas fa-bell  left-menu-icon"  data-toggle="tooltip" data-placement="right"   data-original-title="NOTIFICATIONS"></i>
+            
+            <span class="left-menu-title">Notifications</span>
+          </a>
+        </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+<!-- ... end Fixed Sidebar Left -->
+
+
+<!-- Fixed Sidebar Left -->
+
+<div class="fixed-sidebar fixed-sidebar-responsive">
+
+  <div class="fixed-sidebar-left sidebar--small" id="sidebar-left-responsive">
+    <a href="{% url 'home' %}" class="logo js-sidebar-open">
+      <img src="{% static 'static/img/logo.png' %}" alt="Inksculpt">
+    </a>
+
+  </div>
+
+  <div class="fixed-sidebar-left sidebar--large" id="sidebar-left-1-responsive">
+    <a href="{% url 'home' %}" class="logo">
+      <div class="img-wrap">
+        <img src="{% static 'static/img/logo.png' %}" alt="Inksculpt">
+      </div>
+      <div class="title-block">
+        <h6 class="logo-title">Inksculpt</h6>
+      </div>
+    </a>
+
+    <div class="mCustomScrollbar" data-mcs-theme="dark">
+
+      <div class="control-block">
+        <div class="author-page author vcard inline-items">
+          <div class="author-thumb">
+            <img alt="author" src="{% static 'static/img/author-page.jpg' %}" class="avatar">
+            <span class="icon-status online"></span>
           </div>
-
-          <!-- Collect the nav links, forms, and other content for toggling -->
-          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <a href="{{ request.user.profile.get_absolute_url }}" class="author-name fn">
+            <div class="author-title">
+              {{ request.user.username }} 
+            </div>
             
+          </a>
+        </div>
+      </div>
+
+      <div class="ui-block-title ui-block-title-small">
+        <h6 class="title">MAIN SECTION</h6>
+      </div>
+
+      <ul class="left-menu">
+        <li>
+          <a href="#" class="js-sidebar-open">
+                        <i class="fas fa-times  left-menu-icon"></i>
+            
+            <span class="left-menu-title">Collapse Menu</span>
+          </a>
+        </li>
+        <li>
+          <a href="/">
+                        <i class="fas fa-bars  left-menu-icon"  data-toggle="tooltip" data-placement="right"   data-original-title="NEWSFEED"></i>
+            
+            <span class="left-menu-title">Newsfeed</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'sculpt:featured' %}">
+                        <i class="fas fa-star  left-menu-icon"  data-toggle="tooltip" data-placement="right"   data-original-title="FEATURED"></i>
+            
+            <span class="left-menu-title">Featured</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'profiles:detail' request.user.username %}">
+                         <i class="fas fa-user  left-menu-icon"   data-toggle="tooltip" data-placement="right"   data-original-title="MY PROFILE"></i>
+            
+            <span class="left-menu-title">My Profile</span>
+          </a>
+        </li>
+                <li>
+          <a href="{% url 'notifications:all'  %}">
+                        <i class="fas fa-bell  left-menu-icon"  data-toggle="tooltip" data-placement="right"   data-original-title="NOTIFICATIONS"></i>
+            
+            <span class="left-menu-title">Notifications</span>
+          </a>
+        </li>
+        
+        
+      </ul>
+
+      <div class="ui-block-title ui-block-title-small">
+        <h6 class="title">YOUR ACCOUNT</h6>
+      </div>
+
+      <ul class="account-settings">
+        <li>
+          <a href="#">
+                        <i class="fas fa-sliders-h olymp-menu-icon"></i>
+            
+
+            <span>Account Settings</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="{% url 'account_logout' %}">
+                        <i class="fas fa-sign-out-alt olymp-logout-icon"></i>
+            
+
+            <span>Log Out</span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="ui-block-title ui-block-title-small">
+        <h6 class="title">About Inksculpt</h6>
+      </div>
+
+      <ul class="about-olympus">
+        <li>
+          <a href="#">
+            <span>Terms and Conditions</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://inksculpt.com/contact/contact.html">
+            <span>Privacy Policy</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://inksculpt.com/contact/contact.html">
+            <span>FAQs</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <span>Careers</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://inksculpt.com/contact/contact.html">
+            <span>Contact</span>
+          </a>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+<!-- ... end Fixed Sidebar Left -->
+
+
+
+
+<!-- Fixed Sidebar Right-Responsive -->
+
+
+<!-- ... end Fixed Sidebar Right-Responsive -->
+
+
+<!-- Header-BP -->
+
+<header class="header" id="site-header">
+
+  <div class="page-title">
+    <h6>Newsfeed</h6>
+  </div>
+
+  <div class="header-content-wrapper">
+
+    {% include "sculpts/search_form.html"  %}
+    
+
+    
+
+    <div class="control-block">
+
+      <div class="control-icon more has-items">
+                <i class="fas fa-pencil-alt" style="font-size: 25px; color: white"></i>
+                
+        
+        
+
+        
+      </div>
+
+      <div class="control-icon more has-items">
+                <i class="far fa-bookmark" style="font-size: 25px; color: white"></i>
+        
+        
+
+      </div>
+
+      <div class="control-icon more has-items">
+                <i class="far fa-star "  style="font-size: 25px; color: white"></i>
+        
+
+        
+
+        
+      </div>
+
+      <div class="author-page author vcard inline-items more">
+        <div class="author-thumb">
+          <img alt="author" src="{% static 'static/img/author-page.jpg' %}" class="avatar">
+          <span class="icon-status online"></span>
+          <div class="more-dropdown more-with-triangle">
+            <div class="mCustomScrollbar" data-mcs-theme="dark">
+              <div class="ui-block-title ui-block-title-small">
+                <h6 class="title">Your Account</h6>
+              </div>
+
+              <ul class="account-settings">
+                
+                                
+                                <li>
+                  <a href="#">
+                                        <i class="fas fa-sliders-h "></i>
+                              <span>Account Settings</span>
+                          </a>
+                </li>
+                
+                <li>
+                  <a href="{% url 'account_logout' %}">
+                    <i class="fas fa-sign-out-alt "></i>
+
+                    <span>Log Out</span>
+                  </a>
+                </li>
+              </ul>
+
+              
+
+              
+
+
+              <div class="ui-block-title ui-block-title-small">
+                <h6 class="title">About Inksculpt</h6>
+              </div>
+
+              <ul>
+                <li>
+                  <a href="#">
+                    <span>Terms and Conditions</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <span>Privacy Policy</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <span>FAQs</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <span>Careers</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <span>Contact</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+        <a href="#" class="author-name fn">
+          <div class="author-title">
+            {{ request.user.username }}
+                        
+          </div>
+                    
           
+        </a>
+                <i class="fas fa-caret-down " style="font-size: 25px;"></i>
+      </div>
 
-            <ul class="nav navbar-nav navbar-right main-menu">
-              <li class="dropdown"><a href="{% url 'home' %}">Home</a></li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account <span><img src= "{% static 'images/down-arrow.png' %}" alt="" /></span></a>
-                <ul class="dropdown-menu newsfeed-home">
-                  <li><a href="{{ request.user.profile.get_absolute_url }}">Profile</a></li>
-                  <li><a href="{% url 'account_logout' %}">Logout</a></li>
-                  
-                </ul>
-              </li>
-              
-              
-              <li class="dropdown"><a href="https://inksculpt.com/contact/contact.html">Contact</a></li>
-            </ul>
+    </div>
+  </div>
 
-             {% include "sculpts/search_form.html"  %}
+</header>
 
+<!-- ... end Header-BP -->
+
+
+<!-- Responsive Header-BP -->
+
+<header class="header header-responsive" id="site-header-responsive">
+
+  <div class="header-content-wrapper">
+    <ul class="nav nav-tabs mobile-app-tabs" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#request" role="tab">
+          <div class="control-icon has-items">
+            <i class="fas fa-pencil-alt" style="font-size: 25px; color: white"></i>
             
-            <!-- {% include "sculpts/search_form.html" %} -->
+          </div>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#chat" role="tab">
+          <div class="control-icon has-items">
+            <i class="far fa-bookmark" style="font-size: 25px; color: white"></i>
+           
+          </div>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#notification" role="tab">
+          <div class="control-icon has-items">
+            <i class="far fa-star "  style="font-size: 25px; color: white"></i>
+            
+          </div>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#search" role="tab">
+          <i class="fas fa-search " style="font-size: 20px; color: white"></i>
+          
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Tab panes -->
+  <div class="tab-content tab-content-responsive">
+
+    <div class="tab-pane " id="request" role="tabpanel">
+
+      
+
+    </div>
+
+    <div class="tab-pane " id="chat" role="tabpanel">
+
+      
+
+    </div>
+
+    <div class="tab-pane " id="notification" role="tabpanel">
+
+      
+
+    </div>
+
+    <div class="tab-pane " id="search" role="tabpanel">
 
 
-          </div><!-- /.navbar-collapse -->
-        </div><!-- /.container -->
-      </nav>
-    </header>
+         {% include "sculpts/search_form.html"  %}
+
+
+    </div>
+
+  </div>
+  <!-- ... end  Tab panes -->
+
+</header>
+
+<!-- ... end Responsive Header-BP -->
+<div class="header-spacer"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
 
 
  {% else %}
 
 
-<header id="header">
-      <nav class="navbar navbar-default navbar-fixed-top menu">
-        <div class="container">
-
-          <!-- Brand and toggle get grouped for better mobile display -->
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'images/finallogo.png' %}" alt="logo" /></a>
-          </div>
-
-          <!-- Collect the nav links, forms, and other content for toggling -->
-          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+<div class="fixed-sidebar">
+        <div class=" sidebar--small" id="sidebar-left">
+            <a href="#" class="logo">
+                <div class="img-wrap"> <img src="img/logo.png" alt="Inksculpt"> </div>
+            </a>
             
-           
-
+        </div>
+        
+    </div>
+    <!-- ... end Fixed Sidebar Left -->
+    <!-- Fixed Sidebar Left -->
+    <div class="fixed-sidebar fixed-sidebar-responsive">
+        <div class="fixed-sidebar-left sidebar--small" id="sidebar-left-responsive">
+            <a href="#" class="logo "> <img src="img/logo.png" alt="Inksculpt"> </a>
+        </div>
+        
+    </div>
+    <!-- ... end Fixed Sidebar Left -->
+    <!-- Fixed Sidebar Right-Responsive -->
+    <!-- ... end Fixed Sidebar Right-Responsive -->
+    <!-- Header-BP -->
+    <header class="header" id="site-header">
+        <div class="page-title">
+            <h6>Inksculpt</h6> </div>
+        <div class="header-content-wrapper">
             
-            <!-- {% include "sculpts/search_form.html" %} -->
-
-           
-
-            <ul class="nav navbar-nav navbar-right main-menu">
-              <li class="dropdown"><a href="{% url 'account_login' %}">Login</a></li>
-               <li class="dropdown"><a href="{% url 'account_signup' %}">Register</a></li>
-              
-              
-             
-            </ul>
-            
-
-
-          </div><!-- /.navbar-collapse -->
-        </div><!-- /.container -->
-      </nav>
+            <div class="control-block">
+                <div class="control-icon more has-items">
+                   <a href="{% url 'account_login' %}" style="color: white">Login</a>
+                </div>
+                <div class="control-icon more has-items"> 
+                   <a href="{% url 'account_signup' %}" style="color: white" >Register</a>
+                </div>
+               
+                
+            </div>
+        </div>
     </header>
+    <!-- ... end Header-BP -->
+    <!-- Responsive Header-BP -->
+    <header class="header header-responsive" id="site-header-responsive">
+        <div class="header-content-wrapper">
+            <ul class="nav nav-tabs mobile-app-tabs" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="{% url 'account_login' %}" role="tab" style="color: white">
+                        <div class="control-icon has-items">Login
+                            
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="{% url 'account_signup' %}" role="tab" style="color: white">
+                        <div class="control-icon has-items"> Sign Up
+                            
+                        </div>
+                    </a>
+                </li>
+                
+                
+            </ul>
+        </div>
+        <!-- Tab panes -->
+        <div class="tab-content tab-content-responsive">
+            <div class="tab-pane " id="request" role="tabpanel"> </div>
+            <div class="tab-pane " id="chat" role="tabpanel"> </div>
+            
+        </div>
+        <!-- ... end  Tab panes -->
+    </header>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -100,59 +587,3 @@
 
 
 
-<!-- 
-
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="{% url 'home' %}">Inksculpt</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    
-
-    {% if request.user.is_authenticated %}
-
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-     
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Account
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="{{ request.user.profile.get_absolute_url }}">Profile</a>
-          
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
-      </li>
-    </ul>
-
-
-
-
-    {% else %}
-    <ul class="navbar-nav mr-auto">
-      
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'account_login' %}">Login</a>
-      </li>
-      
-      <li class="nav-item">
-        <a class="nav-link " href="{% url 'account_signup' %}">Register</a>
-      </li>
-    </ul>
-    {% endif %}
-
-    {% include "sculpts/search_form.html" %}
-  
-
-
-  </div>
-</nav> -->

@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django_countries',
    'notify',
     'crispy_forms',
+    'django_fields',
     'rest_framework',
     'accounts',
     'hashtags',

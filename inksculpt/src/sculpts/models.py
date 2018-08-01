@@ -127,7 +127,7 @@ class Sculpt(models.Model):
 
 	# this function is to change the name from sculptobject to actual written sculpt in admin page.
 	def __str__(self):
-		return str(self.content) #self.id can also be added here.
+		return str(self.user) #self.id can also be added here.
 
 	def get_absolute_url(self):
 		return reverse("sculpt:detail", kwargs={"pk":self.pk}) # if theirs no success_url in the views class, it will go this url

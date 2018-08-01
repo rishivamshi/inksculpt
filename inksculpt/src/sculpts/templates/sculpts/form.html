@@ -1,32 +1,69 @@
 <!-- {% load crispy_forms_tags %} -->
 
-<form  class="form {% if form_class %}{{ form_class }}{% endif %}" method="POST" enctype="multipart/form-data" action="{% if action_url %}{{ action_url }}{% endif %}">
+{% load static %}
+<!-- <form class="form {% if form_class %}{{ form_class }}{% endif %}" method="POST" enctype="multipart/form-data" action="{% if action_url %}{{ action_url }}{% endif %}">
+                {% csrf_token %}
+                
+                <div class="form-group with-icon label-floating is-empty">
+                  
+                  {{ form.content }}
+                </div>
+                <div class="add-options-message">
+                  <a href="#" class="options-message" data-toggle="tooltip" data-placement="top"   data-original-title="ADD PHOTOS">
+                                        {{ form.image }}
+                    
+                  </a>
+                  <div class="progress progress-striped active" >
+    <div class="bar" style="width: 0%;"><span id="percent"></span></div>
+</div>
+        
+                  <button class="btn btn-primary btn-md-2" type="submit" value="Post" >Post Status</button>
+                  <button   class="btn btn-md-2 btn-border-think btn-transparent c-grey">Preview</button>
+        
+                </div>
+        
+              </form> -->
+
+<form class="form" {% if form_id %} id = '{{ form_id }}' {% endif %} method="POST" enctype="multipart/form-data" action="{% if action_url %}{{ action_url }}{% endif %}" >
+    <div class="author-thumb post__author "> <img src="{{ user.profile.profile_image.url }}" alt="A"> </div>
+    {% csrf_token %}
+                                    <div class="form-group with-icon label-floating is-empty">
+                                        <label class="control-label">Share what you are thinking here...</label>
+                                        {{ form.content }}
+                                        
+                                    </div>
+                                    <div class="add-options-message">
+                                        {{ form.image }}
+                                        <div class="progress progress-striped active" >
+    <div class="bar" style="width: 0%;"><span id="percent"></span></div>
+</div>
+                                        
+                                    </div>
+                                    <button type="submit"  class="btn btn-primary btn-md-2">Post Status</button>
+                                        <button class="btn btn-md-2 btn-border-think btn-transparent c-grey">Preview</button>
+                                </form>
+
+
+<!-- <form  class="form" {% if form_id %} id = '{{ form_id }}' {% endif %} method="POST" enctype="multipart/form-data" action="{% if action_url %}{{ action_url }}{% endif %}">
 	{% csrf_token %}
 
 
    
     {{ form.content }}
-  <br>
-  <br>
-
+  
 
     {{ form.image }}
 
-	
-	
-	
-
-	
-	<br>
-	<br>
 	<div class="progress progress-striped active" >
     <div class="bar" style="width: 0%;"><span id="percent"></span></div>
 </div>
 	
 <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
 	<button class="btn btn-primary pull-right"  type="submit" value="Post" >Post</button>
-</div>
-</form>
+
+</form> -->
+
+
 
 
 
