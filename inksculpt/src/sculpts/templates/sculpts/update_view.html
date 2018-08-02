@@ -7,16 +7,37 @@
 
 <html lang="en">
   <head>
-  
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/ionicons.min.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.min.css' %}">
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i" rel="stylesheet">
-    <title>Update Post | Inksculpt </title>
-  </head>
+
+  <title>Update Post</title>
+
+  <!-- Required meta tags always come first -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+  <!-- Main Font -->
+  <script src="{% static 'static/js/webfontloader.min.js' %}"></script>
+  <script>
+    WebFont.load({
+      google: {
+        families: ['Roboto:300,400,500,700:latin']
+      }
+    });
+  </script>
+
+
+</style>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" type="text/css" href="{% static 'static/Bootstrap/dist/css/bootstrap-reboot.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'static/Bootstrap/dist/css/bootstrap.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'static/Bootstrap/dist/css/bootstrap-grid.css' %}">
+
+  <!-- Main Styles CSS -->
+  <link rel="stylesheet" type="text/css" href="{% static 'static/css/main.min.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'static/css/fonts.min.css' %}">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+
+</head>
 
 
 <body>
@@ -26,64 +47,203 @@
     <!-- <img src = "{{ object.image_thumbnail.url }}"> -->
 
     <div class="container">
+  <div class="row">
 
-      <!-- Timeline
-      ================================================= -->
-      <div class="timeline">
+    <!-- Main Content -->
+
+    <main class="col col-xl-6 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12">
+
+      
+
+      <div class="ui-block">
         
-
-
-
+        <!-- News Feed Form  -->
         
-        <div id="page-contents">
-          <div class="row">
-          
-{% include "sculpts/form.html" with form=form btn_title='Update' %}
-             
-
+        <div class="news-feed-form">
+          <!-- Nav tabs -->
+          <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active inline-items" data-toggle="tab" href="#home-1" role="tab" aria-expanded="true">
+                        <i class="fas fa-pencil-alt "></i>
+                
+        
+                <span>Edit Post</span>
+              </a>
+            </li>
+                        
+            
+          </ul>
+        
+          <!-- Tab panes -->
+          <div class="tab-content">
+            <div class="tab-pane active" id="home-1" role="tabpanel" aria-expanded="true">
+              {% include "sculpts/form.html" with form=form btn_title='Update' %}
               
+            </div>
+                        
+                    
+                        
+       
+            
         
-
-
-
-           
-
-
-           
+            
           </div>
         </div>
+        
+        <!-- ... end News Feed Form  -->      </div>
+
+       
+
+        
+      
+
+    </main>
 
 
 
 
 
 
+    <aside class="col col-xl-3 order-xl-1 col-lg-6 order-lg-2 col-md-6 col-sm-12 col-12">
+      <div class="ui-block">
+        
+        <!-- W-Weather -->
+        
+        <div class="widget w-wethear">
+          
+        
+          <div class="wethear-now inline-items">
+                        
+                        
+                        
+                        <svg class="olymp-weather-partly-sunny-icon"><use xlink:href="{% static 'svg-icons/sprites/icons-weather.svg#olymp-weather-partly-sunny-icon' %}"></use></svg>
+            <a href="{% url 'profiles:detail' request.user.username %}"><div class="temperature-sensor">{{ credits }}</div></a>
+            
+        
+            
+          </div>
+        
+          <div class="wethear-now-description">
+            <a href="{% url 'profiles:detail' request.user.username %}"><div class="climate">{{ request.user }}</div></a>
+            <span>Student </span>
+            
+          </div>
+        
+          
+          <div class="date-and-place">
+            <h5 class="date">Saturday, March 26th</h5>
+            
+          </div>
+        
+        </div>
+        
+        <!-- W-Weather -->      </div>
 
 
+      
+    </aside>
 
-    </div>
+    <!-- ... end Left Sidebar -->
+
+
+    <!-- Right Sidebar -->
+
+    <aside class="col col-xl-3 order-xl-3 col-lg-6 order-lg-3 col-md-6 col-sm-12 col-12">
+
+      
+
+      <div class="ui-block">
+        <div class="ui-block-title">
+          <h6 class="title">Friend Suggestions</h6>
+          
+        </div>
+
+        
+        
+        <!-- W-Action -->
+        
+        <ul class="widget w-friend-pages-added notification-list friend-requests">
+          
+        
+          
+        
+          {% recommended request.user %}
+        
+        </ul>
+        
+        <!-- ... end W-Action -->
+      </div>
+
+      
+
+
+      
+
+    </aside>
+
+    <!-- ... end Right Sidebar -->
+
+  </div>
 </div>
 
 
 
 
-
-
-
-
-<script
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-     <script type="text/javascript" src="{% static 'js/js/bootstrap.min.js' %}"></script>
-     <script type="text/javascript" src="{% static 'js/jquery.sticky-kit.min.js' %}"></script>
-     <script type="text/javascript" src="{% static 'js/jquery.scrollbar.min.js' %}"></script>
-     <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
-
-
    
 
+
+
+
+
+
+
+
+<script src="{% static 'static/js/jquery-3.2.1.js' %}"></script>
+<script src="{% static 'static/js/jquery.appear.js' %}"></script>
+<script src="{% static 'static/js/jquery.mousewheel.js' %}"></script>
+<script src="{% static 'static/js/perfect-scrollbar.js' %}"></script>
+<script src="{% static 'static/js/jquery.matchHeight.js' %}"></script>
+<script src="{% static 'static/js/svgxuse.js' %}"></script>
+<script src="{% static 'static/js/imagesloaded.pkgd.js' %}"></script>
+<script src="{% static 'static/js/Headroom.js' %}"></script>
+<script src="{% static 'static/js/velocity.js' %}"></script>
+<script src="{% static 'static/js/ScrollMagic.js' %}"></script>
+<script src="{% static 'static/js/jquery.waypoints.js' %}"></script>
+<script src="{% static 'static/js/jquery.countTo.js' %}"></script>
+<script src="{% static 'static/js/popper.min.js' %}"></script>
+<script src="{% static 'static/js/material.min.js' %}"></script>
+<script src="{% static 'static/js/bootstrap-select.js' %}"></script>
+<script src="{% static 'static/js/smooth-scroll.js' %}"></script>
+<script src="{% static 'static/js/selectize.js' %}"></script>
+<script src="{% static 'static/js/swiper.jquery.js' %}"></script>
+<script src="{% static 'static/js/moment.js' %}"></script>
+<script src="{% static 'static/js/daterangepicker.js' %}"></script>
+<script src="{% static 'static/js/simplecalendar.js' %}"></script>
+<script src="{% static 'static/js/fullcalendar.js' %}"></script>
+<script src="{% static 'static/js/isotope.pkgd.js' %}"></script>
+<script src="{% static 'static/js/ajax-pagination.js' %}"></script>
+<script src="{% static 'static/js/Chart.js' %}"></script>
+<script src="{% static 'static/js/chartjs-plugin-deferred.js' %}"></script>
+<script src="{% static 'static/js/circle-progress.js' %}"></script>
+<script src="{% static 'static/js/loader.js' %}"></script>
+<script src="{% static 'static/js/run-chart.js' %}"></script>
+<script src="{% static 'static/js/jquery.magnific-popup.js' %}"></script>
+<script src="{% static 'static/js/jquery.gifplayer.js' %}"></script>
+<script src="{% static 'static/js/mediaelement-and-player.js' %}"></script>
+<script src="{% static 'static/js/mediaelement-playlist-plugin.min.js' %}"></script>
+
+<script src="{% static 'static/js/base-init.js' %}"></script>
+<script defer src="{% static 'static/fonts/fontawesome-all.js' %}"></script>
+
+<script src="{% static 'static/Bootstrap/dist/js/bootstrap.bundle.js' %}"></script>
+{% include "search-js.html" %}
+
+
+    <script type="text/javascript">
+     $(document).ready(function() {
+        $("form textarea").addClass('form-control')
+    }); 
+   </script>
 
 
 

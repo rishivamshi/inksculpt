@@ -67,7 +67,7 @@ class SculptUpdateView(LoginRequiredMixin, UserOwnerMixin, UpdateView):
 class SculptDeleteView(LoginRequiredMixin, DeleteView):
 	model = Sculpt
 	template_name = 'sculpts/delete_confirm.html' # delete view template
-	success_url = reverse_lazy("sculpt:list") #/sculpt/list
+	success_url ="/" #/sculpt/list
 	def get_queryset(self):
 		qs = super(SculptDeleteView, self).get_queryset()
 		return qs.filter(user = self.request.user)
