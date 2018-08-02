@@ -3,18 +3,26 @@
 {% load static %}
 
 {% for profile in recommended %}
-	<div  class="follow-user">
+	
 
-    
-                <img src="{% static 'images/dp.jpg' %}" alt="" class="profile-photo-sm pull-left" />
-                <div>
-                  <h5><a href="/{{ profile.user.username }}">{{ profile.user.username }}</a></h5>
-                  <a href="/{{ profile.user.username }}/follow" class="text-green">Follow</a>
-                </div>
-                	
-                 
-                
-                </div>
+
+  <li class="inline-items">
+            <div class="author-thumb post__author">
+              <img src="{{ profile.user.profile.profile_image.url }}" alt="author">
+            </div>
+            <div class="notification-event">
+              <a href="/{{ profile.user.username }}" class="h6 notification-friend">{{ profile.user.username }}</a>
+              
+            </div>
+            <span class="notification-icon">
+              <a href="/{{ profile.user.username }}/follow" class="accept-request">
+                <span class="icon-add without-text">
+                                    <i class="fa fa-user-plus olymp-happy-face-icon"></i>
+                  
+                </span>
+              </a>
+            </span>
+          </li>
                 
 
               
