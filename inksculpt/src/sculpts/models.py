@@ -184,9 +184,9 @@ def sculpt_save_receiver(sender, instance, created, *args, **kwargs):
 			
 			notify.send(instance.user, recipient = instance.parent.user , actor = instance.user, verb = 'Commented on your post')
 			
-		else:
-			notify.send(instance.user, recipient = instance.parent.user , actor = instance.user, verb = 'Reposted your post')
-		
+		#else:
+			#notify.send(instance.user, recipient = instance.parent.user , actor = instance.user, verb = 'Reposted your post')
+			
 
 
 post_save.connect(sculpt_save_receiver, sender = Sculpt)

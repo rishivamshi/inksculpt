@@ -519,23 +519,6 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "src/sculpts/templates/sculpts/list_view.html",
-			"settings":
-			{
-				"buffer_size": 65055,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "src/sculpts/templates/sculpts/form.html",
-			"settings":
-			{
-				"buffer_size": 3043,
-				"line_ending": "Windows"
-			}
-		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -572,21 +555,18 @@
 		"/D/Work/github_projects/inksculpt/inksculpt",
 		"/D/Work/github_projects/inksculpt/inksculpt/lib",
 		"/D/Work/github_projects/inksculpt/inksculpt/src",
-		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts",
-		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/templates",
-		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/templates/accounts",
-		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/templates/accounts/snippets",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/api",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/templates",
-		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/templates/sculpts",
-		"/D/Work/github_projects/inksculpt/inksculpt/src/templates"
+		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/templates/sculpts"
 	],
 	"file_history":
 	[
+		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/templates/sculpts/list_view.html",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/models.py",
+		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/templates/sculpts/form.html",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/templates/accounts/snippets/recommend.html",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/api/serializers.py",
-		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/templates/sculpts/list_view.html",
-		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/templates/sculpts/form.html",
 		"/D/Work/github_projects/inksculpt/inksculpt/lib/python3.5/site-packages/django_fields/fields.py",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/templates/accounts/user_profileimage.html",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/api/serializers.py",
@@ -596,7 +576,6 @@
 		"/D/Work/github_projects/inksculpt/inksculpt/src/inksculpt/settings/production.py",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/templates/sculpts/search_form.html",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/templates/navbar.html",
-		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/models.py",
 		"/D/Work/github_projects/inksculpt/inksculpt/lib/python3.5/site-packages/allauth/templates/account/login.html",
 		"/D/Work/github_projects/inksculpt/inksculpt/lib/python3.5/site-packages/allauth/templates/account/signup.html",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/sculpts/views.py",
@@ -731,6 +710,11 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"2",
+			"3",
+			"sculpt-featuredcontainer",
+			"parseSculpts",
+			"attachActiveSculpt",
 			"parseSculpts",
 			"recom",
 			"{% static 'images/dp.jpg' %}",
@@ -853,12 +837,7 @@
 			"127",
 			"12",
 			"127",
-			"profiles:",
-			"139",
-			"register",
-			"UserRegisterForm",
-			"is_authenticated()",
-			"reverse"
+			"profiles:"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -881,69 +860,8 @@
 	"groups":
 	[
 		{
-			"selected": 0,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "src/sculpts/templates/sculpts/list_view.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 65055,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								63095,
-								63107
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 15602.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "src/sculpts/templates/sculpts/form.html",
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 3043,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1354,
-								1366
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				}
 			]
 		}
 	],
@@ -986,7 +904,7 @@
 	"project": "inksculpt.sublime-project",
 	"replace":
 	{
-		"height": 72.0
+		"height": 42.0
 	},
 	"save_all_on_build": true,
 	"select_file":

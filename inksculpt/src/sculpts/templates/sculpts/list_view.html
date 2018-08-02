@@ -184,76 +184,12 @@
 
         <!-- W-Friend-Pages-Added -->
         
-        <ul class="widget w-friend-pages-added notification-list friend-requests">
-          <li class="inline-items">
-            <div class="author-thumb">
-              <img src="" alt="author">
-            </div>
-            <div class="notification-event">
-              <a href="#" class="h6 notification-friend">The Marina Bar</a>
-              <span class="chat-message-item">Restaurant / Bar</span>
-            </div>
-            
+        <ul class="widget w-friend-pages-added notification-list friend-requests" id="sculpt-featuredcontainer"  data-url='/api/sculpt/featuredhome/'>
+
         
-          </li>
+          
         
-          <li class="inline-items">
-            <div class="author-thumb">
-              <img src="" alt="author">
-            </div>
-            <div class="notification-event">
-              <a href="#" class="h6 notification-friend">Tapronus Rock</a>
-              <span class="chat-message-item">Rock Band</span>
-            </div>
-            
-        
-          </li>
-        
-          <li class="inline-items">
-            <div class="author-thumb">
-              <img src="" alt="author">
-            </div>
-            <div class="notification-event">
-              <a href="#" class="h6 notification-friend">Pixel Digital Design</a>
-              <span class="chat-message-item">Company</span>
-            </div>
-            
-          </li>
-        
-          <li class="inline-items">
-            <div class="author-thumb">
-              <img src="" alt="author">
-            </div>
-            <div class="notification-event">
-              <a href="#" class="h6 notification-friend">Thompson’s Custom Clothing Boutique</a>
-              <span class="chat-message-item">Clothing Store</span>
-            </div>
-            
-        
-          </li>
-        
-          <li class="inline-items">
-            <div class="author-thumb">
-              <img src="" alt="author">
-            </div>
-            <div class="notification-event">
-              <a href="#" class="h6 notification-friend">Crimson Agency</a>
-              <span class="chat-message-item">Company</span>
-            </div>
-            
-          </li>
-        
-          <li class="inline-items">
-            <div class="author-thumb">
-              <img src="" alt="author">
-            </div>
-            <div class="notification-event">
-              <a href="#" class="h6 notification-friend">Mannequin Angel</a>
-              <span class="chat-message-item">Clothing Store</span>
-            </div>
-            
-          </li>
-        </ul>
+                 </ul>
         
         <!-- .. end W-Friend-Pages-Added -->
       </div>
@@ -894,6 +830,9 @@ var counter = 0;
 
       function loadFeaturedContainer(sculptContainerFID) {
     // console.log('working');
+
+
+
         var query = getParameterByName('q')
         // console.log(query)
         var sculptlist = [];
@@ -910,36 +849,44 @@ var counter = 0;
         // console.log(initialURL)
 
 
-        
-
-        
-
-
-
-
-
-
-
-
-
-
-       
-
-
 
 
 
         function attachSculpt(sculptValue) {
-            
-            
+
+
+          var dateDisplay = sculptValue.date_display;
+            var sculptContent = sculptValue.content;
             var sculptImage = sculptValue.image;
             var sculptUser = sculptValue.user;
+            var timeSince = sculptValue.timesince;
+            var verb = 'Like'
+            if (sculptValue.did_like) {
+              verb = 'Unlike'
+            }
+            
+            
+            
+
+
+
+
+            
+            
+            
+          
            
             
 
-             
+             if (sculptImage == null){
+              sculptFeaturedContainer.append("<li class='inline-items'><div class='author-thumb post__author'><img src='"+ sculptUser.dp_url +"' alt='author'></div><div class='notification-event'><a href='#' data-toggle='modal' data-target='#f"+ sculptValue.id +"' class='h6 notification-friend'> &nbsp; "+ sculptContent.substring(0,40)  +"</a><span class='chat-message-item'> &nbsp; &nbsp;"+ sculptUser.username +"</span></div></li><div class='modal fade' id='f"+ sculptValue.id +"' tabindex='-1' role='dialog' aria-labelledby='blog-post-popup' aria-hidden='true'><div class='modal-dialog window-popup blog-post-popup' role='document'><div class='modal-content'><a href='#' class='close icon-close' data-dismiss='modal' aria-label='Close'><i class='fas fa-times olymp-close-icon'></i></a><div class='modal-body'><article class='hentry post has-post-thumbnail thumb-full-width'><div class='post__author author vcard inline-items'><img src='"+ sculptUser.dp_url +"' alt='author'><div class='author-date'><a class='h6 post__author-name fn' href='"+sculptUser.url +"'>" + sculptUser.username  + "</a> wrote a <a href='#'>blog post</a><div class='post__date'><time class='published' datetime='"+ dateDisplay +"'>"+ timeSince +"</time></div></div></div><p class='white-space-pre'>"+ sculptContent +"</p><div class='post-additional-info inline-items'><a href='#' data-id='" + sculptValue.id +"' class='post-add-icon inline-items sculpt-like'><i class='far fa-heart olymp-heart-icon sculpt-like'></i>"+ verb +" <span>"+ sculptValue.likes +"</span></a><a href='/sculpt/" + sculptValue.id + "' class='inline-items'><span>View</span><span></span></a></div><div class='control-block-button post-control-button'><a href='#' class='btn btn-control'><i class='far fa-heart '></i></a></div></div></div></div></div>")
 
-sculptFeaturedContainer.append("<div class='item'><div style=\"background:url('"+ sculptImage +"') center center; background-size:cover;\" class='slider-size'><div class='carousel-caption'><h3>" + sculptUser.username +"</h3><p>Sculpt Now</p></div></div></div>")
+             }
+             else {
+              sculptFeaturedContainer.append("<li class='inline-items'><div class='author-thumb post__author'><img src='"+ sculptUser.dp_url +"' alt='author'></div><div class='notification-event'><a href='#' data-toggle='modal' data-target='#f"+ sculptValue.id +"' class='h6 notification-friend'> &nbsp; "+ sculptContent.substring(0,40)  +"</a><span class='chat-message-item'> &nbsp; &nbsp;"+ sculptUser.username +"</span></div></li><div class='modal fade' id='f"+ sculptValue.id +"' tabindex='-1' role='dialog' aria-labelledby='blog-post-popup' aria-hidden='true'><div class='modal-dialog window-popup blog-post-popup' role='document'><div class='modal-content'><a href='#' class='close icon-close' data-dismiss='modal' aria-label='Close'><i class='fas fa-times olymp-close-icon'></i></a><div class='modal-body'><article class='hentry post has-post-thumbnail thumb-full-width'><div class='post__author author vcard inline-items'><img src='"+ sculptUser.dp_url +"' alt='author'><div class='author-date'><a class='h6 post__author-name fn' href='"+sculptUser.url +"'>" + sculptUser.username  + "</a> wrote a <a href='#'>blog post</a><div class='post__date'><time class='published' datetime='"+ dateDisplay +"'>"+ timeSince +"</time></div></div></div><div class='post-thumb'><img src='" + sculptImage + "'  alt='photo'><h2 class='h1 post-title'>"+ sculptContent.substring(0,50) +"...</h2><div class='overlay'></div></div><p class='white-space-pre'>"+ sculptContent +"</p><div class='post-additional-info inline-items'><a href='#' data-id='" + sculptValue.id +"' class='post-add-icon inline-items sculpt-like'><i class='far fa-heart olymp-heart-icon sculpt-like'></i>"+ verb +" <span>"+ sculptValue.likes +"</span></a><a href='/sculpt/" + sculptValue.id + "' class='inline-items'><span>View</span><span></span></a></div><div class='control-block-button post-control-button'><a href='#' class='btn btn-control'><i class='far fa-heart olymp-like-post-icon'></i></a><a href='#' class='btn btn-control'><i class='far fa-comments olymp-comments-post-icon'></i></a><a href='#' class='btn btn-control'><i class='far fa-copy olymp-share-icon'></i></a></div></div></div></div></div>")
+             }
+
+
 
 
 
@@ -947,40 +894,22 @@ sculptFeaturedContainer.append("<div class='item'><div style=\"background:url('"
         }
 
 
-        function attachActiveSculpt(sculptValue) {
-            
-            
-            var sculptImage = sculptValue.image;
-            var sculptUser = sculptValue.user;
-           
-            
-
-             
-
-sculptFeaturedContainer.append("<div class='item active'><div style=\"background:url('"+ sculptImage +"') center center; background-size:cover;\" class='slider-size'><div class='carousel-caption'><h3>" + sculptUser.username +"</h3><p>Sculpt Now</p></div></div></div>")
-
-
-
-            
-        }
 
 
         function parseSculpts() {
             if (sculptlist == 0) {
-                sculptFeaturedContainer.text("No sculpts currently found")
+                sculptFeaturedContainer.text("No Featured Posts currently found")
             } else {
                 // $('#sculpt-container').empty()
                 // sculpts exist - parse and display them
                 $.each(sculptlist, function(key, value) {
                     var sculptKey = key;
+                    console.log(sculptKey)
 
-                    if (sculptKey == 0) {
-                        attachActiveSculpt(value)
-
-                    } else {
-            
+                    if (sculptKey < 5) {
                         attachSculpt(value)
-                    }
+
+                    } 
 
 
                 })
