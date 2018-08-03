@@ -6,222 +6,128 @@
 
 <html lang="en">
   <head>
+
+  <title>{{ object.username }} | Album </title>
+
+  <!-- Required meta tags always come first -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+  <!-- Main Font -->
+  <script src="{% static 'static/js/webfontloader.min.js' %}"></script>
+  <script>
+    WebFont.load({
+      google: {
+        families: ['Roboto:300,400,500,700:latin']
+      }
+    });
+  </script>
   
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/ionicons.min.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.min.css' %}">
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i" rel="stylesheet">
-    
 
-        <style type="text/css">
-  {% if user.profile.cover_image %}
-    .timeline-cover{
-  background: url("{{ user.profile.cover_image.url }}") no-repeat;
-  background-position: center;
-  background-size: cover;
-  min-height: 360px;
-  border-radius: 0 0 4px 4px;
-  position: relative;
-} 
-{% else %}
-.timeline-cover{
-  background: url("{% static 'images/cover.png' %}") no-repeat;
-  background-position: center;
-  background-size: cover;
-  min-height: 360px;
-  border-radius: 0 0 4px 4px;
-  position: relative;
-} 
-{% endif %}
-
-        .profile-info:hover .edit  {
-                display: block;
-        }
-
-        .edit {
-
-    padding-top: 40px;  
-    padding-right: 60px;
-
-    position: absolute;
-    right: 0;
-    top: 0;
-    display: none;
-    
+<style type="text/css">
+  .white-space-pre {
+    white-space: pre-wrap;
 }
-.edit a {
-    color: #000;
-}
+</style>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" type="text/css" href="{% static 'static/Bootstrap/dist/css/bootstrap-reboot.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'static/Bootstrap/dist/css/bootstrap.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'static/Bootstrap/dist/css/bootstrap-grid.css' %}">
+
+  <!-- Main Styles CSS -->
+  <link rel="stylesheet" type="text/css" href="{% static 'static/css/main.min.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'static/css/fonts.min.css' %}">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+
+</head>
 
 
-    </style>
-    
-    
-   
-    <title>{% block title %} Inksculpt {% endblock title %}</title>
-  </head>
-
-{% include "reply-modal.html" %}
 <body>
+  {% include "reply-modal.html" %}
     	
     {% include "navbar.html" %}
 
     <div class="container">
+        <div class="row">
+            <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="ui-block">
+                    <div class="top-header">
+                        <div class="top-header-thumb"> <img src="{{ user.profile.cover_image.url }}" alt="nature"> </div>
+                        <div class="profile-section">
+                            <div class="row">
+                                <div class="col col-lg-5 col-md-5 col-sm-12 col-12">
+                                    <ul class="profile-menu">
+                                        <li> <a href="{% url 'profiles:detail' object.username %}" >Timeline</a> </li>
+                                        <li> <a href="{% url 'profiles:about' object.username %}">About</a> </li>
+                                        <li> <a href="{% url 'profiles:album' object.username %}" class="active">Album</a> </li>
+                                    </ul>
+                                </div>
+                                <div class="col col-lg-5 ml-auto col-md-5 col-sm-12 col-12">
+                                    <ul class="profile-menu">
+                                        <li> <a href="{% url 'profiles:followers' object.username %}">Followers ({{ object.followed_by.all.count }})</a> </li>
+                                        <li> <a href="{% url 'profiles:following' object.username %}">Following ({{ object.profile.get_following.count }})</a> </li>
+                                        <li>
+                                            <div class="more"> <i class="fas fa-ellipsis-h "></i>
+                                                <ul class="more-dropdown more-with-triangle">
+                                                    <li> <a href="#">Report Profile</a> </li>
+                                                    
+                                                </ul>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="control-block-button">
 
-      <!-- Timeline
-      ================================================= -->
-      <div class="timeline">
-        <div class="timeline-cover">
 
-          <!--Timeline Menu for Large Screens-->
-          <div class="timeline-nav-bar hidden-sm hidden-xs">
-            <div class="row">
-              <div class="col-md-3">
-                <div class="profile-info">
+                                
 
-                  <div class="editbutton">
-                  {% if object.profile.profile_image %} 
-
-                    <img src="{{ object.profile.profile_image.url }}" alt="" class="img-responsive profile-photo" />
-                     <div class="edit"><a href="#" ><i class="fa fa-pencil fa-lg"></i></a></div>
-                    {% else %} 
-                    <img src="{% static 'images/dp.jpg' %}" alt="" class="img-responsive profile-photo" />
-                    {% endif %}
-                   
-                  </div>
+                                {% if request.user.get_username != object.username %}
+                                <a href="{{ object.profile.get_follow_url }}" class="btn btn-control bg-blue"> <i class="fa fa-user-plus "></i>{% if following %}Unfollow{% else %}Follow{% endif %} </a>
                   
-                  
-                  <h3>{{ object.username }}</h3>
-                
-                  
-<p class="text-muted">{{ user.first_name }} &nbsp; {{ user.last_name }}</p>
-                </div>
-              </div>
-              <div class="col-md-9">
-                <ul class="list-inline profile-menu">
-                 <li><a href="{% url 'profiles:detail' object.username %}" >Timeline</a></li>
-                  <li><a href="{% url 'profiles:about' object.username %}" >About</a></li>
-                  <li><a href="{% url 'profiles:album' object.username %}" class="active">Album</a></li>
-                  <li><a href="{% url 'profiles:following' object.username %}">Following ({{ object.profile.get_following.count }})</a></li>
-                  <li><a href="{% url 'profiles:followers' object.username %}">Followers ({{ object.followed_by.all.count }})</a></li>
-                </ul>
-                <ul class="follow-me list-inline">
-                  
-
-
-                  {% if request.user.get_username != object.username %}
-                  <li><a class="btn-primary" href="{{ object.profile.get_follow_url }}">{% if following %}Unfollow{% else %}Follow{% endif %}</a></li>
-        
                {% else %}
+               <div class="btn btn-control bg-primary more"> <i class="fas fa-sliders-h " style="color: white"></i>
+                                    <ul class="more-dropdown more-with-triangle triangle-bottom-right">
+                                        <li> <a href="#" data-toggle="modal" data-target="#update-header-photo">Update Profile Photo</a> </li>
+                                        <li> <a href="#" data-toggle="modal" data-target="#update-header-photo">Update Header Photo</a> </li>
+                                        <li> <a href="{% url 'profiles:profileedit'  %}">Edit</a> </li>
+                                    </ul>
+                                </div>
 
-              <li><a class="btn-primary" href="{% url 'profiles:profileedit'  %}"><i class="fa fa-pencil "></i>&nbsp; Edit</a></li>
+              
 
                {% endif %}
-
-                </ul>
-              </div>
-            </div>
-          </div><!--Timeline Menu for Large Screens End-->
-
-          <!--Timeline Menu for Small Screens-->
-          <div class="navbar-mobile hidden-lg hidden-md">
-            <div class="profile-info">
-
-              <div class="editbutton">
-                  {% if object.profile.profile_image %} 
-
-                    <img src="{{ object.profile.profile_image.url }}" alt="" class="img-responsive profile-photo" />
-                     <div class="edit"><a href="#" ><i class="fa fa-pencil fa-lg"></i></a></div>
-                    {% else %} 
-                    <img src="{% static 'images/dp.jpg' %}" alt="" class="img-responsive profile-photo" />
-                    {% endif %}
-                   
-                  </div>
-              <h4>{{ object.username }}</h4>
-<p class="text-muted">{{ user.first_name }} &nbsp; {{ user.last_name }}</p>
-
-              
-            </div>
-            <div class="mobile-menu">
-              <ul class="list-inline">
-                <li><a href="{% url 'profiles:detail' object.username %}" >Timeline</a></li>
-                  <li><a href="{% url 'profiles:about' object.username %}" >About</a></li>
-                  <li><a href="{% url 'profiles:album' object.username %}" class="active">Album</a></li>
-                  <li><a href="{% url 'profiles:following' object.username %}">Following ({{ object.profile.get_following.count }})</a></li>
-                  <li><a href="{% url 'profiles:followers' object.username %}">Followers ({{ object.followed_by.all.count }})</a></li>
-              </ul>
-
-              {% if request.user.get_username != object.username %}
-                  <a class="btn-primary" href="{{ object.profile.get_follow_url }}">{% if following %}Unfollow{% else %}Follow{% endif %}</a>
-        
-               {% else %}
-
-              <li><a class="btn-primary" href="{% url 'profiles:profileedit'  %}"><i class="fa fa-pencil "></i>&nbsp; Edit</a></li>
-
-               {% endif %}
-
-              
-            </div>
-          </div><!--Timeline Menu for Small Screens End-->
-
-        </div>
-
-
-
-        
-        <div id="page-contents">
-          <div class="row">
-            <div class="col-md-3"></div>
-            <div class="col-md-7">
-
-             
-
-
-
-            	<ul class="album-photos">
-              
-              		<div id="sculpt-container" data-url='/api/{{ object.username }}/sculpt/album/'> </div>
-        			<a href="#" id='loadmore'>Load More Sculpts</a>
-				
-				</ul>
-
-
-
-
-            </div>
-
-
-            <div class="col-md-2 static">
-              <div id="sticky-sidebar">
-                <h4 class="grey">Recommended Users</h4>
-                <div class="feed-item">
-                  <div class="live-activity">
-                    <p>{% recommended request.user %}</p>
-                    
-                  </div>
+                            </div>
+                        </div>
+                        <div class="top-header-author">
+                            <a href="02-ProfilePage.html" class="author-thumb "> <img src="{{ user.profile.profile_image.url }}" alt="author"> </a>
+                            <div class="author-content"> <a href="#" class="h4 author-name">{{ user.username }}</a>
+                                <div class="country">{{user.first_name}} &nbsp; {{ user.last_name }}</div>
+                            </div> 
+                        </div>
+                    </div>
                 </div>
-                
-                
-              </div>
             </div>
-          </div>
         </div>
-
-
-
-
-
-
-
-
-
     </div>
-</div>
 
+    <div class="container">
+        <div class="row">
+            <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div class="tab-pane active" id="photo-page" role="tabpanel">
+                      <div class="photo-album-wrapper" id="sculpt-container" data-url='/api/{{ object.username }}/sculpt/album/'>
 
+                      </div>
+                     
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 
@@ -392,7 +298,8 @@
 
                         
                     
-                        sculptContainer.append("<li ><div class='img-wrapper' data-toggle='modal' data-target='.photo-"+ sculptValue.id +"'><img src='"+ mainSculpt.image +"' alt='photo' /></div><div class='modal fade photo-"+ sculptValue.id +"' tabindex='-1' role='dialog' aria-hidden='true'><div class='modal-dialog modal-lg'><div class='modal-content'><img src='"+ mainSculpt.image +"' alt='photo' /></div></div></div></li>")
+
+                        sculptContainer.append("<div class='photo-item col-4-width'> <img src='" + mainSculpt.image + "' alt='photo'><div class='overlay overlay-dark'></div><a href='' class='post-add-icon inline-items'> <i class='far fa-heart olymp-heart-icon'></i> <span>"+ sculptValue.likes +"</span> </a><a href='#' data-toggle='modal' data-target='#"+ mainSculpt.id +"' class='  full-block'></a><div class='content'> <a href='#' class='h6 title'>"+ mainSculpt.user.username +"</a><time class='published' datetime="+ mainSculpt.date_display +"'>"+ mainSculpt.timesince +"</time></div></div>")
 
                     
                 }
@@ -409,7 +316,8 @@
 
                         
 
-                        sculptContainer.append("<li ><div class='img-wrapper' data-toggle='modal' data-target='.photo-"+ sculptValue.id +"'><img src='"+ sculptImage +"' alt='photo' /></div><div class='modal fade photo-"+ sculptValue.id +"' tabindex='-1' role='dialog' aria-hidden='true'><div class='modal-dialog modal-lg'><div class='modal-content'><img src='"+ sculptImage +"' alt='photo' /></div></div></div></li>")
+
+                        sculptContainer.append("<div class='photo-item col-4-width'> <img src='" + sculptImage + "' alt='photo'><div class='overlay overlay-dark'></div><a href='' class='post-add-icon inline-items'> <i class='far fa-heart olymp-heart-icon'></i> <span>"+ sculptValue.likes +"</span> </a><a href='#' data-toggle='modal' data-target='#"+ sculptValue.id +"' class='  full-block'></a><div class='content'> <a href='#' class='h6 title'>"+ sculptUser.username +"</a><time class='published' datetime="+ dateDisplay +"'>"+ timeSince +"</time></div></div>")
 
 
 

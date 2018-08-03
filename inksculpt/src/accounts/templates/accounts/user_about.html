@@ -7,225 +7,249 @@
 
 <html lang="en">
   <head>
+
+  <title>{{ object.username }} | Inksculpt</title>
+
+  <!-- Required meta tags always come first -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+  <!-- Main Font -->
+  <script src="{% static 'static/js/webfontloader.min.js' %}"></script>
+  <script>
+    WebFont.load({
+      google: {
+        families: ['Roboto:300,400,500,700:latin']
+      }
+    });
+  </script>
   
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/ionicons.min.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.min.css' %}">
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i" rel="stylesheet">
-    <title>{% block title %} Inksculpt {% endblock title %}</title>
 
-    <style type="text/css">
-    	
-    {% if user.profile.cover_image %}
-    .timeline-cover{
-  background: url("{{ user.profile.cover_image.url }}") no-repeat;
-  background-position: center;
-  background-size: cover;
-  min-height: 360px;
-  border-radius: 0 0 4px 4px;
-  position: relative;
-} 
-{% else %}
-.timeline-cover{
-  background: url("{% static 'images/cover.png' %}") no-repeat;
-  background-position: center;
-  background-size: cover;
-  min-height: 360px;
-  border-radius: 0 0 4px 4px;
-  position: relative;
-} 
-{% endif %}
-
-    	.profile-info:hover .edit  {
-    			display: block;
-    	}
-
-    	.edit {
-
-	padding-top: 40px;	
-	padding-right: 60px;
-
-	position: absolute;
-	right: 0;
-	top: 0;
-	display: none;
-	
+<style type="text/css">
+  .white-space-pre {
+    white-space: pre-wrap;
 }
-.edit a {
-	color: #000;
-}
+</style>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" type="text/css" href="{% static 'static/Bootstrap/dist/css/bootstrap-reboot.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'static/Bootstrap/dist/css/bootstrap.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'static/Bootstrap/dist/css/bootstrap-grid.css' %}">
 
+  <!-- Main Styles CSS -->
+  <link rel="stylesheet" type="text/css" href="{% static 'static/css/main.min.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'static/css/fonts.min.css' %}">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 
-    </style>
-
-  </head>
+</head>
 
 
 <body>
     	
     {% include "navbar.html" %}
 
-    <div class="container">
+   <div class="container">
+        <div class="row">
+            <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="ui-block">
+                    <div class="top-header">
+                        <div class="top-header-thumb"> <img src="{{ user.profile.cover_image.url }}" alt="nature"> </div>
+                        <div class="profile-section">
+                            <div class="row">
+                                <div class="col col-lg-5 col-md-5 col-sm-12 col-12">
+                                    <ul class="profile-menu">
+                                        <li> <a href="{% url 'profiles:detail' object.username %}" >Timeline</a> </li>
+                                        <li> <a href="{% url 'profiles:about' object.username %}" class="active">About</a> </li>
+                                        <li> <a href="{% url 'profiles:album' object.username %}">Album</a> </li>
+                                    </ul>
+                                </div>
+                                <div class="col col-lg-5 ml-auto col-md-5 col-sm-12 col-12">
+                                    <ul class="profile-menu">
+                                        <li> <a href="{% url 'profiles:followers' object.username %}">Followers ({{ object.followed_by.all.count }})</a> </li>
+                                        <li> <a href="{% url 'profiles:following' object.username %}">Following ({{ object.profile.get_following.count }})</a> </li>
+                                        <li>
+                                            <div class="more"> <i class="fas fa-ellipsis-h "></i>
+                                                <ul class="more-dropdown more-with-triangle">
+                                                    <li> <a href="#">Report Profile</a> </li>
+                                                    
+                                                </ul>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="control-block-button">
 
-      <!-- Timeline
-      ================================================= -->
-      <div class="timeline">
-        <div class="timeline-cover">
 
-          <!--Timeline Menu for Large Screens-->
-          <div class="timeline-nav-bar hidden-sm hidden-xs">
-            <div class="row">
-              <div class="col-md-3">
-                <div class="profile-info">
+                                
 
-                  <div class="editbutton">
-                  {% if object.profile.profile_image %} 
-
-                    <img src="{{ object.profile.profile_image.url }}" alt="" class="img-responsive profile-photo" />
-                     <div class="edit"><a href="#" ><i class="fa fa-pencil fa-lg"></i></a></div>
-                    {% else %} 
-                    <img src="{% static 'images/dp.jpg' %}" alt="" class="img-responsive profile-photo" />
-                    {% endif %}
-                   
-                  </div>
+                                {% if request.user.get_username != object.username %}
+                                <a href="{{ object.profile.get_follow_url }}" class="btn btn-control bg-blue"> <i class="fa fa-user-plus "></i>{% if following %}Unfollow{% else %}Follow{% endif %} </a>
                   
-                  
-                  <h3>{{ object.username }}</h3>
-                
-                  
-<p class="text-muted">{{ user.first_name }} &nbsp; {{ user.last_name }}</p>
+               {% else %}
+               <div class="btn btn-control bg-primary more"> <i class="fas fa-sliders-h " style="color: white"></i>
+                                    <ul class="more-dropdown more-with-triangle triangle-bottom-right">
+                                        <li> <a href="#" data-toggle="modal" data-target="#update-header-photo">Update Profile Photo</a> </li>
+                                        <li> <a href="#" data-toggle="modal" data-target="#update-header-photo">Update Header Photo</a> </li>
+                                        <li> <a href="{% url 'profiles:profileedit'  %}">Edit</a> </li>
+                                    </ul>
+                                </div>
+
+              
+
+               {% endif %}
+                            </div>
+                        </div>
+                        <div class="top-header-author">
+                            <a href="02-ProfilePage.html" class="author-thumb "> <img src="{{ user.profile.profile_image.url }}" alt="author"> </a>
+                            <div class="author-content"> <a href="#" class="h4 author-name">{{ user.username }}</a>
+                                <div class="country">{{user.first_name}} &nbsp; {{ user.last_name }}</div>
+                            </div> 
+                        </div>
+                    </div>
                 </div>
-              </div>
-              <div class="col-md-9">
-                <ul class="list-inline profile-menu">
-                  <li><a href="{% url 'profiles:detail' object.username %}" >Timeline</a></li>
-                  <li><a href="{% url 'profiles:about' object.username %}" class="active">About</a></li>
-                  <li><a href="{% url 'profiles:album' object.username %}">Album</a></li>
-                  <li><a href="{% url 'profiles:following' object.username %}">Following ({{ object.profile.get_following.count }})</a></li>
-                  <li><a href="{% url 'profiles:followers' object.username %}">Followers ({{ object.followed_by.all.count }})</a></li>
-                </ul>
-                <ul class="follow-me list-inline">
-                  
-
-
-                  {% if request.user.get_username != object.username %}
-                  <li><a class="btn-primary" href="{{ object.profile.get_follow_url }}">{% if following %}Unfollow{% else %}Follow{% endif %}</a></li>
-        
-               {% else %}
-
-              <li><a class="btn-primary" href="{% url 'profiles:profileedit'  %}"><i class="fa fa-pencil "></i>&nbsp; Edit</a></li>
-
-               {% endif %}
-
-                </ul>
-              </div>
             </div>
-          </div><!--Timeline Menu for Large Screens End-->
-
-          <!--Timeline Menu for Small Screens-->
-          <div class="navbar-mobile hidden-lg hidden-md">
-            <div class="profile-info">
-
-              <div class="editbutton">
-                  {% if object.profile.profile_image %} 
-
-                    <img src="{{ object.profile.profile_image.url }}" alt="" class="img-responsive profile-photo" />
-                     <div class="edit"><a href="#" ><i class="fa fa-pencil fa-lg"></i></a></div>
-                    {% else %} 
-                    <img src="{% static 'images/dp.jpg' %}" alt="" class="img-responsive profile-photo" />
-                    {% endif %}
-                   
-                  </div>
-              <h4>{{ object.username }}</h4>
-<p class="text-muted">{{ user.first_name }} &nbsp; {{ user.last_name }}</p>
-
-              
-            </div>
-            <div class="mobile-menu">
-              <ul class="list-inline">
-                <li><a href="{% url 'profiles:detail' user.username %}" >Timeline</a></li>
-                <li><a href="{% url 'profiles:about' user.username %}" class="active">About</a></li>
-                <li><a href="{% url 'profiles:album' user.username %}">Album</a></li>
-                <li><a href="{% url 'profiles:following' user.username %}">Following ({{ object.profile.get_following.count }})</a></li>
-                <li><a href="{% url 'profiles:followers' user.username %}">Followers ({{ object.followed_by.all.count }})</a></li>
-              </ul>
-
-              {% if request.user.get_username != object.username %}
-                  <a class="btn-primary" href="{{ object.profile.get_follow_url }}">{% if following %}Unfollow{% else %}Follow{% endif %}</a>
-        
-               {% else %}
-
-              <li><a class="btn-primary" href="{% url 'profiles:profileedit'  %}"><i class="fa fa-pencil "></i>&nbsp; Edit</a></li>
-
-               {% endif %}
-
-              
-            </div>
-          </div><!--Timeline Menu for Small Screens End-->
-
         </div>
+    </div>
 
-
-
-        
-        <div id="page-contents">
+    <div class="container">
+  <div class="row">
+    <div class="col col-xl-8 order-xl-2 col-lg-8 order-lg-2 col-md-12 order-md-1 col-sm-12 col-12">
+      <div class="ui-block">
+        <div class="ui-block-title">
+          <h6 class="title">Other Info</h6>
+          <a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg></a>
+        </div>
+        <div class="ui-block-content">
           <div class="row">
-            <div class="col-md-3"></div>
-            <div class="col-md-7">
+            <div class="col col-lg-6 col-md-6 col-sm-12 col-12">
 
-              <div class="about-profile">
-                <div class="about-content-block">
-                  <h4 class="grey"><i class="ion-ios-information-outline icon-in-title"></i>Status</h4>
-                  <p>{{ object.profile.status }}</p>
-                </div>
+              
+              <!-- W-Personal-Info -->
+              
+              <ul class="widget w-personal-info item-block">
+                    {% if user.profile.status  %}                   
+                             <li>
+                               <span class="title">Status:</span>
+                                <span class="text">{{ user.profile.status }} </span>
+                              </li>
+                    {% else %}
+                              <li>
+                                <span class="title">Status:</span>
+                                  <span class="text">Hurray! I am A SCULPTOR!</span>
+                              </li>
+                    {% endif %}
+
+                    {% if user.profile.dob  %}                   
+                             <li>
+                               <span class="title">Birthday:</span>
+                                <span class="text">{{ user.profile.dob }} </span>
+                              </li>
+                    {% else %}
+                              <li>
+                                <span class="title">Birthday:</span>
+                                  <span class="text">Looks like you aren't invited to the party.</span>
+                              </li>
+                    {% endif %}
+
                 
-                <div class="about-content-block">
-                  <h4 class="grey"><i class="ion-ios-email-outline icon-in-title"></i>email</h4>
-                  <p>{{ object.email }}</p>
-                  
-                </div>
-                <div class="about-content-block">
-                  <h4 class="grey"><i class="ion-ios-location-outline icon-in-title"></i>location</h4>
-                  <p>{{ object.profile.city }} , {{ object.profile.country }}</p>
-                </div>
                 
-              </div>
-
-             
-
-
-
+              </ul>
+              
+              <!-- ... end W-Personal-Info -->
             </div>
+            <div class="col col-lg-6 col-md-6 col-sm-12 col-12">
 
+              
+              <!-- W-Personal-Info -->
+              
+              <ul class="widget w-personal-info item-block">
 
-            <div class="col-md-2 static">
-              <div id="sticky-sidebar">
-                <h4 class="grey">Recommended Users</h4>
-                <div class="feed-item">
-                  <div class="live-activity">
-                    <p>{% recommended request.user %}</p>
-                    
-                  </div>
-                </div>
+                {% if user.profile.gender  %}                   
+                             <li>
+                               <span class="title">Gender:</span>
+                                <span class="text">{{ user.profile.gender }} </span>
+                              </li>
+                    {% else %}
+                              <li>
+                                <span class="title">Gender:</span>
+                                  <span class="text">Not Interested to let you know my interests.</span>
+                              </li>
+                    {% endif %}
                 
+                {% if user.profile.city  %}                   
+                             <li>
+                               <span class="title">Place:</span>
+                                <span class="text">{{ user.profile.city }}, {{ user.profile.country }} </span>
+                              </li>
+                    {% else %}
+                              <li>
+                                <span class="title">Place:</span>
+                                  <span class="text">Lost in the woods.</span>
+                              </li>
+                    {% endif %}
                 
-              </div>
+              </ul>
+              
+              <!-- ... end W-Personal-Info -->
             </div>
           </div>
         </div>
-
-
-
-
-
-
-
-
-
+      </div>
+      
     </div>
+
+    <div class="col col-xl-4 order-xl-1 col-lg-4 order-lg-1 col-md-12 order-md-2 col-sm-12 col-12">
+      <div class="ui-block">
+        <div class="ui-block-title">
+          <h6 class="title">Personal Info</h6>
+          <a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg></a>
+        </div>
+        <div class="ui-block-content">
+
+          
+          <!-- W-Personal-Info -->
+          
+          <ul class="widget w-personal-info">
+
+            <li>
+              <span class="title">Full Name:</span>
+              <span class="text">{{ user.first_name }} {{ user.last_name }}
+                        </span>
+            </li>
+            <li>
+              <span class="title">Email:</span>
+              <span class="text">{{ user.email }}</span>
+            </li>
+            
+            
+          </ul>
+          
+          <!-- ... end W-Personal-Info -->
+          <!-- W-Socials -->
+          
+          <div class="widget w-socials">
+            <h6 class="title">Other Social Networks:</h6>
+            <a href="#" class="social-item bg-facebook">
+              <i class="fab fa-facebook-f" aria-hidden="true"></i>
+              Facebook
+            </a>
+            <a href="#" class="social-item bg-twitter">
+              <i class="fab fa-twitter" aria-hidden="true"></i>
+              Twitter
+            </a>
+            <a href="#" class="social-item bg-dribbble">
+              <i class="fab fa-dribbble" aria-hidden="true"></i>
+              Dribbble
+            </a>
+          </div>
+          
+          
+          <!-- ... end W-Socials -->
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 
@@ -235,18 +259,45 @@
 
 
 
-<script
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-     <script type="text/javascript" src="{% static 'js/js/bootstrap.min.js' %}"></script>
-     <script type="text/javascript" src="{% static 'js/jquery.sticky-kit.min.js' %}"></script>
-     <script type="text/javascript" src="{% static 'js/jquery.scrollbar.min.js' %}"></script>
-     <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
+<script src="{% static 'static/js/jquery-3.2.1.js' %}"></script>
+<script src="{% static 'static/js/jquery.appear.js' %}"></script>
+<script src="{% static 'static/js/jquery.mousewheel.js' %}"></script>
+<script src="{% static 'static/js/perfect-scrollbar.js' %}"></script>
+<script src="{% static 'static/js/jquery.matchHeight.js' %}"></script>
+<script src="{% static 'static/js/svgxuse.js' %}"></script>
+<script src="{% static 'static/js/imagesloaded.pkgd.js' %}"></script>
+<script src="{% static 'static/js/Headroom.js' %}"></script>
+<script src="{% static 'static/js/velocity.js' %}"></script>
+<script src="{% static 'static/js/ScrollMagic.js' %}"></script>
+<script src="{% static 'static/js/jquery.waypoints.js' %}"></script>
+<script src="{% static 'static/js/jquery.countTo.js' %}"></script>
+<script src="{% static 'static/js/popper.min.js' %}"></script>
+<script src="{% static 'static/js/material.min.js' %}"></script>
+<script src="{% static 'static/js/bootstrap-select.js' %}"></script>
+<script src="{% static 'static/js/smooth-scroll.js' %}"></script>
+<script src="{% static 'static/js/selectize.js' %}"></script>
+<script src="{% static 'static/js/swiper.jquery.js' %}"></script>
+<script src="{% static 'static/js/moment.js' %}"></script>
+<script src="{% static 'static/js/daterangepicker.js' %}"></script>
+<script src="{% static 'static/js/simplecalendar.js' %}"></script>
+<script src="{% static 'static/js/fullcalendar.js' %}"></script>
+<script src="{% static 'static/js/isotope.pkgd.js' %}"></script>
+<script src="{% static 'static/js/ajax-pagination.js' %}"></script>
+<script src="{% static 'static/js/Chart.js' %}"></script>
+<script src="{% static 'static/js/chartjs-plugin-deferred.js' %}"></script>
+<script src="{% static 'static/js/circle-progress.js' %}"></script>
+<script src="{% static 'static/js/loader.js' %}"></script>
+<script src="{% static 'static/js/run-chart.js' %}"></script>
+<script src="{% static 'static/js/jquery.magnific-popup.js' %}"></script>
+<script src="{% static 'static/js/jquery.gifplayer.js' %}"></script>
+<script src="{% static 'static/js/mediaelement-and-player.js' %}"></script>
+<script src="{% static 'static/js/mediaelement-playlist-plugin.min.js' %}"></script>
 
+<script src="{% static 'static/js/base-init.js' %}"></script>
+<script defer src="{% static 'static/fonts/fontawesome-all.js' %}"></script>
 
-      {% include "search-js.html" %}
+<script src="{% static 'static/Bootstrap/dist/js/bootstrap.bundle.js' %}"></script>
+{% include "search-js.html" %}
 
 
 
