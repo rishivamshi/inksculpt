@@ -108,10 +108,11 @@ class UserProfile(models.Model):
 	width_profilefield = models.IntegerField(default = 0, null = True, blank = True)
 
 
-	cover_image = models.ImageField(
+	cover_image = DefaultStaticImageField(
 				upload_to = upload_location,
 				null = True,
 				blank = True,
+				default_image_path='images/cover.png',
 				width_field = "width_coverfield",
 				height_field = "height_coverfield") # images stuff
 		

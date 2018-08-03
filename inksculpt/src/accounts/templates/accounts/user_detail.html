@@ -6,230 +6,192 @@
 
 <html lang="en">
   <head>
-  
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/ionicons.min.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.min.css' %}">
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i" rel="stylesheet">
-    <title>{% block title %} Inksculpt {% endblock title %}</title>
 
-    <style type="text/css">
-      
-    {% if user.profile.cover_image %}
-    .timeline-cover{
-  background: url("{{ user.profile.cover_image.url }}") no-repeat;
-  background-position: center;
-  background-size: cover;
-  min-height: 360px;
-  border-radius: 0 0 4px 4px;
-  position: relative;
-} 
-{% else %}
-.timeline-cover{
-  background: url("{% static 'images/cover.png' %}") no-repeat;
-  background-position: center;
-  background-size: cover;
-  min-height: 360px;
-  border-radius: 0 0 4px 4px;
-  position: relative;
-} 
-{% endif %}
+  <title>{{ object.username }} | Inksculpt</title>
 
-      .profile-info:hover .edit  {
-          display: block;
+  <!-- Required meta tags always come first -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+  <!-- Main Font -->
+  <script src="{% static 'static/js/webfontloader.min.js' %}"></script>
+  <script>
+    WebFont.load({
+      google: {
+        families: ['Roboto:300,400,500,700:latin']
       }
-
-      .edit {
-
-  padding-top: 40px;  
-  padding-right: 60px;
-
-  position: absolute;
-  right: 0;
-  top: 0;
-  display: none;
+    });
+  </script>
   
+
+<style type="text/css">
+  .white-space-pre {
+    white-space: pre-wrap;
 }
-.edit a {
-  color: #000;
-}
+</style>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" type="text/css" href="{% static 'static/Bootstrap/dist/css/bootstrap-reboot.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'static/Bootstrap/dist/css/bootstrap.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'static/Bootstrap/dist/css/bootstrap-grid.css' %}">
+
+  <!-- Main Styles CSS -->
+  <link rel="stylesheet" type="text/css" href="{% static 'static/css/main.min.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'static/css/fonts.min.css' %}">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+
+</head>
 
 
-    </style>
-
-
-
-  </head>
-
-{% include "reply-modal.html" %}
 <body>
-    	
+    	{% include "reply-modal.html" %}
     {% include "navbar.html" %}
 
     <div class="container">
+        <div class="row">
+            <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="ui-block">
+                    <div class="top-header">
+                        <div class="top-header-thumb"> <img src="{{ user.profile.cover_image.url }}" alt="nature"> </div>
+                        <div class="profile-section">
+                            <div class="row">
+                                <div class="col col-lg-5 col-md-5 col-sm-12 col-12">
+                                    <ul class="profile-menu">
+                                        <li> <a href="{% url 'profiles:detail' object.username %}" class="active">Timeline</a> </li>
+                                        <li> <a href="{% url 'profiles:about' object.username %}">About</a> </li>
+                                        <li> <a href="{% url 'profiles:album' object.username %}">Album</a> </li>
+                                    </ul>
+                                </div>
+                                <div class="col col-lg-5 ml-auto col-md-5 col-sm-12 col-12">
+                                    <ul class="profile-menu">
+                                        <li> <a href="{% url 'profiles:followers' object.username %}">Followers ({{ object.followed_by.all.count }})</a> </li>
+                                        <li> <a href="{% url 'profiles:following' object.username %}">Following ({{ object.profile.get_following.count }})</a> </li>
+                                        <li>
+                                            <div class="more"> <i class="fas fa-ellipsis-h "></i>
+                                                <ul class="more-dropdown more-with-triangle">
+                                                    <li> <a href="#">Report Profile</a> </li>
+                                                    
+                                                </ul>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="control-block-button">
 
-      <!-- Timeline
-      ================================================= -->
-      <div class="timeline">
-        <div class="timeline-cover">
 
-          <!--Timeline Menu for Large Screens-->
-          <div class="timeline-nav-bar hidden-sm hidden-xs">
-            <div class="row">
-              <div class="col-md-3">
-                <div class="profile-info">
+                                
 
-                  <div class="editbutton">
-                  {% if object.profile.profile_image %} 
-
-                    <img src="{{ object.profile.profile_image.url }}" alt="" class="img-responsive profile-photo" />
-                     <div class="edit"><a href="#" ><i class="fa fa-pencil fa-lg"></i></a></div>
-                    {% else %} 
-                    <img src="{% static 'images/dp.jpg' %}" alt="" class="img-responsive profile-photo" />
-                    {% endif %}
-                   
-                  </div>
+                                {% if request.user.get_username != object.username %}
+                                <a href="{{ object.profile.get_follow_url }}" class="btn btn-control bg-blue"> <i class="fa fa-user-plus "></i>{% if following %}Unfollow{% else %}Follow{% endif %} </a>
                   
-                  
-                  <h3>{{ object.username }}</h3>
-                
-                  
-<p class="text-muted">{{ user.first_name }} &nbsp; {{ user.last_name }}</p>
-                </div>
-              </div>
-              <div class="col-md-9">
-                <ul class="list-inline profile-menu">
-                  <li><a href="{% url 'profiles:detail' object.username %}" class="active">Timeline</a></li>
-                  <li><a href="{% url 'profiles:about' object.username %}">About</a></li>
-                  <li><a href="{% url 'profiles:album' object.username %}">Album</a></li>
-                  <li><a href="{% url 'profiles:following' object.username %}">Following ({{ object.profile.get_following.count }})</a></li>
-                  <li><a href="{% url 'profiles:followers' object.username %}">Followers ({{ object.followed_by.all.count }})</a></li>
-                </ul>
-                <ul class="follow-me list-inline">
-                  
-
-
-                  {% if request.user.get_username != object.username %}
-                  <li><a class="btn-primary" href="{{ object.profile.get_follow_url }}">{% if following %}Unfollow{% else %}Follow{% endif %}</a></li>
-        
                {% else %}
-
-              <li><a class="btn-primary" href="{% url 'profiles:profileedit'  %}"><i class="fa fa-pencil "></i>&nbsp; Edit</a></li>
-
-               {% endif %}
-
-                </ul>
-              </div>
-            </div>
-          </div><!--Timeline Menu for Large Screens End-->
-
-          <!--Timeline Menu for Small Screens-->
-          <div class="navbar-mobile hidden-lg hidden-md">
-            <div class="profile-info">
-
-              <div class="editbutton">
-                  {% if object.profile.profile_image %} 
-
-                    <img src="{{ object.profile.profile_image.url }}" alt="" class="img-responsive profile-photo" />
-                     <div class="edit"><a href="#" ><i class="fa fa-pencil fa-lg"></i></a></div>
-                    {% else %} 
-                    <img src="{% static 'images/dp.jpg' %}" alt="" class="img-responsive profile-photo" />
-                    {% endif %}
-                   
-                  </div>
-              <h4>{{ object.username }}</h4>
-<p class="text-muted">{{ user.first_name }} &nbsp; {{ user.last_name }}</p>
-
-
-            </div>
-            <div class="mobile-menu">
-              <ul class="list-inline">
-                <li><a href="{% url 'profiles:detail' object.username %}" class="active">Timeline</a></li>
-                <li><a href="{% url 'profiles:about' object.username %}">About</a></li>
-                <li><a href="{% url 'profiles:album' object.username %}">Album</a></li>
-                <li><a href="{% url 'profiles:following' object.username %}">Following ({{ object.profile.get_following.count }})</a></li>
-                <li><a href="{% url 'profiles:followers' object.username %}">Followers ({{ object.followed_by.all.count }})</a></li>
-              </ul>
-
-              {% if request.user.get_username != object.username %}
-                  <a class="btn-primary" href="{{ object.profile.get_follow_url }}">{% if following %}Unfollow{% else %}Follow{% endif %}</a>
-        
-               {% else %}
-
-              <li><a class="btn-primary" href="{% url 'profiles:profileedit'  %}"><i class="fa fa-pencil "></i>&nbsp; Edit</a></li>
-
-               {% endif %}
+               <div class="btn btn-control bg-primary more"> <i class="fas fa-sliders-h " style="color: white"></i>
+                                    <ul class="more-dropdown more-with-triangle triangle-bottom-right">
+                                        <li> <a href="#" data-toggle="modal" data-target="#update-header-photo">Update Profile Photo</a> </li>
+                                        <li> <a href="#" data-toggle="modal" data-target="#update-header-photo">Update Header Photo</a> </li>
+                                        <li> <a href="{% url 'profiles:profileedit'  %}">Edit</a> </li>
+                                    </ul>
+                                </div>
 
               
-            </div>
-          </div><!--Timeline Menu for Small Screens End-->
 
-        </div>
-
-
-
-        
-        <div id="page-contents">
-          <div class="row">
-            <div class="col-md-3"></div>
-            <div class="col-md-7">
-
-              <!-- Post Create Box
-              ================================================= -->
-              <div class="create-post">
-                <div class="row">
-                  {% if request.user.get_username == object.username %}
-                    <div class="panel panel-default">
-                    <div class="panel-heading">Credits:  {{ credits }}</div>
+               {% endif %}
+                            </div>
+                        </div>
+                        <div class="top-header-author">
+                            <a href="02-ProfilePage.html" class="author-thumb "> <img src="{{ user.profile.profile_image.url }}" alt="author"> </a>
+                            <div class="author-content"> <a href="#" class="h4 author-name">{{ user.username }}</a>
+                                <div class="country">{{user.first_name}} &nbsp; {{ user.last_name }}</div>
+                            </div> 
+                        </div>
                     </div>
-                  {% endif %}
-                  
- 
-                
-                  
                 </div>
-              </div><!-- Post Create Box End-->
-
-              <div id="sculpt-container" data-url='/api/{{ object.username }}/sculpt/'> </div>
-        
-         <div class="newcontent" >
-                    <h3><a href="#" id='loadmore' style="color: white">Load More Sculpts</a></h3>
-                </div>
-
-
-
             </div>
+        </div>
+    </div>
 
-
-            <div class="col-md-2 static">
-              <div id="sticky-sidebar">
-                <h4 class="grey">Recommended Users</h4>
-                <div class="feed-item">
-                  <div class="live-activity">
-                    <p>{% recommended request.user %}</p>
-                    
+    <div class="container">
+      <div class="row">
+         
+         <div class="col col-xl-6 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12">
+                 <div id="newsfeed-items-grid">
+                      <div id="sculpt-container" data-url='/api/{{ object.username }}/sculpt/'></div>
                   </div>
-                </div>
-                
-                
-              </div>
+
+        
+      <a id="loadmore" href="#" class="btn btn-control btn-more" ><i class="fas fa-ellipsis-h olymp-three-dots-icon" style="color: white"></i></a>
             </div>
-          </div>
+
+            <div class="col col-xl-3 order-xl-1 col-lg-6 order-lg-2 col-md-6 col-sm-12 col-12">
+                <div class="ui-block">
+                    <div class="ui-block-title">
+                        <h6 class="title">Profile Intro</h6> </div>
+                    <div class="ui-block-content">
+                        <!-- W-Personal-Info -->
+                        <ul class="widget w-personal-info item-block">
+                            <li> <span class="title">Full Name</span> <span class="text">{{ user.first_name }} {{ user.last_name }}</span> </li>
+
+                            {% if request.user.get_username == object.username %}
+                            <li> <span class="title">Credits</span> <span class="text">{{ credits }}</span> </li>
+                    
+                            {% endif %}
+                            {% if user.profile.status  %}
+
+                            <li> <span class="title">Status</span> <span class="text">{{ user.profile.status }}</span> </li>
+                            {% endif %}
+
+                            {% if user.email %}
+
+                            <li> <span class="title">Email</span> <span class="text">{{ user.email }}</span> </li>
+                            {% endif %}
+                            {% if user.profile.city %}
+                            <li> <span class="title">From</span> <span class="text">{{ user.profile.city }}, {{ user.profile.country }}</span> </li>
+                          {% endif %}
+                        </ul>
+                        <!-- .. end W-Personal-Info -->
+                        <!-- W-Socials -->
+                        <div class="widget w-socials">
+                            <h6 class="title">Other Social Networks:</h6>
+                            <a href="#" class="social-item bg-facebook"> <i class="fab fa-facebook-f" aria-hidden="true"></i> Facebook </a>
+                            <a href="#" class="social-item bg-twitter"> <i class="fab fa-twitter" aria-hidden="true"></i> Twitter </a>
+                            <a href="#" class="social-item bg-dribbble"> <i class="fab fa-instagram" aria-hidden="true"></i> Instagram </a>
+                        </div>
+                        <!-- ... end W-Socials -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="col col-xl-3 order-xl-3 col-lg-6 order-lg-3 col-md-6 col-sm-12 col-12">
+                <div class="ui-block">
+        <div class="ui-block-title">
+          <h6 class="title">Friend Suggestions</h6>
+          
         </div>
 
+        
+        <ul class="widget w-friend-pages-added notification-list friend-requests">
+          
+        
+          
+        
+          {% recommended request.user %}
+        
+        </ul>
+        
+        <!-- ... end W-Action -->
+      </div>
+                
+            </div>
 
 
 
 
 
-
-
-
+      </div>
     </div>
-</div>
+
+    
 
 
 
@@ -237,17 +199,45 @@
 
 
 
+<script src="{% static 'static/js/jquery-3.2.1.js' %}"></script>
+<script src="{% static 'static/js/jquery.appear.js' %}"></script>
+<script src="{% static 'static/js/jquery.mousewheel.js' %}"></script>
+<script src="{% static 'static/js/perfect-scrollbar.js' %}"></script>
+<script src="{% static 'static/js/jquery.matchHeight.js' %}"></script>
+<script src="{% static 'static/js/svgxuse.js' %}"></script>
+<script src="{% static 'static/js/imagesloaded.pkgd.js' %}"></script>
+<script src="{% static 'static/js/Headroom.js' %}"></script>
+<script src="{% static 'static/js/velocity.js' %}"></script>
+<script src="{% static 'static/js/ScrollMagic.js' %}"></script>
+<script src="{% static 'static/js/jquery.waypoints.js' %}"></script>
+<script src="{% static 'static/js/jquery.countTo.js' %}"></script>
+<script src="{% static 'static/js/popper.min.js' %}"></script>
+<script src="{% static 'static/js/material.min.js' %}"></script>
+<script src="{% static 'static/js/bootstrap-select.js' %}"></script>
+<script src="{% static 'static/js/smooth-scroll.js' %}"></script>
+<script src="{% static 'static/js/selectize.js' %}"></script>
+<script src="{% static 'static/js/swiper.jquery.js' %}"></script>
+<script src="{% static 'static/js/moment.js' %}"></script>
+<script src="{% static 'static/js/daterangepicker.js' %}"></script>
+<script src="{% static 'static/js/simplecalendar.js' %}"></script>
+<script src="{% static 'static/js/fullcalendar.js' %}"></script>
+<script src="{% static 'static/js/isotope.pkgd.js' %}"></script>
+<script src="{% static 'static/js/ajax-pagination.js' %}"></script>
+<script src="{% static 'static/js/Chart.js' %}"></script>
+<script src="{% static 'static/js/chartjs-plugin-deferred.js' %}"></script>
+<script src="{% static 'static/js/circle-progress.js' %}"></script>
+<script src="{% static 'static/js/loader.js' %}"></script>
+<script src="{% static 'static/js/run-chart.js' %}"></script>
+<script src="{% static 'static/js/jquery.magnific-popup.js' %}"></script>
+<script src="{% static 'static/js/jquery.gifplayer.js' %}"></script>
+<script src="{% static 'static/js/mediaelement-and-player.js' %}"></script>
+<script src="{% static 'static/js/mediaelement-playlist-plugin.min.js' %}"></script>
 
-<script
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-     <script type="text/javascript" src="{% static 'js/js/bootstrap.min.js' %}"></script>
-     <script type="text/javascript" src="{% static 'js/jquery.sticky-kit.min.js' %}"></script>
-     <script type="text/javascript" src="{% static 'js/jquery.scrollbar.min.js' %}"></script>
-     <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
-  {% include "search-js.html" %}
+<script src="{% static 'static/js/base-init.js' %}"></script>
+<script defer src="{% static 'static/fonts/fontawesome-all.js' %}"></script>
+
+<script src="{% static 'static/Bootstrap/dist/js/bootstrap.bundle.js' %}"></script>
+{% include "search-js.html" %}
 
     <script type="text/javascript">
 
@@ -424,11 +414,11 @@ var counter = 0;
             var PopoverMenu;
             if (sculptValue.current_user == sculptUser.username) {
 
-                 PopoverMenu = "<div class='btn-group'><button type='button' data-toggle='dropdown' class='btn btn-info dropdown-toggle'>options &nbsp;<span class='caret'></span></button><div role='menu' class='dropdown-menu'><li><a href='/sculpt/"+ sculptValue.id + "/update'>edit</a></li><li><a href='/sculpt/"+ sculptValue.id +"/delete'>Delete</a></li><li class='divider'></li><li><a href='#'>Report</a></li></div></div>";
+                  PopoverMenu = "<div class='more'><i class='fas fa-ellipsis-h'></i><ul class='more-dropdown'><li><a href='sculpt/"+ sculptValue.id + "/update'>Edit Post</a></li><li><a href='sculpt/"+ sculptValue.id +"/delete'>Delete Post</a></li><hr><li><a href='#' class='sculpt-report' data-id = "+ sculptValue.id +">Report Post</a></li></ul></div>";
 
              } else {
 
-                PopoverMenu = "<div class='btn-group'><button type='button' data-toggle='dropdown' class='btn btn-info dropdown-toggle'>options &nbsp;<span class='caret'></span></button><div role='menu' class='dropdown-menu'><div class='divider'></div><div><a href='#'>Report</a></div></div></div>";
+                PopoverMenu = "<div class='more'><i class='fas fa-ellipsis-h'></i><ul class='more-dropdown'><li><a href='#' class='sculpt-report' data-id = "+ sculptValue.id +">Report Post</a></li></ul></div>";
 
              }
 
@@ -438,7 +428,7 @@ var counter = 0;
                 
                     if (sculptImage == null) {
 
-                        sculptContainer.append("<div class='post-content'><div class='post-date hidden-xs hidden-sm'><h5>"+ sculptUser.username +"</h5><p class='text-grey' style='font-size: 9'>"+ dateDisplay +"</p></div><div class='post-container'><img src='{% static 'images/dp.jpg' %}' alt='user' class='profile-photo-md pull-left' /><div class='post-detail'><div class='user-info'><h5><a href='"+ sculptUser.url +"' class='profile-link'>" + sculptUser.username  + "</a> <span class='following'>following</span></h5><p class='text-muted'>Reposted <a href='"+ mainSculpt.user.url +"'>"+ mainSculpt.user.username + "</a>'s post about <span title='" + dateDisplay + "' style=' color:#00897B;'> "+ timeSince +"</span></p></div><div class='reaction'><a href = '#' class='btn text-green sculpt-like' data-id='" + sculptValue.id +"'><i class='icon ion-thumbsup'></i>" + verb + " ("+ sculptValue.likes +")</a>"+ PopoverMenu +"</div><div class='line-divider'></div><div class='post-text'><pre class='sculptcontentclass'>" + sculptContent +"</pre></div><div class='row options-buttons' style='margin-bottom: 10px'><a role='button'  class='btn' style='background-color: #00897B; color: whitesmoke' href = '/sculpt/" + sculptValue.id + "' >("+ counter +")<span class='options-buttons-text'>View</span> </a><a role='button' class='sculpt-reply  btn' style='background-color: #00897B; color: whitesmoke' data-user ='"+ sculptUser.username +"' data-id='"+ replyId + "' ><i class='icon ion-ios-chatbubble-outline'></i>&nbsp;<span class='options-buttons-text'>Comment</span></a><a role='button' class=' resculptBtn  btn' style='background-color: #00897B; color: whitesmoke' href = '/sculpt/" + sculptValue.id + "/resculpt/' ><i class='icon ion-ios-refresh-outline'></i>&nbsp;<span class='options-buttons-text'>Repost</span></a></div></div></div></div>")
+                        sculptContainer.append("<div class='ui-block'><article class='hentry post has-post-thumbnail shared-photo'><div class='post__author author vcard inline-items'><img src='"+ sculptUser.dp_url +"' alt='author'><div class='author-date'><a class='h6 post__author-name fn' href='"+ sculptUser.url +"'>"+ sculptUser.username +"</a> shared <a href='"+ mainSculpt.user.url +"'>"+ mainSculpt.user.username +"</a>’s <a href='#' data-toggle='modal' data-target='#"+ sculptValue.id +"' class=''>Post</a><div class='post__date'><time class='published' datetime='"+ dateDisplay +"'>"+ timeSince +"</time></div></div>" + PopoverMenu + "</div><div class='post-thumb'>  </div><ul class='children single-children'><li class='comment-item'><div class='post__author author vcard inline-items'> <img src='"+ mainSculpt.user.dp_url +"' alt='author'><div class='author-date'> <a class='h6 post__author-name fn' href='"+ mainSculpt.user.url +"'>"+mainSculpt.user.username+"</a><div class='post__date'><time class='published' datetime=''> "+ mainSculpt.timesince +"</time></div></div></div><p>"+ sculptContent.substring(0,300) +"...</p><a href='#' data-toggle='modal' data-target='#"+ sculptValue.id +"' class='btn btn-md-2 btn-border-think c-grey btn-transparent custom-color'>Read More</a></li></ul><div class='post-additional-info inline-items'><a href='#' data-id='" + sculptValue.id +"' class='post-add-icon inline-items sculpt-like'><i class='far fa-heart olymp-heart-icon sculpt-like'></i>"+ verb +" <span>"+ sculptValue.likes +"</span></a><a href='/sculpt/" + sculptValue.id + "' class='inline-items'><span>View</span><span>"+counter+"</span></a><div class='comments-shared'><a href='#' data-user ='"+ sculptUser.username +"' data-id='"+ replyId + "' class='post-add-icon sculpt-reply inline-items'><i class='far fa-comments olymp-speech-balloon-icon'></i></a><a href='/sculpt/" + sculptValue.id + "/resculpt/' class='post-add-icon resculptBtn inline-items'><i class='far fa-copy olymp-share-icon'></i></a></div></div><div class='control-block-button post-control-button'><a href='#' class='btn btn-control'><i class='far fa-heart olymp-like-post-icon'></i></a><a href='#' class='btn btn-control'><i class='far fa-comments olymp-comments-post-icon'></i></a><a href='#' class='btn btn-control'><i class='far fa-copy olymp-share-icon'></i></a></div></article><div class='modal fade' id='"+ sculptValue.id +"' tabindex='-1' role='dialog' aria-labelledby='blog-post-popup' aria-hidden='true'><div class='modal-dialog window-popup blog-post-popup' role='document'><div class='modal-content'><a href='#' class='close icon-close' data-dismiss='modal' aria-label='Close'> <i class='fas fa-times olymp-close-icon'></i> </a><div class='modal-body'><article class='hentry post has-post-thumbnail thumb-full-width'><div class='post__author author vcard inline-items'> <img src='"+ mainSculpt.user.dp_url +"' alt='author'><div class='author-date'> <a class='h6 post__author-name fn' href='"+ mainSculpt.user.url +"'>"+ mainSculpt.user.username +"</a> wrote a <a href='#'>post</a><div class='post__date'><time class='published' datetime='"+ dateDisplay +"'>"+ timeSince +"</time></div></div>" + PopoverMenu + "</div><p class='white-space-pre'>"+sculptContent+"</p><div class='post-additional-info inline-items'><a href='#' data-id='" + sculptValue.id +"' class='post-add-icon inline-items sculpt-like'><i class='far fa-heart olymp-heart-icon sculpt-like'></i>"+ verb +" <span>"+ sculptValue.likes +"</span></a><a href='/sculpt/" + sculptValue.id + "' class='inline-items'><span>View</span><span>"+counter+"</span></a><div class='comments-shared'><a href='#' data-user ='"+ sculptUser.username +"' data-id='"+ replyId + "' class='post-add-icon sculpt-reply inline-items'><i class='far fa-comments olymp-speech-balloon-icon'></i></a><a href='/sculpt/" + sculptValue.id + "/resculpt/' class='post-add-icon resculptBtn inline-items'><i class='far fa-copy olymp-share-icon'></i></a></div></div><div class='control-block-button post-control-button'><a href='#' class='btn btn-control'><i class='far fa-heart olymp-like-post-icon'></i></a><a href='#' class='btn btn-control'><i class='far fa-comments olymp-comments-post-icon'></i></a><a href='#' class='btn btn-control'><i class='far fa-copy olymp-share-icon'></i></a></div></article></div></div></div></div></div>")
 
 
                         
@@ -448,7 +438,7 @@ var counter = 0;
                     } else {
 
 
-                        sculptContainer.append("<div class='post-content'><div class='post-date hidden-xs hidden-sm'><h5>"+ sculptUser.username +"</h5><p class='text-grey' style='font-size: 9'>"+ dateDisplay +"</p></div><img src='" + mainSculpt.image + "' alt='post-image' class='img-responsive post-image' /><div class='post-container'><img src='{% static 'images/dp.jpg' %}' alt='user' class='profile-photo-md pull-left' /><div class='post-detail'><div class='user-info'><h5><a href='"+ sculptUser.url +"' class='profile-link'>" + sculptUser.username  + "</a> <span class='following'>following</span></h5><p class='text-muted'>Reposted <a href='"+ mainSculpt.user.url +"'>"+ mainSculpt.user.username + "</a>'s post about <span title='" + dateDisplay + "' style=' color:#00897B;'> "+ timeSince +"</span></p></div><div class='reaction'><a href = '#' class='btn text-green sculpt-like' data-id='" + sculptValue.id +"'><i class='icon ion-thumbsup'></i>" + verb + " ("+ sculptValue.likes +")</a>"+ PopoverMenu +"</div><div class='line-divider'></div><div class='post-text'><pre class='sculptcontentclass'>" + sculptContent +"</pre></div><div class='row options-buttons' style='margin-bottom: 10px'><a role='button'  class=' btn' style='background-color: #00897B; color: whitesmoke' href = '/sculpt/" + sculptValue.id + "' >("+ counter +")<span class='options-buttons-text'>View</span> </a><a role='button' class='sculpt-reply  btn' style='background-color: #00897B; color: whitesmoke' data-user ='"+ sculptUser.username +"' data-id='"+ replyId + "' ><i class='icon ion-ios-chatbubble-outline'></i>&nbsp;<span class='options-buttons-text'>Comment</span></a><a role='button' class=' resculptBtn btn' style='background-color: #00897B; color: whitesmoke' href = '/sculpt/" + sculptValue.id + "/resculpt/' ><i class='icon ion-ios-refresh-outline'></i>&nbsp;<span class='options-buttons-text'>Repost</span></a></div></div></div></div>")
+                        sculptContainer.append("<div class='ui-block'><article class='hentry post has-post-thumbnail shared-photo'><div class='post__author author vcard inline-items'><img src='"+ sculptUser.dp_url +"' alt='author'><div class='author-date'><a class='h6 post__author-name fn' href='"+ sculptUser.url +"'>"+ sculptUser.username +"</a> shared <a href='"+ mainSculpt.user.url +"'>"+ mainSculpt.user.username +"</a>’s <a href='#' data-toggle='modal' data-target='#"+ sculptValue.id +"' class=''>Post</a><div class='post__date'><time class='published' datetime='"+ dateDisplay +"'>"+ timeSince +"</time></div></div>" + PopoverMenu + "</div><div class='post-thumb'> <img src='"+ mainSculpt.image +"' alt='photo'> </div><ul class='children single-children'><li class='comment-item'><div class='post__author author vcard inline-items'> <img src='"+ mainSculpt.user.dp_url +"' alt='author'><div class='author-date'> <a class='h6 post__author-name fn' href='"+ mainSculpt.user.url +"'>"+mainSculpt.user.username+"</a><div class='post__date'><time class='published' datetime=''> "+ mainSculpt.timesince +"</time></div></div></div><p>"+ sculptContent.substring(0,300) +"...</p><a href='#' data-toggle='modal' data-target='#"+ sculptValue.id +"' class='btn btn-md-2 btn-border-think c-grey btn-transparent custom-color'>Read More</a></li></ul><div class='post-additional-info inline-items'><a href='#' data-id='" + sculptValue.id +"' class='post-add-icon inline-items sculpt-like'><i class='far fa-heart olymp-heart-icon sculpt-like'></i>"+ verb +" <span>"+ sculptValue.likes +"</span></a><a href='/sculpt/" + sculptValue.id + "' class='inline-items'><span>View</span><span>"+counter+"</span></a><div class='comments-shared'><a href='#' data-user ='"+ sculptUser.username +"' data-id='"+ replyId + "' class='post-add-icon sculpt-reply inline-items'><i class='far fa-comments olymp-speech-balloon-icon'></i></a><a href='/sculpt/" + sculptValue.id + "/resculpt/' class='post-add-icon resculptBtn inline-items'><i class='far fa-copy olymp-share-icon'></i></a></div></div><div class='control-block-button post-control-button'><a href='#' class='btn btn-control'><i class='far fa-heart olymp-like-post-icon'></i></a><a href='#' class='btn btn-control'><i class='far fa-comments olymp-comments-post-icon'></i></a><a href='#' class='btn btn-control'><i class='far fa-copy olymp-share-icon'></i></a></div></article><div class='modal fade' id='"+ sculptValue.id +"' tabindex='-1' role='dialog' aria-labelledby='blog-post-popup' aria-hidden='true'><div class='modal-dialog window-popup blog-post-popup' role='document'><div class='modal-content'><a href='#' class='close icon-close' data-dismiss='modal' aria-label='Close'> <i class='fas fa-times olymp-close-icon'></i> </a><div class='modal-body'><article class='hentry post has-post-thumbnail thumb-full-width'><div class='post__author author vcard inline-items'> <img src='"+ mainSculpt.user.dp_url +"' alt='author'><div class='author-date'> <a class='h6 post__author-name fn' href='"+ mainSculpt.user.url +"'>"+ mainSculpt.user.username +"</a> wrote a <a href='#'>post</a><div class='post__date'><time class='published' datetime='"+ dateDisplay +"'>"+ timeSince +"</time></div></div>" + PopoverMenu + "</div><div class='post-thumb'> <img src='"+ mainSculpt.image +"' alt='photo'><h2 class='h1 post-title'>"+ sculptContent.substring(0,50) +"...</h2><div class='overlay'></div></div><p class='white-space-pre'>"+sculptContent+"</p><div class='post-additional-info inline-items'><a href='#' data-id='" + sculptValue.id +"' class='post-add-icon inline-items sculpt-like'><i class='far fa-heart olymp-heart-icon sculpt-like'></i>"+ verb +" <span>"+ sculptValue.likes +"</span></a><a href='/sculpt/" + sculptValue.id + "' class='inline-items'><span>View</span><span>"+counter+"</span></a><div class='comments-shared'><a href='#' data-user ='"+ sculptUser.username +"' data-id='"+ replyId + "' class='post-add-icon sculpt-reply inline-items'><i class='far fa-comments olymp-speech-balloon-icon'></i></a><a href='/sculpt/" + sculptValue.id + "/resculpt/' class='post-add-icon resculptBtn inline-items'><i class='far fa-copy olymp-share-icon'></i></a></div></div><div class='control-block-button post-control-button'><a href='#' class='btn btn-control'><i class='far fa-heart olymp-like-post-icon'></i></a><a href='#' class='btn btn-control'><i class='far fa-comments olymp-comments-post-icon'></i></a><a href='#' class='btn btn-control'><i class='far fa-copy olymp-share-icon'></i></a></div></article></div></div></div></div></div>")
                     
 
 
@@ -464,7 +454,7 @@ var counter = 0;
                         
                         
 
-                        sculptContainer.append("<div class='post-content'><div class='post-date hidden-xs hidden-sm'><h5>"+ sculptUser.username +"</h5><p class='text-grey' style='font-size: 9'>"+ dateDisplay +"</p></div><div class='post-container'><img src='{% static 'images/dp.jpg' %}' alt='user' class='profile-photo-md pull-left' /><div class='post-detail'><div class='user-info'><h5><a href='"+ sculptUser.url +"' class='profile-link'>" + sculptUser.username  + "</a> <span class='following'>following</span></h5><p class='text-muted'>Commented on <a href='"+ mainSculpt.user.url +"'>"+ mainSculpt.user.username + "</a>'s post about <span title='" + dateDisplay + "' style=' color:#00897B;'> "+ timeSince +"</span></p></div><div class='reaction'><a href = '#' class='btn text-green sculpt-like' data-id='" + sculptValue.id +"'><i class='icon ion-thumbsup'></i>" + verb + " ("+ sculptValue.likes +")</a>"+ PopoverMenu +"</div><div class='line-divider'></div><div class='post-text'><pre class='sculptcontentclass'>" + sculptContent +"</pre></div><div class='row options-buttons' style='margin-bottom: 10px'><a role='button'  class=' btn' style='background-color: #00897B; color: whitesmoke' href = '/sculpt/" + sculptValue.id + "' >("+ counter +")<span class='options-buttons-text'>View</span> </a><a role='button' class='sculpt-reply  btn' style='background-color: #00897B; color: whitesmoke' data-user ='"+ sculptUser.username +"' data-id='"+ replyId + "' ><i class='icon ion-ios-chatbubble-outline'></i>&nbsp;<span class='options-buttons-text'>Repost</span></a></div></div></div></div>")
+                        sculptContainer.append("<div class='ui-block'><article class='hentry post'><div class='post__author author vcard inline-items'> <img src='"+ mainSculpt.user.dp_url +"' alt='author'><div class='author-date'> <a class='h6 post__author-name fn' href='"+ mainSculpt.user.url +"'>"+ mainSculpt.user.username +"</a><div class='post__date'><time class='published' datetime='"+ dateDisplay +"'>"+ mainSculpt.timesince +"</time></div></div>" + PopoverMenu + "</div><p>"+mainSculpt.content.substring(0, 300)+"...<a href='/sculpt/" + sculptValue.id + "' >View the Full Post</a></p></article><ul class='comments-list style-2'><li class='comment-item'><div class='post__author author vcard'><img src='"+ sculptUser.dp_url +"' alt='author'><div class='author-date'><p ><a class='h6 post__author-name fn' href='"+ sculptUser.url +"'>"+ sculptUser.username +"</a> <span class='sculptcontentclass'>" + sculptContent +"</span> </p><a href='#' data-id='" + sculptValue.id +"' class='post-add-icon inline-items sculpt-like'><i class='far fa-heart olymp-heart-icon sculpt-like'></i>"+ verb +" <span>"+ sculptValue.likes +"</span></a><a href='#' data-user ='"+ sculptUser.username +"' data-id='"+ replyId + "' class=' sculpt-reply reply '>Reply</a><div class='post__date'><time class='published' datetime='"+ dateDisplay  +"'>"+timeSince+"</time></div></div></div></li></ul><a href='/sculpt/" + sculptValue.id + "' class='more-comments'>View more comments <span>+</span></a></div>")
 
                     
                     
@@ -477,7 +467,7 @@ var counter = 0;
                     if (sculptImage == null) {
 
 
-                       sculptContainer.append("<div class='post-content'><div class='post-date hidden-xs hidden-sm'><h5>"+ sculptUser.username +"</h5><p class='text-grey' style='font-size: 9'>"+ dateDisplay +"</p></div><div class='post-container'><img src='{% static 'images/dp.jpg' %}' alt='user' class='profile-photo-md pull-left' /><div class='post-detail'><div class='user-info'><h5><a href='"+ sculptUser.url +"' class='profile-link'>" + sculptUser.username  + "</a> <span class='following'>following</span></h5><p class='text-muted'>Published a photo about <span title='" + dateDisplay + "' style=' color:#00897B;'> "+ timeSince +"</span></p></div><div class='reaction'><a href = '#' class='btn text-green sculpt-like' data-id='" + sculptValue.id +"'><i class='icon ion-thumbsup'></i>" + verb + " ("+ sculptValue.likes +")</a>"+ PopoverMenu +"</div><div class='line-divider'></div><div class='post-text'><pre class='sculptcontentclass'>" + sculptContent +"</pre></div><div class='row options-buttons' style='margin-bottom: 10px'><a role='button'  class=' btn' style='background-color: #00897B; color: whitesmoke' href = '/sculpt/" + sculptValue.id + "' >("+ counter +")<span class='options-buttons-text'>View</span>  </a><a role='button' class='sculpt-reply  btn' style='background-color: #00897B; color: whitesmoke' data-user ='"+ sculptUser.username +"' data-id='"+ replyId + "' ><i class='icon ion-ios-chatbubble-outline'></i>&nbsp;<span class='options-buttons-text'>Comment</span></a><a role='button' class=' resculptBtn  btn' style='background-color: #00897B; color: whitesmoke' href = '/sculpt/" + sculptValue.id + "/resculpt/' ><i class='icon ion-ios-refresh-outline'></i>&nbsp;<span class='options-buttons-text'>Repost</span></a></div></div></div></div>")
+                       sculptContainer.append("<div class='ui-block'><article class='hentry post has-post-thumbnail thumb-full-width'><div class='post__author author vcard inline-items'><img src='"+ sculptUser.dp_url +"' alt='author'><div class='author-date'><a class='h6 post__author-name fn' href='"+sculptUser.url +"'>" + sculptUser.username  + "</a> wrote a <a href='#'>blog post</a><div class='post__date'><time class='published' datetime='"+ dateDisplay +"'>"+ timeSince +"</time></div></div>" + PopoverMenu + "</div><a href='#' data-toggle='modal' data-target='#"+ sculptValue.id +"' class='h2 post-title'>"+ sculptContent.substring(0,50) +"...</a>  <p>"+ sculptContent.substring(0,300) +"...</p><a href='#' data-toggle='modal' data-target='#"+ sculptValue.id +"' class='btn btn-md-2 btn-border-think c-grey btn-transparent custom-color'>Read More</a><div class='post-additional-info inline-items'><a href='#' data-id='" + sculptValue.id +"' class='post-add-icon inline-items sculpt-like'><i class='far fa-heart olymp-heart-icon sculpt-like'></i>"+ verb +" <span>"+ sculptValue.likes +"</span></a><a href='/sculpt/" + sculptValue.id + "' class='inline-items'><span>View</span><span>"+counter+"</span></a><div class='comments-shared'><a href='#' data-user ='"+ sculptUser.username +"' data-id='"+ replyId + "' class='post-add-icon sculpt-reply inline-items'><i class='far fa-comments olymp-speech-balloon-icon'></i></a><a href='/sculpt/" + sculptValue.id + "/resculpt/' class='post-add-icon resculptBtn inline-items'><i class='far fa-copy olymp-share-icon'></i></a></div></div><div class='control-block-button post-control-button'><a href='#' class='btn btn-control'><i class='far fa-heart olymp-like-post-icon'></i></a><a href='#' class='btn btn-control'><i class='far fa-comments olymp-comments-post-icon'></i></a><a href='#' class='btn btn-control'><i class='far fa-copy olymp-share-icon'></i></a></div></article></div><div class='modal fade' id='"+ sculptValue.id +"' tabindex='-1' role='dialog' aria-labelledby='blog-post-popup' aria-hidden='true'><div class='modal-dialog window-popup blog-post-popup' role='document'><div class='modal-content'><a href='#' class='close icon-close' data-dismiss='modal' aria-label='Close'><i class='fas fa-times olymp-close-icon'></i></a><div class='modal-body'><article class='hentry post has-post-thumbnail thumb-full-width'><div class='post__author author vcard inline-items'><img src='"+ sculptUser.dp_url +"' alt='author'><div class='author-date'><a class='h6 post__author-name fn' href='"+sculptUser.url +"'>" + sculptUser.username  + "</a> wrote a <a href='#'>blog post</a><div class='post__date'><time class='published' datetime='"+ dateDisplay +"'>"+ timeSince +"</time></div></div>"+ PopoverMenu +"</div><p class = 'white-space-pre'>"+ sculptContent +"</p><div class='post-additional-info inline-items'><a href='#' data-id='" + sculptValue.id +"' class='post-add-icon inline-items sculpt-like'><i class='far fa-heart olymp-heart-icon sculpt-like'></i>"+ verb +" <span>"+ sculptValue.likes +"</span></a><a href='/sculpt/" + sculptValue.id + "' class='inline-items'><span>View</span><span>"+counter+"</span></a><div class='comments-shared'><a href='#' data-user ='"+ sculptUser.username +"' data-id='"+ replyId + "' class='post-add-icon sculpt-reply inline-items'><i class='far fa-comments olymp-speech-balloon-icon'></i></a><a href='/sculpt/" + sculptValue.id + "/resculpt/' class='post-add-icon resculptBtn inline-items'><i class='far fa-copy olymp-share-icon'></i></a></div></div><div class='control-block-button post-control-button'><a href='#' class='btn btn-control'><i class='far fa-heart olymp-like-post-icon'></i></a><a href='#' class='btn btn-control'><i class='far fa-comments olymp-comments-post-icon'></i></a><a href='#' class='btn btn-control'><i class='far fa-copy olymp-share-icon'></i></a></div></div></div></div></div>")
 
                        counter = 0;
 
@@ -492,7 +482,7 @@ var counter = 0;
                         
                         
 
-                        sculptContainer.append("<div class='post-content'><div class='post-date hidden-xs hidden-sm'><h5>"+ sculptUser.username +"</h5><p class='text-grey' style='font-size: 9'  >"+ dateDisplay +"</p></div><img src='" + sculptImage + "' alt='post-image' class='img-responsive post-image' /><div class='post-container'><img src='{% static 'images/dp.jpg' %}' alt='user' class='profile-photo-md pull-left' /><div class='post-detail'><div class='user-info'><h5><a href='"+ sculptUser.url +"' class='profile-link'>" + sculptUser.username  + "</a> <span class='following'>following</span></h5><p class='text-muted'>Published a photo about <span title='" + dateDisplay + "' style=' color:#00897B;'> "+ timeSince +"</span></p></div><div class='reaction'><a href = '#' class='btn text-green sculpt-like' data-id='" + sculptValue.id +"'><i class='icon ion-thumbsup'></i>" + verb + " ("+ sculptValue.likes +")</a>"+ PopoverMenu +"</div><div class='line-divider'></div><div class='post-text'><pre class='sculptcontentclass'>" + sculptContent +"</pre></div><div class='row options-buttons' style='margin-bottom: 10px'><a role='button'  class=' btn' style='background-color: #00897B; color: whitesmoke' href = '/sculpt/" + sculptValue.id + "' >("+ counter +")<span class='options-buttons-text'>View</span> </a><a role='button' class='sculpt-reply  btn' style='background-color: #00897B; color: whitesmoke' data-user ='"+ sculptUser.username +"' data-id='"+ replyId + "' ><i class='icon ion-ios-chatbubble-outline'></i>&nbsp;<span class='options-buttons-text'>Comment</span></a><a role='button' class=' resculptBtn  btn' style='background-color: #00897B; color: whitesmoke' href = '/sculpt/" + sculptValue.id + "/resculpt/' ><i class='icon ion-ios-refresh-outline'></i>&nbsp;<span class='options-buttons-text'>Repost</span></a>  </div></div></div></div>")
+                        sculptContainer.append("<div class='ui-block'><article class='hentry post has-post-thumbnail thumb-full-width'><div class='post__author author vcard inline-items'><img src='"+ sculptUser.dp_url +"' alt='author'><div class='author-date'><a class='h6 post__author-name fn' href='"+sculptUser.url +"'>" + sculptUser.username  + "</a> wrote a <a href='#'>blog post</a><div class='post__date'><time class='published' datetime='"+ dateDisplay +"'>"+ timeSince +"</time></div></div>" + PopoverMenu + "</div><div class='post-thumb'><img src='" + sculptImage + "' alt='photo'></div><a href='#' data-toggle='modal' data-target='#"+ sculptValue.id +"' class='h2 post-title'>"+ sculptContent.substring(0,50) +"...</a>  <p>"+ sculptContent.substring(0,300) +"...</p><a href='#' data-toggle='modal' data-target='#"+ sculptValue.id +"' class='btn btn-md-2 btn-border-think c-grey btn-transparent custom-color'>Read More</a><div class='post-additional-info inline-items'><a href='#' data-id='" + sculptValue.id +"' class='post-add-icon inline-items sculpt-like'><i class='far fa-heart olymp-heart-icon sculpt-like'></i>"+ verb +" <span>"+ sculptValue.likes +"</span></a><a href='/sculpt/" + sculptValue.id + "' class='inline-items'><span>View</span><span>"+counter+"</span></a><div class='comments-shared'><a href='#' data-user ='"+ sculptUser.username +"' data-id='"+ replyId + "' class='post-add-icon sculpt-reply inline-items'><i class='far fa-comments olymp-speech-balloon-icon'></i></a><a href='/sculpt/" + sculptValue.id + "/resculpt/' class='post-add-icon resculptBtn inline-items'><i class='far fa-copy olymp-share-icon'></i></a></div></div><div class='control-block-button post-control-button'><a href='#' class='btn btn-control'><i class='far fa-heart olymp-like-post-icon'></i></a><a href='#' class='btn btn-control'><i class='far fa-comments olymp-comments-post-icon'></i></a><a href='#' class='btn btn-control'><i class='far fa-copy olymp-share-icon'></i></a></div></article></div><div class='modal fade' id='"+ sculptValue.id +"' tabindex='-1' role='dialog' aria-labelledby='blog-post-popup' aria-hidden='true'><div class='modal-dialog window-popup blog-post-popup' role='document'><div class='modal-content'><a href='#' class='close icon-close' data-dismiss='modal' aria-label='Close'><i class='fas fa-times olymp-close-icon'></i></a><div class='modal-body'><article class='hentry post has-post-thumbnail thumb-full-width'><div class='post__author author vcard inline-items'><img src='"+ sculptUser.dp_url +"' alt='author'><div class='author-date'><a class='h6 post__author-name fn' href='"+sculptUser.url +"'>" + sculptUser.username  + "</a> wrote a <a href='#'>blog post</a><div class='post__date'><time class='published' datetime='"+ dateDisplay +"'>"+ timeSince +"</time></div></div>"+ PopoverMenu +"</div><div class='post-thumb'><img src='" + sculptImage + "'  alt='photo'><h2 class='h1 post-title'>"+ sculptContent.substring(0,50) +"...</h2><div class='overlay'></div></div><p class='white-space-pre'>"+ sculptContent +"</p><div class='post-additional-info inline-items'><a href='#' data-id='" + sculptValue.id +"' class='post-add-icon inline-items sculpt-like'><i class='far fa-heart olymp-heart-icon sculpt-like'></i>"+ verb +" <span>"+ sculptValue.likes +"</span></a><a href='/sculpt/" + sculptValue.id + "' class='inline-items'><span>View</span><span>"+counter+"</span></a><div class='comments-shared'><a href='#' data-user ='"+ sculptUser.username +"' data-id='"+ replyId + "' class='post-add-icon sculpt-reply inline-items'><i class='far fa-comments olymp-speech-balloon-icon'></i></a><a href='/sculpt/" + sculptValue.id + "/resculpt/' class='post-add-icon resculptBtn inline-items'><i class='far fa-copy olymp-share-icon'></i></a></div></div><div class='control-block-button post-control-button'><a href='#' class='btn btn-control'><i class='far fa-heart olymp-like-post-icon'></i></a><a href='#' class='btn btn-control'><i class='far fa-comments olymp-comments-post-icon'></i></a><a href='#' class='btn btn-control'><i class='far fa-copy olymp-share-icon'></i></a></div></div></div></div></div>")
 
                         counter = 0;
 
