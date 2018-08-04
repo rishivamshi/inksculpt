@@ -68,6 +68,9 @@ class ProfileForm(forms.ModelForm):
 			'gender',
 			'status',
 			'phone_number',
+			'facebook',
+			'twitter',
+			'instagram',
 			)
 
 

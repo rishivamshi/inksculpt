@@ -137,10 +137,11 @@ class UserProfile(models.Model):
 	gender = models.CharField(max_length = 1, choices = GENDER_CHOICES, null = True)
 	city	= models.CharField(max_length = 140, null = True, blank = True)
 	country = CountryField(blank = True, null = True)
-	status = models.CharField(max_length = 140, null = True, blank = True)
+	status = models.CharField(max_length = 200, null = True, blank = True)
 	phone_number = models.CharField( max_length=10, validators=[RegexValidator(r'^\d{1,10}$'),MinLengthValidator(10)], null = True, blank = True)
-
-
+	facebook = models.URLField(null = True, blank = True)
+	twitter = models.URLField(null = True, blank = True)
+	instagram = models.URLField(null = True, blank = True)
 
 
 
