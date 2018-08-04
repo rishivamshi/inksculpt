@@ -16,7 +16,7 @@
 <html lang="en">
   <head>
 
-  <title>{{ object.username }} | Followers </title>
+  <title>{{ object.username }} | Edit </title>
 
   <!-- Required meta tags always come first -->
   <meta charset="utf-8">
@@ -76,8 +76,8 @@
                                 </div>
                                 <div class="col col-lg-5 ml-auto col-md-5 col-sm-12 col-12">
                                     <ul class="profile-menu">
-                                        <li> <a href="{% url 'profiles:followers' user.username %}"  >Followers ({{ object.followed_by.all.count }})</a> </li>
-                                        <li> <a href="{% url 'profiles:following' user.username %}" class="active">Following ({{ object.profile.get_following.count }})</a> </li>
+                                        <li> <a href="{% url 'profiles:followers' user.username %}"  >Followers ({{ user.followed_by.all.count }})</a> </li>
+                                        <li> <a href="{% url 'profiles:following' user.username %}" class="active">Following ({{ user.profile.get_following.count }})</a> </li>
                                         <li>
                                             <div class="more"> <i class="fas fa-ellipsis-h "></i>
                                                 <ul class="more-dropdown more-with-triangle">
@@ -94,10 +94,7 @@
 
                                 
 
-                                {% if request.user.get_username != object.username %}
-                                <a href="{{ object.profile.get_follow_url }}" class="btn btn-control bg-blue"> <i class="fa fa-user-plus "></i>{% if following %}Unfollow{% else %}Follow{% endif %} </a>
-                  
-               {% else %}
+                                
                <div class="btn btn-control bg-primary more"> <i class="fas fa-sliders-h " style="color: white"></i>
                                     <ul class="more-dropdown more-with-triangle triangle-bottom-right">
                                         <li> <a href="#" data-toggle="modal" data-target="#update-header-photo">Update Profile Photo</a> </li>
@@ -108,7 +105,7 @@
 
               
 
-               {% endif %}
+               
                             </div>
                         </div>
                         <div class="top-header-author">
