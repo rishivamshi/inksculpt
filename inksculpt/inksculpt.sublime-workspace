@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"time",
+				"timesince"
+			],
+			[
+				"scu",
+				"sculpt-container"
+			],
+			[
 				"max-",
 				"max-height\tproperty"
 			],
@@ -130,10 +138,6 @@
 			[
 				"ty",
 				"typingTimer"
-			],
-			[
-				"scu",
-				"sculptId"
 			],
 			[
 				"ma",
@@ -504,10 +508,6 @@
 				"resculpt_qs"
 			],
 			[
-				"time",
-				"timezone"
-			],
-			[
 				"da",
 				"date_display"
 			],
@@ -523,7 +523,16 @@
 			"file": "src/accounts/templates/accounts/user_detail.html",
 			"settings":
 			{
-				"buffer_size": 42690,
+				"buffer_size": 42495,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "src/accounts/templates/accounts/user_album.html",
+			"settings":
+			{
+				"buffer_size": 18893,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -574,12 +583,11 @@
 		"/D/Work/github_projects/inksculpt/inksculpt/lib",
 		"/D/Work/github_projects/inksculpt/inksculpt/src",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts",
-		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/templates",
-		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/templates/accounts",
-		"/D/Work/github_projects/inksculpt/inksculpt/src/templates"
+		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/templates"
 	],
 	"file_history":
 	[
+		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/templates/accounts/user_about.html",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/templates/navbar.html",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/models.py",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/templates/accounts/user_profile.html",
@@ -621,7 +629,6 @@
 		"/D/Work/github_projects/inksculpt/inksculpt/lib/python3.5/site-packages/allauth/templates/account/email.html",
 		"/D/Work/github_projects/inksculpt/inksculpt/lib/python3.5/site-packages/allauth/templates/account/account_inactive.html",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/templates/accounts/change_password.html",
-		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/templates/accounts/user_about.html",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/templates/accounts/user_album.html",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/templates/accounts/user_followers.html",
 		"/D/Work/github_projects/inksculpt/inksculpt/src/accounts/templates/accounts/user_following.html",
@@ -711,7 +718,7 @@
 	],
 	"find":
 	{
-		"height": 40.8
+		"height": 23.0
 	},
 	"find_in_files":
 	{
@@ -878,7 +885,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -887,15 +894,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 42690,
+						"buffer_size": 42495,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								618,
-								618
+								32131,
+								32131
 							]
 						],
 						"settings":
@@ -905,14 +912,44 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1056.0,
+						"translation.y": 7454.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "src/accounts/templates/accounts/user_album.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 18893,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								12037,
+								12037
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 3683.2,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
 					"type": "text"
 				},
 				{
-					"buffer": 1,
+					"buffer": 2,
 					"file": "src/sculpts/templates/sculpts/list_view.html",
 					"semi_transient": false,
 					"settings":
@@ -938,7 +975,7 @@
 						"translation.y": 2171.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 2,
 					"type": "text"
 				}
 			]
